@@ -102,7 +102,7 @@ np_baseball = np.array(baseball)
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intermediate Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542453323.53" ts_lastsave="1542457044.44" unique_id="3">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1542454804.22" unique_id="4">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1542702403.26" unique_id="4">
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
 
@@ -110,6 +110,12 @@ np_baseball = np.array(baseball)
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+
+Plotting using pandas module. This also seem to work, from what it seems in other courses.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 </rich_text>
 			<codebox char_offset="24" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
@@ -123,6 +129,15 @@ plt.clf()
 
 # Change the line plot below to a scatter plot
 plt.scatter(gdp_cap, life_exp)
+</codebox>
+			<codebox char_offset="120" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Plot 'Age' variable in a histogram
+# data is a data series
+pd.DataFrame.hist(data)
+plt.show()
 </codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1542456770.27" unique_id="5">
@@ -700,7 +715,7 @@ for value in get_lengths(lannister):
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542554823.12" unique_id="14">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542714323.61" unique_id="14">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Numpy" prog_lang="custom-colors" readonly="False" tags="numpy data import" ts_creation="1542554816.8" ts_lastsave="1542555952.79" unique_id="15">
 			<rich_text scale="h1">Basic numpy data import</rich_text>
@@ -756,8 +771,11 @@ data = np.loadtxt(file, delimiter=&quot;,&quot;, skiprows=1, usecols=[0,2], dtyp
 d=np.recfromcsv(file)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554823.12" ts_lastsave="1542701730.45" unique_id="16">
-			<rich_text>Flat files can be imported in pandas.
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="pandas flat file import" ts_creation="1542554823.12" ts_lastsave="1542714218.39" unique_id="16">
+			<rich_text scale="h1">Basic pandas data import</rich_text>
+			<rich_text>
+
+Flat files can be imported in pandas.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -770,7 +788,7 @@ comment: comment symbol, if used in the data frame
 na_values: string used in flat file to indicate NA or NaN
 
 </rich_text>
-			<codebox char_offset="39" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas as pd
+			<codebox char_offset="65" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas as pd
 import pandas as pd
 
 # Assign the filename: file
@@ -779,6 +797,132 @@ file = 'titanic.csv'
 # Read the file into a DataFrame: df
 df = pd.read_csv(file, nrows=5, header=None, sep=&quot;\t&quot;, comment=&quot;#&quot;, na_values=&quot;Nothing&quot;)
 
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="pickle" prog_lang="custom-colors" readonly="False" tags="pickle" ts_creation="1542713565.79" ts_lastsave="1542713784.93" unique_id="18">
+			<rich_text>Loading data with pickle
+
+The pickle module allows us to save Python objects that cannot usually be easily saved in text format.
+
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Question: How to save objects in pickle format?</rich_text>
+			<codebox char_offset="131" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pickle package
+import pickle
+
+# Open pickle file and load data: d
+with open('data.pkl', &quot;rb&quot;) as file:
+    d = pickle.load(file)
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Excel" prog_lang="custom-colors" readonly="False" tags="excel data import" ts_creation="1542713007.11" ts_lastsave="1542713537.05" unique_id="17">
+			<rich_text>Loading data from excel files
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<codebox char_offset="31" frame_height="520" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Load spreadsheet: xl
+xl = pd.ExcelFile(&quot;battledeath.xlsx&quot;)
+
+# Print sheet names - this will return a list of strings
+print(xl.sheet_names)
+
+# Load a sheet into a DataFrame by name: df1 - this assumes that there is a sheet named &quot;2004&quot;
+# skiprows is a list of indices of the rows to skip
+# names is a list of the names we assign to the columns imported
+df1 = xl.parse(&quot;2004&quot;, skiprows=[0], names=[&quot;Country&quot;,&quot;AAM due to War (2004)&quot;])
+
+# Print the head of the DataFrame df1
+print(df1.head())
+
+# Parse the first column of the second sheet and rename the column: df2
+# parse_cols is a list of the indices of the columns to parse. Here names give the name assigned to this column
+df2 = xl.parse(&quot;2004&quot;, parse_cols=[0], skiprows=[0], names=[&quot;Country&quot;])
+
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="SAS and Stata" prog_lang="custom-colors" readonly="False" tags="SAS Stata" ts_creation="1542713903.03" ts_lastsave="1542714196.05" unique_id="19">
+			<rich_text>Here's how we import SAS files
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+Here's how we import Stata files
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<codebox char_offset="32" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pandas has already been imported
+
+# Import sas7bdat package
+from sas7bdat import SAS7BDAT
+
+# Save file to a DataFrame: df_sas - this is a pandas data frame
+with SAS7BDAT('sales.sas7bdat') as file:
+    df_sas=file.to_data_frame()
+</codebox>
+			<codebox char_offset="71" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Load Stata file into a pandas DataFrame: df
+df = pd.read_stata(&quot;disarea.dta&quot;)
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="HDF5" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542714323.61" ts_lastsave="1542714962.28" unique_id="20">
+			<rich_text>Here's how we import HDF5 files
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Data is stored in separate sections and we can view them as if it were a dictionary. Certain sections may contain a “table of content” of sorts for the data set.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Once we have identified the data we want, we can access it through its label. This subsection will have sub-keys.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+</rich_text>
+			<codebox char_offset="33" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the h5py module
+import h5py
+
+# Load file: data
+data = h5py.File(&quot;LIGO_data.hdf5&quot;,&quot;r&quot;)
+</codebox>
+			<codebox char_offset="200" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the keys of the file
+for key in data.keys():
+    print(key)
+
+</codebox>
+			<codebox char_offset="319" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">group=data[&quot;strain&quot;]
+
+# Check out keys of group
+for key in group.keys():
+    print(key)
+
+# Set variable equal to time series data: strain
+# strain can be plotted
+strain=data['strain'][&quot;Strain&quot;].value
 </codebox>
 		</node>
 	</node>
