@@ -702,25 +702,59 @@ for value in get_lengths(lannister):
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542554823.12" unique_id="14">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Numpy" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554816.8" ts_lastsave="1542555290.65" unique_id="15">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Numpy" prog_lang="custom-colors" readonly="False" tags="numpy data import" ts_creation="1542554816.8" ts_lastsave="1542555952.79" unique_id="15">
+			<rich_text scale="h1">Basic numpy data import</rich_text>
 			<rich_text>
 
-Importing as a numpy array
+Importing as a numpy array. The object data is of type numpy.ndarray
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
-
-delimiter: what delimiter is used for the data
+delimiter: what delimiter is used for the data. Tab is \t
 skiprows: how many header rows to skip at the start
 usecols: which columns to import - in the example above, we are importing the first and third columns
 dtype: what data type to use for all the data - in  the example above everything is imported as strings
 
-Numpy is fine if all data is of the same type, but loadtxt break down if data is of mixed type.
-
+Numpy is fine if all data is of the same type, but loadtxt breaks down if data is of mixed type.
 
 </rich_text>
-			<codebox char_offset="30" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import numpy as np
+			<rich_text scale="h1">genfromtxt function</rich_text>
+			<rich_text>
+
+The numpy.genfromtxt() function is preferable for mixed type data.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+names: whether there is a header row.
+dtype: if set to None, genfromtxt will figure out what each column should be
+
+Here the object data is a structured array, where each element of this 1D array represents a row of the data
+
+data[&lt;number&gt;] accesses a row
+data[&lt;column label&gt;] accesses a column
+
+</rich_text>
+			<rich_text scale="h1">recfromcsv function</rich_text>
+			<rich_text>
+
+There is another function numpy.recfromcsv() that behaves similar to genfromtxt(). Its default arguments are as above in the genfromtxt() example, so we do not need to pass recfromcsv() any further arguments. The default dtype is None.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<codebox char_offset="95" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import numpy as np
 filename = &quot;file.txt&quot;
 data = np.loadtxt(file, delimiter=&quot;,&quot;, skiprows=1, usecols=[0,2], dtype=str)</codebox>
+			<codebox char_offset="602" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">data = np.genfromtxt('titanic.csv', delimiter=',', names=True, dtype=None)</codebox>
+			<codebox char_offset="1159" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">file = 'titanic.csv'
+d=np.recfromcsv(file)
+</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554823.12" ts_lastsave="1542554823.12" unique_id="16">
 			<rich_text></rich_text>

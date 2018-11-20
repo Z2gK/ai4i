@@ -102,7 +102,7 @@ np_baseball = np.array(baseball)
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intermediate Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542453323.53" ts_lastsave="1542457044.44" unique_id="3">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1542454804.22" unique_id="4">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1542702403.26" unique_id="4">
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
 
@@ -110,6 +110,12 @@ np_baseball = np.array(baseball)
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+
+Plotting using pandas module. This also seem to work, from what it seems in other courses.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 </rich_text>
 			<codebox char_offset="24" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
@@ -123,6 +129,15 @@ plt.clf()
 
 # Change the line plot below to a scatter plot
 plt.scatter(gdp_cap, life_exp)
+</codebox>
+			<codebox char_offset="120" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Plot 'Age' variable in a histogram
+# data is a data series
+pd.DataFrame.hist(data)
+plt.show()
 </codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1542456770.27" unique_id="5">
@@ -756,8 +771,33 @@ data = np.loadtxt(file, delimiter=&quot;,&quot;, skiprows=1, usecols=[0,2], dtyp
 d=np.recfromcsv(file)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554823.12" ts_lastsave="1542554823.12" unique_id="16">
-			<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="pandas flat file import" ts_creation="1542554823.12" ts_lastsave="1542702475.42" unique_id="16">
+			<rich_text scale="h1">Basic pandas data import</rich_text>
+			<rich_text>
+
+Flat files can be imported in pandas.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+nrows: number of rows to import
+header: if set to None, there is no header row in the flat file. If set to 0, there is a header row and its column names are taken as default. The default behaviour is 0. Otherwise, the column names need to be specified in an argument names, a list of column names to use in the resulting data frame.
+sep: field separator if not comma
+comment: comment symbol, if used in the data frame
+na_values: string used in flat file to indicate NA or NaN
+
+</rich_text>
+			<codebox char_offset="65" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas as pd
+import pandas as pd
+
+# Assign the filename: file
+file = 'titanic.csv'
+
+# Read the file into a DataFrame: df
+df = pd.read_csv(file, nrows=5, header=None, sep=&quot;\t&quot;, comment=&quot;#&quot;, na_values=&quot;Nothing&quot;)
+
+</codebox>
 		</node>
 	</node>
 </cherrytree>
