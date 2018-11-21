@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2"/>
+	<bookmarks list="2,18"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -725,7 +725,7 @@ for value in get_lengths(lannister):
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542714323.61" unique_id="14">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542800512.04" unique_id="14">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Numpy" prog_lang="custom-colors" readonly="False" tags="numpy data import" ts_creation="1542554816.8" ts_lastsave="1542555952.79" unique_id="15">
 			<rich_text scale="h1">Basic numpy data import</rich_text>
@@ -809,8 +809,11 @@ df = pd.read_csv(file, nrows=5, header=None, sep=&quot;\t&quot;, comment=&quot;#
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="pickle" prog_lang="custom-colors" readonly="False" tags="pickle" ts_creation="1542713565.79" ts_lastsave="1542713784.93" unique_id="18">
-			<rich_text>Loading data with pickle
+		<node custom_icon_id="0" foreground="" is_bold="False" name="pickle" prog_lang="custom-colors" readonly="False" tags="pickle" ts_creation="1542713565.79" ts_lastsave="1542715341.59" unique_id="18">
+			<rich_text scale="h1">Pickle</rich_text>
+			<rich_text>
+
+Loading data with pickle
 
 The pickle module allows us to save Python objects that cannot usually be easily saved in text format.
 
@@ -821,7 +824,7 @@ The pickle module allows us to save Python objects that cannot usually be easily
 
 </rich_text>
 			<rich_text weight="heavy">Question: How to save objects in pickle format?</rich_text>
-			<codebox char_offset="131" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pickle package
+			<codebox char_offset="139" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pickle package
 import pickle
 
 # Open pickle file and load data: d
@@ -829,15 +832,18 @@ with open('data.pkl', &quot;rb&quot;) as file:
     d = pickle.load(file)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Excel" prog_lang="custom-colors" readonly="False" tags="excel data import" ts_creation="1542713007.11" ts_lastsave="1542713537.05" unique_id="17">
-			<rich_text>Loading data from excel files
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Excel" prog_lang="custom-colors" readonly="False" tags="excel data import" ts_creation="1542713007.11" ts_lastsave="1542715292.94" unique_id="17">
+			<rich_text scale="h1">Excel</rich_text>
+			<rich_text>
+
+Loading data from excel files
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
 </rich_text>
-			<codebox char_offset="31" frame_height="520" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+			<codebox char_offset="38" frame_height="520" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
 import pandas as pd
 
 # Load spreadsheet: xl
@@ -860,8 +866,11 @@ df2 = xl.parse(&quot;2004&quot;, parse_cols=[0], skiprows=[0], names=[&quot;Coun
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="SAS and Stata" prog_lang="custom-colors" readonly="False" tags="SAS Stata" ts_creation="1542713903.03" ts_lastsave="1542714196.05" unique_id="19">
-			<rich_text>Here's how we import SAS files
+		<node custom_icon_id="0" foreground="" is_bold="False" name="SAS and Stata" prog_lang="custom-colors" readonly="False" tags="SAS Stata" ts_creation="1542713903.03" ts_lastsave="1542715304.68" unique_id="19">
+			<rich_text scale="h1">SAS and Stata</rich_text>
+			<rich_text>
+
+Here's how we import SAS files
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -876,7 +885,7 @@ Here's how we import Stata files
 			<rich_text>
 
 </rich_text>
-			<codebox char_offset="32" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pandas has already been imported
+			<codebox char_offset="47" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pandas has already been imported
 
 # Import sas7bdat package
 from sas7bdat import SAS7BDAT
@@ -885,15 +894,18 @@ from sas7bdat import SAS7BDAT
 with SAS7BDAT('sales.sas7bdat') as file:
     df_sas=file.to_data_frame()
 </codebox>
-			<codebox char_offset="71" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+			<codebox char_offset="86" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
 import pandas as pd
 
 # Load Stata file into a pandas DataFrame: df
 df = pd.read_stata(&quot;disarea.dta&quot;)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="HDF5" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542714323.61" ts_lastsave="1542714962.28" unique_id="20">
-			<rich_text>Here's how we import HDF5 files
+		<node custom_icon_id="0" foreground="" is_bold="False" name="HDF5" prog_lang="custom-colors" readonly="False" tags="HDF5" ts_creation="1542714323.61" ts_lastsave="1542800518.61" unique_id="20">
+			<rich_text scale="h1">HDF5</rich_text>
+			<rich_text>
+
+Here's how we import HDF5 files
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -913,18 +925,18 @@ Once we have identified the data we want, we can access it through its label. Th
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 </rich_text>
-			<codebox char_offset="33" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the h5py module
+			<codebox char_offset="39" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the h5py module
 import h5py
 
 # Load file: data
 data = h5py.File(&quot;LIGO_data.hdf5&quot;,&quot;r&quot;)
 </codebox>
-			<codebox char_offset="200" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the keys of the file
+			<codebox char_offset="206" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the keys of the file
 for key in data.keys():
     print(key)
 
 </codebox>
-			<codebox char_offset="319" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">group=data[&quot;strain&quot;]
+			<codebox char_offset="325" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">group=data[&quot;strain&quot;]
 
 # Check out keys of group
 for key in group.keys():
@@ -934,6 +946,25 @@ for key in group.keys():
 # strain can be plotted
 strain=data['strain'][&quot;Strain&quot;].value
 </codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="sql" ts_creation="1542800512.04" ts_lastsave="1542801063.81" unique_id="21">
+			<rich_text>
+
+
+
+
+
+
+
+
+
+
+
+
+
+WHat is the pro and cons of using the pandas way to execute a SQL query?
+
+Revise INNER JOIN, OUTER JOIN and different types of joins</rich_text>
 		</node>
 	</node>
 </cherrytree>

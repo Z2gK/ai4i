@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18"/>
+	<bookmarks list="2,18,21"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -725,7 +725,7 @@ for value in get_lengths(lannister):
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542714323.61" unique_id="14">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542800512.04" unique_id="14">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Numpy" prog_lang="custom-colors" readonly="False" tags="numpy data import" ts_creation="1542554816.8" ts_lastsave="1542555952.79" unique_id="15">
 			<rich_text scale="h1">Basic numpy data import</rich_text>
@@ -901,7 +901,7 @@ import pandas as pd
 df = pd.read_stata(&quot;disarea.dta&quot;)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="HDF5" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542714323.61" ts_lastsave="1542715314.87" unique_id="20">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="HDF5" prog_lang="custom-colors" readonly="False" tags="HDF5" ts_creation="1542714323.61" ts_lastsave="1542800518.61" unique_id="20">
 			<rich_text scale="h1">HDF5</rich_text>
 			<rich_text>
 
@@ -946,6 +946,25 @@ for key in group.keys():
 # strain can be plotted
 strain=data['strain'][&quot;Strain&quot;].value
 </codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="sql" ts_creation="1542800512.04" ts_lastsave="1542801716.06" unique_id="21">
+			<rich_text>
+
+
+
+
+
+
+
+
+
+
+
+
+
+WHat is the pro and cons of using the pandas way to execute a SQL query?
+
+Revise INNER JOIN, OUTER JOIN and different types of joins</rich_text>
 		</node>
 	</node>
 </cherrytree>
