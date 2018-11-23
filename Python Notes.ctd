@@ -150,7 +150,7 @@ pd.DataFrame.hist(data)
 plt.show()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1542456770.27" unique_id="5">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1542988641.1" unique_id="5">
 			<rich_text scale="h1">Building Pandas data frames</rich_text>
 			<rich_text>
 
@@ -203,6 +203,12 @@ We can select row data using the row labels
 			<rich_text>
 
 We can query individual elements, and take their intersection. To select all values, as usual, the “:” operator is used.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Seen in Importing Data in Python Part 2 exercise, a new way to reference
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -276,7 +282,8 @@ print(cars.loc[['RU','MOR'],['country','drives_right']])
 
 # Print out cars_per_cap and drives_right as DataFrame
 print(cars.loc[:,['cars_per_cap','drives_right']])</codebox>
-			<codebox char_offset="1129" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
+			<codebox char_offset="1084" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df.ix[:, 0:1]</codebox>
+			<codebox char_offset="1206" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
 cars = pd.read_csv('cars.csv', index_col = 0)
 
 # Convert code to a one-liner - the argument is a True/False Series
@@ -725,7 +732,7 @@ for value in get_lengths(lannister):
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542800512.04" unique_id="14">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542987986.82" unique_id="14">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Numpy" prog_lang="custom-colors" readonly="False" tags="numpy data import" ts_creation="1542554816.8" ts_lastsave="1542555952.79" unique_id="15">
 			<rich_text scale="h1">Basic numpy data import</rich_text>
@@ -832,7 +839,7 @@ with open('data.pkl', &quot;rb&quot;) as file:
     d = pickle.load(file)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Excel" prog_lang="custom-colors" readonly="False" tags="excel data import" ts_creation="1542713007.11" ts_lastsave="1542715292.94" unique_id="17">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Excel" prog_lang="custom-colors" readonly="False" tags="excel data import" ts_creation="1542713007.11" ts_lastsave="1542989125.01" unique_id="17">
 			<rich_text scale="h1">Excel</rich_text>
 			<rich_text>
 
@@ -841,6 +848,14 @@ Loading data from excel files
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+Alternative way to read excel files using pandas from Importing Data in Python Part 2
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
 
 </rich_text>
 			<codebox char_offset="38" frame_height="520" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
@@ -865,6 +880,10 @@ print(df1.head())
 df2 = xl.parse(&quot;2004&quot;, parse_cols=[0], skiprows=[0], names=[&quot;Country&quot;])
 
 </codebox>
+			<codebox char_offset="128" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
+url = 'http://my.url/data.xls'
+xl = pd.read_excel(url,sheetname=None)
+print(xl.keys()) # prints the sheetnames - individual sheets can be referenced as if xl was a dictionary</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="SAS and Stata" prog_lang="custom-colors" readonly="False" tags="SAS Stata" ts_creation="1542713903.03" ts_lastsave="1542715304.68" unique_id="19">
 			<rich_text scale="h1">SAS and Stata</rich_text>
@@ -965,6 +984,117 @@ strain=data['strain'][&quot;Strain&quot;].value
 WHat is the pro and cons of using the pandas way to execute a SQL query?
 
 Revise INNER JOIN, OUTER JOIN and different types of joins</rich_text>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542988073.09" ts_lastsave="1542990129.81" unique_id="22">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="urllib" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542988172.07" ts_lastsave="1542989223.85" unique_id="23">
+			<rich_text>
+Using urllib
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Or directly using pandas
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Import excel files can be done as well
+
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<codebox char_offset="14" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from urllib.requests import urlretrieve
+url = &quot;http://some.url/data.csv&quot;
+urlretrieve(url, &quot;localdata.csv&quot;)
+</codebox>
+			<codebox char_offset="43" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df=pd.read_csv(url,sep=&quot;;&quot;)</codebox>
+			<codebox char_offset="87" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
+url = 'http://my.url/data.xls' # this can be other supported protocols such as ftp. Local file can be referenced with file:///
+xl = pd.read_excel(url,sheetname=None)
+print(xl.keys()) # prints the sheetnames - individual sheets can be referenced as if xl was a dictionary</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="HTML requests" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542989430.82" ts_lastsave="1542989716.4" unique_id="24">
+			<rich_text>
+Using urllib
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Using requests module
+
+
+
+</rich_text>
+			<codebox char_offset="15" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from urllib.request import urlopen, Request
+url = &quot;http://my.url&quot;
+request = Request(url)
+response = urlopen(request)
+html = response.read()
+response.close()</codebox>
+			<codebox char_offset="41" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import requests
+url = &quot;http://my.url&quot;
+r = requests.get(url)
+text = r.text</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="BeautifulSoup" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542990129.82" ts_lastsave="1542991288.78" unique_id="25">
+			<rich_text>
+Starting </rich_text>
+			<rich_text link="node 25">BeautifulSoup</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Then we can do things to the soup.
+
+Prettify it
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Get the title
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Get the text
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Find tags
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<codebox char_offset="25" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from bs4 import BeautifulSoup
+import requests
+url = &quot;http://my.url&quot;
+r = requests.get(url)
+html_doc = r.text
+soup = BeautifulSoup(html_doc)</codebox>
+			<codebox char_offset="77" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># pretty soup is a properly indented soup object
+pretty_soup = soup.prettify()</codebox>
+			<codebox char_offset="95" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># this string contains the &lt;title&gt; tags
+title = soup.title</codebox>
+			<codebox char_offset="112" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This string contains no tags, only the textual part of the page
+text = soup.text</codebox>
+			<codebox char_offset="126" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">a_tags = soup.find_all('a') # finds all a tags -usually these will have urls
+# a_tags is of the type ResultSet - this is an iterable
+# link is a Tag object. Printing it gives the results together with the tags
+# calling the method get('href') filters the result to give only those with href
+for link in a_tags:
+    print(link.get('href'))</codebox>
 		</node>
 	</node>
 </cherrytree>
