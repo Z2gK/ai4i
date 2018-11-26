@@ -982,7 +982,7 @@ for key in group.keys():
 strain=data['strain'][&quot;Strain&quot;].value
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="sql" ts_creation="1542800512.04" ts_lastsave="1543083455.05" unique_id="21">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="sql" ts_creation="1542800512.04" ts_lastsave="1543083693.27" unique_id="21">
 			<rich_text>
 
 Common DB types: Postgresql, MySQL, SQLite, 
@@ -1001,6 +1001,11 @@ Fetch only a certain number of rows.
 			<rich_text>
 
 
+We can alternatively run the query from pandas
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -1030,11 +1035,13 @@ df = pd.DataFrame(rs.fetchall())
 df.columns = rs.keys() # Set the column names to be the same as that in the DB
 con.close()</codebox>
 			<codebox char_offset="184" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df = pd.DataFrame(rs.fetchmany(size=5))</codebox>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Basic SQL Syntax" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543082608.26" ts_lastsave="1543083577.41" unique_id="28">
+			<codebox char_offset="236" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df = pd.read_sql_query(&quot;SELECT * FROM Table&quot;, engine)
+</codebox>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Basic SQL Syntax" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543082608.26" ts_lastsave="1543083890.38" unique_id="28">
 				<rich_text>
 </rich_text>
 				<rich_text justification="left"></rich_text>
-				<codebox char_offset="1" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">-- Selects all records in all columns from table
+				<codebox char_offset="1" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">-- Selects all records in all columns from table
 SELECT * FROM Table_Name;
 
 -- Selects only certain columns from the table
@@ -1044,7 +1051,10 @@ SELECT col1, col2, col3 FROM Table_Name;
 SELECT * FROM Table_Name WHERE col1 &gt;= 6;
 
 -- Select all records but sort them by a certain column
-SELECT * FROM Employee ORDER BY BirthDate;</codebox>
+SELECT * FROM Employee ORDER BY BirthDate;
+
+-- Performs inner join. Displays only certain columns selected from two tables. Specifies which column to use as the joining key
+SELECT Title, Name FROM Album INNER JOIN Artist on Album.ArtistID = Artist.ArtistID</codebox>
 			</node>
 		</node>
 	</node>
