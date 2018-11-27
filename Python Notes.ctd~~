@@ -1241,9 +1241,14 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543084217.31" unique_id="29">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543084457.13" unique_id="29">
 		<rich_text>
-Common problems of unclean data
+
+
+</rich_text>
+		<rich_text underline="single" weight="heavy">Common problems of unclean data</rich_text>
+		<rich_text>
+
 • Inconsistent column names
 • Missing data
 • Outliers
@@ -1252,5 +1257,35 @@ Common problems of unclean data
 • Column types signal unexpected values
 
 </rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1543309892.98" unique_id="30">
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<codebox char_offset="2" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># assuming df is a pandas data frame
+
+# Check out the first five rows of data
+print(df.head())
+
+# Check out the last five rows of data
+print(df.tail())
+
+# print the number of rows and columns of this data set in (rows, cols) format - note that this is not a method
+print(df.shape)
+
+# print the names of the columns - note that this is not a method
+print(df.columns)
+
+# print out info about the types of objects in each column, how many nulls there are etc
+print(df.info())
+
+# print out summary statistics such as count, mean, median, std, max, quartiles for numeric columns
+df.describe()
+
+# print the count of occurences for various categories, including NA
+# applies to categorical data only
+print(df['Column Name'].value_counts(dropna=False))
+</codebox>
+		</node>
 	</node>
 </cherrytree>

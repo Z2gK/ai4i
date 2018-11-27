@@ -982,7 +982,8 @@ for key in group.keys():
 strain=data['strain'][&quot;Strain&quot;].value
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="sql" ts_creation="1542800512.04" ts_lastsave="1543083693.27" unique_id="21">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="sql" ts_creation="1542800512.04" ts_lastsave="1543084039.51" unique_id="21">
+			<rich_text scale="h1">SQL</rich_text>
 			<rich_text>
 
 Common DB types: Postgresql, MySQL, SQLite, 
@@ -1000,6 +1001,9 @@ Fetch only a certain number of rows.
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+</rich_text>
+			<rich_text scale="h1">Running queries from pandas</rich_text>
+			<rich_text>
 
 We can alternatively run the query from pandas
 
@@ -1016,7 +1020,7 @@ We can alternatively run the query from pandas
 WHat is the pro and cons of using the pandas way to execute a SQL query?
 
 Revise INNER JOIN, OUTER JOIN and different types of joins</rich_text>
-			<codebox char_offset="142" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary module
+			<codebox char_offset="145" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary module
 from sqlalchemy import create_engine
 from pandas import pd
 
@@ -1034,14 +1038,16 @@ rs = con.execute(&quot;SELECT * FROM Table_Name&quot;)
 df = pd.DataFrame(rs.fetchall())
 df.columns = rs.keys() # Set the column names to be the same as that in the DB
 con.close()</codebox>
-			<codebox char_offset="184" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df = pd.DataFrame(rs.fetchmany(size=5))</codebox>
-			<codebox char_offset="236" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df = pd.read_sql_query(&quot;SELECT * FROM Table&quot;, engine)
+			<codebox char_offset="187" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df = pd.DataFrame(rs.fetchmany(size=5))</codebox>
+			<codebox char_offset="267" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df = pd.read_sql_query(&quot;SELECT * FROM Table&quot;, engine)
 </codebox>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Basic SQL Syntax" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543082608.26" ts_lastsave="1543083890.38" unique_id="28">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Basic SQL Syntax" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543082608.26" ts_lastsave="1543084021.69" unique_id="28">
+				<rich_text scale="h1">Basic SQL Syntax</rich_text>
 				<rich_text>
+
 </rich_text>
 				<rich_text justification="left"></rich_text>
-				<codebox char_offset="1" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">-- Selects all records in all columns from table
+				<codebox char_offset="18" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">-- Selects all records in all columns from table
 SELECT * FROM Table_Name;
 
 -- Selects only certain columns from the table
@@ -1054,11 +1060,14 @@ SELECT * FROM Table_Name WHERE col1 &gt;= 6;
 SELECT * FROM Employee ORDER BY BirthDate;
 
 -- Performs inner join. Displays only certain columns selected from two tables. Specifies which column to use as the joining key
-SELECT Title, Name FROM Album INNER JOIN Artist on Album.ArtistID = Artist.ArtistID</codebox>
+SELECT Title, Name FROM Album INNER JOIN Artist on Album.ArtistID = Artist.ArtistID;
+
+-- Another example of multiple table query
+SELECT * FROM PlaylistTrack INNER JOIN Track on PlaylistTrack.TrackId=Track.TrackID WHERE Milliseconds &lt; 250000;</codebox>
 			</node>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542988073.09" ts_lastsave="1543080225.62" unique_id="22">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542988073.09" ts_lastsave="1543084212.47" unique_id="22">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="urllib" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542988172.07" ts_lastsave="1543082459.11" unique_id="23">
 			<rich_text>
@@ -1210,7 +1219,7 @@ with open('file.json', 'r') as json_file:
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="APIs" prog_lang="custom-colors" readonly="False" tags="API" ts_creation="1543080225.62" ts_lastsave="1543082511.94" unique_id="27">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="APIs" prog_lang="custom-colors" readonly="False" tags="API" ts_creation="1543080225.62" ts_lastsave="1543084190.58" unique_id="27">
 			<rich_text scale="h1">Miscellaneous information about APIs</rich_text>
 			<rich_text>
 
@@ -1230,6 +1239,48 @@ consumer_key = &quot;...&quot;
 consumer_secret = &quot;...&quot;
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543084457.13" unique_id="29">
+		<rich_text>
+
+
+</rich_text>
+		<rich_text underline="single" weight="heavy">Common problems of unclean data</rich_text>
+		<rich_text>
+
+• Inconsistent column names
+• Missing data
+• Outliers
+• Duplicate rows
+• Need to process columns
+• Column types signal unexpected values
+
+</rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1543309627.14" unique_id="30">
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<codebox char_offset="2" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># assuming df is a pandas data frame
+
+# Check out the first five rows of data
+print(df.head())
+
+# Check out the last five rows of data
+print(df.tail())
+
+# print the number of rows and columns of this data set in (rows, cols) format - note that this is not a method
+print(df.shape)
+
+# print the names of the columns - note that this is not a method
+print(df.columns)
+
+# print out info about the types of objects in each column, how many nulls there are etc
+print(df.info())
+
+# print out summary statistics such as count, mean, median, std, max, quartiles for numeric columns
+df.describe()</codebox>
 		</node>
 	</node>
 </cherrytree>

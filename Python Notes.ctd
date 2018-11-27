@@ -112,7 +112,7 @@ time = np.arange(0, 1, 1/num_samples)
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intermediate Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542453323.53" ts_lastsave="1542457044.44" unique_id="3">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1542702403.26" unique_id="4">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543310707.55" unique_id="4">
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
 
@@ -127,6 +127,11 @@ Plotting using pandas module. This also seem to work, from what it seems in othe
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+The plotting function can be called directly from the data frame as well, through the plot method. This usage is seen in the Cleaning Data in Python chapter.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 </rich_text>
 			<codebox char_offset="24" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
 
@@ -148,6 +153,20 @@ import pandas as pd
 # data is a data series
 pd.DataFrame.hist(data)
 plt.show()
+</codebox>
+			<codebox char_offset="282" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+
+# Plot the histogram
+# rot is for rotation of the x axis labels
+# logx and logy are for specify if the axes need to be on the log scale
+df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
+
+# Create the boxplot
+# This is a whisker and tail plot
+# rot is for rotating the x axis label
+# The value plotted is in the column argument, category is by Borough
+df.boxplot(column='initial_cost', by='Borough', rot=90)
+
 </codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1543081828.77" unique_id="5">
@@ -1257,7 +1276,7 @@ auth.set_access_token(access_token, access_token_secret)</codebox>
 • Column types signal unexpected values
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1543249779.51" unique_id="30">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1543310088.16" unique_id="30">
 			<rich_text>
 
 </rich_text>
@@ -1278,6 +1297,13 @@ print(df.columns)
 
 # print out info about the types of objects in each column, how many nulls there are etc
 print(df.info())
+
+# print out summary statistics such as count, mean, median, std, max, quartiles for numeric columns
+df.describe()
+
+# print the count of occurences for various categories, including NA
+# applies to categorical data only
+print(df['Column Name'].value_counts(dropna=False))
 
 </codebox>
 		</node>
