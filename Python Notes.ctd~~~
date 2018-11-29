@@ -1307,7 +1307,7 @@ print(df['Column Name'].value_counts(dropna=False))
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting and Pivoting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543420088.28" ts_lastsave="1543422159.08" unique_id="31">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting and Pivoting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543420088.28" ts_lastsave="1543422713.62" unique_id="31">
 			<rich_text scale="h1">Melting</rich_text>
 			<rich_text>
 
@@ -1333,6 +1333,13 @@ This is the opposite of melting.
 			<rich_text>
 
 Note that the above is not quite the original data frame - it's got a hierachical index aka Multiindex.
+
+We can reset the index to get back what we want. This is covered in more depth in a later chapter.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
 
 </rich_text>
 			<rich_text weight="heavy">Q: Does the function supplied to the pivot_table method need to be a numpy function?
@@ -1380,7 +1387,16 @@ airquality_pivot = airquality_melt.pivot_table(index=[&quot;Month&quot;, &quot;D
 #       4       18.0    313.0  62.0  11.5
 #       5        NaN      NaN  56.0  14.3
 </codebox>
-			<codebox char_offset="577" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
+			<codebox char_offset="481" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the index of airquality_pivot
+print(airquality_pivot.index)
+
+# Reset the index of airquality_pivot: airquality_pivot_reset
+airquality_pivot_reset = airquality_pivot.reset_index()
+
+# Print the new index of airquality_pivot_reset
+print(airquality_pivot_reset)
+</codebox>
+			<codebox char_offset="681" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
 tb_melt = pd.melt(frame=tb, id_vars=[&quot;country&quot;, &quot;year&quot;])
 
 # Create the 'gender' column

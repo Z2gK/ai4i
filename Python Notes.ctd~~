@@ -1307,7 +1307,7 @@ print(df['Column Name'].value_counts(dropna=False))
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting and Pivoting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543420088.28" ts_lastsave="1543422397.59" unique_id="31">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543420088.28" ts_lastsave="1543422755.86" unique_id="31">
 			<rich_text scale="h1">Melting</rich_text>
 			<rich_text>
 
