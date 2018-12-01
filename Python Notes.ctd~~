@@ -1458,7 +1458,7 @@ ebola_melt['type'] = ebola_melt[&quot;str_split&quot;].str.get(0)
 ebola_melt['country'] = ebola_melt[&quot;str_split&quot;].str.get(1)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543644784.14" ts_lastsave="1543647059.44" unique_id="32">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543644784.14" ts_lastsave="1543647669.42" unique_id="32">
 			<rich_text>
 Concatenating data - adding rows
 
@@ -1488,6 +1488,19 @@ left_on and right_on are the column names of the common column.
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Many to one merging also uses the same syntax
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Here are the left, right and resulting data frames
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+For many-many merges, all duplicate keys will be created
+
+
 
 TIP: If columns are replaced by ... when using head or tail methods, we can view and configure the behaviours through the pandas get_options and set_option methods
 
@@ -1516,7 +1529,37 @@ csv_files = glob.glob(pattern)
 			<codebox char_offset="513" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: o2o
 o2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quot;site&quot;)
 </codebox>
-			<codebox char_offset="682" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+			<codebox char_offset="562" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: m2o
+m2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quot;site&quot;)
+</codebox>
+			<codebox char_offset="616" frame_height="235" frame_width="30" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sh" width_in_pixels="False">
+    name    lat    long
+0   DR-1 -49.85 -128.57
+1   DR-3 -47.15 -126.72
+2  MSK-4 -48.87 -123.40
+</codebox>
+			<codebox char_offset="617" frame_height="235" frame_width="30" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="ada" width_in_pixels="False">
+   ident   site       dated
+0    619   DR-1  1927-02-08
+1    622   DR-1  1927-02-10
+2    734   DR-3  1939-01-07
+3    735   DR-3  1930-01-12
+4    751   DR-3  1930-02-26
+5    752   DR-3         NaN
+6    837  MSK-4  1932-01-14
+7    844   DR-1  1932-03-22
+</codebox>
+			<codebox char_offset="618" frame_height="235" frame_width="39" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sh" width_in_pixels="False">    name    lat    long  ident   site       dated
+0   DR-1 -49.85 -128.57    619   DR-1  1927-02-08
+1   DR-1 -49.85 -128.57    622   DR-1  1927-02-10
+2   DR-1 -49.85 -128.57    844   DR-1  1932-03-22
+3   DR-3 -47.15 -126.72    734   DR-3  1939-01-07
+4   DR-3 -47.15 -126.72    735   DR-3  1930-01-12
+5   DR-3 -47.15 -126.72    751   DR-3  1930-02-26
+6   DR-3 -47.15 -126.72    752   DR-3         NaN
+7  MSK-4 -48.87 -123.40    837  MSK-4  1932-01-14
+</codebox>
+			<codebox char_offset="846" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 pd.get_option(&quot;display.max_columns&quot;)
 
 pd.set_option(&quot;display.max_columns&quot;,10)

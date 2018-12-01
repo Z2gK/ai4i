@@ -1260,7 +1260,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543644784.13" unique_id="29">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543678078.56" unique_id="29">
 		<rich_text>
 
 
@@ -1458,7 +1458,7 @@ ebola_melt['type'] = ebola_melt[&quot;str_split&quot;].str.get(0)
 ebola_melt['country'] = ebola_melt[&quot;str_split&quot;].str.get(1)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="merging" ts_creation="1543644784.14" ts_lastsave="1543648294.22" unique_id="32">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="merging" ts_creation="1543644784.14" ts_lastsave="1543680584.23" unique_id="32">
 			<rich_text scale="h1">Concatenating rows and columns</rich_text>
 			<rich_text>
 
@@ -1575,6 +1575,9 @@ pd.get_option(&quot;display.max_columns&quot;)
 
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543678078.56" unique_id="33">
+			<rich_text></rich_text>
 		</node>
 	</node>
 </cherrytree>

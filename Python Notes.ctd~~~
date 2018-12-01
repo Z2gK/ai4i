@@ -1458,7 +1458,7 @@ ebola_melt['type'] = ebola_melt[&quot;str_split&quot;].str.get(0)
 ebola_melt['country'] = ebola_melt[&quot;str_split&quot;].str.get(1)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543644784.14" ts_lastsave="1543646964.53" unique_id="32">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543644784.14" ts_lastsave="1543647059.44" unique_id="32">
 			<rich_text>
 Concatenating data - adding rows
 
@@ -1482,7 +1482,7 @@ Finding files in the local workspace - first we find all files matching a certai
 
 Merging data frames - this is in cases where two data frames have a common column we can use to merge the data.
 left_on and right_on are the column names of the common column.
-1-1, many-1, 1-many merging all use the same code.
+1-1, many-1, 1-many merging all use the same code. Think about different types of JOINs in SQL.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -1513,10 +1513,10 @@ pattern = '*.csv'
 # Save all file matches: csv_files - this is a list of filenames which we can use for importing in pandas
 csv_files = glob.glob(pattern)
 </codebox>
-			<codebox char_offset="468" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: o2o
+			<codebox char_offset="513" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: o2o
 o2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quot;site&quot;)
 </codebox>
-			<codebox char_offset="637" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+			<codebox char_offset="682" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 pd.get_option(&quot;display.max_columns&quot;)
 
 pd.set_option(&quot;display.max_columns&quot;,10)
