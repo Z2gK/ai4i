@@ -1260,7 +1260,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543420088.28" unique_id="29">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543644784.13" unique_id="29">
 		<rich_text>
 
 
@@ -1307,7 +1307,7 @@ print(df['Column Name'].value_counts(dropna=False))
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543420088.28" ts_lastsave="1543483287.34" unique_id="31">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543420088.28" ts_lastsave="1543507687.21" unique_id="31">
 			<rich_text scale="h1">Melting</rich_text>
 			<rich_text>
 
@@ -1340,7 +1340,7 @@ We can reset the index to get back what we want. This is covered in more depth i
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Pivoting with aggregation function to deal  with duplicates.
+Pivoting with aggregation function to deal  with duplicates. The default aggregation function used is np.mean if no aggfunc argument is specified.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -1349,6 +1349,7 @@ Pivoting with aggregation function to deal  with duplicates.
 
 </rich_text>
 			<rich_text weight="heavy">Q: Does the function supplied to the pivot_table method need to be a numpy function?
+Q: There are two ways to reference columns - either by df[&quot;colname&quot;] or df.colname. Are there situations where only one way works? Personally i prefer the former. WOn't there be ambiguity when the column name contains a dot ‘.’?
 </rich_text>
 			<rich_text>
 
@@ -1361,6 +1362,14 @@ This is how we split strings and create new columns. Note how we apply the str a
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+Split() and get() methods
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
 
 
 </rich_text>
@@ -1402,13 +1411,13 @@ airquality_pivot_reset = airquality_pivot.reset_index()
 # Print the new index of airquality_pivot_reset
 print(airquality_pivot_reset)
 </codebox>
-			<codebox char_offset="546" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pivot airquality_dup: airquality_pivot
+			<codebox char_offset="632" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pivot airquality_dup: airquality_pivot
 airquality_pivot = airquality_dup.pivot_table(index=[&quot;Month&quot;,&quot;Day&quot;], columns=&quot;measurement&quot;, values=&quot;reading&quot;, aggfunc=np.mean)
 
 # Reset the index of airquality_pivot
 airquality_pivot = airquality_pivot.reset_index()
 </codebox>
-			<codebox char_offset="746" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
+			<codebox char_offset="1061" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
 tb_melt = pd.melt(frame=tb, id_vars=[&quot;country&quot;, &quot;year&quot;])
 
 # Create the 'gender' column
@@ -1425,6 +1434,92 @@ tb_melt['age_group'] = tb_melt.variable.str[1:]
 # 2      AF  2000     m014   52.0      m       014
 # 3      AG  2000     m014    0.0      m       014
 # 4      AL  2000     m014    2.0      m       014
+</codebox>
+			<codebox char_offset="1091" frame_height="430" frame_width="100" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="False"># Original data frame looks a bit like this (many columns omitted)
+#         Date  Day  Cases_Guinea  Cases_Liberia  Cases_SierraLeone  \
+#0    1/5/2015  289        2776.0            NaN            10030.0   
+#1    1/4/2015  288        2775.0            NaN             9780.0   
+#2    1/3/2015  287        2769.0         8166.0             9722.0   
+#3    1/2/2015  286           NaN         8157.0                NaN   
+#4  12/31/2014  284        2730.0         8115.0             9633.0   
+
+
+# Melt ebola: ebola_melt
+ebola_melt = pd.melt(ebola, id_vars=[&quot;Date&quot;, &quot;Day&quot;], var_name=&quot;type_country&quot;, value_name=&quot;counts&quot;)
+
+# Create the 'str_split' column
+# This also seems to work: ebola_melt['str_split'] = ebola_melt.type_country.str.split(&quot;_&quot;)
+ebola_melt['str_split'] = ebola_melt[&quot;type_country&quot;].str.split(&quot;_&quot;)
+
+# Create the 'type' column
+ebola_melt['type'] = ebola_melt[&quot;str_split&quot;].str.get(0)
+
+# Create the 'country' column
+ebola_melt['country'] = ebola_melt[&quot;str_split&quot;].str.get(1)
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543644784.14" ts_lastsave="1543647059.44" unique_id="32">
+			<rich_text>
+Concatenating data - adding rows
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Adding columns - specify axis=1 as an argument. If omitted, axis=0, as is the case above.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Finding files in the local workspace - first we find all files matching a certain pattern using glob.
+
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Merging data frames - this is in cases where two data frames have a common column we can use to merge the data.
+left_on and right_on are the column names of the common column.
+1-1, many-1, 1-many merging all use the same code. Think about different types of JOINs in SQL.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+TIP: If columns are replaced by ... when using head or tail methods, we can view and configure the behaviours through the pandas get_options and set_option methods
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+</rich_text>
+			<codebox char_offset="35" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># uber1, uber2 and uber3 are data frames
+# pandas as been imported as pd
+# Concatenate uber1, uber2, and uber3: row_concat
+row_concat = pd.concat([uber1,uber2,uber3])
+
+# To use running indices in the new data frame, add an ignore_index argument
+row_concat = pd.concat([uber1,uber2,uber3], ignore_index=True)</codebox>
+			<codebox char_offset="129" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Concatenate ebola_melt and status_country column-wise: ebola_tidy
+ebola_tidy = pd.concat([ebola_melt,status_country],axis=1)
+</codebox>
+			<codebox char_offset="236" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import glob
+
+# Write the pattern: pattern
+pattern = '*.csv'
+
+# Save all file matches: csv_files - this is a list of filenames which we can use for importing in pandas
+csv_files = glob.glob(pattern)
+</codebox>
+			<codebox char_offset="513" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: o2o
+o2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quot;site&quot;)
+</codebox>
+			<codebox char_offset="682" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+pd.get_option(&quot;display.max_columns&quot;)
+
+pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
 	</node>
