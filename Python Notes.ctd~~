@@ -1260,7 +1260,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543644784.13" unique_id="29">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543678078.56" unique_id="29">
 		<rich_text>
 
 
@@ -1307,7 +1307,7 @@ print(df['Column Name'].value_counts(dropna=False))
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543420088.28" ts_lastsave="1543507687.21" unique_id="31">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="melting, pivoting, splitting" ts_creation="1543420088.28" ts_lastsave="1543648052.21" unique_id="31">
 			<rich_text scale="h1">Melting</rich_text>
 			<rich_text>
 
@@ -1458,8 +1458,10 @@ ebola_melt['type'] = ebola_melt[&quot;str_split&quot;].str.get(0)
 ebola_melt['country'] = ebola_melt[&quot;str_split&quot;].str.get(1)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543644784.14" ts_lastsave="1543647669.42" unique_id="32">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Combining data" prog_lang="custom-colors" readonly="False" tags="merging" ts_creation="1543644784.14" ts_lastsave="1543680584.23" unique_id="32">
+			<rich_text scale="h1">Concatenating rows and columns</rich_text>
 			<rich_text>
+
 Concatenating data - adding rows
 
 </rich_text>
@@ -1472,13 +1474,20 @@ Adding columns - specify axis=1 as an argument. If omitted, axis=0, as is the ca
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Finding files in the local workspace - first we find all files matching a certain pattern using glob.
+</rich_text>
+			<rich_text scale="h1">Finding files</rich_text>
+			<rich_text>
 
+Finding files in the local workspace - first we find all files matching a certain pattern using glob.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+
+</rich_text>
+			<rich_text scale="h1">Merging data frames</rich_text>
+			<rich_text>
 
 Merging data frames - this is in cases where two data frames have a common column we can use to merge the data.
 left_on and right_on are the column names of the common column.
@@ -1494,6 +1503,7 @@ Many to one merging also uses the same syntax
 			<rich_text>
 
 Here are the left, right and resulting data frames
+
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
@@ -1501,6 +1511,7 @@ Here are the left, right and resulting data frames
 For many-many merges, all duplicate keys will be created
 
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 TIP: If columns are replaced by ... when using head or tail methods, we can view and configure the behaviours through the pandas get_options and set_option methods
 
@@ -1508,17 +1519,17 @@ TIP: If columns are replaced by ... when using head or tail methods, we can view
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 </rich_text>
-			<codebox char_offset="35" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># uber1, uber2 and uber3 are data frames
+			<codebox char_offset="66" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># uber1, uber2 and uber3 are data frames
 # pandas as been imported as pd
 # Concatenate uber1, uber2, and uber3: row_concat
 row_concat = pd.concat([uber1,uber2,uber3])
 
 # To use running indices in the new data frame, add an ignore_index argument
 row_concat = pd.concat([uber1,uber2,uber3], ignore_index=True)</codebox>
-			<codebox char_offset="129" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Concatenate ebola_melt and status_country column-wise: ebola_tidy
+			<codebox char_offset="160" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Concatenate ebola_melt and status_country column-wise: ebola_tidy
 ebola_tidy = pd.concat([ebola_melt,status_country],axis=1)
 </codebox>
-			<codebox char_offset="236" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import glob
+			<codebox char_offset="281" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import glob
 
 # Write the pattern: pattern
 pattern = '*.csv'
@@ -1526,19 +1537,19 @@ pattern = '*.csv'
 # Save all file matches: csv_files - this is a list of filenames which we can use for importing in pandas
 csv_files = glob.glob(pattern)
 </codebox>
-			<codebox char_offset="513" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: o2o
+			<codebox char_offset="579" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: o2o
 o2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quot;site&quot;)
 </codebox>
-			<codebox char_offset="562" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: m2o
+			<codebox char_offset="628" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge the DataFrames: m2o
 m2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quot;site&quot;)
 </codebox>
-			<codebox char_offset="616" frame_height="235" frame_width="30" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sh" width_in_pixels="False">
+			<codebox char_offset="683" frame_height="235" frame_width="30" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sh" width_in_pixels="False">
     name    lat    long
 0   DR-1 -49.85 -128.57
 1   DR-3 -47.15 -126.72
 2  MSK-4 -48.87 -123.40
 </codebox>
-			<codebox char_offset="617" frame_height="235" frame_width="30" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="ada" width_in_pixels="False">
+			<codebox char_offset="684" frame_height="235" frame_width="30" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="ada" width_in_pixels="False">
    ident   site       dated
 0    619   DR-1  1927-02-08
 1    622   DR-1  1927-02-10
@@ -1549,7 +1560,7 @@ m2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quo
 6    837  MSK-4  1932-01-14
 7    844   DR-1  1932-03-22
 </codebox>
-			<codebox char_offset="618" frame_height="235" frame_width="39" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sh" width_in_pixels="False">    name    lat    long  ident   site       dated
+			<codebox char_offset="685" frame_height="235" frame_width="39" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sh" width_in_pixels="False">    name    lat    long  ident   site       dated
 0   DR-1 -49.85 -128.57    619   DR-1  1927-02-08
 1   DR-1 -49.85 -128.57    622   DR-1  1927-02-10
 2   DR-1 -49.85 -128.57    844   DR-1  1932-03-22
@@ -1559,11 +1570,14 @@ m2o = pd.merge(left=site, right=visited, left_on=&quot;name&quot;, right_on=&quo
 6   DR-3 -47.15 -126.72    752   DR-3         NaN
 7  MSK-4 -48.87 -123.40    837  MSK-4  1932-01-14
 </codebox>
-			<codebox char_offset="846" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+			<codebox char_offset="947" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 pd.get_option(&quot;display.max_columns&quot;)
 
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543678078.56" unique_id="33">
+			<rich_text></rich_text>
 		</node>
 	</node>
 </cherrytree>

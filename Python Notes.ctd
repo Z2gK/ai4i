@@ -1576,8 +1576,30 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543678078.56" unique_id="33">
-			<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543721547.62" unique_id="33">
+			<rich_text>
+
+
+
+
+
+
+
+
+
+</rich_text>
+			<rich_text weight="heavy">Q: Categorical variables - what if there are additional variables not represented by the data frame. if we add new ones through row combine (say), would  it cause any error?</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: What exactly does notnull return?</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: For the function passed to np.apply(), what data type for the input argument is assumed? An entire row? Or individual element?</rich_text>
+			<rich_text>
+
+</rich_text>
 		</node>
 	</node>
 </cherrytree>
