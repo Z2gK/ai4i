@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31"/>
+	<bookmarks list="2,18,21,31,33"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -112,7 +112,7 @@ time = np.arange(0, 1, 1/num_samples)
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intermediate Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542453323.53" ts_lastsave="1542457044.44" unique_id="3">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543310707.55" unique_id="4">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543758901.67" unique_id="4">
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
 
@@ -132,6 +132,16 @@ The plotting function can be called directly from the data frame as well, throug
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+
+Other miscellaneous configuration options
+
+
+
+
+
+
+
 </rich_text>
 			<codebox char_offset="24" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
 
@@ -145,7 +155,7 @@ plt.clf()
 # Change the line plot below to a scatter plot
 plt.scatter(gdp_cap, life_exp)
 </codebox>
-			<codebox char_offset="120" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot as plt
+			<codebox char_offset="120" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -154,7 +164,7 @@ import pandas as pd
 pd.DataFrame.hist(data)
 plt.show()
 </codebox>
-			<codebox char_offset="282" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+			<codebox char_offset="282" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 
 # Plot the histogram
 # rot is for rotation of the x axis labels
@@ -167,6 +177,12 @@ df['Existing Zoning Sqft'].plot(kind='hist', rot=70, logx=True, logy=True)
 # The value plotted is in the column argument, category is by Borough
 df.boxplot(column='initial_cost', by='Borough', rot=90)
 
+# Create the scatter plot
+g1800s.plot(kind=&quot;scatter&quot;, x=&quot;1800&quot;, y=&quot;1899&quot;)
+</codebox>
+			<codebox char_offset="329" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify axis limits
+plt.xlim(20, 55)
+plt.ylim(20, 55)
 </codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1543081828.77" unique_id="5">
@@ -1307,7 +1323,7 @@ print(df['Column Name'].value_counts(dropna=False))
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="melting, pivoting, splitting" ts_creation="1543420088.28" ts_lastsave="1543648052.21" unique_id="31">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="melting, pivoting, splitting" ts_creation="1543420088.28" ts_lastsave="1543760427.2" unique_id="31">
 			<rich_text scale="h1">Melting</rich_text>
 			<rich_text>
 
@@ -1318,6 +1334,7 @@ Melting - doing away with certain chosen columns and putting the values associat
 			<rich_text>
 
 We can assign names to the new columns of the melted data frame through var_name and value_name.
+Or we can simply assign the names through the columns variable by passing a list.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -1378,10 +1395,12 @@ Split() and get() methods
 # by default, if no value_vars is defined, all columns not in id_vars will be melted
 melted_frame = pd.melt(frame=unmelted_frame, id_vars = ['col1','col2'], value_vars = ['meltcol1','meltcol2'])
 </codebox>
-			<codebox char_offset="227" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt airquality: airquality_melt
+			<codebox char_offset="309" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt airquality: airquality_melt
 airquality_melt = pd.melt(frame=airquality, id_vars=[&quot;Month&quot;,&quot;Day&quot;], var_name=&quot;measurement&quot;, value_name=&quot;reading&quot;)
+
+airquality_melt.columns = [&quot;col1name&quot;, &quot;col2name&quot;, &quot;col3name&quot;]
 </codebox>
-			<codebox char_offset="273" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># original data frame
+			<codebox char_offset="355" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># original data frame
 #    Month  Day measurement  reading
 # 0      5    1       Ozone     41.0
 # 1      5    2       Ozone     36.0
@@ -1402,7 +1421,7 @@ airquality_pivot = airquality_melt.pivot_table(index=[&quot;Month&quot;, &quot;D
 #       4       18.0    313.0  62.0  11.5
 #       5        NaN      NaN  56.0  14.3
 </codebox>
-			<codebox char_offset="481" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the index of airquality_pivot
+			<codebox char_offset="563" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the index of airquality_pivot
 print(airquality_pivot.index)
 
 # Reset the index of airquality_pivot: airquality_pivot_reset
@@ -1411,13 +1430,13 @@ airquality_pivot_reset = airquality_pivot.reset_index()
 # Print the new index of airquality_pivot_reset
 print(airquality_pivot_reset)
 </codebox>
-			<codebox char_offset="632" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pivot airquality_dup: airquality_pivot
+			<codebox char_offset="714" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pivot airquality_dup: airquality_pivot
 airquality_pivot = airquality_dup.pivot_table(index=[&quot;Month&quot;,&quot;Day&quot;], columns=&quot;measurement&quot;, values=&quot;reading&quot;, aggfunc=np.mean)
 
 # Reset the index of airquality_pivot
 airquality_pivot = airquality_pivot.reset_index()
 </codebox>
-			<codebox char_offset="1061" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
+			<codebox char_offset="1143" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
 tb_melt = pd.melt(frame=tb, id_vars=[&quot;country&quot;, &quot;year&quot;])
 
 # Create the 'gender' column
@@ -1435,7 +1454,7 @@ tb_melt['age_group'] = tb_melt.variable.str[1:]
 # 3      AG  2000     m014    0.0      m       014
 # 4      AL  2000     m014    2.0      m       014
 </codebox>
-			<codebox char_offset="1091" frame_height="430" frame_width="100" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="False"># Original data frame looks a bit like this (many columns omitted)
+			<codebox char_offset="1173" frame_height="430" frame_width="100" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="False"># Original data frame looks a bit like this (many columns omitted)
 #         Date  Day  Cases_Guinea  Cases_Liberia  Cases_SierraLeone  \
 #0    1/5/2015  289        2776.0            NaN            10030.0   
 #1    1/4/2015  288        2775.0            NaN             9780.0   
@@ -1576,7 +1595,7 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543721344.86" unique_id="33">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543761166.47" unique_id="33">
 			<rich_text>
 
 
@@ -1596,6 +1615,31 @@ pd.set_option(&quot;display.max_columns&quot;,10)
 			<rich_text>
 
 </rich_text>
+			<rich_text weight="heavy">Q: For the function passed to np.apply(), what data type for the input argument is assumed? An entire row? Or individual element?</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: check_null_or_valid is row based function, but we're passing almost the entire data frame. How does this work?</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: In Case Study 5 - this is not really a row-wise conncatenation, unlike what the instructions said.</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: Any way to specify integer or float when casting to numeric data type via pd.to_numeric? Sometimes that is useful as it helps with memory management.</rich_text>
+			<rich_text>
+
+
+
+</rich_text>
+			<codebox char_offset="469" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
+assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
+</codebox>
 		</node>
 	</node>
 </cherrytree>
