@@ -136,7 +136,9 @@ The plotting function can be called directly from the data frame as well, throug
 
 Other miscellaneous configuration options
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -1595,7 +1597,7 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543761595.3" unique_id="33">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543801969.07" unique_id="33">
 			<rich_text>
 
 
@@ -1637,6 +1639,11 @@ pd.set_option(&quot;display.max_columns&quot;,10)
 </rich_text>
 			<rich_text weight="heavy">Q: .all() is still quite unclear</rich_text>
 			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: For previous chapter - how to extract data from websites that depend on javascript to display data? viewing the source does not show up the data, so cannot use beautifulsoup immediately. Is there any python package to help display this content?</rich_text>
+			<rich_text>
+
 
 </rich_text>
 			<codebox char_offset="469" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
