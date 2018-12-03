@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33"/>
+	<bookmarks list="2,18,21,31,33,36"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -187,7 +187,7 @@ plt.xlim(20, 55)
 plt.ylim(20, 55)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1543081828.77" unique_id="5">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1543837687.31" unique_id="5">
 			<rich_text scale="h1">Building Pandas data frames</rich_text>
 			<rich_text>
 
@@ -258,6 +258,7 @@ Seen in Importing Data in Python Part 2 exercise, a new way to reference
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+loc also takes a Series of booleans, as we can see in Cleaning Data in Python.
 
 </rich_text>
 			<rich_text scale="h1">Logical subsetting</rich_text>
@@ -336,7 +337,7 @@ print(cars.loc[['RU','MOR'],['country','drives_right']])
 # Print out cars_per_cap and drives_right as DataFrame
 print(cars.loc[:,['cars_per_cap','drives_right']])</codebox>
 			<codebox char_offset="1204" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df.ix[:, 0:1]</codebox>
-			<codebox char_offset="1326" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
+			<codebox char_offset="1405" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
 cars = pd.read_csv('cars.csv', index_col = 0)
 
 # Convert code to a one-liner - the argument is a True/False Series
@@ -1597,42 +1598,9 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types, NA, asserts, applying functions" ts_creation="1543678078.56" ts_lastsave="1543831851.17" unique_id="33">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types, NA, asserts, applying functions" ts_creation="1543678078.56" ts_lastsave="1543837457.15" unique_id="33">
 			<rich_text>
-We can view the types assigned to each column through the dtypes method.
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-
-
-
-
-Remove duplicate rows
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-Dropping ANY row that has NA.
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-Replacing NAs in a certain column with the mean, or with our specified values
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-
-Using asserts to test if cleaning is successful.
-
-notnull() converts all entries in the data frame to a boolean. all() checks each column and returns True if and only if all entries in the column are True. In effect, notnull().all() returns a Series like object. The final all() takes this Series like object and return True if and only if all entries in this Series are True.
-
-Instead of check for non-null entries, we can check if all entries are greater than or equal to zero. Just replace ebola.notnull() by ebola &gt;= 0.
+We can view the types assigned to each column through the dtypes method. We can also test if the data is of a certain type.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -1683,30 +1651,18 @@ Instead of check for non-null entries, we can check if all entries are greater t
 
 
 </rich_text>
-			<codebox char_offset="75" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">print(df.dtypes)</codebox>
-			<codebox char_offset="105" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
-tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;time&quot;]]
+			<codebox char_offset="126" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">print(df.dtypes)
 
-# Drop the duplicates: tracks_no_duplicates
-tracks_no_duplicates = tracks.drop_duplicates()
+# Test if country is of type object
+assert gapminder.country.dtypes == np.object
+
+# Test if year is of type int64
+assert gapminder.year.dtypes == np.int64
+
+# Test if life_expectancy is of type float64
+assert gapminder.life_expectancy.dtypes == np.float64
 </codebox>
-			<codebox char_offset="139" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
-			<codebox char_offset="221" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
-oz_mean = airquality[&quot;Ozone&quot;].mean()
-
-# Replace all the missing values in the Ozone column with the mean
-airquality['Ozone'] = airquality[&quot;Ozone&quot;].fillna(oz_mean)
-
-tips_nan['sex'] = tips_nan['sex'].fillna('missing')
-
-tips_nan[['total_bill', 'size']] = tips_nan[['total_bill','size']].fillna(0)</codebox>
-			<codebox char_offset="750" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that there are no missing values
-assert ebola.notnull().all().all()
-
-# Assert that all values are &gt;= 0
-assert (ebola &gt;= 0).all().all()
-</codebox>
-			<codebox char_offset="1362" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
+			<codebox char_offset="738" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
 assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
 </codebox>
 			<node custom_icon_id="0" foreground="" is_bold="False" name="Casting data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831800.06" ts_lastsave="1543831810.9" unique_id="34">
@@ -1727,7 +1683,7 @@ df['treatment b'] = df['treatment b'].astype(str)
 # coerce will return NaN when error is encountered. default behaviour is errors=&quot;raise&quot;, which is to raise an exception
  df['treatment a'] = pd.to_numeric(df['treatment a'], errors='coerce')</codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Checking validity using RE" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831830.28" ts_lastsave="1543831839.78" unique_id="35">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Checking validity using RE" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831830.28" ts_lastsave="1543837631.61" unique_id="35">
 				<rich_text>
 
 Checking for valid strings using regular expressions.
@@ -1735,6 +1691,17 @@ Checking for valid strings using regular expressions.
 </rich_text>
 				<rich_text justification="left"></rich_text>
 				<rich_text>
+
+
+We can check if the data satisfies a certain pattern.
+</rich_text>
+				<rich_text weight="heavy">Q: Why isn't there a need to import re?</rich_text>
+				<rich_text>
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
 </rich_text>
 				<codebox char_offset="57" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the regular expression module
 import re
@@ -1769,8 +1736,29 @@ print(pattern2)
 pattern3 = bool(re.match(pattern='[A-Z]\w*', string='Australia'))
 print(pattern3)
 </codebox>
+				<codebox char_offset="156" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the series of countries: countries
+countries = gapminder[&quot;country&quot;]
+
+# Drop all the duplicates from countries
+countries = countries.drop_duplicates()
+
+# Write the regular expression: pattern
+pattern = '^[A-Za-z\.\s]*$'
+
+# Create the Boolean vector: mask
+mask = countries.str.contains(pattern)
+
+# Invert the mask: mask_inverse
+mask_inverse = ~mask
+
+# Subset countries using mask_inverse: invalid_countries
+invalid_countries = countries.loc[mask_inverse]
+
+# Print invalid_countries
+print(invalid_countries)
+</codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Using apply()" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831862.78" ts_lastsave="1543831865.06" unique_id="36">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Using apply()" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831862.78" ts_lastsave="1543836856.32" unique_id="36">
 				<rich_text>
 
 Using .apply() to recode data. We can specify a series, and pass a custom function meant to take in a single string as an argument.
@@ -1790,6 +1778,30 @@ A more complex use of .apply, with a two-input function specified and an additio
 </rich_text>
 				<rich_text justification="left"></rich_text>
 				<rich_text>
+
+Another complex application of apply(). 
+
+It seems that g1800s.iloc[:, </rich_text>
+				<rich_text foreground="#ff0044">1</rich_text>
+				<rich_text>:].apply(check_null_or_valid, axis=</rich_text>
+				<rich_text foreground="#ff0044">1</rich_text>
+				<rich_text>) returns a data frame full of NaN and True. Within columns we typically see NaN mixed with Trues.
+Why is it that g1800s.iloc[:, </rich_text>
+				<rich_text foreground="#ff0044">1</rich_text>
+				<rich_text>:].apply(check_null_or_valid, axis=</rich_text>
+				<rich_text foreground="#ff0044">1</rich_text>
+				<rich_text>).all() still give us all Trues? Are NaN not considered False?
+
+</rich_text>
+				<rich_text weight="heavy">Q: Why is there a need to drop the NAs?</rich_text>
+				<rich_text>
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+
+
+
 
 </rich_text>
 				<codebox char_offset="135" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define recode_gender()
@@ -1852,6 +1864,95 @@ df_subset['diff'] = df_subset.apply(diff_money, axis=1, pattern=pattern)
 #1 520129502 1 STATEN ISLAND $0.00 $1144.00 -1144.0
 # 121601560 1 MANHATTAN $30000.00 $522.50 29477.5
 #3 121601203 1 MANHATTAN $1500.00 $225.00 1275.0 </codebox>
+				<codebox char_offset="712" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def check_null_or_valid(row_data):
+    &quot;&quot;&quot;Function that takes a row of data,
+    drops all missing values,
+    and checks if all remaining values are greater than or equal to 0
+    &quot;&quot;&quot;
+
+    no_na = row_data.dropna()
+    numeric = pd.to_numeric(no_na)
+    ge0 = numeric &gt;= 0
+    return ge0
+
+# Check whether the first column is 'Life expectancy'
+assert g1800s.columns[0] == &quot;Life expectancy&quot;
+
+# Check whether the values in the row are valid
+assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
+
+# Check that there is only one instance of each country
+assert g1800s['Life expectancy'].value_counts()[0] == 1
+</codebox>
+			</node>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Duplicates and NAs" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832028.59" ts_lastsave="1543837780.33" unique_id="37">
+				<rich_text>
+Remove duplicate rows
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+Dropping ANY row that has NA.
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+Replacing NAs in a certain column with the mean, or with our specified values
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+Check that there are no null values
+
+
+
+</rich_text>
+				<codebox char_offset="24" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
+tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;time&quot;]]
+
+# Drop the duplicates: tracks_no_duplicates
+tracks_no_duplicates = tracks.drop_duplicates()
+</codebox>
+				<codebox char_offset="58" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
+				<codebox char_offset="140" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
+oz_mean = airquality[&quot;Ozone&quot;].mean()
+
+# Replace all the missing values in the Ozone column with the mean
+airquality['Ozone'] = airquality[&quot;Ozone&quot;].fillna(oz_mean)
+
+tips_nan['sex'] = tips_nan['sex'].fillna('missing')
+
+tips_nan[['total_bill', 'size']] = tips_nan[['total_bill','size']].fillna(0)</codebox>
+				<codebox char_offset="180" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that country does not contain any missing values
+assert pd.notnull(gapminder.country).all()
+
+# Assert that year does not contain any missing values
+assert pd.notnull(gapminder.year).all()
+</codebox>
+			</node>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Using asserts to verify" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832053.66" ts_lastsave="1543834190.19" unique_id="38">
+				<rich_text>
+
+Using asserts to test if cleaning is successful.
+
+notnull() converts all entries in the data frame to a boolean. all() checks each column and returns True if and only if all entries in the column are True. In effect, notnull().all() returns a Series like object. The final all() takes this Series like object and return True if and only if all entries in this Series are True.
+
+Instead of check for non-null entries, we can check if all entries are greater than or equal to zero. Just replace ebola.notnull() by ebola &gt;= 0.
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+</rich_text>
+				<codebox char_offset="527" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that there are no missing values
+assert ebola.notnull().all().all()
+
+# Assert that all values are &gt;= 0
+assert (ebola &gt;= 0).all().all()
+</codebox>
 			</node>
 		</node>
 	</node>
