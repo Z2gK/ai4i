@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36"/>
+	<bookmarks list="2,18,21,31,33,36,35"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -112,7 +112,7 @@ time = np.arange(0, 1, 1/num_samples)
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intermediate Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542453323.53" ts_lastsave="1542457044.44" unique_id="3">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543758901.67" unique_id="4">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543852128.68" unique_id="4">
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
 
@@ -128,6 +128,12 @@ Plotting using pandas module. This also seem to work, from what it seems in othe
 			<rich_text>
 
 The plotting function can be called directly from the data frame as well, through the plot method. This usage is seen in the Cleaning Data in Python chapter.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Adding subplots
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -166,7 +172,7 @@ import pandas as pd
 pd.DataFrame.hist(data)
 plt.show()
 </codebox>
-			<codebox char_offset="282" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+			<codebox char_offset="282" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 
 # Plot the histogram
 # rot is for rotation of the x axis labels
@@ -181,8 +187,36 @@ df.boxplot(column='initial_cost', by='Borough', rot=90)
 
 # Create the scatter plot
 g1800s.plot(kind=&quot;scatter&quot;, x=&quot;1800&quot;, y=&quot;1899&quot;)
+
+# Create a histogram of life_expectancy
+gapminder.life_expectancy.plot(kind=&quot;hist&quot;)
 </codebox>
-			<codebox char_offset="329" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify axis limits
+			<codebox char_offset="302" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add first subplot
+plt.subplot(2, 1, 1) 
+
+# Create a histogram of life_expectancy
+gapminder.life_expectancy.plot(kind=&quot;hist&quot;)
+
+# ....
+# Do other things here
+
+# Add second subplot
+plt.subplot(2, 1, 2)
+
+# Create a line plot of life expectancy per year
+gapminder_agg.plot()
+
+# Add title and specify axis labels
+plt.title('Life expectancy over the years')
+plt.ylabel('Life expectancy')
+plt.xlabel('Year')
+
+# Display the plots
+plt.tight_layout()
+plt.show()
+
+</codebox>
+			<codebox char_offset="349" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify axis limits
 plt.xlim(20, 55)
 plt.ylim(20, 55)
 </codebox>
@@ -842,7 +876,7 @@ data = np.loadtxt(file, delimiter=&quot;,&quot;, skiprows=1, usecols=[0,2], dtyp
 d=np.recfromcsv(file)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="pandas flat file import" ts_creation="1542554823.12" ts_lastsave="1542714218.39" unique_id="16">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="pandas flat file import" ts_creation="1542554823.12" ts_lastsave="1543837964.05" unique_id="16">
 			<rich_text scale="h1">Basic pandas data import</rich_text>
 			<rich_text>
 
@@ -858,7 +892,14 @@ sep: field separator if not comma
 comment: comment symbol, if used in the data frame
 na_values: string used in flat file to indicate NA or NaN
 
+
+
 </rich_text>
+			<rich_text scale="h1">Saving data</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
 			<codebox char_offset="65" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas as pd
 import pandas as pd
 
@@ -868,6 +909,10 @@ file = 'titanic.csv'
 # Read the file into a DataFrame: df
 df = pd.read_csv(file, nrows=5, header=None, sep=&quot;\t&quot;, comment=&quot;#&quot;, na_values=&quot;Nothing&quot;)
 
+</codebox>
+			<codebox char_offset="560" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Save both DataFrames to csv files
+gapminder.to_csv(&quot;gapminder.csv&quot;)
+gapminder_agg.to_csv(&quot;gapminder_agg.csv&quot;)
 </codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="pickle" prog_lang="custom-colors" readonly="False" tags="pickle" ts_creation="1542713565.79" ts_lastsave="1542715341.59" unique_id="18">
@@ -1598,8 +1643,10 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types, NA, asserts, applying functions" ts_creation="1543678078.56" ts_lastsave="1543837457.15" unique_id="33">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types, NA, asserts, applying functions" ts_creation="1543678078.56" ts_lastsave="1543853250.54" unique_id="33">
+			<rich_text scale="h1">Dtypes</rich_text>
 			<rich_text>
+
 We can view the types assigned to each column through the dtypes method. We can also test if the data is of a certain type.
 
 </rich_text>
@@ -1618,10 +1665,6 @@ We can view the types assigned to each column through the dtypes method. We can 
 			<rich_text> Ans: have to look at data beforehand and recode them as NA
 
 </rich_text>
-			<rich_text weight="heavy">Q: What exactly does notnull return?</rich_text>
-			<rich_text>
-
-</rich_text>
 			<rich_text weight="heavy">Q: For the function passed to np.apply(), what data type for the input argument is assumed? An entire row? Or individual element?</rich_text>
 			<rich_text>
 
@@ -1633,9 +1676,6 @@ We can view the types assigned to each column through the dtypes method. We can 
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-</rich_text>
-			<rich_text weight="heavy">Q: In Case Study 5 - this is not really a row-wise concatenation, unlike what the instructions said.</rich_text>
-			<rich_text>
 
 </rich_text>
 			<rich_text weight="heavy">Q: Any way to specify integer or float when casting to numeric data type via pd.to_numeric? Sometimes that is useful as it helps with memory management.</rich_text>
@@ -1651,7 +1691,7 @@ We can view the types assigned to each column through the dtypes method. We can 
 
 
 </rich_text>
-			<codebox char_offset="126" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">print(df.dtypes)
+			<codebox char_offset="133" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">print(df.dtypes)
 
 # Test if country is of type object
 assert gapminder.country.dtypes == np.object
@@ -1662,18 +1702,20 @@ assert gapminder.year.dtypes == np.int64
 # Test if life_expectancy is of type float64
 assert gapminder.life_expectancy.dtypes == np.float64
 </codebox>
-			<codebox char_offset="738" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
+			<codebox char_offset="707" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
 assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
 </codebox>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Casting data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831800.06" ts_lastsave="1543831810.9" unique_id="34">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Casting data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831800.06" ts_lastsave="1543853139.63" unique_id="34">
+				<rich_text scale="h1">Casting data</rich_text>
 				<rich_text>
+
 Casting columns of data as categoricals, to string and to numeric
 
 </rich_text>
 				<rich_text justification="left"></rich_text>
 				<rich_text>
 </rich_text>
-				<codebox char_offset="68" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Convert the smoker column to type 'category'
+				<codebox char_offset="81" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Convert the smoker column to type 'category'
 tips.smoker = tips.smoker.astype(&quot;category&quot;)
 
 #Converting to string type
@@ -1683,7 +1725,8 @@ df['treatment b'] = df['treatment b'].astype(str)
 # coerce will return NaN when error is encountered. default behaviour is errors=&quot;raise&quot;, which is to raise an exception
  df['treatment a'] = pd.to_numeric(df['treatment a'], errors='coerce')</codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Checking validity using RE" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831830.28" ts_lastsave="1543837631.61" unique_id="35">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Checking validity using RE" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831830.28" ts_lastsave="1543853153.84" unique_id="35">
+				<rich_text scale="h1">Using regular expressions</rich_text>
 				<rich_text>
 
 Checking for valid strings using regular expressions.
@@ -1703,7 +1746,7 @@ We can check if the data satisfies a certain pattern.
 				<rich_text>
 
 </rich_text>
-				<codebox char_offset="57" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the regular expression module
+				<codebox char_offset="82" frame_height="670" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the regular expression module
 import re
 
 # Compile the pattern: prog
@@ -1736,7 +1779,7 @@ print(pattern2)
 pattern3 = bool(re.match(pattern='[A-Z]\w*', string='Australia'))
 print(pattern3)
 </codebox>
-				<codebox char_offset="156" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the series of countries: countries
+				<codebox char_offset="181" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the series of countries: countries
 countries = gapminder[&quot;country&quot;]
 
 # Drop all the duplicates from countries
@@ -1758,7 +1801,8 @@ invalid_countries = countries.loc[mask_inverse]
 print(invalid_countries)
 </codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Using apply()" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831862.78" ts_lastsave="1543836856.32" unique_id="36">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Using apply()" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831862.78" ts_lastsave="1543853169.2" unique_id="36">
+				<rich_text scale="h1">Using the apply() function</rich_text>
 				<rich_text>
 
 Using .apply() to recode data. We can specify a series, and pass a custom function meant to take in a single string as an argument.
@@ -1804,7 +1848,7 @@ Why is it that g1800s.iloc[:, </rich_text>
 
 
 </rich_text>
-				<codebox char_offset="135" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define recode_gender()
+				<codebox char_offset="161" frame_height="550" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define recode_gender()
 def recode_gender(gender):
 
     # Return 0 if gender is 'Female'
@@ -1829,17 +1873,15 @@ tips['total_dollar_replace'] = tips.total_dollar.apply(lambda x: x.replace('$', 
 
 # Write the lambda function using regular expressions
 tips['total_dollar_re'] = tips.total_dollar.apply(lambda x: re.findall('\d+\.\d+', x)[0])
-
-
 </codebox>
-				<codebox char_offset="208" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Column wise
+				<codebox char_offset="234" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Column wise
 # Applies mean across all columns of data frame df - default behaviour axis=0
 df.apply(np.mean, axis=0)
 
 # Row wise
 # Applies mean across all rows of data frame df - need to specify axis=1
 df.apply(np.mean, axis=1)</codebox>
-				<codebox char_offset="331" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def diff_money(row, pattern):
+				<codebox char_offset="357" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def diff_money(row, pattern):
  icost = row['Initial Cost']
  tef = row['Total Est. Fee']
 
@@ -1864,7 +1906,7 @@ df_subset['diff'] = df_subset.apply(diff_money, axis=1, pattern=pattern)
 #1 520129502 1 STATEN ISLAND $0.00 $1144.00 -1144.0
 # 121601560 1 MANHATTAN $30000.00 $522.50 29477.5
 #3 121601203 1 MANHATTAN $1500.00 $225.00 1275.0 </codebox>
-				<codebox char_offset="712" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def check_null_or_valid(row_data):
+				<codebox char_offset="738" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def check_null_or_valid(row_data):
     &quot;&quot;&quot;Function that takes a row of data,
     drops all missing values,
     and checks if all remaining values are greater than or equal to 0
@@ -1885,8 +1927,10 @@ assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
 assert g1800s['Life expectancy'].value_counts()[0] == 1
 </codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Duplicates and NAs" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832028.59" ts_lastsave="1543837780.33" unique_id="37">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Duplicates and NAs" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832028.59" ts_lastsave="1543853189.14" unique_id="37">
+				<rich_text scale="h1">Dealing with duplicates and NAs</rich_text>
 				<rich_text>
+
 Remove duplicate rows
 
 </rich_text>
@@ -1904,20 +1948,15 @@ Replacing NAs in a certain column with the mean, or with our specified values
 </rich_text>
 				<rich_text justification="left"></rich_text>
 				<rich_text>
-
-Check that there are no null values
-
-
-
 </rich_text>
-				<codebox char_offset="24" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
+				<codebox char_offset="56" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
 tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;time&quot;]]
 
 # Drop the duplicates: tracks_no_duplicates
 tracks_no_duplicates = tracks.drop_duplicates()
 </codebox>
-				<codebox char_offset="58" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
-				<codebox char_offset="140" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
+				<codebox char_offset="90" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
+				<codebox char_offset="172" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
 oz_mean = airquality[&quot;Ozone&quot;].mean()
 
 # Replace all the missing values in the Ozone column with the mean
@@ -1926,14 +1965,9 @@ airquality['Ozone'] = airquality[&quot;Ozone&quot;].fillna(oz_mean)
 tips_nan['sex'] = tips_nan['sex'].fillna('missing')
 
 tips_nan[['total_bill', 'size']] = tips_nan[['total_bill','size']].fillna(0)</codebox>
-				<codebox char_offset="180" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that country does not contain any missing values
-assert pd.notnull(gapminder.country).all()
-
-# Assert that year does not contain any missing values
-assert pd.notnull(gapminder.year).all()
-</codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Using asserts to verify" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832053.66" ts_lastsave="1543834190.19" unique_id="38">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Using asserts to verify" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832053.66" ts_lastsave="1543853196.83" unique_id="38">
+				<rich_text scale="h1">Using asserts</rich_text>
 				<rich_text>
 
 Using asserts to test if cleaning is successful.
@@ -1947,11 +1981,26 @@ Instead of check for non-null entries, we can check if all entries are greater t
 				<rich_text>
 
 </rich_text>
-				<codebox char_offset="527" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that there are no missing values
+				<codebox char_offset="540" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that there are no missing values
 assert ebola.notnull().all().all()
 
 # Assert that all values are &gt;= 0
 assert (ebola &gt;= 0).all().all()
+
+# Assert that country does not contain any missing values
+assert pd.notnull(gapminder.country).all()
+
+# Assert that year does not contain any missing values
+assert pd.notnull(gapminder.year).all()
+
+# Test if country is of type object
+assert gapminder.country.dtypes == np.object
+
+# Test if year is of type int64
+assert gapminder.year.dtypes == np.int64
+
+# Test if life_expectancy is of type float64
+assert gapminder.life_expectancy.dtypes == np.float64
 </codebox>
 			</node>
 		</node>
