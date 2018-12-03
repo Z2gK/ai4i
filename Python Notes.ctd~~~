@@ -136,7 +136,9 @@ The plotting function can be called directly from the data frame as well, throug
 
 Other miscellaneous configuration options
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -1276,7 +1278,7 @@ auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543678078.56" unique_id="29">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning Data in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543084190.59" ts_lastsave="1543824771.4" unique_id="29">
 		<rich_text>
 
 
@@ -1285,7 +1287,7 @@ auth.set_access_token(access_token, access_token_secret)</codebox>
 		<rich_text>
 
 • Inconsistent column names
-• Missing data
+• Missing data - either drop them, fill them up or leave as it is
 • Outliers
 • Duplicate rows
 • Need to process columns
@@ -1595,11 +1597,59 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543761139.37" unique_id="33">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543825131.43" unique_id="33">
+			<rich_text>
+We can view the types assigned to each column through the dtypes method.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Casting columns of data as categoricals, to string and to numeric
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Checking for valid strings using regular expressions.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Using .apply() to recode data. We can specify a series, and pass a custom function meant to take in a single string as an argument.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can also use a built-in functions to apply across rows or columns
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+A more complex use of .apply, with a two-input function specified and an additional argument passed into the function.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
 			<rich_text>
 
 
 
+Remove duplicate rows
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Dropping ANY row that has NA.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -1609,6 +1659,10 @@ pd.set_option(&quot;display.max_columns&quot;,10)
 </rich_text>
 			<rich_text weight="heavy">Q: Categorical variables - what if there are additional variables not represented by the data frame. if we add new ones through row combine (say), would  it cause any error?</rich_text>
 			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: How to prevent NA categorical values from getting coded in their proper categories?</rich_text>
+			<rich_text> Ans: have to look at data beforehand and recode them as NA
 
 </rich_text>
 			<rich_text weight="heavy">Q: What exactly does notnull return?</rich_text>
@@ -1631,13 +1685,130 @@ pd.set_option(&quot;display.max_columns&quot;,10)
 			<rich_text>
 
 </rich_text>
-			<rich_text weight="heavy">Q: Any way to specify integer or float for numeric data type? Sometimes that is useful as it helps with memory management.</rich_text>
+			<rich_text weight="heavy">Q: Any way to specify integer or float when casting to numeric data type via pd.to_numeric? Sometimes that is useful as it helps with memory management.</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: .all() is still quite unclear</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: For previous chapter - how to extract data from websites that depend on javascript to display data? viewing the source does not show up the data, so cannot use beautifulsoup immediately. Is there any python package to help display this content?</rich_text>
 			<rich_text>
 
 
-
 </rich_text>
-			<codebox char_offset="469" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
+			<codebox char_offset="75" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">print(df.dtypes)</codebox>
+			<codebox char_offset="145" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Convert the smoker column to type 'category'
+tips.smoker = tips.smoker.astype(&quot;category&quot;)
+
+#Converting to string type
+df['treatment b'] = df['treatment b'].astype(str)
+
+# converting to numeric
+# coerce will return NaN when error is encountered. default behaviour is errors=&quot;raise&quot;, which is to raise an exception
+ df['treatment a'] = pd.to_numeric(df['treatment a'], errors='coerce')</codebox>
+			<codebox char_offset="204" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the regular expression module
+import re
+
+# Compile the pattern: prog
+prog = re.compile('\d{3}-\d{3}-\d{4}')
+
+# See if the pattern matches
+result = prog.match('123-456-7890')
+print(bool(result))
+
+# -------------------------------------------------------------
+# Alternatively, we can return all the matches through findall.
+# matches is a list containing all the matched strings
+# Find the numeric values: matches
+matches = re.findall('\d+', 'the recipe calls for 10 strawberries and 1 banana')
+
+# Print the matches
+print(matches)
+
+# -------------------------------------------------------------
+# Figuring out if the string matches a pattern
+# Write the first pattern
+pattern1 = bool(re.match(pattern='\d{3}-\d{3}-\d{4}', string='123-456-7890'))
+print(pattern1)
+
+# Write the second pattern
+pattern2 = bool(re.match(pattern='\$\d+\.\d{2}', string='$123.45'))
+print(pattern2)
+
+# Write the third pattern
+pattern3 = bool(re.match(pattern='[A-Z]\w*', string='Australia'))
+print(pattern3)
+</codebox>
+			<codebox char_offset="341" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define recode_gender()
+def recode_gender(gender):
+
+    # Return 0 if gender is 'Female'
+    if gender == &quot;Female&quot;:
+        return 0
+    
+    # Return 1 if gender is 'Male'    
+    elif gender == &quot;Male&quot;:
+        return 1
+    
+    # Return np.nan    
+    else:
+        return np.nan
+
+# Apply the function to the sex column
+tips['recode'] = tips.sex.apply(recode_gender)
+
+# -------------------------------------------------------------
+# Or make use of lambda functions
+# Write the lambda function using replace
+tips['total_dollar_replace'] = tips.total_dollar.apply(lambda x: x.replace('$', ''))
+
+# Write the lambda function using regular expressions
+tips['total_dollar_re'] = tips.total_dollar.apply(lambda x: re.findall('\d+\.\d+', x)[0])
+
+
+</codebox>
+			<codebox char_offset="414" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Applies mean across all columns of data frame df - default behaviour axis=0
+df.apply(np.mean, axis=0)
+
+# Applies mean across all rows of data frame df - need to specify axis=1
+df.apply(np.mean, axis=1)</codebox>
+			<codebox char_offset="537" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def diff_money(row, pattern):
+ icost = row['Initial Cost']
+ tef = row['Total Est. Fee']
+
+ if bool(pattern.match(icost)) and bool(pattern.match(tef)):
+ icost = icost.replace(&quot;$&quot;,
+&quot;&quot;)
+ tef = tef.replace(&quot;$&quot;,
+&quot;&quot;)
+
+ icost = float(icost)
+ tef = float(tef)
+
+ return icost - tef
+ else:
+ return(NaN)
+ 
+df_subset['diff'] = df_subset.apply(diff_money,
+    axis=1,
+    pattern=pattern)
+
+# Output data frame
+# Job # Doc # Borough Initial Cost Total Est. Fee diff
+#0 121577873 2 MANHATTAN $75000.00 $986.00 74014.0
+#1 520129502 1 STATEN ISLAND $0.00 $1144.00 -1144.0
+# 121601560 1 MANHATTAN $30000.00 $522.50 29477.5
+#3 121601203 1 MANHATTAN $1500.00 $225.00 1275.0 </codebox>
+			<codebox char_offset="565" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
+tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;time&quot;]]
+
+# Drop the duplicates: tracks_no_duplicates
+tracks_no_duplicates = tracks.drop_duplicates()
+</codebox>
+			<codebox char_offset="599" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
+			<codebox char_offset="1213" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
 assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
 </codebox>
 		</node>
