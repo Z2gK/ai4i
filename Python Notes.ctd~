@@ -1597,7 +1597,7 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543825288.99" unique_id="33">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types, NA, asserts, applying functions" ts_creation="1543678078.56" ts_lastsave="1543831851.17" unique_id="33">
 			<rich_text>
 We can view the types assigned to each column through the dtypes method.
 
@@ -1605,37 +1605,7 @@ We can view the types assigned to each column through the dtypes method.
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Casting columns of data as categoricals, to string and to numeric
 
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-
-Checking for valid strings using regular expressions.
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-
-Using .apply() to recode data. We can specify a series, and pass a custom function meant to take in a single string as an argument.
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-We can also use a built-in functions to apply across rows or columns
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
-
-A more complex use of .apply, with a two-input function specified and an additional argument passed into the function.
-
-</rich_text>
-			<rich_text justification="left"></rich_text>
-			<rich_text>
 
 
 
@@ -1652,6 +1622,17 @@ Dropping ANY row that has NA.
 			<rich_text>
 
 Replacing NAs in a certain column with the mean, or with our specified values
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Using asserts to test if cleaning is successful.
+
+notnull() converts all entries in the data frame to a boolean. all() checks each column and returns True if and only if all entries in the column are True. In effect, notnull().all() returns a Series like object. The final all() takes this Series like object and return True if and only if all entries in this Series are True.
+
+Instead of check for non-null entries, we can check if all entries are greater than or equal to zero. Just replace ebola.notnull() by ebola &gt;= 0.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -1685,7 +1666,7 @@ Replacing NAs in a certain column with the mean, or with our specified values
 			<rich_text>
 
 </rich_text>
-			<rich_text weight="heavy">Q: In Case Study 5 - this is not really a row-wise conncatenation, unlike what the instructions said.</rich_text>
+			<rich_text weight="heavy">Q: In Case Study 5 - this is not really a row-wise concatenation, unlike what the instructions said.</rich_text>
 			<rich_text>
 
 </rich_text>
@@ -1703,7 +1684,40 @@ Replacing NAs in a certain column with the mean, or with our specified values
 
 </rich_text>
 			<codebox char_offset="75" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">print(df.dtypes)</codebox>
-			<codebox char_offset="145" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Convert the smoker column to type 'category'
+			<codebox char_offset="105" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
+tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;time&quot;]]
+
+# Drop the duplicates: tracks_no_duplicates
+tracks_no_duplicates = tracks.drop_duplicates()
+</codebox>
+			<codebox char_offset="139" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
+			<codebox char_offset="221" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
+oz_mean = airquality[&quot;Ozone&quot;].mean()
+
+# Replace all the missing values in the Ozone column with the mean
+airquality['Ozone'] = airquality[&quot;Ozone&quot;].fillna(oz_mean)
+
+tips_nan['sex'] = tips_nan['sex'].fillna('missing')
+
+tips_nan[['total_bill', 'size']] = tips_nan[['total_bill','size']].fillna(0)</codebox>
+			<codebox char_offset="750" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that there are no missing values
+assert ebola.notnull().all().all()
+
+# Assert that all values are &gt;= 0
+assert (ebola &gt;= 0).all().all()
+</codebox>
+			<codebox char_offset="1362" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
+assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
+</codebox>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Casting data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831800.06" ts_lastsave="1543831810.9" unique_id="34">
+				<rich_text>
+Casting columns of data as categoricals, to string and to numeric
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+</rich_text>
+				<codebox char_offset="68" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Convert the smoker column to type 'category'
 tips.smoker = tips.smoker.astype(&quot;category&quot;)
 
 #Converting to string type
@@ -1712,7 +1726,17 @@ df['treatment b'] = df['treatment b'].astype(str)
 # converting to numeric
 # coerce will return NaN when error is encountered. default behaviour is errors=&quot;raise&quot;, which is to raise an exception
  df['treatment a'] = pd.to_numeric(df['treatment a'], errors='coerce')</codebox>
-			<codebox char_offset="204" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the regular expression module
+			</node>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Checking validity using RE" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831830.28" ts_lastsave="1543831839.78" unique_id="35">
+				<rich_text>
+
+Checking for valid strings using regular expressions.
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+</rich_text>
+				<codebox char_offset="57" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the regular expression module
 import re
 
 # Compile the pattern: prog
@@ -1745,7 +1769,30 @@ print(pattern2)
 pattern3 = bool(re.match(pattern='[A-Z]\w*', string='Australia'))
 print(pattern3)
 </codebox>
-			<codebox char_offset="341" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define recode_gender()
+			</node>
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Using apply()" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831862.78" ts_lastsave="1543831865.06" unique_id="36">
+				<rich_text>
+
+Using .apply() to recode data. We can specify a series, and pass a custom function meant to take in a single string as an argument.
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+We can also use a built-in functions to apply across rows or columns
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+A more complex use of .apply, with a two-input function specified and an additional argument passed into the function.
+
+</rich_text>
+				<rich_text justification="left"></rich_text>
+				<rich_text>
+
+</rich_text>
+				<codebox char_offset="135" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define recode_gender()
 def recode_gender(gender):
 
     # Return 0 if gender is 'Female'
@@ -1773,12 +1820,14 @@ tips['total_dollar_re'] = tips.total_dollar.apply(lambda x: re.findall('\d+\.\d+
 
 
 </codebox>
-			<codebox char_offset="414" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Applies mean across all columns of data frame df - default behaviour axis=0
+				<codebox char_offset="208" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Column wise
+# Applies mean across all columns of data frame df - default behaviour axis=0
 df.apply(np.mean, axis=0)
 
+# Row wise
 # Applies mean across all rows of data frame df - need to specify axis=1
 df.apply(np.mean, axis=1)</codebox>
-			<codebox char_offset="537" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def diff_money(row, pattern):
+				<codebox char_offset="331" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def diff_money(row, pattern):
  icost = row['Initial Cost']
  tef = row['Total Est. Fee']
 
@@ -1795,9 +1844,7 @@ df.apply(np.mean, axis=1)</codebox>
  else:
  return(NaN)
  
-df_subset['diff'] = df_subset.apply(diff_money,
-    axis=1,
-    pattern=pattern)
+df_subset['diff'] = df_subset.apply(diff_money, axis=1, pattern=pattern)
 
 # Output data frame
 # Job # Doc # Borough Initial Cost Total Est. Fee diff
@@ -1805,25 +1852,7 @@ df_subset['diff'] = df_subset.apply(diff_money,
 #1 520129502 1 STATEN ISLAND $0.00 $1144.00 -1144.0
 # 121601560 1 MANHATTAN $30000.00 $522.50 29477.5
 #3 121601203 1 MANHATTAN $1500.00 $225.00 1275.0 </codebox>
-			<codebox char_offset="565" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
-tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;time&quot;]]
-
-# Drop the duplicates: tracks_no_duplicates
-tracks_no_duplicates = tracks.drop_duplicates()
-</codebox>
-			<codebox char_offset="599" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
-			<codebox char_offset="681" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
-oz_mean = airquality[&quot;Ozone&quot;].mean()
-
-# Replace all the missing values in the Ozone column with the mean
-airquality['Ozone'] = airquality[&quot;Ozone&quot;].fillna(oz_mean)
-
-tips_nan['sex'] = tips_nan['sex'].fillna('missing')
-
-tips_nan[['total_bill', 'size']] = tips_nan[['total_bill','size']].fillna(0)</codebox>
-			<codebox char_offset="1293" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
-assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
-</codebox>
+			</node>
 		</node>
 	</node>
 </cherrytree>

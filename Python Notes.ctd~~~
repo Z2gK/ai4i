@@ -1597,7 +1597,7 @@ pd.get_option(&quot;display.max_columns&quot;)
 pd.set_option(&quot;display.max_columns&quot;,10)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types" ts_creation="1543678078.56" ts_lastsave="1543825131.43" unique_id="33">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Cleaning data" prog_lang="custom-colors" readonly="False" tags="cleaning data, converting types, NA, asserts, applying functions" ts_creation="1543678078.56" ts_lastsave="1543831400.84" unique_id="33">
 			<rich_text>
 We can view the types assigned to each column through the dtypes method.
 
@@ -1651,7 +1651,22 @@ Dropping ANY row that has NA.
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Replacing NAs in a certain column with the mean, or with our specified values
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Using asserts to test if cleaning is successful.
+
+notnull() converts all entries in the data frame to a boolean. all() checks each column and returns True if and only if all entries in the column are True. In effect, notnull().all() returns a Series like object. The final all() takes this Series like object and return True if and only if all entries in this Series are True.
+
+Instead of check for non-null entries, we can check if all entries are greater than or equal to zero. Just replace ebola.notnull() by ebola &gt;= 0.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -1769,9 +1784,11 @@ tips['total_dollar_re'] = tips.total_dollar.apply(lambda x: re.findall('\d+\.\d+
 
 
 </codebox>
-			<codebox char_offset="414" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Applies mean across all columns of data frame df - default behaviour axis=0
+			<codebox char_offset="414" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Column wise
+# Applies mean across all columns of data frame df - default behaviour axis=0
 df.apply(np.mean, axis=0)
 
+# Row wise
 # Applies mean across all rows of data frame df - need to specify axis=1
 df.apply(np.mean, axis=1)</codebox>
 			<codebox char_offset="537" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def diff_money(row, pattern):
@@ -1808,7 +1825,22 @@ tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;
 tracks_no_duplicates = tracks.drop_duplicates()
 </codebox>
 			<codebox char_offset="599" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
-			<codebox char_offset="1213" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
+			<codebox char_offset="681" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
+oz_mean = airquality[&quot;Ozone&quot;].mean()
+
+# Replace all the missing values in the Ozone column with the mean
+airquality['Ozone'] = airquality[&quot;Ozone&quot;].fillna(oz_mean)
+
+tips_nan['sex'] = tips_nan['sex'].fillna('missing')
+
+tips_nan[['total_bill', 'size']] = tips_nan[['total_bill','size']].fillna(0)</codebox>
+			<codebox char_offset="1210" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assert that there are no missing values
+assert ebola.notnull().all().all()
+
+# Assert that all values are &gt;= 0
+assert (ebola &gt;= 0).all().all()
+</codebox>
+			<codebox char_offset="1822" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Check whether the values in the row are valid
 assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
 </codebox>
 		</node>
