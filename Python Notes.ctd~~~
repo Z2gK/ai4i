@@ -112,7 +112,7 @@ time = np.arange(0, 1, 1/num_samples)
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intermediate Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542453323.53" ts_lastsave="1542457044.44" unique_id="3">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543918978.6" unique_id="4">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543920059.23" unique_id="4">
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
 
@@ -148,7 +148,9 @@ Other miscellaneous configuration options
 
 
 
-
+More plotting </rich_text>
+			<rich_text link="node 42">here...</rich_text>
+			<rich_text>
 
 </rich_text>
 			<codebox char_offset="24" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
@@ -910,7 +912,7 @@ data = np.loadtxt(file, delimiter=&quot;,&quot;, skiprows=1, usecols=[0,2], dtyp
 d=np.recfromcsv(file)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="pandas flat file import" ts_creation="1542554823.12" ts_lastsave="1543919721.98" unique_id="16">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas" prog_lang="custom-colors" readonly="False" tags="pandas flat file import" ts_creation="1542554823.12" ts_lastsave="1543919794.11" unique_id="16">
 			<rich_text scale="h1">Basic pandas data import</rich_text>
 			<rich_text>
 
@@ -934,7 +936,7 @@ delimiter: this is a string that specifies the delimiter string..
 </rich_text>
 			<rich_text weight="heavy">na_values: specifies what string represents na values. Q: what if different columns have different NA values?</rich_text>
 			<rich_text> solved see text
-parse_dates: which columns for the year, month, day information
+parse_dates: which columns for the year, month, day information. can be set to Boolean as well
 
 </rich_text>
 			<rich_text weight="heavy">Q: what's the difference between delimiter and sep?</rich_text>
@@ -960,7 +962,7 @@ file = 'titanic.csv'
 df = pd.read_csv(file, nrows=5, header=None, sep=&quot;\t&quot;, comment=&quot;#&quot;, na_values=&quot;Nothing&quot;)
 
 </codebox>
-			<codebox char_offset="1136" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Save both DataFrames to csv files
+			<codebox char_offset="1167" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Save both DataFrames to csv files
 gapminder.to_csv(&quot;gapminder.csv&quot;)
 gapminder_agg.to_csv(&quot;gapminder_agg.csv&quot;)
 </codebox>
@@ -1402,12 +1404,17 @@ auth.set_access_token(access_token, access_token_secret)</codebox>
 • Column types signal unexpected values
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1543919571.62" unique_id="30">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1544000503.52" unique_id="30">
 			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
-			<codebox char_offset="2" frame_height="565" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># assuming df is a pandas data frame
+			<rich_text>
+
+
+
+</rich_text>
+			<codebox char_offset="2" frame_height="910" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># assuming df is a pandas data frame
 
 # Check out the first five rows of data
 print(df.head())
@@ -1432,7 +1439,31 @@ df.describe()
 print(df['Column Name'].value_counts(dropna=False))
 
 # Prints the row indices of the data frame
-print(df.index)</codebox>
+print(df.index)
+
+# Counts the number of entries - returns a series
+# Can have a list of column names in the square brackets as well
+df[&quot;colname&quot;].count())
+
+# Calculates the mean/median/std dev/min/max
+# if [] is left out, this computes the mean/median/std dev/min/max of all numeric columns
+df[&quot;colname&quot;].mean()
+df[&quot;colname&quot;].median()
+df[&quot;colname&quot;].std()
+df[&quot;colname&quot;].min()
+df[&quot;colname&quot;].max()
+
+# Computes the 25% quantile for all numeric columns
+# Computes the 25% and 75% quantile for all numeric columns
+df.quantile(0.25)
+df.quantile([0.25, 0.75])
+
+# prints the unique entries in this column
+# counts the number of times each unique entry occurs
+df.[&quot;colname&quot;].unique()
+df.[&quot;colname&quot;].nunique()
+
+</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="melting, pivoting, splitting" ts_creation="1543420088.28" ts_lastsave="1543760427.2" unique_id="31">
 			<rich_text scale="h1">Melting</rich_text>
@@ -2077,20 +2108,54 @@ np_vals_log10 = np.log10(np_vals)
 df_log10 = np.log10(df)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918926.97" ts_lastsave="1543919128.47" unique_id="42">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918926.97" ts_lastsave="1543999936.33" unique_id="42">
 			<rich_text>
 
-There are three different idioms for plotting. They have largely the same set of arguments.
+There are three different idioms for plotting. They have largely the same set of arguments, but be careful!
+• df.plot(kind = “hist”)
+• df.plt.hist()
+• df.hist()
 
 
+When .plot() is called without argument, line plot is assumed
 
 Here are the arguments for the df.plot() function
 
+x and y: to specify both when plotting a scatter plot
+y: This is the y data, which can be a list. Applicable for hist and box.
 color: For the color of the line/data point etc. Can be specified as “red”, “green”, etc.
 subplots: Boolean. If set to True, all data series in the plot statement will be plotted as subplots, i.e. separately, on different graphs, separate axes.
+style: for type of data marker e.g. “.-”, “.”
+legend: Boolean - to show legend or not
+kind: “scatter”, “box”, “hist” for various types of graphs
+s: For scatter plots. This should equal the array containing the normalised sizes of the data points
+
+plt.yscale(“log”) for logarithmic y axis
+
+
+multiple plots of different types
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Previous related node on plotting </rich_text>
+			<rich_text link="node 4">here...</rich_text>
+			<rich_text>
 
 
 </rich_text>
+			<codebox char_offset="976" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This formats the plots such that they appear on separate rows
+fig, axes = plt.subplots(nrows=2, ncols=1)
+
+# Plot the PDF
+df.fraction.plot(ax=axes[0], kind='hist', normed=True, bins=30, range=(0,.3))
+plt.show()
+
+# Plot the CDF
+df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True, bins=30, range=(0,.3))
+plt.show()</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">
