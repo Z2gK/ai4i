@@ -2108,7 +2108,7 @@ np_vals_log10 = np.log10(np_vals)
 df_log10 = np.log10(df)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918926.97" ts_lastsave="1543999936.33" unique_id="42">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918926.97" ts_lastsave="1544000685.17" unique_id="42">
 			<rich_text>
 
 There are three different idioms for plotting. They have largely the same set of arguments, but be careful!
@@ -2129,6 +2129,8 @@ style: for type of data marker e.g. “.-”, “.”
 legend: Boolean - to show legend or not
 kind: “scatter”, “box”, “hist” for various types of graphs
 s: For scatter plots. This should equal the array containing the normalised sizes of the data points
+alpha: transparency option when overlapping plot marks are present
+
 
 plt.yscale(“log”) for logarithmic y axis
 
@@ -2146,7 +2148,7 @@ Previous related node on plotting </rich_text>
 
 
 </rich_text>
-			<codebox char_offset="976" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This formats the plots such that they appear on separate rows
+			<codebox char_offset="1044" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This formats the plots such that they appear on separate rows
 fig, axes = plt.subplots(nrows=2, ncols=1)
 
 # Plot the PDF

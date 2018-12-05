@@ -1404,7 +1404,7 @@ auth.set_access_token(access_token, access_token_secret)</codebox>
 • Column types signal unexpected values
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1544000503.52" unique_id="30">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1544000814.05" unique_id="30">
 			<rich_text>
 
 </rich_text>
@@ -1447,6 +1447,7 @@ df[&quot;colname&quot;].count())
 
 # Calculates the mean/median/std dev/min/max
 # if [] is left out, this computes the mean/median/std dev/min/max of all numeric columns
+# there is an axis option on how these should be computed - axis=&quot;column&quot; for calculating across the row
 df[&quot;colname&quot;].mean()
 df[&quot;colname&quot;].median()
 df[&quot;colname&quot;].std()
