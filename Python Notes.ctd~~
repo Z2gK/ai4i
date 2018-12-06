@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -2087,7 +2087,7 @@ assert gapminder.life_expectancy.dtypes == np.float64
 			</node>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="pandas Foundations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543853929.51" ts_lastsave="1543918926.96" unique_id="39">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="pandas Foundations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543853929.51" ts_lastsave="1544001509.23" unique_id="39">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Investigating data frames" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918003.92" ts_lastsave="1543918157.92" unique_id="41">
 			<rich_text>
@@ -2159,6 +2159,15 @@ plt.show()
 # Plot the CDF
 df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True, bins=30, range=(0,.3))
 plt.show()</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544001509.24" ts_lastsave="1544022984.31" unique_id="43">
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: for resample on week, when does the week start? </rich_text>
+			<rich_text>
+
+</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">

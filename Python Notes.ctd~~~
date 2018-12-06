@@ -1404,7 +1404,7 @@ auth.set_access_token(access_token, access_token_secret)</codebox>
 • Column types signal unexpected values
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1544000814.05" unique_id="30">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Useful methods for data inspection" prog_lang="custom-colors" readonly="False" tags="inspecting data" ts_creation="1543084457.13" ts_lastsave="1544000921.04" unique_id="30">
 			<rich_text>
 
 </rich_text>
@@ -1414,7 +1414,7 @@ auth.set_access_token(access_token, access_token_secret)</codebox>
 
 
 </rich_text>
-			<codebox char_offset="2" frame_height="910" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># assuming df is a pandas data frame
+			<codebox char_offset="2" frame_height="1075" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># assuming df is a pandas data frame
 
 # Check out the first five rows of data
 print(df.head())
@@ -2087,7 +2087,7 @@ assert gapminder.life_expectancy.dtypes == np.float64
 			</node>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="pandas Foundations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543853929.51" ts_lastsave="1543918926.96" unique_id="39">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="pandas Foundations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543853929.51" ts_lastsave="1544001509.23" unique_id="39">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Investigating data frames" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918003.92" ts_lastsave="1543918157.92" unique_id="41">
 			<rich_text>
@@ -2159,6 +2159,15 @@ plt.show()
 # Plot the CDF
 df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True, bins=30, range=(0,.3))
 plt.show()</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544001509.24" ts_lastsave="1544001524.21" unique_id="43">
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: for resample on week, when does the week start? </rich_text>
+			<rich_text>
+
+</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">

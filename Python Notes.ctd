@@ -2160,12 +2160,23 @@ plt.show()
 df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True, bins=30, range=(0,.3))
 plt.show()</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544001509.24" ts_lastsave="1544022984.31" unique_id="43">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544001509.24" ts_lastsave="1544092973.94" unique_id="43">
 			<rich_text>
 
 </rich_text>
 			<rich_text weight="heavy">Q: for resample on week, when does the week start? </rich_text>
 			<rich_text>
+</rich_text>
+			<rich_text weight="heavy">Q: It seems that df[&quot;col&quot;][&quot;date&quot;] or df[&quot;date&quot;][&quot;col&quot;] both work. Won't there be ambiguity sometimes?</rich_text>
+			<rich_text>
+</rich_text>
+			<rich_text weight="heavy">Q: What if the date time index is not in order?</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: Daily hours of clear sky. if .resample(&quot;D&quot;) has no aggregation method, what is the default? seems to be sum</rich_text>
+			<rich_text>
+
 
 </rich_text>
 		</node>
