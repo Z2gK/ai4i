@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -223,7 +223,7 @@ plt.xlim(20, 55)
 plt.ylim(20, 55)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1544159176.91" unique_id="5">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1544201723.85" unique_id="5">
 			<rich_text scale="h1">Building Pandas data frames</rich_text>
 			<rich_text>
 
@@ -288,6 +288,8 @@ Dataframes can be indexed and selected. Single brackets give a Series. Double br
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Note that this method is slightly different from the loc() method of indexing. Here, the column is in the FIRST set of square brackets.
+
 
 </rich_text>
 			<rich_text scale="h1">More advanced loc and iloc indexing</rich_text>
@@ -326,6 +328,10 @@ We can select data based on logical criteria using bracket subsetting. These ret
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Think over the all() and any()s</rich_text>
 			<rich_text>
 
 Note special numpy logical functions have to be used when boolean operations are needed.
@@ -382,7 +388,7 @@ import pandas as pd
 
 # Fix import by including index_col
 cars = pd.read_csv('cars.csv',index_col = 0)</codebox>
-			<codebox char_offset="1299" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print out country column as Pandas Series
+			<codebox char_offset="1299" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print out country column as Pandas Series
 print(cars['country'])
 
 # Print out country column as Pandas DataFrame
@@ -395,13 +401,19 @@ print(cars[['country','drives_right']])
 print(cars[0:3])
 
 # Print out fourth, fifth and sixth observation
-print(cars[3:6])</codebox>
-			<codebox char_offset="1458" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print out observation for Japan - this is pandas Series
+print(cars[3:6])
+
+ # The eggs column, 2nd to 4th row
+df['eggs'][1:4]
+
+# The eggs column, 5th row
+df['eggs'][4] </codebox>
+			<codebox char_offset="1595" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print out observation for Japan - this is pandas Series
 print(cars.loc['JAP'])
 
 # Print out observations for Australia and Egypt - this is a DataFrame
 print(cars.loc[['AUS','EG']])</codebox>
-			<codebox char_offset="1583" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print out drives_right value of Morocco - this should be a value
+			<codebox char_offset="1720" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print out drives_right value of Morocco - this should be a value
 # If &quot;MOR&quot; is replaced by :, this would be a Series
 print(cars.loc['MOR','drives_right'])
 
@@ -409,9 +421,12 @@ print(cars.loc['MOR','drives_right'])
 print(cars.loc[['RU','MOR'],['country','drives_right']])
 
 # Print out cars_per_cap and drives_right as DataFrame
-print(cars.loc[:,['cars_per_cap','drives_right']])</codebox>
-			<codebox char_offset="1798" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df.ix[:, 0:1]</codebox>
-			<codebox char_offset="1999" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
+print(cars.loc[:,['cars_per_cap','drives_right']])
+
+# We can use : to specify a range of columns too
+df.loc[:, 'eggs':'salt'] </codebox>
+			<codebox char_offset="1935" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df.ix[:, 0:1]</codebox>
+			<codebox char_offset="2136" frame_height="670" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
 cars = pd.read_csv('cars.csv', index_col = 0)
 
 # Convert code to a one-liner - the argument is a True/False Series
@@ -428,7 +443,23 @@ import numpy as np
 between = np.logical_and(cpc &gt; 100, cpc &lt; 500)
 medium = cars[between]
 
+# We can use AND
+df[(df.salt &gt;= 50) &amp; (df.eggs &lt; 200)] # Both conditions
 
+# We can use OR
+df[(df.salt &gt;= 50) | (df.eggs &lt; 200)] # Either condition
+
+# Select columns with ALL nonzeros
+df2.loc[:, df2.all()]
+
+# Select columns with ANY nonzeros
+df2.loc[:, df2.any()]
+
+# Select columns with ANY NaNs
+df.loc[:, df.isnull().any()]
+
+# Select columns without NaNs
+df.loc[:, df.notnull().all()]
 </codebox>
 		</node>
 	</node>
@@ -1813,7 +1844,7 @@ df['treatment b'] = df['treatment b'].astype(str)
 # coerce will return NaN when error is encountered. default behaviour is errors=&quot;raise&quot;, which is to raise an exception
  df['treatment a'] = pd.to_numeric(df['treatment a'], errors='coerce')</codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Checking validity using RE and other string methods" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831830.28" ts_lastsave="1544160757.39" unique_id="35">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Checking validity using RE and other string methods" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831830.28" ts_lastsave="1544201844.83" unique_id="35">
 				<rich_text scale="h1">Using regular expressions</rich_text>
 				<rich_text>
 
@@ -1900,11 +1931,15 @@ invalid_countries = countries.loc[mask_inverse]
 # Print invalid_countries
 print(invalid_countries)
 </codebox>
-				<codebox char_offset="202" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Strip extra whitespace from the column names: df.columns
+				<codebox char_offset="202" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Strip extra whitespace from the column names: df.columns
 df.columns = df.columns.str.strip()
 
 # Extract data for which the destination airport is Dallas: dallas
 dallas = df['Destination Airport'].str.contains(&quot;DAL&quot;)
+
+# The index can be manipulated  as well
+df.index = df.index.str.upper()
+df.index = df.index.map(str.lower)
 </codebox>
 			</node>
 			<node custom_icon_id="0" foreground="" is_bold="False" name="Using apply()" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543831862.78" ts_lastsave="1543853169.2" unique_id="36">
@@ -2033,7 +2068,7 @@ assert g1800s.iloc[:, 1:].apply(check_null_or_valid, axis=1).all().all()
 assert g1800s['Life expectancy'].value_counts()[0] == 1
 </codebox>
 			</node>
-			<node custom_icon_id="0" foreground="" is_bold="False" name="Duplicates and NAs" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832028.59" ts_lastsave="1544161099.2" unique_id="37">
+			<node custom_icon_id="0" foreground="" is_bold="False" name="Duplicates and NAs" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832028.59" ts_lastsave="1544202194.63" unique_id="37">
 				<rich_text scale="h1">Dealing with duplicates and NAs</rich_text>
 				<rich_text>
 
@@ -2057,7 +2092,6 @@ Replacing NAs in a certain column with the mean, or with our specified values
 
 Dropping values
 
-
 </rich_text>
 				<rich_text justification="left"></rich_text>
 				<codebox char_offset="56" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the new DataFrame: tracks
@@ -2066,7 +2100,12 @@ tracks = billboard[[&quot;year&quot;,&quot;artist&quot;,&quot;track&quot;,&quot;
 # Drop the duplicates: tracks_no_duplicates
 tracks_no_duplicates = tracks.drop_duplicates()
 </codebox>
-				<codebox char_offset="90" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()</codebox>
+				<codebox char_offset="90" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">tips_dropped = tips_nan.dropna()
+
+# Drop rows that has ANY NaNs, i.e. drop as long as there is at least one NaN
+df.dropna(how='any')
+
+# use how=&quot;all&quot; for dropping rows with all NaN</codebox>
 				<codebox char_offset="172" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the mean of the Ozone column: oz_mean
 oz_mean = airquality[&quot;Ozone&quot;].mean()
 
@@ -2076,10 +2115,12 @@ airquality['Ozone'] = airquality[&quot;Ozone&quot;].fillna(oz_mean)
 tips_nan['sex'] = tips_nan['sex'].fillna('missing')
 
 tips_nan[['total_bill', 'size']] = tips_nan[['total_bill','size']].fillna(0)</codebox>
-				<codebox char_offset="193" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Remove the appropriate columns: df_dropped
+				<codebox char_offset="192" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Remove the appropriate columns: df_dropped
 # list_to_drop contains a list of column names to drop
 df_dropped = df.drop(list_to_drop,axis = &quot;columns&quot;)
-</codebox>
+
+# Drop columns with less than 1000 non-missing values
+titanic.dropna(thresh=1000, axis='columns')</codebox>
 			</node>
 			<node custom_icon_id="0" foreground="" is_bold="False" name="Using asserts to verify" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543832053.66" ts_lastsave="1543853196.83" unique_id="38">
 				<rich_text scale="h1">Using asserts</rich_text>
@@ -2120,15 +2161,17 @@ assert gapminder.life_expectancy.dtypes == np.float64
 			</node>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="pandas Foundations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543853929.51" ts_lastsave="1544001509.23" unique_id="39">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="pandas Foundations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543853929.51" ts_lastsave="1544201882.56" unique_id="39">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Investigating data frames" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918003.92" ts_lastsave="1543918157.92" unique_id="41">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Investigating data frames" prog_lang="custom-colors" readonly="False" tags="numpy, pandas" ts_creation="1543918003.92" ts_lastsave="1544162047.62" unique_id="41">
+			<rich_text scale="h1">Numpy and pandas</rich_text>
 			<rich_text>
+
 Numpy and pandas can interoperate
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
-			<codebox char_offset="36" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># df is a pandas data frame
+			<codebox char_offset="53" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># df is a pandas data frame
 # Create a numpy array of DataFrame values: np_vals - this will only affect numerical columns
 # This returns a numpy array
 np_vals = df.values
@@ -2142,7 +2185,10 @@ np_vals_log10 = np.log10(np_vals)
 df_log10 = np.log10(df)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543918926.97" ts_lastsave="1544000685.17" unique_id="42">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="matplotlib, plotting" ts_creation="1543918926.97" ts_lastsave="1544162070.63" unique_id="42">
+			<rich_text>
+</rich_text>
+			<rich_text scale="h1">More on plotting</rich_text>
 			<rich_text>
 
 There are three different idioms for plotting. They have largely the same set of arguments, but be careful!
@@ -2182,7 +2228,7 @@ Previous related node on plotting </rich_text>
 
 
 </rich_text>
-			<codebox char_offset="1044" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This formats the plots such that they appear on separate rows
+			<codebox char_offset="1061" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This formats the plots such that they appear on separate rows
 fig, axes = plt.subplots(nrows=2, ncols=1)
 
 # Plot the PDF
@@ -2193,17 +2239,25 @@ plt.show()
 df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True, bins=30, range=(0,.3))
 plt.show()</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544001509.24" ts_lastsave="1544160955.54" unique_id="43">
-			<rich_text>Date and Time are described in ISO 8601 format
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="DateTimeIndex, date, time" ts_creation="1544001509.24" ts_lastsave="1544162162.71" unique_id="43">
+			<rich_text scale="h1">Date and Time manipulations</rich_text>
+			<rich_text>
+
+Date and Time are described in ISO 8601 format
 
 yyyy-mm-dd hh:mm:ss
 
-Creating a DateTimeIndex
+</rich_text>
+			<rich_text scale="h1">Creating a DateTimeIndex</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+</rich_text>
+			<rich_text scale="h1">Referencing with loc() and without</rich_text>
+			<rich_text>
 
 Various ways of indexing using loc(), and not using loc. Partial datetime string selection is fine.
 
@@ -2211,6 +2265,10 @@ Various ways of indexing using loc(), and not using loc. Partial datetime string
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+
+</rich_text>
+			<rich_text scale="h1">Reindexing</rich_text>
+			<rich_text>
 
 Reindexing using the index of another data frame
 
@@ -2220,7 +2278,9 @@ Reindexing using the index of another data frame
 
 
 
-Downsampling
+</rich_text>
+			<rich_text scale="h1">Downsampling</rich_text>
+			<rich_text>
 
 The aggregation function is specified at the end.
 
@@ -2228,7 +2288,9 @@ The aggregation function is specified at the end.
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Upsampling
+</rich_text>
+			<rich_text scale="h1">Upsampling</rich_text>
+			<rich_text>
 
 ffill() for forward fill any missing data. bfill() for backward fill.
 
@@ -2237,14 +2299,18 @@ ffill() for forward fill any missing data. bfill() for backward fill.
 			<rich_text>
 
 
-Moving quantities
+</rich_text>
+			<rich_text scale="h1">Moving quantities</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
 
-Localising to a timezone
+</rich_text>
+			<rich_text scale="h1">Localising to a timezone</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -2268,7 +2334,7 @@ Localising to a timezone
 
 
 </rich_text>
-			<codebox char_offset="95" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># date_list is a normal python list containing date time strings in the format below
+			<codebox char_offset="124" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># date_list is a normal python list containing date time strings in the format below
 
 # Prepare a format string: time_format
 time_format = &quot;%Y-%m-%d %H:%M&quot;
@@ -2278,7 +2344,7 @@ my_datetimes = pd.to_datetime(date_list,format=time_format)
 
 # Construct a pandas Series using temperature_list and my_datetimes: time_series
 time_series = pd.Series(temperature_list, index=my_datetimes)</codebox>
-			<codebox char_offset="200" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the hour from 9pm to 10pm on '2010-10-11': ts1
+			<codebox char_offset="264" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the hour from 9pm to 10pm on '2010-10-11': ts1
 ts1 = ts0.loc['2010-10-11 21:00:00':'2010-10-11 22:00:00']
 
 # Extract '2010-07-04' from ts0: ts2
@@ -2293,7 +2359,7 @@ august = df.loc[&quot;2010-08&quot;][&quot;Temperature&quot;]
 # Extract data from 2010-Aug-01 to 2010-Aug-15: unsmoothed
 unsmoothed = df['Temperature'][&quot;2010-08-01&quot;:&quot;2010-08-15&quot;]
 </codebox>
-			<codebox char_offset="254" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reindex without fill method: ts3
+			<codebox char_offset="330" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reindex without fill method: ts3
 ts3 = ts2.reindex(ts1.index)
 
 # Reindex with fill method, using forward fill: ts4
@@ -2310,23 +2376,28 @@ df.Date = pd.to_datetime(df[&quot;Date&quot;])
 
 # Set the index to be the converted 'Date' column
 df.set_index(&quot;Date&quot;, inplace=True)
+
+#----------------------------
+# Extract the Temperature column from daily_climate using .reset_index(): daily_temp_climate
+# Sometimes merged frames may not have running indices
+daily_temp_climate = daily_climate.reset_index()[&quot;Temperature&quot;]
 </codebox>
-			<codebox char_offset="324" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Downsample to 6 hour data and aggregate by mean: df1
+			<codebox char_offset="400" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Downsample to 6 hour data and aggregate by mean: df1
 df1 = df[&quot;Temperature&quot;].resample(&quot;6h&quot;).mean()
 
 # Downsample to daily data and count the number of data points: df2
 df2 = df[&quot;Temperature&quot;].resample(&quot;D&quot;).count()</codebox>
-			<codebox char_offset="410" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">two_days.resample('4H').ffill()
+			<codebox char_offset="486" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">two_days.resample('4H').ffill()
 
 population.resample('A').first()
 population.resample('A').first().interpolate('linear')</codebox>
-			<codebox char_offset="433" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Apply a rolling mean with a 24 hour window: smoothed
+			<codebox char_offset="509" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Apply a rolling mean with a 24 hour window: smoothed
 smoothed = unsmoothed.rolling(window=24).mean()
 
 # Use a rolling 7-day window with method chaining to smooth the daily high temperatures in August
 daily_highs_smoothed = daily_highs.rolling(window=7).mean()
 </codebox>
-			<codebox char_offset="463" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Combine two columns of data to create a datetime series: times_tz_none 
+			<codebox char_offset="539" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Combine two columns of data to create a datetime series: times_tz_none 
 times_tz_none = pd.to_datetime(la[&quot;Date (MM/DD/YYYY)&quot;] + ' ' + la[&quot;Wheels-off Time&quot;] )
 
 # Localize the time to US/Central: times_tz_central
@@ -2337,6 +2408,35 @@ times_tz_pacific = times_tz_central.dt.tz_convert(tz=&quot;US/Pacific&quot;)
 
 # Extracts only the hour
 sales['Date'].dt.hour</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544201902.07" unique_id="44">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Vectorised functions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201902.08" ts_lastsave="1544202259.09" unique_id="45">
+			<rich_text scale="h1">Vectorised functions</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Note: As far as possible, choose to use vectorised functions instead of map() or apply() when optimising for speed.
+
+
+</rich_text>
+			<codebox char_offset="22" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># divide all numeric columns by 12 and take the floor of the quotient
+df.floordiv(12)
+
+# Does the same thing as above
+np.floor_divide(df, 12)
+
+def dozens(n):
+    return n//12
+df.apply(dozens)
+
+df.apply(lambda n: n//12)
+
+df['dozens_of_eggs'] = df.eggs.floordiv(12)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">
