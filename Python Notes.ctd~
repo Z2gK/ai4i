@@ -223,7 +223,7 @@ plt.xlim(20, 55)
 plt.ylim(20, 55)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1544201723.85" unique_id="5">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Pandas basics" prog_lang="custom-colors" readonly="False" tags="pandas" ts_creation="1542453803.32" ts_lastsave="1544342718.22" unique_id="5">
 			<rich_text scale="h1">Building Pandas data frames</rich_text>
 			<rich_text>
 
@@ -367,7 +367,7 @@ df = pd.DataFrame(tweets_data, columns=[&quot;text&quot;,&quot;lang&quot;])
 # Print head of DataFrame
 print(df.head())
 </codebox>
-			<codebox char_offset="364" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#In [1]: list_keys
+			<codebox char_offset="364" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#In [1]: list_keys
 #Out[1]: ['Country', 'Total']
 
 #In [2]: list_values
@@ -426,7 +426,7 @@ print(cars.loc[:,['cars_per_cap','drives_right']])
 # We can use : to specify a range of columns too
 df.loc[:, 'eggs':'salt'] </codebox>
 			<codebox char_offset="1935" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">df.ix[:, 0:1]</codebox>
-			<codebox char_offset="2136" frame_height="670" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
+			<codebox char_offset="2136" frame_height="700" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import pandas as pd
 cars = pd.read_csv('cars.csv', index_col = 0)
 
 # Convert code to a one-liner - the argument is a True/False Series
@@ -2239,7 +2239,7 @@ plt.show()
 df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True, bins=30, range=(0,.3))
 plt.show()</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="DateTimeIndex, date, time" ts_creation="1544001509.24" ts_lastsave="1544162162.71" unique_id="43">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="DateTimeIndex, date, time" ts_creation="1544001509.24" ts_lastsave="1544342833.19" unique_id="43">
 			<rich_text scale="h1">Date and Time manipulations</rich_text>
 			<rich_text>
 
@@ -2276,7 +2276,11 @@ Reindexing using the index of another data frame
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Note that indexes are non-mutable objects, i.e. they cannot be changed one at a time in place. However, if needed, the index can be replaced entirely
 
+More on indexing is covered </rich_text>
+			<rich_text link="node 46">here</rich_text>
+			<rich_text>.
 
 </rich_text>
 			<rich_text scale="h1">Downsampling</rich_text>
@@ -2359,7 +2363,7 @@ august = df.loc[&quot;2010-08&quot;][&quot;Temperature&quot;]
 # Extract data from 2010-Aug-01 to 2010-Aug-15: unsmoothed
 unsmoothed = df['Temperature'][&quot;2010-08-01&quot;:&quot;2010-08-15&quot;]
 </codebox>
-			<codebox char_offset="330" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reindex without fill method: ts3
+			<codebox char_offset="330" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reindex without fill method: ts3
 ts3 = ts2.reindex(ts1.index)
 
 # Reindex with fill method, using forward fill: ts4
@@ -2382,22 +2386,22 @@ df.set_index(&quot;Date&quot;, inplace=True)
 # Sometimes merged frames may not have running indices
 daily_temp_climate = daily_climate.reset_index()[&quot;Temperature&quot;]
 </codebox>
-			<codebox char_offset="400" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Downsample to 6 hour data and aggregate by mean: df1
+			<codebox char_offset="584" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Downsample to 6 hour data and aggregate by mean: df1
 df1 = df[&quot;Temperature&quot;].resample(&quot;6h&quot;).mean()
 
 # Downsample to daily data and count the number of data points: df2
 df2 = df[&quot;Temperature&quot;].resample(&quot;D&quot;).count()</codebox>
-			<codebox char_offset="486" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">two_days.resample('4H').ffill()
+			<codebox char_offset="670" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">two_days.resample('4H').ffill()
 
 population.resample('A').first()
 population.resample('A').first().interpolate('linear')</codebox>
-			<codebox char_offset="509" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Apply a rolling mean with a 24 hour window: smoothed
+			<codebox char_offset="693" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Apply a rolling mean with a 24 hour window: smoothed
 smoothed = unsmoothed.rolling(window=24).mean()
 
 # Use a rolling 7-day window with method chaining to smooth the daily high temperatures in August
 daily_highs_smoothed = daily_highs.rolling(window=7).mean()
 </codebox>
-			<codebox char_offset="539" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Combine two columns of data to create a datetime series: times_tz_none 
+			<codebox char_offset="723" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Combine two columns of data to create a datetime series: times_tz_none 
 times_tz_none = pd.to_datetime(la[&quot;Date (MM/DD/YYYY)&quot;] + ' ' + la[&quot;Wheels-off Time&quot;] )
 
 # Localize the time to US/Central: times_tz_central
@@ -2410,9 +2414,9 @@ times_tz_pacific = times_tz_central.dt.tz_convert(tz=&quot;US/Pacific&quot;)
 sales['Date'].dt.hour</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544201902.07" unique_id="44">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544342756.41" unique_id="44">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Applying functions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201902.08" ts_lastsave="1544202354.57" unique_id="45">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Applying functions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201902.08" ts_lastsave="1544202440.64" unique_id="45">
 			<rich_text scale="h1">Vectorised functions</rich_text>
 			<rich_text>
 
@@ -2422,7 +2426,17 @@ sales['Date'].dt.hour</codebox>
 
 Note: As far as possible, choose to use vectorised functions instead of map() or apply() when optimising for speed.
 
-Using map and a dictionary
+</rich_text>
+			<rich_text scale="h1">Using map and a dictionary</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h1">Vectorised function from another module</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -2445,6 +2459,26 @@ red_vs_blue = {&quot;Obama&quot;:&quot;blue&quot;,&quot;Romney&quot;:&quot;red&q
 # Use the dictionary to map the 'winner' column to the new column: election['color']
 election['color'] = election[&quot;winner&quot;].map(red_vs_blue)
 </codebox>
+			<codebox char_offset="214" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import zscore from scipy.stats
+from scipy.stats import zscore
+
+# Call zscore with election['turnout'] as input: turnout_zscore
+turnout_zscore = zscore(election[&quot;turnout&quot;])
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on indexing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544342756.42" ts_lastsave="1544343694.36" unique_id="46">
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: Of what use is a multiindex?</rich_text>
+			<rich_text> A: To have unique indices where this is not possible using one column
+
+Reindexing based on date and time is briefly covered </rich_text>
+			<rich_text link="node 43">here</rich_text>
+			<rich_text>.
+Setting the index at the time of data import is cover </rich_text>
+			<rich_text link="node 5">here</rich_text>
+			<rich_text>.</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">
