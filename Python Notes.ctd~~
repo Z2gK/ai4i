@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -1503,7 +1503,7 @@ df.[&quot;colname&quot;].nunique()
 
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="melting, pivoting, splitting" ts_creation="1543420088.28" ts_lastsave="1543760427.2" unique_id="31">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="melting, pivoting, splitting" ts_creation="1543420088.28" ts_lastsave="1544432356.71" unique_id="31">
 			<rich_text scale="h1">Melting</rich_text>
 			<rich_text>
 
@@ -1566,7 +1566,9 @@ Split() and get() methods
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-
+More on melting and pivoting is covered </rich_text>
+			<rich_text link="node 47">here</rich_text>
+			<rich_text>.
 
 
 </rich_text>
@@ -2414,7 +2416,7 @@ times_tz_pacific = times_tz_central.dt.tz_convert(tz=&quot;US/Pacific&quot;)
 sales['Date'].dt.hour</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544342756.41" unique_id="44">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544432300.47" unique_id="44">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Applying functions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201902.08" ts_lastsave="1544202440.64" unique_id="45">
 			<rich_text scale="h1">Vectorised functions</rich_text>
@@ -2466,16 +2468,294 @@ from scipy.stats import zscore
 turnout_zscore = zscore(election[&quot;turnout&quot;])
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on indexing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544342756.42" ts_lastsave="1544343461.82" unique_id="46">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on indexing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544342756.42" ts_lastsave="1544432587.92" unique_id="46">
 			<rich_text>
 
 </rich_text>
 			<rich_text weight="heavy">Q: Of what use is a multiindex?</rich_text>
 			<rich_text> A: To have unique indices where this is not possible using one column
+</rich_text>
+			<rich_text weight="heavy">Q: Why is there no need to include slice() in Advanced Indexing - Indexing multilevels of a MultiIndex</rich_text>
+			<rich_text>
+
+Indexes are not mutable. i.e. we cannot simply set df.index[0] = var. However, we can change the entire index at once through df.index = somelist
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Indexing can be hierachical
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Referencing hierachical  indexing. Slice is still quite mysterious
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: Why is slice needed in the exercise example </rich_text>
+			<rich_text family="monospace" weight="heavy">stocks.loc[(slice(None), slice('2016-10-03', '2016-10-04')), :]</rich_text>
+			<rich_text weight="heavy"> but not needed here?</rich_text>
+			<rich_text>
 
 Reindexing based on date and time is briefly covered </rich_text>
 			<rich_text link="node 43">here</rich_text>
+			<rich_text>.
+Setting the index at the time of data import is cover </rich_text>
+			<rich_text link="node 5">here</rich_text>
 			<rich_text>.</rich_text>
+			<codebox char_offset="355" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># We can change the name of the index of the rows
+# Assign the string 'MONTHS' to sales.index.name
+sales.index.name = &quot;MONTHS&quot;
+
+# We can change the name of the columns
+# Assign the string 'PRODUCTS' to sales.columns.name 
+sales.columns.name = &quot;PRODUCTS&quot;
+</codebox>
+			<codebox char_offset="387" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This is the original data frame
+#  state  month  eggs  salt  spam
+#0    CA      1    47  12.0    17
+#1    CA      2   110  50.0    31
+#2    NY      1   221  89.0    72
+#3    NY      2    77  87.0    20
+#4    TX      1   132   NaN    52
+#5    TX      2   205  60.0    55
+
+# Now we set the multi index and sort
+# Set the index to be the columns ['state', 'month']: sales
+sales = sales.set_index(['state', 'month'])
+
+# Sort the MultiIndex: sales
+sales = sales.sort_index()
+
+#                eggs  salt  spam
+#    state month                  
+#    CA    1        47  12.0    17
+#          2       110  50.0    31
+#    NY    1       221  89.0    72
+#          2        77  87.0    20
+#    TX    1       132   NaN    52
+#          2       205  60.0    55
+</codebox>
+			<codebox char_offset="458" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#                eggs  salt  spam
+#    state month                  
+#    CA    1        47  12.0    17
+#          2       110  50.0    31
+#    NY    1       221  89.0    72
+#          2        77  87.0    20
+#    TX    1       132   NaN    52
+#          2       205  60.0    55
+
+# Look up data for NY in month 1: NY_month1
+NY_month1 = sales.loc[(&quot;NY&quot;,1)]
+
+# Look up data for CA and TX in month 2: CA_TX_month2
+CA_TX_month2 = sales.loc[([&quot;CA&quot;,&quot;TX&quot;],2),:]
+
+# Look up data for all states in month 2: all_month2
+all_month2 = sales.loc[(slice(None), 2 ),:]</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on Melting, Pivoting and Stacking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544432300.47" ts_lastsave="1544435234.6" unique_id="47">
+			<rich_text>
+</rich_text>
+			<rich_text scale="h1">Pivoting</rich_text>
+			<rich_text>
+
+The difference between pivot and pivot_table is that for the latter, one can specify an aggregation function.
+
+This is the original </rich_text>
+			<rich_text family="monospace">users</rich_text>
+			<rich_text> data frame
+
+</rich_text>
+			<rich_text family="monospace">  weekday    city  visitors  signups
+0     Sun  Austin       139        7
+1     Sun  Dallas       237       12
+2     Mon  Austin       326        3
+3     Mon  Dallas       456        5
+</rich_text>
+			<rich_text>
+For the pivot function, usually the index, columns and values parameters are needed.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+If no values parameter is specified, both visitors and signups will be pivoted. In this case, we will see another two columns in addition to the above.
+
+When we use pivot tables, an aggregation function can be specified through aggfunc. aggfunc=&quot;count&quot; for counting number of table entries.
+
+
+
+
+
+</rich_text>
+			<rich_text scale="h1">Stacking and unstacking</rich_text>
+			<rich_text>
+
+The concept of stacking is to put a columns into the rows, so that the data frame becomes “taller” (like stacking blocks).
+
+</rich_text>
+			<rich_text weight="heavy">Q: how is this different from melting?</rich_text>
+			<rich_text>
+
+This is the original </rich_text>
+			<rich_text family="monospace">users</rich_text>
+			<rich_text> data frame.
+
+</rich_text>
+			<rich_text family="monospace">                visitors  signups
+city   weekday                   
+Austin Mon           326        3
+       Sun           139        7
+Dallas Mon           456        5
+       Sun           237       12
+</rich_text>
+			<rich_text>
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+If we unstack city instead, we would get the cities under visitors and signup hierachy.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The levels of the multiindex can be swapped. They need to be sorted so as to return them to a more appealing form.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<rich_text scale="h1">Melting</rich_text>
+			<rich_text>
+
+Melting only seems to act on columns. It does not make any change to indices. New columns may be created.
+
+This is the original data frame
+
+</rich_text>
+			<rich_text family="monospace">city     Austin  Dallas
+weekday                
+Mon         326     456
+Sun         139     237
+</rich_text>
+			<rich_text>
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Now let's act on this again
+
+</rich_text>
+			<rich_text family="monospace">  weekday    city  visitors  signups
+0     Sun  Austin       139        7
+1     Sun  Dallas       237       12
+2     Mon  Austin       326        3
+3     Mon  Dallas       456        5
+</rich_text>
+			<rich_text>
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+var_name and value_name parameters can be specified so that we do not get variable and value column names.
+
+We can use melting to obtain key value pairs
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+Melting and pivoting was briefly covered </rich_text>
+			<rich_text link="node 31">here</rich_text>
+			<rich_text>.</rich_text>
+			<codebox char_offset="433" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pivot the users DataFrame: visitors_pivot
+visitors_pivot = users.pivot(index=&quot;weekday&quot;,columns=&quot;city&quot;,values=&quot;visitors&quot;)
+
+# This gives
+#city     Austin  Dallas
+#weekday                
+#Mon         326     456
+#Sun         139     237</codebox>
+			<codebox char_offset="728" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the DataFrame with the appropriate pivot table: signups_and_visitors
+signups_and_visitors = users.pivot_table(index=&quot;weekday&quot;,values=[&quot;signups&quot;,&quot;visitors&quot;], aggfunc=sum)
+
+
+# Add in the margins: signups_and_visitors_total 
+signups_and_visitors_total = users.pivot_table(index=&quot;weekday&quot;,values=[&quot;signups&quot;,&quot;visitors&quot;], aggfunc=sum, margins=True)
+</codebox>
+			<codebox char_offset="1167" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Unstack users by 'weekday': byweekday
+byweekday = users.unstack(level=&quot;weekday&quot;)
+
+# We get this after running unstack
+#        visitors      signups    
+#weekday      Mon  Sun     Mon Sun
+#city                             
+#Austin       326  139       3   7
+#Dallas       456  237       5  12
+
+# Calling stack will return us to the original data frame</codebox>
+			<codebox char_offset="1259" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Unstack users by 'city': bycity
+bycity = users.unstack(level=&quot;city&quot;)
+
+#        visitors        signups       
+#city      Austin Dallas  Austin Dallas
+#weekday                               
+#Mon          326    456       3      5
+#Sun          139    237       7     12
+</codebox>
+			<codebox char_offset="1378" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Swap the levels of the index of newusers: newusers
+newusers = newusers.swaplevel(0,1)
+
+# Sort the index of newusers: newusers
+newusers = newusers.sort_index()
+</codebox>
+			<codebox char_offset="1628" frame_height="325" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reset the index: visitors_by_city_weekday
+visitors_by_city_weekday = visitors_by_city_weekday.reset_index() 
+
+#city weekday  Austin  Dallas
+#0        Mon     326     456
+#1        Sun     139     237
+
+# Melt visitors_by_city_weekday: visitors
+visitors = pd.melt(visitors_by_city_weekday, id_vars=&quot;weekday&quot;, value_vars=[&quot;Austin&quot;,&quot;Dallas&quot;],value_name=&quot;visitors&quot;)
+
+#  weekday    city  visitors
+#0     Mon  Austin       326
+#1     Sun  Austin       139
+#2     Mon  Dallas       456
+#3     Sun  Dallas       237</codebox>
+			<codebox char_offset="1846" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt users: skinny
+skinny = pd.melt(users, id_vars=[&quot;weekday&quot;,&quot;city&quot;],value_vars=[&quot;visitors&quot;,&quot;signups&quot;])
+
+#  weekday    city  variable  value
+#0     Sun  Austin  visitors    139
+#1     Sun  Dallas  visitors    237
+#2     Mon  Austin  visitors    326
+#3     Mon  Dallas  visitors    456
+#4     Sun  Austin   signups      7
+#5     Sun  Dallas   signups     12
+#6     Mon  Austin   signups      3
+#7     Mon  Dallas   signups      5
+</codebox>
+			<codebox char_offset="2003" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the new index: users_idx
+users_idx = users.set_index([&quot;city&quot;,&quot;weekday&quot;])
+
+# Obtain the key-value pairs: kv_pairs
+kv_pairs = pd.melt(users_idx,col_level=0)
+
+# Print the key-value pairs
+print(kv_pairs)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">
