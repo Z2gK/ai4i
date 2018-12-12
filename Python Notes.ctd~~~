@@ -2559,7 +2559,7 @@ CA_TX_month2 = sales.loc[([&quot;CA&quot;,&quot;TX&quot;],2),:]
 # Look up data for all states in month 2: all_month2
 all_month2 = sales.loc[(slice(None), 2 ),:]</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on Melting, Pivoting and Stacking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544432300.47" ts_lastsave="1544435147.55" unique_id="47">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on Melting, Pivoting and Stacking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544432300.47" ts_lastsave="1544435234.6" unique_id="47">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Pivoting</rich_text>
@@ -2673,8 +2673,6 @@ We can use melting to obtain key value pairs
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
-
-
 
 
 
