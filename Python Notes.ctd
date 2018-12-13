@@ -111,7 +111,8 @@ time = np.arange(0, 1, 1/num_samples)
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intermediate Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542453323.53" ts_lastsave="1542457044.44" unique_id="3">
-		<rich_text></rich_text>
+		<rich_text>
+</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543920059.23" unique_id="4">
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
@@ -464,7 +465,8 @@ df.loc[:, df.notnull().all()]
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Python Data Science Toolbox Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542457044.44" ts_lastsave="1542458096.74" unique_id="6">
-		<rich_text></rich_text>
+		<rich_text>
+</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Lambda functions and its uses" prog_lang="custom-colors" readonly="False" tags="lambda, map, reduce, filter" ts_creation="1542457086.4" ts_lastsave="1542458233.21" unique_id="7">
 			<rich_text scale="h1">Lambda functions</rich_text>
 			<rich_text>
@@ -549,7 +551,8 @@ result = reduce(lambda item1, item2: item1+item2,stark)
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Python Data Science Toolbox Part 2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542458096.74" ts_lastsave="1543853929.51" unique_id="8">
-		<rich_text></rich_text>
+		<rich_text>
+</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Iterators" prog_lang="custom-colors" readonly="False" tags="iterators, iterables" ts_creation="1542458105.24" ts_lastsave="1542459579.8" unique_id="9">
 			<rich_text scale="h1">Iterators and iterables</rich_text>
 			<rich_text>
@@ -894,7 +897,8 @@ for value in get_lengths(lannister):
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 1" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542554806.19" ts_lastsave="1542987986.82" unique_id="14">
-		<rich_text></rich_text>
+		<rich_text>
+</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Numpy" prog_lang="custom-colors" readonly="False" tags="numpy data import" ts_creation="1542554816.8" ts_lastsave="1542555952.79" unique_id="15">
 			<rich_text scale="h1">Basic numpy data import</rich_text>
 			<rich_text>
@@ -1252,7 +1256,8 @@ SELECT * FROM PlaylistTrack INNER JOIN Track on PlaylistTrack.TrackId=Track.Trac
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Importing Data in Python Part 2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542988073.09" ts_lastsave="1543084212.47" unique_id="22">
-		<rich_text></rich_text>
+		<rich_text>
+</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="urllib" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542988172.07" ts_lastsave="1543082459.11" unique_id="23">
 			<rich_text>
 </rich_text>
@@ -2164,7 +2169,8 @@ assert gapminder.life_expectancy.dtypes == np.float64
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="pandas Foundations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543853929.51" ts_lastsave="1544201882.56" unique_id="39">
-		<rich_text></rich_text>
+		<rich_text>
+</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Investigating data frames" prog_lang="custom-colors" readonly="False" tags="numpy, pandas" ts_creation="1543918003.92" ts_lastsave="1544162047.62" unique_id="41">
 			<rich_text scale="h1">Numpy and pandas</rich_text>
 			<rich_text>
@@ -2417,7 +2423,8 @@ sales['Date'].dt.hour</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544606915.12" unique_id="44">
-		<rich_text></rich_text>
+		<rich_text>
+</rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Applying functions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201902.08" ts_lastsave="1544202440.64" unique_id="45">
 			<rich_text scale="h1">Vectorised functions</rich_text>
 			<rich_text>
@@ -2767,18 +2774,29 @@ print(kv_pairs)</codebox>
 			<rich_text weight="heavy">Q: What is the difference between .agg, .transform and .apply?</rich_text>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
 TIP: If columns are replaced by ... when using head or tail methods, we can view and configure the behaviours through the pandas get_options and set_option methods
 
 </rich_text>
 		<rich_text justification="left"></rich_text>
 		<rich_text>
+
+Simple sorting by a column
+
 </rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+what is the difference between isin and contains</rich_text>
 		<codebox char_offset="166" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 pd.get_option(&quot;display.max_columns&quot;)
 
 pd.set_option(&quot;display.max_columns&quot;,10)
+</codebox>
+		<codebox char_offset="197" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Sort counted by the 'totals' column
+counted = counted.sort_values(ascending=False, by=&quot;totals&quot;)
 </codebox>
 	</node>
 </cherrytree>

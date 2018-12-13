@@ -2416,7 +2416,7 @@ times_tz_pacific = times_tz_central.dt.tz_convert(tz=&quot;US/Pacific&quot;)
 sales['Date'].dt.hour</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544432300.47" unique_id="44">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544606915.12" unique_id="44">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Applying functions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201902.08" ts_lastsave="1544202440.64" unique_id="45">
 			<rich_text scale="h1">Vectorised functions</rich_text>
@@ -2559,7 +2559,7 @@ CA_TX_month2 = sales.loc[([&quot;CA&quot;,&quot;TX&quot;],2),:]
 # Look up data for all states in month 2: all_month2
 all_month2 = sales.loc[(slice(None), 2 ),:]</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on Melting, Pivoting and Stacking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544432300.47" ts_lastsave="1544435257.17" unique_id="47">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on Melting, Pivoting and Stacking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544432300.47" ts_lastsave="1544435411.73" unique_id="47">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Pivoting</rich_text>
@@ -2589,7 +2589,9 @@ If no values parameter is specified, both visitors and signups will be pivoted. 
 
 When we use pivot tables, an aggregation function can be specified through aggfunc. aggfunc=&quot;count&quot; for counting number of table entries. The margins parameter enables us to calculate the column total below
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -2625,6 +2627,8 @@ If we unstack city instead, we would get the cities under visitors and signup hi
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+The level parameter can be numeric - this allows us to specify which level in the hierachy to stack or unstack.
 
 The levels of the multiindex can be swapped. They need to be sorted so as to return them to a more appealing form.
 
@@ -2714,13 +2718,13 @@ bycity = users.unstack(level=&quot;city&quot;)
 #Mon          326    456       3      5
 #Sun          139    237       7     12
 </codebox>
-			<codebox char_offset="1447" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Swap the levels of the index of newusers: newusers
+			<codebox char_offset="1560" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Swap the levels of the index of newusers: newusers
 newusers = newusers.swaplevel(0,1)
 
 # Sort the index of newusers: newusers
 newusers = newusers.sort_index()
 </codebox>
-			<codebox char_offset="1697" frame_height="325" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reset the index: visitors_by_city_weekday
+			<codebox char_offset="1810" frame_height="325" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reset the index: visitors_by_city_weekday
 visitors_by_city_weekday = visitors_by_city_weekday.reset_index() 
 
 #city weekday  Austin  Dallas
@@ -2735,7 +2739,7 @@ visitors = pd.melt(visitors_by_city_weekday, id_vars=&quot;weekday&quot;, value_
 #1     Sun  Austin       139
 #2     Mon  Dallas       456
 #3     Sun  Dallas       237</codebox>
-			<codebox char_offset="1915" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt users: skinny
+			<codebox char_offset="2028" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt users: skinny
 skinny = pd.melt(users, id_vars=[&quot;weekday&quot;,&quot;city&quot;],value_vars=[&quot;visitors&quot;,&quot;signups&quot;])
 
 #  weekday    city  variable  value
@@ -2748,7 +2752,7 @@ skinny = pd.melt(users, id_vars=[&quot;weekday&quot;,&quot;city&quot;],value_var
 #6     Mon  Austin   signups      3
 #7     Mon  Dallas   signups      5
 </codebox>
-			<codebox char_offset="2072" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the new index: users_idx
+			<codebox char_offset="2185" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the new index: users_idx
 users_idx = users.set_index([&quot;city&quot;,&quot;weekday&quot;])
 
 # Obtain the key-value pairs: kv_pairs
@@ -2756,6 +2760,11 @@ kv_pairs = pd.melt(users_idx,col_level=0)
 
 # Print the key-value pairs
 print(kv_pairs)</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1544606968.98" unique_id="48">
+			<rich_text>
+</rich_text>
+			<rich_text weight="heavy">Q: What is the difference between .agg, .transform and .apply?</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1543917654.71" unique_id="40">
