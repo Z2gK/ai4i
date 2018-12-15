@@ -2768,13 +2768,196 @@ kv_pairs = pd.melt(users_idx,col_level=0)
 # Print the key-value pairs
 print(kv_pairs)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1544606968.98" unique_id="48">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1544857682.81" unique_id="48">
 			<rich_text>
+1
+
+The sequence of application is typically this:
+
+df.groupby(...)[ columns...].aggregationfunction
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Other aggregation functions we can use include sum(), mean(), std(), first(), last(), min(), max().
+This is group all aggregations by pclass, reporting only the survived column. This counts the number of survived entries in each pclass. Multiple groups and multiple columns are possible.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can even group by category from a different data frame
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Aggregating different columns with different functions
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+In the example above, max works on age and median works on fare.
+
+Functions must be enclosed in quotes. There are sum, mean and count functions.
+
+Custom aggregation
+
+We can also define our own aggregation function. The input has to take in a series.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+agg allows us to be even more flexible about aggregation by specifying different aggregators and columns in a dict
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Transformations
+
+Transforms is different from aggregation in that it returns one value for each entry, but the computation has some dependence on the group
+
+We use the automobile dataset and define this zscore function
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+One use of transform is to fill in missing values. See lecture notes for more detail.
+
+Apply makes for more complex computations. It can return a data frame
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Grouping and filtering
+
+The groupby object is in fact a dictionary that can be iterated over
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can filter out groups of interest
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Using map to filter
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
 </rich_text>
 			<rich_text weight="heavy">Q: What is the difference between .agg, .transform and .apply?</rich_text>
+			<rich_text>
+
+
+
+</rich_text>
+			<codebox char_offset="102" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group titanic by 'pclass'
+by_class = titanic.groupby(&quot;pclass&quot;)
+
+# Aggregate 'survived' column of by_class by count
+count_by_class = by_class[&quot;survived&quot;].count()
+</codebox>
+			<codebox char_offset="394" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group titanic by 'embarked' and 'pclass'
+by_mult = titanic.groupby([&quot;embarked&quot;,&quot;pclass&quot;])
+
+# Aggregate both the bread and butter columns
+sales.groupby('weekday')[['bread','butter']].sum()
+
+#--------------------------------------
+# We can groupby a function of the index as well
+# Read file: sales
+sales = pd.read_csv(&quot;sales.csv&quot;,index_col=&quot;Date&quot;,parse_dates=True)
+
+# Create a groupby object: by_day
+by_day = sales.groupby(sales.index.strftime(&quot;%a&quot;))
+</codebox>
+			<codebox char_offset="456" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Read life_fname into a DataFrame: life
+life = pd.read_csv(life_fname, index_col='Country')
+
+# Read regions_fname into a DataFrame: regions
+regions = pd.read_csv(regions_fname, index_col=&quot;Country&quot;)
+
+# Group life by regions['region']: life_by_region
+life_by_region = life.groupby(regions[&quot;region&quot;])
+
+# Print the mean over the '2010' column of life_by_region
+print(life_by_region[&quot;2010&quot;].mean())</codebox>
+			<codebox char_offset="515" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group titanic by 'pclass': by_class
+by_class = titanic.groupby(&quot;pclass&quot;)
+
+# Select 'age' and 'fare'
+by_class_sub = by_class[['age','fare']]
+
+# Aggregate by_class_sub by 'max' and 'median': aggregated
+aggregated = by_class_sub.agg([&quot;max&quot;,&quot;median&quot;])
+</codebox>
+			<codebox char_offset="769" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def data_range(series):
+...: return series.max() - series.min()
+
+sales.groupby('weekday')[['bread', 'butter']].agg(data_range)</codebox>
+			<codebox char_offset="888" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group gapminder by 'Year' and 'region': by_year_region
+by_year_region = gapminder.groupby(level=[&quot;Year&quot;,&quot;region&quot;])
+
+# Create the dictionary: aggregator
+aggregator = {'population':'sum', 'child_mortality':'mean', 'gdp':spread}
+
+# Aggregate by_year_region using the dictionary: aggregated
+aggregated = by_year_region.agg(aggregator)
+</codebox>
+			<codebox char_offset="1112" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def zscore(series):
+ ...: return (series - series.mean()) / series.std()
+
+# This computes the zscore for every automobile's mpg, but groups them by year, i.e. the comparison is with respect to other automobiles in the same year
+auto.groupby('yr')['mpg'].transform(zscore).head()</codebox>
+			<codebox char_offset="1273" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def zscore_with_year_and_name(group):
+...: df = pd.DataFrame(
+...: {'mpg': zscore(group['mpg']),
+...: 'year': group['yr'],
+...: 'name': group['name']})
+...: return df
+
+auto.groupby('yr').apply(zscore_with_year_and_name).head()
+
+#mpg name year
+#0 0.058125 chevrolet chevelle malibu 70
+#1 -0.503753 buick skylark 320 70
+#2 0.058125 plymouth satellite 70
+#3 -0.316460 amc rebel sst 70
+#4 -0.129168 ford torino 70</codebox>
+			<codebox char_offset="1370" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">splitting = auto.groupby('yr')
+
+for group_name, group in splitting:
+...: avg = group['mpg'].mean()
+...: print(group_name, avg) 
+</codebox>
+			<codebox char_offset="1411" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group sales by 'Company': by_company
+by_company = sales.groupby(&quot;Company&quot;)
+
+# Filter 'Units' where the sum is &gt; 35: by_com_filt
+by_com_filt = by_company.filter(lambda g:g[&quot;Units&quot;].sum() &gt; 35)
+print(by_com_filt)</codebox>
+			<codebox char_offset="1435" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">under10 = (titanic[&quot;age&quot;] &lt; 10).map({True:'under 10',False:'over 10'})
+
+# Group by under10 and compute the survival rate
+survived_mean_1 = titanic.groupby(under10)[&quot;survived&quot;].mean()
+print(survived_mean_1)
+</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544678554.56" unique_id="40">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
 TIP: If columns are replaced by ... when using head or tail methods, we can view and configure the behaviours through the pandas get_options and set_option methods
 
@@ -2786,6 +2969,10 @@ Simple sorting by a column
 
 </rich_text>
 		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+what is the difference between isin and contains</rich_text>
 		<codebox char_offset="166" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 pd.get_option(&quot;display.max_columns&quot;)
 
