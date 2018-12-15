@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -2247,7 +2247,7 @@ plt.show()
 df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True, bins=30, range=(0,.3))
 plt.show()</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="DateTimeIndex, date, time" ts_creation="1544001509.24" ts_lastsave="1544342833.19" unique_id="43">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="DateTimeIndex, date, time" ts_creation="1544001509.24" ts_lastsave="1544903835.77" unique_id="43">
 			<rich_text scale="h1">Date and Time manipulations</rich_text>
 			<rich_text>
 
@@ -2374,8 +2374,12 @@ unsmoothed = df['Temperature'][&quot;2010-08-01&quot;:&quot;2010-08-15&quot;]
 			<codebox char_offset="330" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reindex without fill method: ts3
 ts3 = ts2.reindex(ts1.index)
 
+# NOTE: if ts1.index contains indices that are not part of the original indices of ts2, these indices will be created in ts3 with NaN entries
+
+
 # Reindex with fill method, using forward fill: ts4
 ts4 = ts2.reindex(ts1.index,method=&quot;ffill&quot;)
+# CAUTION! This might produce unexpected fill results if the fill index is a date but not a date time index
 
 #----------------------------
 # Reset the index of ts2 to ts1, and then use linear interpolation to fill in the NaNs: ts2_interp
@@ -2422,7 +2426,7 @@ times_tz_pacific = times_tz_central.dt.tz_convert(tz=&quot;US/Pacific&quot;)
 sales['Date'].dt.hour</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544606915.12" unique_id="44">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Manipulating Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201882.56" ts_lastsave="1544901148.28" unique_id="44">
 		<rich_text>
 </rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Applying functions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544201902.08" ts_lastsave="1544202440.64" unique_id="45">
@@ -2768,7 +2772,7 @@ kv_pairs = pd.melt(users_idx,col_level=0)
 # Print the key-value pairs
 print(kv_pairs)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1544857724.33" unique_id="48">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1544901131.31" unique_id="48">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Basic grouping</rich_text>
@@ -2794,6 +2798,8 @@ We can even group by category from a different data frame
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+sum(axis=&quot;columns&quot;) work as well, by automatically summing all rows in data frame
 
 Aggregating different columns with different functions
 
@@ -2863,6 +2869,16 @@ Using map to filter
 			<rich_text>
 
 
+Others
+
+Use of idxmax to find the index where the maximum of a series occurs
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+There is idxmin() as well.
+
 </rich_text>
 			<rich_text weight="heavy">Q: What is the difference between .agg, .transform and .apply?</rich_text>
 			<rich_text>
@@ -2901,7 +2917,7 @@ life_by_region = life.groupby(regions[&quot;region&quot;])
 
 # Print the mean over the '2010' column of life_by_region
 print(life_by_region[&quot;2010&quot;].mean())</codebox>
-			<codebox char_offset="528" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group titanic by 'pclass': by_class
+			<codebox char_offset="611" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group titanic by 'pclass': by_class
 by_class = titanic.groupby(&quot;pclass&quot;)
 
 # Select 'age' and 'fare'
@@ -2910,11 +2926,11 @@ by_class_sub = by_class[['age','fare']]
 # Aggregate by_class_sub by 'max' and 'median': aggregated
 aggregated = by_class_sub.agg([&quot;max&quot;,&quot;median&quot;])
 </codebox>
-			<codebox char_offset="782" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def data_range(series):
+			<codebox char_offset="865" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def data_range(series):
 ...: return series.max() - series.min()
 
 sales.groupby('weekday')[['bread', 'butter']].agg(data_range)</codebox>
-			<codebox char_offset="901" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group gapminder by 'Year' and 'region': by_year_region
+			<codebox char_offset="984" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group gapminder by 'Year' and 'region': by_year_region
 by_year_region = gapminder.groupby(level=[&quot;Year&quot;,&quot;region&quot;])
 
 # Create the dictionary: aggregator
@@ -2923,12 +2939,12 @@ aggregator = {'population':'sum', 'child_mortality':'mean', 'gdp':spread}
 # Aggregate by_year_region using the dictionary: aggregated
 aggregated = by_year_region.agg(aggregator)
 </codebox>
-			<codebox char_offset="1125" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def zscore(series):
+			<codebox char_offset="1208" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def zscore(series):
  ...: return (series - series.mean()) / series.std()
 
 # This computes the zscore for every automobile's mpg, but groups them by year, i.e. the comparison is with respect to other automobiles in the same year
 auto.groupby('yr')['mpg'].transform(zscore).head()</codebox>
-			<codebox char_offset="1286" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def zscore_with_year_and_name(group):
+			<codebox char_offset="1369" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def zscore_with_year_and_name(group):
 ...: df = pd.DataFrame(
 ...: {'mpg': zscore(group['mpg']),
 ...: 'year': group['yr'],
@@ -2943,24 +2959,74 @@ auto.groupby('yr').apply(zscore_with_year_and_name).head()
 #2 0.058125 plymouth satellite 70
 #3 -0.316460 amc rebel sst 70
 #4 -0.129168 ford torino 70</codebox>
-			<codebox char_offset="1383" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">splitting = auto.groupby('yr')
+			<codebox char_offset="1466" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">splitting = auto.groupby('yr')
 
 for group_name, group in splitting:
 ...: avg = group['mpg'].mean()
 ...: print(group_name, avg) 
 </codebox>
-			<codebox char_offset="1424" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group sales by 'Company': by_company
+			<codebox char_offset="1507" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Group sales by 'Company': by_company
 by_company = sales.groupby(&quot;Company&quot;)
 
 # Filter 'Units' where the sum is &gt; 35: by_com_filt
 by_com_filt = by_company.filter(lambda g:g[&quot;Units&quot;].sum() &gt; 35)
 print(by_com_filt)</codebox>
-			<codebox char_offset="1448" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">under10 = (titanic[&quot;age&quot;] &lt; 10).map({True:'under 10',False:'over 10'})
+			<codebox char_offset="1531" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">under10 = (titanic[&quot;age&quot;] &lt; 10).map({True:'under 10',False:'over 10'})
 
 # Group by under10 and compute the survival rate
 survived_mean_1 = titanic.groupby(under10)[&quot;survived&quot;].mean()
 print(survived_mean_1)
 </codebox>
+			<codebox char_offset="1613" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#NOC        USA    URS
+#Edition              
+#1952     130.0  117.0
+#1956     118.0  169.0
+#1960     112.0  169.0
+#1964     150.0  174.0
+#1968     149.0  188.0
+#1972     155.0  211.0
+#1976     155.0  285.0
+#1980       NaN  442.0
+#1984     333.0    NaN
+#1988     193.0  294.0
+
+most_medals = cold_war_usa_urs_medals.idxmax(axis=&quot;columns&quot;)
+
+#Edition
+#1952    USA
+#1956    URS
+#1960    URS
+#1964    URS
+#1968    URS
+#1972    URS
+#1976    URS
+#1980    URS
+#1984    USA
+1988    URS</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Merging Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544901131.31" ts_lastsave="1544902109.54" unique_id="49">
+		<rich_text>
+</rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Reading multiple files" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544902109.55" ts_lastsave="1544904478.59" unique_id="50">
+			<rich_text>
+The .copy() method for dataframes can be used to create a copy of the dataframe and assign it to another
+
+</rich_text>
+			<rich_text weight="heavy">Q: There is a difference between using
+
+weather3 = weather1.reindex(year,method=&quot;ffill&quot;)
+and
+weather3 = weather1.reindex(year).ffill()
+</rich_text>
+			<rich_text>
+
+• Reindexing is a way to impose order to an unordered index
+• Reindexing is a way to find common elements between two data frames
+• df1.reindex(df2.index) is not equivalent to df2.reindex(df1.index)
+
+
+</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
