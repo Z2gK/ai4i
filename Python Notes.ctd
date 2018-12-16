@@ -2479,7 +2479,7 @@ from scipy.stats import zscore
 turnout_zscore = zscore(election[&quot;turnout&quot;])
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on indexing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544342756.42" ts_lastsave="1544432587.92" unique_id="46">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on indexing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544342756.42" ts_lastsave="1544973362.13" unique_id="46">
 			<rich_text>
 
 </rich_text>
@@ -2552,7 +2552,7 @@ sales = sales.sort_index()
 #    TX    1       132   NaN    52
 #          2       205  60.0    55
 </codebox>
-			<codebox char_offset="458" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#                eggs  salt  spam
+			<codebox char_offset="458" frame_height="565" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#                eggs  salt  spam
 #    state month                  
 #    CA    1        47  12.0    17
 #          2       110  50.0    31
@@ -2568,7 +2568,19 @@ NY_month1 = sales.loc[(&quot;NY&quot;,1)]
 CA_TX_month2 = sales.loc[([&quot;CA&quot;,&quot;TX&quot;],2),:]
 
 # Look up data for all states in month 2: all_month2
-all_month2 = sales.loc[(slice(None), 2 ),:]</codebox>
+all_month2 = sales.loc[(slice(None), 2 ),:]
+
+
+#------------------------------------------
+# We need this when we filter on an inner multiindex
+#
+# Create alias for pd.IndexSlice: idx
+# From Merging Data Frames with pandas exercise
+idx = pd.IndexSlice
+
+# Print all the data on medals won by the United Kingdom
+print(medals_sorted.loc[idx[:,&quot;United Kingdom&quot;],:])
+</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="More on Melting, Pivoting and Stacking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544432300.47" ts_lastsave="1544435411.73" unique_id="47">
 			<rich_text>
@@ -3008,7 +3020,7 @@ most_medals = cold_war_usa_urs_medals.idxmax(axis=&quot;columns&quot;)
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Merging Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544901131.31" ts_lastsave="1544902109.54" unique_id="49">
 		<rich_text>
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Reading multiple files" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544902109.55" ts_lastsave="1544904478.59" unique_id="50">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Reading multiple files" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544902109.55" ts_lastsave="1544977468.93" unique_id="50">
 			<rich_text>
 The .copy() method for dataframes can be used to create a copy of the dataframe and assign it to another
 
@@ -3026,7 +3038,203 @@ weather3 = weather1.reindex(year).ffill()
 • df1.reindex(df2.index) is not equivalent to df2.reindex(df1.index)
 
 
+Simple Arithmetic
+
+Arithmetics can be performed on data frames. It could be simple broadcasting.
+
+The standard arithmetic operations would work on two data frames if they have the same column names, but if not, special methods are required
+
 </rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+There is .multiply() as well
+
+Concat can stack data frames verticallly and horizontally. Append can onlyl do vertically. The below are equivalent
+
+</rich_text>
+			<rich_text family="monospace">result1 = pd.concat([s1,s2,s3])
+result2 = s1.append(s2).append(s3)
+</rich_text>
+			<rich_text>
+Indices will be preserved. To reindex, we have to call .reset_index(drop=True) (for append) OR ignore_index=True (for concat)
+
+Using append
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+When we append two data frames with quite unlike indices and columns, the indices are combined. NAs are created.
+
+population data frame
+
+</rich_text>
+			<rich_text family="monospace">2010            Census Population
+Zip Code ZCTA
+57538           322
+59916           130
+37660           40038
+2860            45199 
+</rich_text>
+			<rich_text>
+unemployment data frame
+
+                </rich_text>
+			<rich_text family="monospace">unemployment    participants
+Zip
+2860    0.11            34447
+46167   0.02            4800
+1097    0.33            42
+80808   0.07            4310
+</rich_text>
+			<rich_text>
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The result is this. Note the repeated indices
+
+</rich_text>
+			<rich_text family="monospace">            2010 Census Population  participants    unemployment
+57538       322.0                   NaN             NaN
+59916       130.0                   NaN             NaN
+37660       40038.0                 NaN             NaN
+2860        45199.0                 NaN             NaN
+2860        NaN                     34447.0         0.11
+46167       NaN                     4800.0          0.02
+1097        NaN                     42.0            0.33
+80808       NaN                     4310.0          0.07
+</rich_text>
+			<rich_text>
+Equivalently, this can be achieved by concat
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+If we had used axis=1, the repeated index 2860 will disappear. and we will have 7 rows.
+
+This is an OUTER JOIN - this is the default join type. We could have specified </rich_text>
+			<rich_text family="monospace">join=&quot;outer&quot;</rich_text>
+			<rich_text>, but this is the default.
+
+If we wanted INNER JOIN, i.e. only 2860 (common indices) would appear, we would specify </rich_text>
+			<rich_text family="monospace">join=&quot;inner&quot;</rich_text>
+			<rich_text>.
+
+To summarise,
+</rich_text>
+			<rich_text weight="heavy">OUTER JOIN - common indices appear only once. Non-common indices also appear
+INNER JOIN - only common indices appear
+</rich_text>
+			<rich_text>
+Using concat
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can also add a multilevel index during concat to tell apart different data frames. This can be added on the indices or on the columns.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can use dictionaries to concat
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Merge
+
+This is INNER JOIN on column data. concat only works on indices, but merge enables us to join based on column information.
+
+Merge does INNER JOIN by default. how=&quot;inner&quot; is the parameter.
+
+If there are columns with repeated names, both columns will be included in the new data frame, with suffixes to disambiguate. Use suffixes=[&quot;..&quot;,&quot;..&quot;] to customise.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The column to merge on can have different names. left_on and right_on can be lists.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can merge on multiple columns
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Merge can do INNER, OUTER, LEFT and RIGHT joins by specifying the how parameter.
+
+how: “inner”, “outer”, “left”, “right”
+
+An alternative syntax for joining is to use the .join method
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="686" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This divides the numerical colums in week1_range by the numerical column in week1_mean. week1_range / week1_mean does not work here
+week1_range.divide(week1_mean, axis='rows')
+
+# Percentage change of successive rows
+week1_mean.pct_change() * 100
+</codebox>
+			<codebox char_offset="691" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Bronze and silver do not have identical indices set. If added, we will get lots of NAs. This approach treats NAs as 0
+bronze.add(silver, fill_value=0)</codebox>
+			<codebox char_offset="1050" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Append feb_units and then mar_units to jan_units: quarter1
+quarter1 = jan_units.append(feb_units).append(mar_units)</codebox>
+			<codebox char_offset="1514" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">population.append(unemployment)</codebox>
+			<codebox char_offset="2128" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">pd.concat([population, unemployment], axis=0)</codebox>
+			<codebox char_offset="2588" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build the list of Series
+for month in [jan, feb, mar]:
+    units.append(month[&quot;Units&quot;])
+
+
+# Concatenate the list: quarter1
+# axis = 0 equivalently
+quarter1 = pd.concat(units, axis=&quot;rows&quot;)
+</codebox>
+			<codebox char_offset="2730" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Concatenate medals: medals
+medals = pd.concat(medals,keys = [&quot;bronze&quot;,&quot;silver&quot;,&quot;gold&quot;])
+
+# Concatenate dataframes: february
+february = pd.concat(dataframes, keys=[&quot;Hardware&quot;,&quot;Software&quot;,&quot;Service&quot;],axis=1)</codebox>
+			<codebox char_offset="2768" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># rain2013 and rain2014 are data frames
+rain_dict = {2013: rain2013, 2014: rain2014}
+In [16]: rain1314 = pd.concat(rain_dict, axis='columns') </codebox>
+			<codebox char_offset="3134" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">combined = pd.merge(revenue, managers, on='city')</codebox>
+			<codebox char_offset="3222" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge revenue &amp; managers on 'city' &amp; 'branch': combined
+combined = pd.merge(revenue,managers,left_on=&quot;city&quot;,right_on=&quot;branch&quot;)</codebox>
+			<codebox char_offset="3259" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge revenue &amp; managers on 'branch_id', 'city', &amp; 'state': combined
+combined = pd.merge(revenue,managers,on=[&quot;branch_id&quot;,&quot;city&quot;,&quot;state&quot;])
+</codebox>
+			<codebox char_offset="3446" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">population.join(unemployment, how= 'right')
+# how can be &quot;left&quot;, &quot;right&quot;, &quot;inner&quot; or &quot;outer&quot;</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
