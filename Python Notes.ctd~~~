@@ -2788,7 +2788,7 @@ kv_pairs = pd.melt(users_idx,col_level=0)
 # Print the key-value pairs
 print(kv_pairs)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1544901131.31" unique_id="48">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1545041300.92" unique_id="48">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Basic grouping</rich_text>
@@ -2885,7 +2885,9 @@ Using map to filter
 			<rich_text>
 
 
-Others
+</rich_text>
+			<rich_text scale="h1">Others</rich_text>
+			<rich_text>
 
 Use of idxmax to find the index where the maximum of a series occurs
 
@@ -3024,7 +3026,7 @@ most_medals = cold_war_usa_urs_medals.idxmax(axis=&quot;columns&quot;)
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Merging Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544901131.31" ts_lastsave="1545034371.36" unique_id="49">
 		<rich_text>
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Dealing with multiple data frames" prog_lang="custom-colors" readonly="False" tags="merge, joins, concat" ts_creation="1544902109.55" ts_lastsave="1545034209.49" unique_id="50">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Dealing with multiple data frames" prog_lang="custom-colors" readonly="False" tags="merge, joins, concat" ts_creation="1544902109.55" ts_lastsave="1545041376.87" unique_id="50">
 			<rich_text>
 The .copy() method for dataframes can be used to create a copy of the dataframe and assign it to another
 
@@ -3042,7 +3044,9 @@ weather3 = weather1.reindex(year).ffill()
 • df1.reindex(df2.index) is not equivalent to df2.reindex(df1.index)
 
 
-Simple Arithmetic
+</rich_text>
+			<rich_text scale="h1">Simple Arithmetic</rich_text>
+			<rich_text>
 
 Arithmetics can be performed on data frames. It could be simple broadcasting.
 
@@ -3069,7 +3073,9 @@ result2 = s1.append(s2).append(s3)
 			<rich_text>
 Indices will be preserved. To reindex, we have to call .reset_index(drop=True) (for append) OR ignore_index=True (for concat)
 
-Using append
+</rich_text>
+			<rich_text scale="h1">Using append</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3139,7 +3145,9 @@ To summarise,
 INNER JOIN - only common indices appear
 </rich_text>
 			<rich_text>
-Using concat
+</rich_text>
+			<rich_text scale="h1">Using concat</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3158,7 +3166,9 @@ We can use dictionaries to concat
 			<rich_text>
 
 
-Merge
+</rich_text>
+			<rich_text scale="h1">Merge</rich_text>
+			<rich_text>
 
 This is INNER JOIN on column data. concat only works on indices, but merge enables us to join based on column information.
 
@@ -3249,7 +3259,7 @@ combined = pd.merge(revenue,managers,on=[&quot;branch_id&quot;,&quot;city&quot;,
 # how can be &quot;left&quot;, &quot;right&quot;, &quot;inner&quot; or &quot;outer&quot;</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545034371.37" ts_lastsave="1545041097.4" unique_id="51">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545034371.37" ts_lastsave="1545041412.32" unique_id="51">
 		<rich_text>
 Basic SELECTing of columns from table, or multiple columns, or all columns
 
@@ -3300,7 +3310,9 @@ IN operator
 
 Instead of this,
 
-
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
 we can use IN as a shorthand for the same purpose.
 
@@ -3317,7 +3329,9 @@ They can be used to match strings in WHERE clauses using _ and % characters.
 % will match zero or many characters (like unix *)
 _ will match exactly one character (like unix ?)
 
-
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
 
 There are simple aggregations we can use. This calculates and returns the average budget for all films.
@@ -3491,6 +3505,16 @@ FROM films
 JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545041640.14" unique_id="52">
+		<rich_text>
+We can use SQLAlchemy
+
+The connection isn't made until we make the first query
+
+We can use Reflection to find out more about the tables - this makes understanding the tables easier later.
+
+</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>

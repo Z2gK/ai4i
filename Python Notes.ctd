@@ -3259,7 +3259,7 @@ combined = pd.merge(revenue,managers,on=[&quot;branch_id&quot;,&quot;city&quot;,
 # how can be &quot;left&quot;, &quot;right&quot;, &quot;inner&quot; or &quot;outer&quot;</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL basics" prog_lang="custom-colors" readonly="False" tags="SQL" ts_creation="1545034371.37" ts_lastsave="1545041815.41" unique_id="51">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL basics" prog_lang="custom-colors" readonly="False" tags="SQL" ts_creation="1545034371.37" ts_lastsave="1545065566.13" unique_id="51">
 		<rich_text>
 Basic SELECTing of columns from table, or multiple columns, or all columns
 
@@ -3413,49 +3413,49 @@ Performing basic INNER JOIN
 
 
 </rich_text>
-		<codebox char_offset="77" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name FROM people;
+		<codebox char_offset="77" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name FROM people;
 
 SELECT name, birthdate FROM people;
 
 SELECT * FROM people</codebox>
 		<codebox char_offset="104" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT 'string output' AS result;</codebox>
 		<codebox char_offset="190" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT DISTINCT country FROM films;</codebox>
-		<codebox char_offset="347" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT COUNT(*) FROM films;
+		<codebox char_offset="347" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT COUNT(*) FROM films;
 
 SELECT COUNT(birthdate) FROM people;
 
 SELECT COUNT(DISTINCT birthdate) FROM people;</codebox>
-		<codebox char_offset="485" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title FROM films WHERE release_year &gt; 2000;
+		<codebox char_offset="485" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title FROM films WHERE release_year &gt; 2000;
 
 SELECT title
 FROM films
 WHERE release_year &gt; 1994
 AND release_year &lt; 2000;</codebox>
-		<codebox char_offset="686" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
+		<codebox char_offset="686" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
 FROM kids
 WHERE age = 2
 OR age = 4
 OR age = 6
 OR age = 8
 OR age = 10;</codebox>
-		<codebox char_offset="741" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
+		<codebox char_offset="741" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
 FROM kids
 WHERE age IN (2, 4, 6, 8, 10);</codebox>
-		<codebox char_offset="1066" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
+		<codebox char_offset="1066" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
 FROM companies
 WHERE name LIKE 'Data%';
 
 SELECT name
 FROM companies
 WHERE name LIKE 'DataC_mp';</codebox>
-		<codebox char_offset="1228" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT AVG(budget)
+		<codebox char_offset="1228" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT AVG(budget)
 FROM films;</codebox>
-		<codebox char_offset="1330" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">-- This performs integer division
+		<codebox char_offset="1330" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">-- This performs integer division
 SELECT (10/3);
 
 -- This performs floating point division
 SELECT (4.0/3.0);</codebox>
-		<codebox char_offset="1416" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT MAX(budget) AS max_budget,
+		<codebox char_offset="1416" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT MAX(budget) AS max_budget,
        MAX(duration) AS max_duration
 FROM films;
 
@@ -3464,7 +3464,7 @@ SELECT title, (gross - budget) AS net_profit FROM films;
 -- get the count(deathdate) and multiply by 100.0
 -- then divide by count(*)
 SELECT COUNT(deathdate) * 100.0 / COUNT(*) AS percentage_dead FROM people;</codebox>
-		<codebox char_offset="1613" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title
+		<codebox char_offset="1613" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title
 FROM films
 ORDER BY release_year DESC;
 
@@ -3472,7 +3472,7 @@ SELECT birthdate, name
 FROM people
 ORDER BY birthdate, name;
 </codebox>
-		<codebox char_offset="1974" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT sex, count(*)
+		<codebox char_offset="1974" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT sex, count(*)
 FROM employees
 GROUP BY sex;
 
@@ -3482,11 +3482,11 @@ GROUP BY sex
 ORDER BY count DESC;
 
 SELECT release_year, country, MAX(budget) FROM films GROUP BY release_year, country ORDER BY release_year, country;</codebox>
-		<codebox char_offset="2093" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT release_year
+		<codebox char_offset="2093" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT release_year
 FROM films
 GROUP BY release_year
 HAVING COUNT(title) &gt; 10;</codebox>
-		<codebox char_offset="2155" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross FROM films WHERE release_year &gt; 1990 GROUP BY release_year HAVING AVG(budget) &gt; 60000000 ORDER BY avg_gross DESC;
+		<codebox char_offset="2155" frame_height="325" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross FROM films WHERE release_year &gt; 1990 GROUP BY release_year HAVING AVG(budget) &gt; 60000000 ORDER BY avg_gross DESC;
 
 -- select country, average budget, average gross
 SELECT country, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross
@@ -3500,13 +3500,13 @@ HAVING COUNT(title) &gt; 10
 ORDER BY country
 -- limit to only show 5 results
 LIMIT 5;</codebox>
-		<codebox char_offset="2188" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title, imdb_score
+		<codebox char_offset="2188" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title, imdb_score
 FROM films
 JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545041640.14" unique_id="52">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545066168.83" unique_id="52">
 		<rich_text>
 We can use SQLAlchemy
 
@@ -3514,7 +3514,38 @@ The connection isn't made until we make the first query
 
 We can use Reflection to find out more about the tables - this makes understanding the tables easier later.
 
+Checking out table names
+
 </rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Idiom for showing metadata
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<codebox char_offset="216" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import create_engine
+from sqlalchemy import create_engine
+
+# Create an engine that connects to the census.sqlite file: engine
+engine = create_engine(&quot;sqlite:///census.sqlite&quot;)
+
+# Print table names
+print(engine.table_names())</codebox>
+		<codebox char_offset="247" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Table
+from sqlalchemy import Table
+
+# Reflect census table from the engine: census
+census = Table(&quot;census&quot;, metadata, autoload=True, autoload_with=engine)
+
+# Print census table metadata
+print(repr(census))
+
+# Print the column names
+print(census.columns.keys())
+
+# Print full table metadata
+print(repr(metadata.tables[&quot;census&quot;]))</codebox>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>

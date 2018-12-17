@@ -3259,7 +3259,7 @@ combined = pd.merge(revenue,managers,on=[&quot;branch_id&quot;,&quot;city&quot;,
 # how can be &quot;left&quot;, &quot;right&quot;, &quot;inner&quot; or &quot;outer&quot;</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545034371.37" ts_lastsave="1545041412.32" unique_id="51">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL basics" prog_lang="custom-colors" readonly="False" tags="SQL" ts_creation="1545034371.37" ts_lastsave="1545041815.41" unique_id="51">
 		<rich_text>
 Basic SELECTing of columns from table, or multiple columns, or all columns
 
@@ -3506,8 +3506,15 @@ JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545041412.32" unique_id="52">
-		<rich_text></rich_text>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545041640.14" unique_id="52">
+		<rich_text>
+We can use SQLAlchemy
+
+The connection isn't made until we make the first query
+
+We can use Reflection to find out more about the tables - this makes understanding the tables easier later.
+
+</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
