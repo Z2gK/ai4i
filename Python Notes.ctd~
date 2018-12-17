@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -1509,6 +1509,8 @@ df.[&quot;colname&quot;].nunique()
 </codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Melting, Pivoting and Splitting" prog_lang="custom-colors" readonly="False" tags="melting, pivoting, splitting" ts_creation="1543420088.28" ts_lastsave="1544432356.71" unique_id="31">
+			<rich_text>
+</rich_text>
 			<rich_text scale="h1">Melting</rich_text>
 			<rich_text>
 
@@ -1577,17 +1579,17 @@ More on melting and pivoting is covered </rich_text>
 
 
 </rich_text>
-			<codebox char_offset="126" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># id_vars represents the columns that we DO NOT wish to melt
+			<codebox char_offset="127" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># id_vars represents the columns that we DO NOT wish to melt
 # value_vars represents the columns that we DO wish to melt
 # by default, if no value_vars is defined, all columns not in id_vars will be melted
 melted_frame = pd.melt(frame=unmelted_frame, id_vars = ['col1','col2'], value_vars = ['meltcol1','meltcol2'])
 </codebox>
-			<codebox char_offset="309" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt airquality: airquality_melt
+			<codebox char_offset="310" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt airquality: airquality_melt
 airquality_melt = pd.melt(frame=airquality, id_vars=[&quot;Month&quot;,&quot;Day&quot;], var_name=&quot;measurement&quot;, value_name=&quot;reading&quot;)
 
 airquality_melt.columns = [&quot;col1name&quot;, &quot;col2name&quot;, &quot;col3name&quot;]
 </codebox>
-			<codebox char_offset="355" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># original data frame
+			<codebox char_offset="356" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># original data frame
 #    Month  Day measurement  reading
 # 0      5    1       Ozone     41.0
 # 1      5    2       Ozone     36.0
@@ -1608,7 +1610,7 @@ airquality_pivot = airquality_melt.pivot_table(index=[&quot;Month&quot;, &quot;D
 #       4       18.0    313.0  62.0  11.5
 #       5        NaN      NaN  56.0  14.3
 </codebox>
-			<codebox char_offset="563" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the index of airquality_pivot
+			<codebox char_offset="564" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Print the index of airquality_pivot
 print(airquality_pivot.index)
 
 # Reset the index of airquality_pivot: airquality_pivot_reset
@@ -1617,13 +1619,13 @@ airquality_pivot_reset = airquality_pivot.reset_index()
 # Print the new index of airquality_pivot_reset
 print(airquality_pivot_reset)
 </codebox>
-			<codebox char_offset="714" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pivot airquality_dup: airquality_pivot
+			<codebox char_offset="715" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Pivot airquality_dup: airquality_pivot
 airquality_pivot = airquality_dup.pivot_table(index=[&quot;Month&quot;,&quot;Day&quot;], columns=&quot;measurement&quot;, values=&quot;reading&quot;, aggfunc=np.mean)
 
 # Reset the index of airquality_pivot
 airquality_pivot = airquality_pivot.reset_index()
 </codebox>
-			<codebox char_offset="1143" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
+			<codebox char_offset="1144" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Melt tb: tb_melt
 tb_melt = pd.melt(frame=tb, id_vars=[&quot;country&quot;, &quot;year&quot;])
 
 # Create the 'gender' column
@@ -1641,7 +1643,7 @@ tb_melt['age_group'] = tb_melt.variable.str[1:]
 # 3      AG  2000     m014    0.0      m       014
 # 4      AL  2000     m014    2.0      m       014
 </codebox>
-			<codebox char_offset="1173" frame_height="430" frame_width="100" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="False"># Original data frame looks a bit like this (many columns omitted)
+			<codebox char_offset="1174" frame_height="430" frame_width="100" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="False"># Original data frame looks a bit like this (many columns omitted)
 #         Date  Day  Cases_Guinea  Cases_Liberia  Cases_SierraLeone  \
 #0    1/5/2015  289        2776.0            NaN            10030.0   
 #1    1/4/2015  288        2775.0            NaN             9780.0   
@@ -2248,6 +2250,8 @@ df.fraction.plot(ax=axes[1], kind=&quot;hist&quot;, normed=True, cumulative=True
 plt.show()</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Date and Time" prog_lang="custom-colors" readonly="False" tags="DateTimeIndex, date, time" ts_creation="1544001509.24" ts_lastsave="1544903835.77" unique_id="43">
+			<rich_text>
+</rich_text>
 			<rich_text scale="h1">Date and Time manipulations</rich_text>
 			<rich_text>
 
@@ -2346,7 +2350,7 @@ ffill() for forward fill any missing data. bfill() for backward fill.
 
 
 </rich_text>
-			<codebox char_offset="124" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># date_list is a normal python list containing date time strings in the format below
+			<codebox char_offset="125" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># date_list is a normal python list containing date time strings in the format below
 
 # Prepare a format string: time_format
 time_format = &quot;%Y-%m-%d %H:%M&quot;
@@ -2356,7 +2360,7 @@ my_datetimes = pd.to_datetime(date_list,format=time_format)
 
 # Construct a pandas Series using temperature_list and my_datetimes: time_series
 time_series = pd.Series(temperature_list, index=my_datetimes)</codebox>
-			<codebox char_offset="264" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the hour from 9pm to 10pm on '2010-10-11': ts1
+			<codebox char_offset="265" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the hour from 9pm to 10pm on '2010-10-11': ts1
 ts1 = ts0.loc['2010-10-11 21:00:00':'2010-10-11 22:00:00']
 
 # Extract '2010-07-04' from ts0: ts2
@@ -2371,7 +2375,7 @@ august = df.loc[&quot;2010-08&quot;][&quot;Temperature&quot;]
 # Extract data from 2010-Aug-01 to 2010-Aug-15: unsmoothed
 unsmoothed = df['Temperature'][&quot;2010-08-01&quot;:&quot;2010-08-15&quot;]
 </codebox>
-			<codebox char_offset="330" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reindex without fill method: ts3
+			<codebox char_offset="331" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Reindex without fill method: ts3
 ts3 = ts2.reindex(ts1.index)
 
 # NOTE: if ts1.index contains indices that are not part of the original indices of ts2, these indices will be created in ts3 with NaN entries
@@ -2398,22 +2402,22 @@ df.set_index(&quot;Date&quot;, inplace=True)
 # Sometimes merged frames may not have running indices
 daily_temp_climate = daily_climate.reset_index()[&quot;Temperature&quot;]
 </codebox>
-			<codebox char_offset="584" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Downsample to 6 hour data and aggregate by mean: df1
+			<codebox char_offset="585" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Downsample to 6 hour data and aggregate by mean: df1
 df1 = df[&quot;Temperature&quot;].resample(&quot;6h&quot;).mean()
 
 # Downsample to daily data and count the number of data points: df2
 df2 = df[&quot;Temperature&quot;].resample(&quot;D&quot;).count()</codebox>
-			<codebox char_offset="670" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">two_days.resample('4H').ffill()
+			<codebox char_offset="671" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">two_days.resample('4H').ffill()
 
 population.resample('A').first()
 population.resample('A').first().interpolate('linear')</codebox>
-			<codebox char_offset="693" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Apply a rolling mean with a 24 hour window: smoothed
+			<codebox char_offset="694" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Apply a rolling mean with a 24 hour window: smoothed
 smoothed = unsmoothed.rolling(window=24).mean()
 
 # Use a rolling 7-day window with method chaining to smooth the daily high temperatures in August
 daily_highs_smoothed = daily_highs.rolling(window=7).mean()
 </codebox>
-			<codebox char_offset="723" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Combine two columns of data to create a datetime series: times_tz_none 
+			<codebox char_offset="724" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Combine two columns of data to create a datetime series: times_tz_none 
 times_tz_none = pd.to_datetime(la[&quot;Date (MM/DD/YYYY)&quot;] + ' ' + la[&quot;Wheels-off Time&quot;] )
 
 # Localize the time to US/Central: times_tz_central
@@ -2784,7 +2788,7 @@ kv_pairs = pd.melt(users_idx,col_level=0)
 # Print the key-value pairs
 print(kv_pairs)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1544901131.31" unique_id="48">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on grouping and aggregations" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544606915.13" ts_lastsave="1545041300.92" unique_id="48">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Basic grouping</rich_text>
@@ -2881,7 +2885,9 @@ Using map to filter
 			<rich_text>
 
 
-Others
+</rich_text>
+			<rich_text scale="h1">Others</rich_text>
+			<rich_text>
 
 Use of idxmax to find the index where the maximum of a series occurs
 
@@ -3017,10 +3023,10 @@ most_medals = cold_war_usa_urs_medals.idxmax(axis=&quot;columns&quot;)
 1988    URS</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Merging Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544901131.31" ts_lastsave="1544902109.54" unique_id="49">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Merging Data Frames with pandas" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544901131.31" ts_lastsave="1545034371.36" unique_id="49">
 		<rich_text>
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Reading multiple files" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1544902109.55" ts_lastsave="1544977425.49" unique_id="50">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Dealing with multiple data frames" prog_lang="custom-colors" readonly="False" tags="merge, joins, concat" ts_creation="1544902109.55" ts_lastsave="1545041376.87" unique_id="50">
 			<rich_text>
 The .copy() method for dataframes can be used to create a copy of the dataframe and assign it to another
 
@@ -3038,7 +3044,9 @@ weather3 = weather1.reindex(year).ffill()
 • df1.reindex(df2.index) is not equivalent to df2.reindex(df1.index)
 
 
-Simple Arithmetic
+</rich_text>
+			<rich_text scale="h1">Simple Arithmetic</rich_text>
+			<rich_text>
 
 Arithmetics can be performed on data frames. It could be simple broadcasting.
 
@@ -3065,7 +3073,9 @@ result2 = s1.append(s2).append(s3)
 			<rich_text>
 Indices will be preserved. To reindex, we have to call .reset_index(drop=True) (for append) OR ignore_index=True (for concat)
 
-Using append
+</rich_text>
+			<rich_text scale="h1">Using append</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3135,7 +3145,9 @@ To summarise,
 INNER JOIN - only common indices appear
 </rich_text>
 			<rich_text>
-Using concat
+</rich_text>
+			<rich_text scale="h1">Using concat</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3154,7 +3166,9 @@ We can use dictionaries to concat
 			<rich_text>
 
 
-Merge
+</rich_text>
+			<rich_text scale="h1">Merge</rich_text>
+			<rich_text>
 
 This is INNER JOIN on column data. concat only works on indices, but merge enables us to join based on column information.
 
@@ -3166,7 +3180,7 @@ If there are columns with repeated names, both columns will be included in the n
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-The column to merge on can have different names.
+The column to merge on can have different names. left_on and right_on can be lists.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3182,6 +3196,12 @@ Merge can do INNER, OUTER, LEFT and RIGHT joins by specifying the how parameter.
 
 how: “inner”, “outer”, “left”, “right”
 
+There are other forms of merge such as merge_ordered and merge_asof.
+
+</rich_text>
+			<rich_text weight="heavy">Q: What are these for?</rich_text>
+			<rich_text>
+
 An alternative syntax for joining is to use the .join method
 
 </rich_text>
@@ -3189,7 +3209,9 @@ An alternative syntax for joining is to use the .join method
 			<rich_text>
 
 
-
+</rich_text>
+			<rich_text weight="heavy">Q: There is a use of expanding() function in one of the final exercises. What is expanding().mean()? Its use is strange here. Are there other examples?</rich_text>
+			<rich_text>
 
 
 
@@ -3228,14 +3250,271 @@ february = pd.concat(dataframes, keys=[&quot;Hardware&quot;,&quot;Software&quot;
 rain_dict = {2013: rain2013, 2014: rain2014}
 In [16]: rain1314 = pd.concat(rain_dict, axis='columns') </codebox>
 			<codebox char_offset="3134" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">combined = pd.merge(revenue, managers, on='city')</codebox>
-			<codebox char_offset="3187" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge revenue &amp; managers on 'city' &amp; 'branch': combined
+			<codebox char_offset="3222" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge revenue &amp; managers on 'city' &amp; 'branch': combined
 combined = pd.merge(revenue,managers,left_on=&quot;city&quot;,right_on=&quot;branch&quot;)</codebox>
-			<codebox char_offset="3224" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge revenue &amp; managers on 'branch_id', 'city', &amp; 'state': combined
+			<codebox char_offset="3259" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Merge revenue &amp; managers on 'branch_id', 'city', &amp; 'state': combined
 combined = pd.merge(revenue,managers,on=[&quot;branch_id&quot;,&quot;city&quot;,&quot;state&quot;])
 </codebox>
-			<codebox char_offset="3411" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">population.join(unemployment, how= 'right')
+			<codebox char_offset="3540" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">population.join(unemployment, how= 'right')
 # how can be &quot;left&quot;, &quot;right&quot;, &quot;inner&quot; or &quot;outer&quot;</codebox>
 		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545034371.37" ts_lastsave="1545041412.32" unique_id="51">
+		<rich_text>
+Basic SELECTing of columns from table, or multiple columns, or all columns
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Simply print something
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Get all the distinct entries in a column. Quite like .unique() function in pandas
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Count the number of rows in table, and the number of non-missing values in the column, or the number of distinct entries.
+
+</rich_text>
+		<rich_text weight="heavy">Q: Are there other syntaxes? </rich_text>
+		<rich_text>
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Use of WHERE to filter. And we can also build up multiple conditions
+
+Comparison operators include the following
+
+</rich_text>
+		<rich_text family="monospace">=, &lt;&gt;, &gt;, &lt;, &lt;=, &gt;=</rich_text>
+		<rich_text>
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+Boolean operators include AND and OR. We can use parentheses to further specify our order.
+
+field BETWEEN x AND y can be used in place of field &gt;= x AND field &lt;= y.
+
+IN operator
+
+Instead of this,
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+we can use IN as a shorthand for the same purpose.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+NULL can be used in queries to represent unknown values. We can use it in WHERE field IS NULL or WHERE field IS NOT NULL.
+
+LIKE and NOT LIKE
+
+They can be used to match strings in WHERE clauses using _ and % characters. 
+% will match zero or many characters (like unix *)
+_ will match exactly one character (like unix ?)
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+There are simple aggregations we can use. This calculates and returns the average budget for all films.
+
+Other aggregation functions include SUM, MAX, MIN, 
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+This can be combined with WHERE conditional clauses.
+
+We can perform basic arithmetic operations.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Aliasing
+
+We can use aliases to disambiguate by naming the new columns we create.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+Sorting and ordering
+
+ORDER BY is used to sort columns according to alphabetical or numerical order. DESC can be added to the end to reverse the order.
+
+We can also ORDER BY multiple columns.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+Result aggregation using GROUP BY
+
+The query here counts the number of male and female entries from the employees table. We can use aggregation functions like COUNT or MAX.
+
+The GROUP BY operator should always come after FROM.
+
+There can be multiple GROUP BY columns.
+
+Warning: SQL will return an error if a field SELECTed is not in the GROUP BY clause.
+
+
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+HAVING clause
+
+If we want to filter on an aggregation result, we cannot use WHERE. Instead, we should use HAVING.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Example of a super long query to show ordering of clauses
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+Performing basic INNER JOIN
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+
+
+
+</rich_text>
+		<codebox char_offset="77" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name FROM people;
+
+SELECT name, birthdate FROM people;
+
+SELECT * FROM people</codebox>
+		<codebox char_offset="104" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT 'string output' AS result;</codebox>
+		<codebox char_offset="190" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT DISTINCT country FROM films;</codebox>
+		<codebox char_offset="347" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT COUNT(*) FROM films;
+
+SELECT COUNT(birthdate) FROM people;
+
+SELECT COUNT(DISTINCT birthdate) FROM people;</codebox>
+		<codebox char_offset="485" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title FROM films WHERE release_year &gt; 2000;
+
+SELECT title
+FROM films
+WHERE release_year &gt; 1994
+AND release_year &lt; 2000;</codebox>
+		<codebox char_offset="686" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
+FROM kids
+WHERE age = 2
+OR age = 4
+OR age = 6
+OR age = 8
+OR age = 10;</codebox>
+		<codebox char_offset="741" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
+FROM kids
+WHERE age IN (2, 4, 6, 8, 10);</codebox>
+		<codebox char_offset="1066" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name
+FROM companies
+WHERE name LIKE 'Data%';
+
+SELECT name
+FROM companies
+WHERE name LIKE 'DataC_mp';</codebox>
+		<codebox char_offset="1228" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT AVG(budget)
+FROM films;</codebox>
+		<codebox char_offset="1330" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">-- This performs integer division
+SELECT (10/3);
+
+-- This performs floating point division
+SELECT (4.0/3.0);</codebox>
+		<codebox char_offset="1416" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT MAX(budget) AS max_budget,
+       MAX(duration) AS max_duration
+FROM films;
+
+SELECT title, (gross - budget) AS net_profit FROM films;
+
+-- get the count(deathdate) and multiply by 100.0
+-- then divide by count(*)
+SELECT COUNT(deathdate) * 100.0 / COUNT(*) AS percentage_dead FROM people;</codebox>
+		<codebox char_offset="1613" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title
+FROM films
+ORDER BY release_year DESC;
+
+SELECT birthdate, name
+FROM people
+ORDER BY birthdate, name;
+</codebox>
+		<codebox char_offset="1974" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT sex, count(*)
+FROM employees
+GROUP BY sex;
+
+SELECT sex, count(*)
+FROM employees
+GROUP BY sex
+ORDER BY count DESC;
+
+SELECT release_year, country, MAX(budget) FROM films GROUP BY release_year, country ORDER BY release_year, country;</codebox>
+		<codebox char_offset="2093" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT release_year
+FROM films
+GROUP BY release_year
+HAVING COUNT(title) &gt; 10;</codebox>
+		<codebox char_offset="2155" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT release_year, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross FROM films WHERE release_year &gt; 1990 GROUP BY release_year HAVING AVG(budget) &gt; 60000000 ORDER BY avg_gross DESC;
+
+-- select country, average budget, average gross
+SELECT country, AVG(budget) AS avg_budget, AVG(gross) AS avg_gross
+-- from the films table
+FROM films
+-- group by country 
+GROUP BY country
+-- where the country has more than 10 titles
+HAVING COUNT(title) &gt; 10
+-- order by country
+ORDER BY country
+-- limit to only show 5 results
+LIMIT 5;</codebox>
+		<codebox char_offset="2188" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT title, imdb_score
+FROM films
+JOIN reviews
+ON films.id = reviews.film_id
+WHERE title = 'To Kill a Mockingbird';</codebox>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545041640.14" unique_id="52">
+		<rich_text>
+We can use SQLAlchemy
+
+The connection isn't made until we make the first query
+
+We can use Reflection to find out more about the tables - this makes understanding the tables easier later.
+
+</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
