@@ -3506,8 +3506,14 @@ JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545066032.09" unique_id="52">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545117907.39" unique_id="52">
 		<rich_text>
+
+
+
+</rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545117902.06" ts_lastsave="1545119803.19" unique_id="53">
+			<rich_text>
 We can use SQLAlchemy
 
 The connection isn't made until we make the first query
@@ -3517,29 +3523,212 @@ We can use Reflection to find out more about the tables - this makes understandi
 Checking out table names
 
 </rich_text>
-		<rich_text justification="left"></rich_text>
-		<rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Note that connection.execute(stmt) is a ResultProxy object
+connection.execute(stmt).fetchall() is a ResultSet object
+
+ResultSet objects can be referenced
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
 
 Idiom for showing metadata
 
 </rich_text>
-		<rich_text justification="left"></rich_text>
-		<codebox char_offset="216" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import create_engine
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Pythonic queries for SQL statements
+
+This is equivalent to SELECT * FROM census;
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+WHERE statement
+
+SELECT * FROM census WHERE state IN (&quot;State 1&quot;, “State2”, “State3”);
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+There are other methods including and_(), any_(), or_(), not_() ... but they need importing
+
+SELECT * FROM census WHERE state = “California” AND sex != “M”;
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+SELECT state FROM census ORDER BY state;
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+To use DESC just import desc and use it around the column name
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Ordering by multiple columns
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Functions and GROUP BY
+
+Distinct count
+
+SELECT COUNT(DISTINCT state) FROM census;
+
+.scalar() ensures that only the number is returned, not the entire row/column object
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+SELECT state, COUNT(age) FROM census GROUP BY state;
+
+
+
+SELECT state, pop2008 AS population FROM census GROUP BY state;
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Importing ResultSet into pandas
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="216" frame_height="265" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import create_engine
 from sqlalchemy import create_engine
 
 # Create an engine that connects to the census.sqlite file: engine
 engine = create_engine(&quot;sqlite:///census.sqlite&quot;)
 
 # Print table names
-print(engine.table_names())</codebox>
-		<codebox char_offset="247" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Table
+print(engine.table_names())
+
+connection = engine.connect()
+
+stmt = &quot;SELECT * FROM census&quot;
+
+# Execute the statement and fetch the results: results
+results = connection.execute(stmt).fetchall()
+
+# Print results
+print(results)</codebox>
+			<codebox char_offset="374" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">first_row = results[0]
+print(first_row)
+# ('Illinois', 'M', 0, 89600, 95012)
+
+print(first_row.keys())
+#['state', 'sex', 'age', 'pop2000', 'pop2008']
+
+print(first_row.state)
+# 'Illinois'</codebox>
+			<codebox char_offset="407" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Table
 from sqlalchemy import Table
 
 # Reflect census table from the engine: census
 census = Table(&quot;census&quot;, metadata, autoload=True, autoload_with=engine)
 
 # Print census table metadata
-print(repr(census))</codebox>
+print(repr(census))
+
+# Print the column names
+print(census.columns.keys())
+
+# Print full table metadata
+print(repr(metadata.tables[&quot;census&quot;]))</codebox>
+			<codebox char_offset="493" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = select([census])</codebox>
+			<codebox char_offset="583" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a query for the census table: stmt
+stmt = select([census])
+
+# Append a where clause to match all the states in_ the list states
+stmt = stmt.where(census.columns.state.in_(states))
+
+for result in connection.execute(stmt):
+    print(result.state, result.pop2000)
+</codebox>
+			<codebox char_offset="744" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = stmt.where(
+    # The state of California with a non-male sex
+    and_(census.columns.state == &quot;California&quot;,
+         census.columns.sex != &quot;M&quot;
+         )
+)</codebox>
+			<codebox char_offset="789" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state column: stmt
+stmt = select([census.columns.state])
+
+# Order stmt by the state column
+stmt = stmt.order_by(census.columns.state)
+
+# Execute the query and store the results: results
+results = connection.execute(stmt).fetchall()
+</codebox>
+			<codebox char_offset="856" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">rev_stmt = stmt.order_by(desc(census.columns.state))</codebox>
+			<codebox char_offset="889" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select state and age: stmt
+stmt = select([census.columns.state, census.columns.age])
+
+# Append order by to ascend by state and descend by age
+stmt = stmt.order_by(census.columns.state, desc(census.columns.age))
+</codebox>
+			<codebox char_offset="1061" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to count the distinct states values: stmt
+stmt = select([func.count(census.columns.state.distinct())])
+
+# Execute the query and store the scalar result: distinct_state_count
+distinct_state_count = connection.execute(stmt).scalar()
+
+# Print the distinct_state_count
+print(distinct_state_count)
+</codebox>
+			<codebox char_offset="1118" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state and count of ages by state: stmt
+stmt = select([census.columns.state, func.count(census.columns.age)])
+
+# Group stmt by state
+stmt = stmt.group_by(census.columns.state)
+</codebox>
+			<codebox char_offset="1186" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build an expression to calculate the sum of pop2008 labeled as population
+pop2008_sum = func.sum(census.columns.pop2008).label(&quot;population&quot;)
+
+# Build a query to select the state and sum of pop2008: stmt
+stmt = select([census.columns.state, pop2008_sum])
+
+# Group stmt by state
+stmt = stmt.group_by(census.columns.state)
+</codebox>
+			<codebox char_offset="1223" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># import pandas
+import pandas as pd
+
+# Create a DataFrame from the results: df
+df = pd.DataFrame(results)
+
+# Set column names
+df.columns = results[0].keys()
+</codebox>
+		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
