@@ -3506,14 +3506,18 @@ JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545117907.39" unique_id="52">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545120103.3" unique_id="52">
 		<rich_text>
 
 
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="SQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545117902.06" ts_lastsave="1545119613.38" unique_id="53">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic SQL" prog_lang="custom-colors" readonly="False" tags="sql, pandas, sqlalchemy" ts_creation="1545117902.06" ts_lastsave="1545120043.33" unique_id="53">
 			<rich_text>
+</rich_text>
+			<rich_text scale="h1">Starting connection to database</rich_text>
+			<rich_text>
+
 We can use SQLAlchemy
 
 The connection isn't made until we make the first query
@@ -3536,6 +3540,9 @@ ResultSet objects can be referenced
 			<rich_text>
 
 
+</rich_text>
+			<rich_text scale="h1">Showing metadata</rich_text>
+			<rich_text>
 
 Idiom for showing metadata
 
@@ -3544,7 +3551,9 @@ Idiom for showing metadata
 			<rich_text>
 
 
-Pythonic queries for SQL statements
+</rich_text>
+			<rich_text scale="h1">Pythonic queries for SQL statements</rich_text>
+			<rich_text>
 
 This is equivalent to SELECT * FROM census;
 
@@ -3554,7 +3563,9 @@ This is equivalent to SELECT * FROM census;
 
 WHERE statement
 
-SELECT * FROM census WHERE state IN (&quot;State 1&quot;, “State2”, “State3”);
+</rich_text>
+			<rich_text family="monospace">SELECT * FROM census WHERE state IN (&quot;State 1&quot;, “State2”, “State3”);</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3562,13 +3573,17 @@ SELECT * FROM census WHERE state IN (&quot;State 1&quot;, “State2”, “State
 
 There are other methods including and_(), any_(), or_(), not_() ... but they need importing
 
-SELECT * FROM census WHERE state = “California” AND sex != “M”;
+</rich_text>
+			<rich_text family="monospace">SELECT * FROM census WHERE state = “California” AND sex != “M”;</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-SELECT state FROM census ORDER BY state;
+</rich_text>
+			<rich_text family="monospace">SELECT state FROM census ORDER BY state;</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3590,7 +3605,9 @@ Functions and GROUP BY
 
 Distinct count
 
-SELECT COUNT(DISTINCT state) FROM census;
+</rich_text>
+			<rich_text family="monospace">SELECT COUNT(DISTINCT state) FROM census;</rich_text>
+			<rich_text>
 
 .scalar() ensures that only the number is returned, not the entire row/column object
 
@@ -3598,11 +3615,28 @@ SELECT COUNT(DISTINCT state) FROM census;
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-SELECT state, COUNT(age) FROM census GROUP BY state;
+</rich_text>
+			<rich_text family="monospace">SELECT state, COUNT(age) FROM census GROUP BY state;</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text family="monospace">SELECT state, pop2008 AS population FROM census GROUP BY state;</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+</rich_text>
+			<rich_text scale="h1">Integrating with pandas</rich_text>
+			<rich_text>
 
-SELECT state, pop2008 AS population FROM census GROUP BY state;
+Importing ResultSet into pandas
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -3610,8 +3644,12 @@ SELECT state, pop2008 AS population FROM census GROUP BY state;
 
 
 
+
+
+
+
 </rich_text>
-			<codebox char_offset="216" frame_height="265" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import create_engine
+			<codebox char_offset="249" frame_height="265" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import create_engine
 from sqlalchemy import create_engine
 
 # Create an engine that connects to the census.sqlite file: engine
@@ -3629,7 +3667,7 @@ results = connection.execute(stmt).fetchall()
 
 # Print results
 print(results)</codebox>
-			<codebox char_offset="374" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">first_row = results[0]
+			<codebox char_offset="407" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">first_row = results[0]
 print(first_row)
 # ('Illinois', 'M', 0, 89600, 95012)
 
@@ -3638,7 +3676,7 @@ print(first_row.keys())
 
 print(first_row.state)
 # 'Illinois'</codebox>
-			<codebox char_offset="407" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Table
+			<codebox char_offset="457" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Table
 from sqlalchemy import Table
 
 # Reflect census table from the engine: census
@@ -3652,8 +3690,8 @@ print(census.columns.keys())
 
 # Print full table metadata
 print(repr(metadata.tables[&quot;census&quot;]))</codebox>
-			<codebox char_offset="493" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = select([census])</codebox>
-			<codebox char_offset="583" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a query for the census table: stmt
+			<codebox char_offset="543" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = select([census])</codebox>
+			<codebox char_offset="633" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a query for the census table: stmt
 stmt = select([census])
 
 # Append a where clause to match all the states in_ the list states
@@ -3662,13 +3700,13 @@ stmt = stmt.where(census.columns.state.in_(states))
 for result in connection.execute(stmt):
     print(result.state, result.pop2000)
 </codebox>
-			<codebox char_offset="744" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = stmt.where(
+			<codebox char_offset="794" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = stmt.where(
     # The state of California with a non-male sex
     and_(census.columns.state == &quot;California&quot;,
          census.columns.sex != &quot;M&quot;
          )
 )</codebox>
-			<codebox char_offset="789" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state column: stmt
+			<codebox char_offset="839" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state column: stmt
 stmt = select([census.columns.state])
 
 # Order stmt by the state column
@@ -3677,14 +3715,14 @@ stmt = stmt.order_by(census.columns.state)
 # Execute the query and store the results: results
 results = connection.execute(stmt).fetchall()
 </codebox>
-			<codebox char_offset="856" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">rev_stmt = stmt.order_by(desc(census.columns.state))</codebox>
-			<codebox char_offset="889" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select state and age: stmt
+			<codebox char_offset="906" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">rev_stmt = stmt.order_by(desc(census.columns.state))</codebox>
+			<codebox char_offset="939" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select state and age: stmt
 stmt = select([census.columns.state, census.columns.age])
 
 # Append order by to ascend by state and descend by age
 stmt = stmt.order_by(census.columns.state, desc(census.columns.age))
 </codebox>
-			<codebox char_offset="1061" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to count the distinct states values: stmt
+			<codebox char_offset="1111" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to count the distinct states values: stmt
 stmt = select([func.count(census.columns.state.distinct())])
 
 # Execute the query and store the scalar result: distinct_state_count
@@ -3693,13 +3731,13 @@ distinct_state_count = connection.execute(stmt).scalar()
 # Print the distinct_state_count
 print(distinct_state_count)
 </codebox>
-			<codebox char_offset="1118" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state and count of ages by state: stmt
+			<codebox char_offset="1168" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state and count of ages by state: stmt
 stmt = select([census.columns.state, func.count(census.columns.age)])
 
 # Group stmt by state
 stmt = stmt.group_by(census.columns.state)
 </codebox>
-			<codebox char_offset="1186" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build an expression to calculate the sum of pop2008 labeled as population
+			<codebox char_offset="1236" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build an expression to calculate the sum of pop2008 labeled as population
 pop2008_sum = func.sum(census.columns.pop2008).label(&quot;population&quot;)
 
 # Build a query to select the state and sum of pop2008: stmt
@@ -3707,6 +3745,140 @@ stmt = select([census.columns.state, pop2008_sum])
 
 # Group stmt by state
 stmt = stmt.group_by(census.columns.state)
+</codebox>
+			<codebox char_offset="1298" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># import pandas
+import pandas as pd
+
+# Create a DataFrame from the results: df
+df = pd.DataFrame(results)
+
+# Set column names
+df.columns = results[0].keys()
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More SQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545120103.31" ts_lastsave="1545141243.23" unique_id="54">
+			<rich_text>
+Arithmetic operations are the same and we can just use them as in Python
+
++ - * / %
+
+.limit(n) works to limit the number of returned rows to n
+
+Complicated use of case and cast statements to calculate female population percentage
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+Joins
+
+Simple inner join
+
+SELECT pop2000, abbreviation FROM census JOIN state_fact ON ... = ...;
+
+There is no need to specify joining relationship here because it is already defined in the database
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+SELECT * FROM census JOIN state_fact ON census.state = state_fact.name;
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+SELECT state, SUM(pop2000), census_division_name FROM census JOIN state_fact ON census.state = state_fact.name GROUP BY name;
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Tables can be self referential
+
+The example given in the lecture is about an employee table with employee ids. However, each employee also has a manager who is in turn an employee. Every employee's manager is stored in a columns called manager with the manager's employee id.
+
+It is useful to think of such situations as two tables when writing queries.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="232" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build an expression to calculate female population in 2000
+female_pop2000 = func.sum(
+    case([
+        (census.columns.sex == 'F', census.columns.pop2000)
+    ], else_=0))
+
+# Cast an expression to calculate total population in 2000 to Float
+total_pop2000 = cast(func.sum(census.columns.pop2000), Float)
+
+# Build a query to calculate the percentage of females in 2000: stmt
+stmt = select([female_pop2000 / total_pop2000 * 100])
+
+# Execute the query and store the scalar result: percent_female
+percent_female = connection.execute(stmt).scalar()</codebox>
+			<codebox char_offset="436" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a statement to join census and state_fact tables: stmt
+stmt = select([census.columns.pop2000, state_fact.columns.abbreviation])
+
+# Execute the statement and get the first result: result
+result = connection.execute(stmt).first()</codebox>
+			<codebox char_offset="513" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a statement to select the census and state_fact tables: stmt
+stmt = select([census, state_fact])
+
+# Add a select_from clause that wraps a join for the census and state_fact
+# tables where the census state column and state_fact name column match
+stmt = stmt.select_from(
+    census.join(state_fact, census.columns.state == state_fact.columns.name))
+
+# Execute the statement and get the first result: result
+result = connection.execute(stmt).first()
+
+# Loop over the keys in the result object and print the key and value
+for key in result.keys():
+    print(key, getattr(result, key))
+</codebox>
+			<codebox char_offset="643" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a statement to select the state, sum of 2008 population and census
+# division name: stmt
+stmt = select([
+    census.columns.state,
+    func.sum(census.columns.pop2000),
+    state_fact.columns.census_division_name
+])
+
+# Append select_from to join the census and state_fact tables by the census state and state_fact name columns
+stmt = stmt.select_from(
+    census.join(state_fact, census.columns.state == state_fact.columns.name)
+)
+
+# Append a group by for the state_fact name column
+stmt = stmt.group_by(state_fact.columns.name)
+</codebox>
+			<codebox char_offset="1001" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make an alias of the employees table: managers
+managers = employees.alias()
+
+# Build a query to select manager's and their employees names: stmt
+stmt = select(
+    [managers.columns.name.label('manager'),
+     employees.columns.name.label('employee')]
+)
+
+# Match managers id with employees mgr: stmt
+stmt = stmt.where(managers.columns.id == employees.columns.mgr)
+
+# Order the statement by the managers name: stmt
+stmt = stmt.order_by(managers.columns.name)
 </codebox>
 		</node>
 	</node>
