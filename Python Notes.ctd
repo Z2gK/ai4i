@@ -3506,7 +3506,7 @@ JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545120103.3" unique_id="52">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545234838.96" unique_id="52">
 		<rich_text>
 
 
@@ -3908,6 +3908,220 @@ stmt = select([managers.columns.name, func.count(employees.columns.id)])
 
 # Close the ResultProxy, and thus the connection
 results_proxy.close()
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Making changes to tables" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545234838.96" ts_lastsave="1545237638.73" unique_id="55">
+			<rich_text>
+Creating a table with default values
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Inserting a row of data
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Inserting multiple entries
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Reading from csv and insert rows in batches
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Updating a row
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+If the where statement selects more clauses, we can update more rows
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Updating using the results from another query
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Deleting an entire table
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Deleting specific records
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Dropping tables 
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="39" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Table, Column, String, Integer, Float, Boolean from sqlalchemy
+from sqlalchemy import Table, Column, String, Integer, Float, Boolean
+
+# Define a new table with a name, count, amount, and valid column: data
+data = Table('data', metadata,
+             Column('name', String(255), unique=True),
+             Column('count', Integer(), default=1),
+             Column('amount', Float()),
+             Column('valid', Boolean(), default=False)
+)
+
+# Use the metadata to create the table
+metadata.create_all(engine)
+
+# Print the table details
+print(repr(metadata.tables['data']))
+
+# Print table details
+print(repr(data))</codebox>
+			<codebox char_offset="68" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import insert and select from sqlalchemy
+from sqlalchemy import insert, select
+
+# Build an insert statement to insert a record into the data table: stmt
+stmt = insert(data).values(name='Anna', count=1, amount=1000.00, valid=True)
+
+# Execute the statement via the connection: results
+results = connection.execute(stmt)
+
+# Print result rowcount
+print(results.rowcount)
+</codebox>
+			<codebox char_offset="99" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a list of dictionaries: values_list
+values_list = [
+    {'name': 'Anna', 'count': 1, 'amount': 1000.00, 'valid': True},
+    {'name': 'Taylor', 'count': 1, 'amount': 750.00, 'valid': False}
+]
+
+# Build an insert statement for the data table: stmt
+stmt = insert(data)
+
+# Execute stmt with the values_list: results
+results = connection.execute(stmt, values_list)
+
+# Print rowcount
+print(results.rowcount)</codebox>
+			<codebox char_offset="147" frame_height="460" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a insert statement for census: stmt
+stmt = insert(census)
+
+# Create an empty list and zeroed row count: values_list, total_rowcount
+values_list = []
+total_rowcount = 0
+
+# Enumerate the rows of csv_reader
+for idx, row in enumerate(csv_reader):
+    #create data and append to values_list
+    data = {'state': row[0], 'sex': row[1], 'age': row[2], 'pop2000': row[3],
+            'pop2008': row[4]}
+    values_list.append(data)
+
+    # Check to see if divisible by 51
+    if idx % 51 == 0:
+        results = connection.execute(stmt, values_list)
+        total_rowcount += results.rowcount
+        values_list = []
+
+# Print total rowcount
+print(total_rowcount)</codebox>
+			<codebox char_offset="166" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a select statement: select_stmt
+select_stmt = select([state_fact]).where(state_fact.columns.name == &quot;New York&quot;)
+
+# Print the results of executing the select_stmt
+print(connection.execute(select_stmt).fetchall())
+
+# Build a statement to update the fips_state to 36: stmt
+stmt = update(state_fact).values(fips_state = 36)
+
+# Append a where clause to limit it to records for New York state
+stmt = stmt.where(state_fact.columns.name == 'New York')
+
+# Execute the statement: results
+results = connection.execute(stmt)
+
+# Print rowcount
+print(results.rowcount)
+</codebox>
+			<codebox char_offset="239" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a statement to update the notes to 'The Wild West': stmt
+stmt = update(state_fact).values(notes='The Wild West')
+
+# Append a where clause to match the West census region records
+stmt = stmt.where(state_fact.columns.census_region_name == &quot;West&quot;)
+</codebox>
+			<codebox char_offset="289" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a statement to select name from state_fact: stmt
+fips_stmt = select([state_fact.columns.name])
+
+# Append a where clause to Match the fips_state to flat_census fips_code
+fips_stmt = fips_stmt.where(
+    state_fact.columns.fips_state == flat_census.columns.fips_code)
+
+# Build an update statement to set the name to fips_stmt: update_stmt
+update_stmt = update(flat_census).values(state_name = fips_stmt)
+
+# Execute update_stmt: results
+results = connection.execute(update_stmt)
+</codebox>
+			<codebox char_offset="318" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import delete, select
+from sqlalchemy import delete, select
+
+# Build a statement to empty the census table: stmt
+stmt = delete(census)
+
+# Execute the statement: results
+results = connection.execute(stmt)
+</codebox>
+			<codebox char_offset="349" frame_height="520" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a statement to count records using the sex column for Men ('M') age 36: stmt
+stmt = select([func.count(census.columns.sex)]).where(
+    and_(census.columns.sex == 'M',
+         census.columns.age == 36)
+)
+
+# Execute the select statement and use the scalar() fetch method to save the record count
+to_delete = connection.execute(stmt).scalar()
+
+# Build a statement to delete records from the census table: stmt_del
+stmt_del = delete(census)
+
+# Append a where clause to target Men ('M') age 36
+stmt_del = stmt_del.where(
+    and_(census.columns.sex == &quot;M&quot;,
+         census.columns.age == 36)
+)
+
+# Execute the statement: results
+results = connection.execute(stmt_del)
+
+# Print affected rowcount and to_delete record count, make sure they match
+print(results.rowcount, to_delete)</codebox>
+			<codebox char_offset="370" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Drop the state_fact table
+state_fact.drop(engine)
+
+# Check to see if state_fact exists
+print(state_fact.exists(engine))
+
+# Drop all tables
+metadata.drop_all(engine)
+
+# Check to see if census exists
+print(census.exists(engine))
 </codebox>
 		</node>
 	</node>
