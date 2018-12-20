@@ -3506,7 +3506,7 @@ JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545234838.96" unique_id="52">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545315637.84" unique_id="52">
 		<rich_text>
 
 
@@ -3910,7 +3910,7 @@ stmt = select([managers.columns.name, func.count(employees.columns.id)])
 results_proxy.close()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Creating tables" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545234838.96" ts_lastsave="1545236667.06" unique_id="55">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Making changes to tables" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545234838.96" ts_lastsave="1545237638.73" unique_id="55">
 			<rich_text>
 Creating a table with default values
 
@@ -3955,9 +3955,24 @@ Updating using the results from another query
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Deleting an entire table
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+Deleting specific records
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Dropping tables 
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -4066,6 +4081,93 @@ update_stmt = update(flat_census).values(state_name = fips_stmt)
 # Execute update_stmt: results
 results = connection.execute(update_stmt)
 </codebox>
+			<codebox char_offset="318" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import delete, select
+from sqlalchemy import delete, select
+
+# Build a statement to empty the census table: stmt
+stmt = delete(census)
+
+# Execute the statement: results
+results = connection.execute(stmt)
+</codebox>
+			<codebox char_offset="349" frame_height="520" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a statement to count records using the sex column for Men ('M') age 36: stmt
+stmt = select([func.count(census.columns.sex)]).where(
+    and_(census.columns.sex == 'M',
+         census.columns.age == 36)
+)
+
+# Execute the select statement and use the scalar() fetch method to save the record count
+to_delete = connection.execute(stmt).scalar()
+
+# Build a statement to delete records from the census table: stmt_del
+stmt_del = delete(census)
+
+# Append a where clause to target Men ('M') age 36
+stmt_del = stmt_del.where(
+    and_(census.columns.sex == &quot;M&quot;,
+         census.columns.age == 36)
+)
+
+# Execute the statement: results
+results = connection.execute(stmt_del)
+
+# Print affected rowcount and to_delete record count, make sure they match
+print(results.rowcount, to_delete)</codebox>
+			<codebox char_offset="370" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Drop the state_fact table
+state_fact.drop(engine)
+
+# Check to see if state_fact exists
+print(state_fact.exists(engine))
+
+# Drop all tables
+metadata.drop_all(engine)
+
+# Check to see if census exists
+print(census.exists(engine))
+</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545315653.63" unique_id="56">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545316768.99" unique_id="57">
+			<rich_text>
+
+Histograms
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+hist parameters
+bins: set to number for number of bins, or list for user defined bin edges
+
+There is a ‘square root rule’ for histograms - choose the number of bins to be square root of the number of data points
+
+Bee Swarm Plots
+
+Bee Swarm plots add more information to histograms without adding more complexity. These can be done in seaborn.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<codebox char_offset="14" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set()
+_ = plt.hist(df_swing['dem_share'])
+_ = plt.xlabel('percent of vote for Obama')
+_ = plt.ylabel('number of counties')
+plt.show() </codebox>
+			<codebox char_offset="361" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
+_ = sns.swarmplot(x='species',y='petal length (cm)',data=df)
+
+# Label the axes
+_ = plt.xlabel('species')
+_ = plt.ylabel('petal length (cm)')
+
+# Show the plot
+plt.show()</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">

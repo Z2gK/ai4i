@@ -3506,7 +3506,7 @@ JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545234838.96" unique_id="52">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545315637.84" unique_id="52">
 		<rich_text>
 
 
@@ -3970,7 +3970,9 @@ Deleting specific records
 
 Dropping tables 
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -4123,6 +4125,102 @@ metadata.drop_all(engine)
 # Check to see if census exists
 print(census.exists(engine))
 </codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545315653.63" unique_id="56">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545318008.59" unique_id="57">
+			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
+
+Histograms
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+hist parameters
+bins: set to number for number of bins, or list for user defined bin edges
+
+There is a ‘square root rule’ for histograms - choose the number of bins to be square root of the number of data points
+
+Bee Swarm Plots
+
+Bee Swarm plots add more information to histograms without adding more complexity. These can be done in seaborn.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Empirical Cumulative Distribution Function (ECDF)
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can plot multiple ECDF on the same plot simply by calling the plt.plot function multiple times for different data sets. The legend can be set as such
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="80" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set()
+_ = plt.hist(df_swing['dem_share'])
+_ = plt.xlabel('percent of vote for Obama')
+_ = plt.ylabel('number of counties')
+plt.show() </codebox>
+			<codebox char_offset="427" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
+_ = sns.swarmplot(x='species',y='petal length (cm)',data=df)
+
+# Label the axes
+_ = plt.xlabel('species')
+_ = plt.ylabel('petal length (cm)')
+
+# Show the plot
+plt.show()</codebox>
+			<codebox char_offset="481" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def ecdf(data):
+    &quot;&quot;&quot;Compute ECDF for a one-dimensional array of measurements.&quot;&quot;&quot;
+    # Number of data points: n
+    n = len(data)
+
+    # x-data for the ECDF: x
+    x = np.sort(data)
+
+    # y-data for the ECDF: y
+    y = np.arange(1, (n+1)) / n
+
+    return x, y
+
+# Compute ECDF for versicolor data: x_vers, y_vers
+x_vers, y_vers = ecdf(versicolor_petal_length)
+
+# Generate plot
+_ = plt.plot(x_vers,y_vers, marker = '.', linestyle = 'none')
+
+# Label the axes
+_ = plt.xlabel('versicolor petal length')
+_ = plt.ylabel('ECDF')
+
+plt.margins(0.02) # Keeps data off plot edges
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="638" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
