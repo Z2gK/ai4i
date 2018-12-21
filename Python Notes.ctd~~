@@ -4223,7 +4223,7 @@ for result in results:
     print('{}:{}'.format(result.state, result.pop_change))</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545391603.72" unique_id="60">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545397906.08" unique_id="60">
 		<rich_text>
 Here's a </rich_text>
 		<rich_text link="node 42">previous node on plotting</rich_text>
@@ -4232,7 +4232,7 @@ Here's a </rich_text>
 Here's </rich_text>
 		<rich_text link="node 57">another node on plotting</rich_text>
 		<rich_text> in the Statistical Thinking course.</rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Even more on plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391464.6" ts_lastsave="1545396036.28" unique_id="61">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 1D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391464.6" ts_lastsave="1545396477.96" unique_id="61">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Multiple plots</rich_text>
@@ -4294,13 +4294,17 @@ The plotted figure can be saved to file using plt.savefig(&lt;filename&gt;)
 			<rich_text scale="h1">Legends</rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 There are various other location codes. The label parameter in plt.plot will be used for the legend label.
 
 Annotations
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 plt.annotate() allows us to point at one point and add a comment
@@ -4317,6 +4321,11 @@ arrowprops: dictionary of arrow properties
 			<rich_text>
 
 ggplot is a popular one. ‘fivethirtyeight’ is used in the lecture notes.
+
+We can check which styles are available using </rich_text>
+			<rich_text family="monospace">plt.style.available</rich_text>
+			<rich_text>.
+
 
 
 </rich_text>
@@ -4410,6 +4419,114 @@ plt.show()</codebox>
 			<codebox char_offset="1506" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the style to 'ggplot'
 plt.style.use('ggplot')
 </codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 2D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545397906.08" ts_lastsave="1545399128.65" unique_id="62">
+			<rich_text>
+
+Meshgrids
+
+These are rather like heatmaps
+
+
+
+</rich_text>
+			<rich_text family="monospace">np.linspace(-2,2,41)</rich_text>
+			<rich_text> generates an array of 41 equally spaced values from -2 to 2 
+
+np.meshgrid(u,v) generates X and Y such that
+X is 
+</rich_text>
+			<rich_text family="monospace">[[-2, -1.9, -1.8,...., 2],
+[-2, -1.9, -1.8,...., 2],
+[-2, -1.9, -1.8,...., 2],
+...
+[-2, -1.9, -1.8,...., 2]]
+</rich_text>
+			<rich_text>
+There are 21 rows above
+
+Y is 
+</rich_text>
+			<rich_text family="monospace">[[-1, -1, -1, ...., -1],
+[-0.9, -0.9,-0.9, ...-0.9],
+...
+[1, 1, 1, ...., 1]]
+</rich_text>
+			<rich_text>
+plt.pcolor(Z) plots from bottom right up. Also, it does not know about the values of X and Y, so we will see only integers on the x and y axes.
+On the bottom most row of the plot, we will see the values of Z (in color) for 
+
+(-2,-1) -&gt; (-1.9, -1) -&gt; ... -&gt; (2, -1)
+
+Then the row above this row is for the (x,y) values
+
+(-2, -0.9) -&gt; (-1.9, -0.9) -&gt; ... (2, -0.9)
+
+Note that this the contrary to the way we traditionally view matrices!!!
+
+We can change the color map using the cmap parameter. Color bars can be displayed for reference
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+cmap: ‘gray’, ‘autumn’
+
+plt.axis('tight') to get rid of the whitespace
+
+To include the correct X and Y axes labels (instead of integers), we simply include X and Y in the pcolor argument list
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Contour plots
+
+Instead of pcolor, we can use contour plots to show equi-valued points. The usage is similar.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can specify the number of contours to draw
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The function contourf produces filled contour plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+</rich_text>
+			<codebox char_offset="45" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import numpy as np
+import matplotlib.pyplot as plt
+
+# Generate two 1-D arrays: u, v
+u = np.linspace(-2,2, 41)
+v = np.linspace(-1,1,21)
+
+# Generate 2-D arrays from u and v: X, Y
+X,Y = np.meshgrid(u,v)
+
+# Compute Z based on X and Y
+Z = np.sin(3*np.sqrt(X**2 + Y**2)) 
+
+# Display the resulting image with pcolor()
+plt.pcolor(Z)
+plt.show()</codebox>
+			<codebox char_offset="936" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.pcolor(A, cmap='Blues')
+In [2]: plt.colorbar()</codebox>
+			<codebox char_offset="1132" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.pcolor(X,Y,Z)</codebox>
+			<codebox char_offset="1245" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contour(Z)
+plt.contour(X,Y,Z)</codebox>
+			<codebox char_offset="1295" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contour(X,Y,Z, 30)</codebox>
+			<codebox char_offset="1351" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contourf(X,Y,Z, 30)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">
