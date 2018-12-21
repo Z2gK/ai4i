@@ -2195,7 +2195,7 @@ np_vals_log10 = np.log10(np_vals)
 df_log10 = np.log10(df)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="matplotlib, plotting" ts_creation="1543918926.97" ts_lastsave="1544162070.63" unique_id="42">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="matplotlib, plotting" ts_creation="1543918926.97" ts_lastsave="1545366347.53" unique_id="42">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">More on plotting</rich_text>
@@ -2235,7 +2235,9 @@ multiple plots of different types
 Previous related node on plotting </rich_text>
 			<rich_text link="node 4">here...</rich_text>
 			<rich_text>
-
+Even more on plotting can be found </rich_text>
+			<rich_text link="node 57">here</rich_text>
+			<rich_text>.
 
 </rich_text>
 			<codebox char_offset="1061" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This formats the plots such that they appear on separate rows
@@ -4127,9 +4129,9 @@ print(census.exists(engine))
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545315653.63" unique_id="56">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545366287.71" unique_id="56">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545362204.59" unique_id="57">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545369608.74" unique_id="57">
 			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
 
 Histograms
@@ -4140,6 +4142,8 @@ Histograms
 
 hist parameters
 bins: set to number for number of bins, or list for user defined bin edges
+normed: Boolean - to switch the y-axis to normalised probabilities instead of the default frequency
+histtype: ‘step’ to see transparent stepped bars instead of the default opaque colors
 
 There is a ‘square root rule’ for histograms - choose the number of bins to be square root of the number of data points
 
@@ -4193,12 +4197,19 @@ Calculating covariance
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+
+Pearson correlation coefficient
+
 Note that the Pearson correlation coefficient is simply the covariance divided by the respective standard deviations of x and y.
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
-
-
+Previous node on plotting can be found </rich_text>
+			<rich_text link="node 42">here</rich_text>
+			<rich_text>.
 </rich_text>
 			<codebox char_offset="80" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
 import seaborn as sns
@@ -4207,7 +4218,7 @@ _ = plt.hist(df_swing['dem_share'])
 _ = plt.xlabel('percent of vote for Obama')
 _ = plt.ylabel('number of counties')
 plt.show() </codebox>
-			<codebox char_offset="427" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
+			<codebox char_offset="613" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
 _ = sns.swarmplot(x='species',y='petal length (cm)',data=df)
 
 # Label the axes
@@ -4216,7 +4227,7 @@ _ = plt.ylabel('petal length (cm)')
 
 # Show the plot
 plt.show()</codebox>
-			<codebox char_offset="481" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def ecdf(data):
+			<codebox char_offset="667" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def ecdf(data):
     &quot;&quot;&quot;Compute ECDF for a one-dimensional array of measurements.&quot;&quot;&quot;
     # Number of data points: n
     n = len(data)
@@ -4244,30 +4255,121 @@ plt.margins(0.02) # Keeps data off plot edges
 # Display the plot
 plt.show()
 </codebox>
-			<codebox char_offset="638" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
-			<codebox char_offset="728" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify array of percentiles: percentiles
+			<codebox char_offset="824" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
+			<codebox char_offset="914" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify array of percentiles: percentiles
 percentile = [2.5,25,50,75,97.5]
 
 # Compute percentiles: ptiles_vers
 ptiles_vers = np.percentile(versicolor_petal_length,np.array(percentile))
 </codebox>
-			<codebox char_offset="834" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create box plot with Seaborn's default settings
+			<codebox char_offset="1020" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create box plot with Seaborn's default settings
 _ =sns.boxplot(x='species',y='petal length (cm)', data=df)
 
 # Label the axes
 _ = plt.xlabel('species')
 _ = plt.ylabel('petal length (cm)')
 </codebox>
-			<codebox char_offset="852" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make a scatter plot
+			<codebox char_offset="1038" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make a scatter plot
 _ = plt.plot(versicolor_petal_length,versicolor_petal_width,marker='.',linestyle='none')
 </codebox>
-			<codebox char_offset="880" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">covariance_matrix = np.cov(versicolor_petal_length,versicolor_petal_width)
+			<codebox char_offset="1066" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">covariance_matrix = np.cov(versicolor_petal_length,versicolor_petal_width)
 
 # Extract covariance of length and width of petals: petal_cov
 petal_cov = covariance_matrix[0,1]
 
 # Note that covariance_matrix[1,0] is the same as the above value by symmetry
 </codebox>
+			<codebox char_offset="1233" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def pearson_r(x, y):
+    &quot;&quot;&quot;Compute Pearson correlation coefficient between two arrays.&quot;&quot;&quot;
+    # Compute correlation matrix: corr_mat
+    corr_mat = np.corrcoef(x,y)
+
+    # Return entry [0,1]
+    return corr_mat[0,1]
+
+# Compute Pearson correlation coefficient for I. versicolor: r
+r = pearson_r(versicolor_petal_length,versicolor_petal_width)
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Probability Distributions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545366287.72" ts_lastsave="1545370375.11" unique_id="58">
+			<rich_text>
+
+
+Seeding and generating random numbers with np.random.random()
+
+Note that an empty array should be initialised first for efficiency.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Alternatively the array can be generated if we pass the size = n parameter to np.random.random.
+
+size can be passed to most PDF, e.g. binomial.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Probability mass function vs Probability Distributions?
+
+Plotting PMF in matplotlib requires a bit of trickery. We will use the histogram method to plot instead
+
+Poisson process
+
+Timing of one is independent of timing of the previous
+e.g. births in a hospital, hits on a website in a given hour, meteor strikes, moleculer collisionss in a gas, aviations accidents, buses in Poissonville
+
+Poisson is the limit to Binomial for low probability of success and high number of trials, i.e. for rare events
+
+The Normal Distribution
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Things that you think are normally distributed are actually not
+4 standard deviation data points are very very rare - when data contains such points, be very careful
+
+
+Exponential distribution
+
+The probability of interval (time) between Poisson processes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="136" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Seed the random number generator
+np.random.seed(42)
+
+# Initialize random numbers: random_numbers
+random_numbers = np.empty(100000)
+
+# Generate random numbers by looping over range(100000)
+for i in range(100000):
+    random_numbers[i] = np.random.random()</codebox>
+			<codebox char_offset="284" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">n_defaults = np.random.binomial(n=100,p=0.05,size=10000)
+</codebox>
+			<codebox char_offset="813" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Draw 100000 samples from Normal distribution with stds of interest: samples_std1, samples_std3, samples_std10
+samples_std1 = np.random.normal(20, 1, size=100000)
+samples_std3 = np.random.normal(20, 3, size=100000)
+samples_std10 = np.random.normal(20, 10, size=100000)
+
+# Make a legend, set limits and show plot
+_ = plt.legend(('std = 1', 'std = 3', 'std = 10'))
+plt.ylim(-0.01, 0.42)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
