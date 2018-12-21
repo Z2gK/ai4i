@@ -2195,7 +2195,7 @@ np_vals_log10 = np.log10(np_vals)
 df_log10 = np.log10(df)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="matplotlib, plotting" ts_creation="1543918926.97" ts_lastsave="1545366347.53" unique_id="42">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="More on plotting" prog_lang="custom-colors" readonly="False" tags="matplotlib, plotting" ts_creation="1543918926.97" ts_lastsave="1545391531.1" unique_id="42">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">More on plotting</rich_text>
@@ -2238,6 +2238,10 @@ Previous related node on plotting </rich_text>
 Even more on plotting can be found </rich_text>
 			<rich_text link="node 57">here</rich_text>
 			<rich_text>.
+
+A whole course on plotting can be found here in </rich_text>
+			<rich_text link="node 60">More Data Visualisation</rich_text>
+			<rich_text>
 
 </rich_text>
 			<codebox char_offset="1061" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># This formats the plots such that they appear on separate rows
@@ -3508,13 +3512,13 @@ JOIN reviews
 ON films.id = reviews.film_id
 WHERE title = 'To Kill a Mockingbird';</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545315637.84" unique_id="52">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Databases in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545041412.32" ts_lastsave="1545391161.59" unique_id="52">
 		<rich_text>
 
 
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic SQL" prog_lang="custom-colors" readonly="False" tags="sql, pandas, sqlalchemy" ts_creation="1545117902.06" ts_lastsave="1545120043.33" unique_id="53">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic SQL" prog_lang="custom-colors" readonly="False" tags="sql, pandas, sqlalchemy" ts_creation="1545117902.06" ts_lastsave="1545389781.41" unique_id="53">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Starting connection to database</rich_text>
@@ -3551,6 +3555,13 @@ Idiom for showing metadata
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+We initialise the metadata object like this
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
 
 
 </rich_text>
@@ -3692,8 +3703,9 @@ print(census.columns.keys())
 
 # Print full table metadata
 print(repr(metadata.tables[&quot;census&quot;]))</codebox>
-			<codebox char_offset="543" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = select([census])</codebox>
-			<codebox char_offset="633" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a query for the census table: stmt
+			<codebox char_offset="505" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">metadata = MetaData()</codebox>
+			<codebox char_offset="592" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = select([census])</codebox>
+			<codebox char_offset="682" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a query for the census table: stmt
 stmt = select([census])
 
 # Append a where clause to match all the states in_ the list states
@@ -3702,13 +3714,13 @@ stmt = stmt.where(census.columns.state.in_(states))
 for result in connection.execute(stmt):
     print(result.state, result.pop2000)
 </codebox>
-			<codebox char_offset="794" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = stmt.where(
+			<codebox char_offset="843" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">stmt = stmt.where(
     # The state of California with a non-male sex
     and_(census.columns.state == &quot;California&quot;,
          census.columns.sex != &quot;M&quot;
          )
 )</codebox>
-			<codebox char_offset="839" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state column: stmt
+			<codebox char_offset="888" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state column: stmt
 stmt = select([census.columns.state])
 
 # Order stmt by the state column
@@ -3717,14 +3729,14 @@ stmt = stmt.order_by(census.columns.state)
 # Execute the query and store the results: results
 results = connection.execute(stmt).fetchall()
 </codebox>
-			<codebox char_offset="906" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">rev_stmt = stmt.order_by(desc(census.columns.state))</codebox>
-			<codebox char_offset="939" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select state and age: stmt
+			<codebox char_offset="955" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">rev_stmt = stmt.order_by(desc(census.columns.state))</codebox>
+			<codebox char_offset="988" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select state and age: stmt
 stmt = select([census.columns.state, census.columns.age])
 
 # Append order by to ascend by state and descend by age
 stmt = stmt.order_by(census.columns.state, desc(census.columns.age))
 </codebox>
-			<codebox char_offset="1111" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to count the distinct states values: stmt
+			<codebox char_offset="1160" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to count the distinct states values: stmt
 stmt = select([func.count(census.columns.state.distinct())])
 
 # Execute the query and store the scalar result: distinct_state_count
@@ -3733,13 +3745,13 @@ distinct_state_count = connection.execute(stmt).scalar()
 # Print the distinct_state_count
 print(distinct_state_count)
 </codebox>
-			<codebox char_offset="1168" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state and count of ages by state: stmt
+			<codebox char_offset="1217" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build a query to select the state and count of ages by state: stmt
 stmt = select([census.columns.state, func.count(census.columns.age)])
 
 # Group stmt by state
 stmt = stmt.group_by(census.columns.state)
 </codebox>
-			<codebox char_offset="1236" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build an expression to calculate the sum of pop2008 labeled as population
+			<codebox char_offset="1285" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build an expression to calculate the sum of pop2008 labeled as population
 pop2008_sum = func.sum(census.columns.pop2008).label(&quot;population&quot;)
 
 # Build a query to select the state and sum of pop2008: stmt
@@ -3748,7 +3760,7 @@ stmt = select([census.columns.state, pop2008_sum])
 # Group stmt by state
 stmt = stmt.group_by(census.columns.state)
 </codebox>
-			<codebox char_offset="1298" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># import pandas
+			<codebox char_offset="1347" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># import pandas
 import pandas as pd
 
 # Create a DataFrame from the results: df
@@ -4128,8 +4140,282 @@ metadata.drop_all(engine)
 print(census.exists(engine))
 </codebox>
 		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Example Queries" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391161.6" ts_lastsave="1545391265.5" unique_id="59">
+			<rich_text>
+
+Determining average age grouped by gender
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Determining percentage population which is of a certain gender grouped by state
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Determining population difference grouped by state
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+</rich_text>
+			<codebox char_offset="45" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import select
+from sqlalchemy  import select
+
+# Calculate weighted average age: stmt
+stmt = select([census.columns.sex,
+               (func.sum(census.columns.pop2008 * census.columns.age) /
+                func.sum(census.columns.pop2008)).label('average_age')
+               ])
+
+# Group by sex
+stmt = stmt.group_by(census.columns.sex)
+
+# Execute the query and store the results: results
+results = connection.execute(stmt).fetchall()
+
+# Print the average age by sex
+for sex, average_age in results:
+    print(sex, average_age)</codebox>
+			<codebox char_offset="129" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># import case, cast and Float from sqlalchemy
+from sqlalchemy import case, cast, Float
+
+# Build a query to calculate the percentage of females in 2000: stmt
+stmt = select([census.columns.state,
+    (func.sum(
+        case([
+            (census.columns.sex == 'F', census.columns.pop2000)
+        ], else_=0)) /
+     cast(func.sum(census.columns.pop2000), Float) * 100).label('percent_female')
+])
+
+# Group By state
+stmt = stmt.group_by(census.columns.state)
+
+# Execute the query and store the results: results
+results = connection.execute(stmt).fetchall()
+
+# Print the percentage
+for result in results:
+    print(result.state, result.percent_female)</codebox>
+			<codebox char_offset="185" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Build query to return state name and population difference from 2008 to 2000
+stmt = select([census.columns.state,
+     (census.columns.pop2008-census.columns.pop2000).label('pop_change')
+])
+
+# Group by State
+stmt = stmt.group_by(census.columns.state)
+
+# Order by Population Change
+stmt = stmt.order_by(desc('pop_change'))
+
+# Limit to top 10
+stmt = stmt.limit(10)
+
+# Use connection to execute the statement and fetch all results
+results = connection.execute(stmt).fetchall()
+
+# Print the state and population change for each record
+for result in results:
+    print('{}:{}'.format(result.state, result.pop_change))</codebox>
+		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545366287.71" unique_id="56">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545391603.72" unique_id="60">
+		<rich_text>
+Here's a </rich_text>
+		<rich_text link="node 42">previous node on plotting</rich_text>
+		<rich_text>
+
+Here's </rich_text>
+		<rich_text link="node 57">another node on plotting</rich_text>
+		<rich_text> in the Statistical Thinking course.</rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Even more on plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391464.6" ts_lastsave="1545396168.08" unique_id="61">
+			<rich_text>
+</rich_text>
+			<rich_text scale="h1">Multiple plots</rich_text>
+			<rich_text>
+
+This plots things on the same axes
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Now we plot on two separate plots, but we have to specify where we want our plots to be
+</rich_text>
+			<rich_text family="monospace">plt.axes[xlo, ylo, xwidth, ywidth]</rich_text>
+			<rich_text> - this is applicable to the subsequent plot statements until the next plt.axes statement. - the units have to be in the interval [0,1]
+xlo and ylo are the coordinates of the lower left corner of the plot.
+xwidth and ywidth are the lengths of the actual plot
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Using subplot for multiple plots
+
+This is the better alternative to plt.axes. But these three plots still suffer from the problem of overcrowded x axes labels
+</rich_text>
+			<rich_text family="monospace">subplot(nrows, ncols, nsubplot)</rich_text>
+			<rich_text> - nsubplot activates the subplot the subsequent statements are applicable to. Indexing starts from 1 (instead of 0). It goes in the sequence of row-wise beginning at the top left
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<rich_text scale="h1">Setting axes limits</rich_text>
+			<rich_text>
+
+The range of axis values we want to display can be controlled separately using 
+plt.xlim(&lt;tuple&gt;) and
+plt.ylim(&lt;tuple&gt;)
+
+where &lt;tuple&gt; is (start, end)
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Alternatively, all of that can be accomplished in one statement of plt.axis()
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The plotted figure can be saved to file using plt.savefig(&lt;filename&gt;)
+
+</rich_text>
+			<rich_text scale="h1">Legends</rich_text>
+			<rich_text>
+
+
+
+There are various other location codes. The label parameter in plt.plot will be used for the legend label.
+
+Annotations
+
+
+
+
+plt.annotate() allows us to point at one point and add a comment
+xy: where the tip of the arrow is
+xytext: where the text should be displaced wrt xy
+arrowprops: dictionary of arrow properties
+
+</rich_text>
+			<rich_text scale="h1">Using a different stylesheet</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+ggplot is a popular one. ‘fivethirtyeight’ is used in the lecture notes.
+
+We can check which styles are available using plt.style.available.
+
+
+
+</rich_text>
+			<codebox char_offset="53" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot
+import matplotlib.pyplot as plt
+
+# Plot in blue the % of degrees awarded to women in the Physical Sciences
+plt.plot(year, physical_sciences, color='blue')
+
+# Plot in red the % of degrees awarded to women in Computer Science
+plt.plot(year, computer_science, color='red')
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="438" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create plot axes for the first line plot
+plt.axes([0.05,0.05,0.425,0.9])
+
+# Plot in blue the % of degrees awarded to women in the Physical Sciences
+plt.plot(year, physical_sciences, color='blue')
+
+# Create plot axes for the second line plot
+plt.axes([0.525,0.05,0.425,0.9])
+
+# Plot in red the % of degrees awarded to women in Computer Science
+plt.plot(year, computer_science, color='red')
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="813" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a figure with 1x2 subplot and make the left subplot active
+plt.subplot(1,2,1)
+
+# Plot in blue the % of degrees awarded to women in the Physical Sciences
+plt.plot(year, physical_sciences, color='blue')
+plt.title('Physical Sciences')
+
+# Make the right subplot active in the current 1x2 subplot grid
+plt.subplot(1,2,2)
+
+# Plot in red the % of degrees awarded to women in Computer Science
+plt.plot(year, computer_science, color='red')
+plt.title('Computer Science')
+
+# Use plt.tight_layout() to improve the spacing between subplots
+plt.tight_layout()
+plt.show()</codebox>
+			<codebox char_offset="990" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the x-axis range
+plt.xlim((1990,2010))
+
+# Set the y-axis range
+plt.ylim((0,50))
+</codebox>
+			<codebox char_offset="1072" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the x-axis and y-axis limits
+plt.axis((1990,2010,0,50))
+</codebox>
+			<codebox char_offset="1155" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify the label 'Computer Science'
+plt.plot(year, computer_science, color='red', label='Computer Science') 
+
+# Specify the label 'Physical Sciences' 
+plt.plot(year, physical_sciences, color='blue', label='Physical Sciences')
+
+# Add a legend at the lower center
+plt.legend(loc='lower center')
+
+# Add axis labels and title
+plt.xlabel('Year')
+plt.ylabel('Enrollment (%)')
+plt.title('Undergraduate enrollment of women')
+plt.show()
+</codebox>
+			<codebox char_offset="1279" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot with legend as before
+plt.plot(year, computer_science, color='red', label='Computer Science') 
+plt.plot(year, physical_sciences, color='blue', label='Physical Sciences')
+plt.legend(loc='lower right')
+
+# Compute the maximum enrollment of women in Computer Science: cs_max
+cs_max = max(computer_science)
+
+# Calculate the year in which there was maximum enrollment of women in Computer Science: yr_max
+yr_max = year[computer_science.argmax()]
+
+# Add a black arrow annotation
+plt.annotate('Maximum',xy=(yr_max,cs_max),xytext=(yr_max+5,cs_max+5), arrowprops=dict(facecolor='black'))
+
+# Add axis labels and title
+plt.xlabel('Year')
+plt.ylabel('Enrollment (%)')
+plt.title('Undergraduate enrollment of women')
+plt.show()</codebox>
+			<codebox char_offset="1506" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the style to 'ggplot'
+plt.style.use('ggplot')
+</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545369608.74" unique_id="57">
 			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
@@ -4291,7 +4577,7 @@ petal_cov = covariance_matrix[0,1]
 r = pearson_r(versicolor_petal_length,versicolor_petal_width)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Probability Distributions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545366287.72" ts_lastsave="1545370375.11" unique_id="58">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Probability Distributions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545366287.72" ts_lastsave="1545371079.92" unique_id="58">
 			<rich_text>
 
 
@@ -4336,7 +4622,9 @@ Exponential distribution
 
 The probability of interval (time) between Poisson processes
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -4370,6 +4658,7 @@ samples_std10 = np.random.normal(20, 10, size=100000)
 # Make a legend, set limits and show plot
 _ = plt.legend(('std = 1', 'std = 3', 'std = 10'))
 plt.ylim(-0.01, 0.42)</codebox>
+			<codebox char_offset="1072" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">t1 = np.random.exponential(tau1, size=size)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
