@@ -4129,8 +4129,8 @@ print(census.exists(engine))
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545315653.63" unique_id="56">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545317929.62" unique_id="57">
-			<rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545362204.59" unique_id="57">
+			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
 
 Histograms
 
@@ -4163,27 +4163,51 @@ We can plot multiple ECDF on the same plot simply by calling the plt.plot functi
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Percentiles
+
+Note that the percentile array need to be first converted to numpy array
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+Box plots
+
+We use box plots when the number of samples get too much to be represented in swarm plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Scatter plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+Calculating covariance
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
-
+Note that the Pearson correlation coefficient is simply the covariance divided by the respective standard deviations of x and y.
 
 
 
 
 
 </rich_text>
-			<codebox char_offset="14" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
+			<codebox char_offset="80" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set()
 _ = plt.hist(df_swing['dem_share'])
 _ = plt.xlabel('percent of vote for Obama')
 _ = plt.ylabel('number of counties')
 plt.show() </codebox>
-			<codebox char_offset="361" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
+			<codebox char_offset="427" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
 _ = sns.swarmplot(x='species',y='petal length (cm)',data=df)
 
 # Label the axes
@@ -4192,7 +4216,7 @@ _ = plt.ylabel('petal length (cm)')
 
 # Show the plot
 plt.show()</codebox>
-			<codebox char_offset="415" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def ecdf(data):
+			<codebox char_offset="481" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def ecdf(data):
     &quot;&quot;&quot;Compute ECDF for a one-dimensional array of measurements.&quot;&quot;&quot;
     # Number of data points: n
     n = len(data)
@@ -4220,7 +4244,30 @@ plt.margins(0.02) # Keeps data off plot edges
 # Display the plot
 plt.show()
 </codebox>
-			<codebox char_offset="572" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
+			<codebox char_offset="638" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
+			<codebox char_offset="728" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify array of percentiles: percentiles
+percentile = [2.5,25,50,75,97.5]
+
+# Compute percentiles: ptiles_vers
+ptiles_vers = np.percentile(versicolor_petal_length,np.array(percentile))
+</codebox>
+			<codebox char_offset="834" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create box plot with Seaborn's default settings
+_ =sns.boxplot(x='species',y='petal length (cm)', data=df)
+
+# Label the axes
+_ = plt.xlabel('species')
+_ = plt.ylabel('petal length (cm)')
+</codebox>
+			<codebox char_offset="852" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make a scatter plot
+_ = plt.plot(versicolor_petal_length,versicolor_petal_width,marker='.',linestyle='none')
+</codebox>
+			<codebox char_offset="880" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">covariance_matrix = np.cov(versicolor_petal_length,versicolor_petal_width)
+
+# Extract covariance of length and width of petals: petal_cov
+petal_cov = covariance_matrix[0,1]
+
+# Note that covariance_matrix[1,0] is the same as the above value by symmetry
+</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">

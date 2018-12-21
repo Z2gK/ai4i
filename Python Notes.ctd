@@ -4129,7 +4129,7 @@ print(census.exists(engine))
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545315653.63" unique_id="56">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545318008.59" unique_id="57">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545362287.8" unique_id="57">
 			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
 
 Histograms
@@ -4163,13 +4163,40 @@ We can plot multiple ECDF on the same plot simply by calling the plt.plot functi
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Percentiles
+
+Note that the percentile array need to be first converted to numpy array
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+Box plots
+
+We use box plots when the number of samples get too much to be represented in swarm plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Scatter plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+Calculating covariance
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+Pearson correlation coefficient
 
+Note that the Pearson correlation coefficient is simply the covariance divided by the respective standard deviations of x and y.
 
 
 
@@ -4221,6 +4248,40 @@ plt.margins(0.02) # Keeps data off plot edges
 plt.show()
 </codebox>
 			<codebox char_offset="638" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
+			<codebox char_offset="728" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify array of percentiles: percentiles
+percentile = [2.5,25,50,75,97.5]
+
+# Compute percentiles: ptiles_vers
+ptiles_vers = np.percentile(versicolor_petal_length,np.array(percentile))
+</codebox>
+			<codebox char_offset="834" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create box plot with Seaborn's default settings
+_ =sns.boxplot(x='species',y='petal length (cm)', data=df)
+
+# Label the axes
+_ = plt.xlabel('species')
+_ = plt.ylabel('petal length (cm)')
+</codebox>
+			<codebox char_offset="852" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make a scatter plot
+_ = plt.plot(versicolor_petal_length,versicolor_petal_width,marker='.',linestyle='none')
+</codebox>
+			<codebox char_offset="880" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">covariance_matrix = np.cov(versicolor_petal_length,versicolor_petal_width)
+
+# Extract covariance of length and width of petals: petal_cov
+petal_cov = covariance_matrix[0,1]
+
+# Note that covariance_matrix[1,0] is the same as the above value by symmetry
+</codebox>
+			<codebox char_offset="1047" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def pearson_r(x, y):
+    &quot;&quot;&quot;Compute Pearson correlation coefficient between two arrays.&quot;&quot;&quot;
+    # Compute correlation matrix: corr_mat
+    corr_mat = np.corrcoef(x,y)
+
+    # Return entry [0,1]
+    return corr_mat[0,1]
+
+# Compute Pearson correlation coefficient for I. versicolor: r
+r = pearson_r(versicolor_petal_length,versicolor_petal_width)
+</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
