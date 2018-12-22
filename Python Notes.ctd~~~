@@ -4223,7 +4223,7 @@ for result in results:
     print('{}:{}'.format(result.state, result.pop_change))</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545397906.08" unique_id="60">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545497371.62" unique_id="60">
 		<rich_text>
 Here's a </rich_text>
 		<rich_text link="node 42">previous node on plotting</rich_text>
@@ -4420,14 +4420,16 @@ plt.show()</codebox>
 plt.style.use('ggplot')
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 2D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545397906.08" ts_lastsave="1545399088.47" unique_id="62">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 2D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545397906.08" ts_lastsave="1545497117.42" unique_id="62">
 			<rich_text>
 
 Meshgrids
 
 These are rather like heatmaps
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text family="monospace">np.linspace(-2,2,41)</rich_text>
@@ -4470,7 +4472,8 @@ We can change the color map using the cmap parameter. Color bars can be displaye
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-cmap: ‘gray’, ‘autumn’
+cmap: ‘gray’, ‘autumn’, etc.
+Color schemes include 'jet', 'coolwarm', 'magma' and 'viridis'; 'Greens', 'Blues', 'Reds', and 'Purples'; or the seasons
 
 plt.axis('tight') to get rid of the whitespace
 
@@ -4494,9 +4497,58 @@ We can specify the number of contours to draw
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+The function contourf produces filled contour plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can improve the spacing as well using this
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
+2D Histogram
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+In the example here, hp and mpg are on the horizontal and vertical axes respectively. There are 20 bins on the horizontal and 20 on the vertical. the range parameter specifies the range of values we are showing - [40, 235] on the horizontal and [8,48] on the vertical.
+
+Hexbin plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Here, gridsize is the equivalent of bins. extent is the equivalent of range, except that it is provided in one tuple instead of two separate ones.
+
+Images
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Creating a gray scale image by collapsing an axis
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Changing aspect ratio (ratio of physical height to width of each pixel on screen)
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Rescaling image intensity values. The image array can be treated like an array and we can perform arithmetic on it. This is a grayscale image.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 </rich_text>
@@ -4518,10 +4570,129 @@ plt.pcolor(Z)
 plt.show()</codebox>
 			<codebox char_offset="936" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.pcolor(A, cmap='Blues')
 In [2]: plt.colorbar()</codebox>
-			<codebox char_offset="1132" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.pcolor(X,Y,Z)</codebox>
-			<codebox char_offset="1245" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contour(Z)
+			<codebox char_offset="1259" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.pcolor(X,Y,Z)</codebox>
+			<codebox char_offset="1372" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contour(Z)
 plt.contour(X,Y,Z)</codebox>
-			<codebox char_offset="1295" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contour(X,Y,Z, 30)</codebox>
+			<codebox char_offset="1422" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contour(X,Y,Z, 30)</codebox>
+			<codebox char_offset="1478" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.contourf(X,Y,Z, 30)</codebox>
+			<codebox char_offset="1528" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.tight_layout()</codebox>
+			<codebox char_offset="1546" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a 2-D histogram
+plt.hist2d(hp,mpg,bins=(20,20),range=((40,235),(8,48)))
+</codebox>
+			<codebox char_offset="1833" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a 2d histogram with hexagonal bins
+plt.hexbin(hp,mpg,gridsize=(15,12),extent=(40,235,8,48))
+</codebox>
+			<codebox char_offset="1992" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Load the image into an array: img
+img = plt.imread('480px-Astronaut-EVA.jpg')
+
+# Print the shape of the image
+print(img.shape)
+
+# Display the image
+plt.imshow(img)
+
+# Hide the axes
+plt.axis('off')
+plt.show()</codebox>
+			<codebox char_offset="2046" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Compute the sum of the red, green and blue channels: intensity
+intensity = img.sum(axis=2)
+
+# Print the shape of the intensity
+print(intensity.shape)
+# This gives (480,480) instead of (480,480,3)
+
+# Display the intensity with a colormap of 'gray'
+plt.imshow(intensity,cmap='gray')
+
+# Hide the axes and show the figure
+plt.axis('off')
+plt.show()
+</codebox>
+			<codebox char_offset="2132" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Load the image into an array: img
+img = plt.imread('480px-Astronaut-EVA.jpg')
+
+# Specify the extent and aspect ratio of the top left subplot
+plt.subplot(2,2,1)
+plt.title('extent=(-1,1,-1,1),\naspect=0.5') 
+plt.xticks([-1,0,1])
+plt.yticks([-1,0,1])
+plt.imshow(img, extent=(-1,1,-1,1), aspect=0.5)
+
+# ... Other code for other subplots
+
+# Improve spacing and display the figure
+plt.tight_layout()
+plt.show()</codebox>
+			<codebox char_offset="2279" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Load the image into an array: image
+image = plt.imread('640px-Unequalized_Hawkes_Bay_NZ.jpg')
+
+# Extract minimum and maximum values from the image: pmin, pmax
+pmin, pmax = image.min(), image.max()
+print(&quot;The smallest &amp; largest pixel intensities are %d &amp; %d.&quot; % (pmin, pmax))
+
+# Rescale the pixels: rescaled_image
+rescaled_image = 256*(image - pmin) / (pmax - pmin)
+print(&quot;The rescaled smallest &amp; largest pixel intensities are %.1f &amp; %.1f.&quot; % 
+      (rescaled_image.min(), rescaled_image.max()))
+
+# Display the original image in the top subplot
+plt.subplot(2,1,1)
+plt.title('original image')
+plt.axis('off')
+plt.imshow(image)
+
+# Display the rescaled image in the bottom subplot
+plt.subplot(2,1,2)
+plt.title('rescaled image')
+plt.axis('off')
+plt.imshow(rescaled_image)
+
+plt.show()
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Seaborn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545497371.62" ts_lastsave="1545498230.59" unique_id="63">
+			<rich_text>
+Plotting a simple linear regression line
+
+Note that the 95% confidence range shading is included in the plot
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Additional parameters:
+color: string, to specify the color of the plotted points
+
+This  is a residual plot, with similar arguments as lmplot
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Higher order regression
+
+regplot() is lower level compared to lmplot(). We can specify the order of the fitted line. Presumably this has to do with the polynomial order being used.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<codebox char_offset="111" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import plotting modules
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Plot a linear regression between 'weight' and 'hp'
+sns.lmplot(x='weight', y='hp', data=auto)
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="256" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a green residual plot of the regression between 'hp' and 'mpg'
+sns.residplot(x='hp', y='mpg', data=auto, color='green')</codebox>
+			<codebox char_offset="442" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot in green a linear regression of order 2 between 'weight' and 'mpg'
+sns.regplot(x='weight', y='mpg', data=auto, scatter=None, order=2, color='green',label='order 2')</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">
