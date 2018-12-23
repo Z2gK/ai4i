@@ -4650,7 +4650,7 @@ plt.imshow(rescaled_image)
 plt.show()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Seaborn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545497371.62" ts_lastsave="1545498473.01" unique_id="63">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Seaborn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545497371.62" ts_lastsave="1545542170.02" unique_id="63">
 			<rich_text>
 Plotting a simple linear regression line
 
@@ -4669,6 +4669,13 @@ color: string, to specify the color of the plotted points
 
 We can use hue to group points into different sets, with different regression lines.
 
+Alternatively, this puts the different regression lines into distinct plots.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Residual plots
 
 This  is a residual plot, with similar arguments as lmplot
 
@@ -4685,6 +4692,22 @@ regplot() is lower level compared to lmplot(). We can specify the order of the f
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+
+Strip Plots
+
+Strip plots are like bee swarm plots, except that the default option plots the points in a vertical line, making it impossible to see multiple plots when they are plotted on top of each other
+The workaround is to use the parameter jitter=True, which jitters the plotted points so that they don't overlap. The parameter size is for the size of the points.
+
+Note that x has to be a categorical variable, and y the continuous variable. If x is omitted, there will be no categorisation shown.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+
 </rich_text>
 			<codebox char_offset="111" frame_height="205" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import plotting modules
 import matplotlib.pyplot as plt
@@ -4698,10 +4721,19 @@ plt.show()
 </codebox>
 			<codebox char_offset="196" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot a linear regression between 'weight' and 'hp', with a hue of 'origin' and palette of 'Set1'
 sns.lmplot(x='weight',y='hp',data=auto,hue='origin',palette='Set1')</codebox>
-			<codebox char_offset="346" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a green residual plot of the regression between 'hp' and 'mpg'
+			<codebox char_offset="363" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot linear regressions between 'weight' and 'hp' grouped row-wise by 'origin'
+sns.lmplot(x='weight',y='hp',data=auto,row='origin')</codebox>
+			<codebox char_offset="442" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a green residual plot of the regression between 'hp' and 'mpg'
 sns.residplot(x='hp', y='mpg', data=auto, color='green')</codebox>
-			<codebox char_offset="532" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot in green a linear regression of order 2 between 'weight' and 'mpg'
+			<codebox char_offset="628" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot in green a linear regression of order 2 between 'weight' and 'mpg'
 sns.regplot(x='weight', y='mpg', data=auto, scatter=None, order=2, color='green',label='order 2')</codebox>
+			<codebox char_offset="1135" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make a strip plot of 'hp' grouped by 'cyl'
+plt.subplot(2,1,1)
+sns.stripplot(x='cyl', y='hp', data=auto)
+
+# Make the strip plot again using jitter and a smaller point size
+plt.subplot(2,1,2)
+sns.stripplot(x='cyl', y='hp', data=auto, jitter=True, size=3)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">
