@@ -4223,7 +4223,7 @@ for result in results:
     print('{}:{}'.format(result.state, result.pop_change))</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545497371.62" unique_id="60">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545664972.78" unique_id="60">
 		<rich_text>
 Here's a </rich_text>
 		<rich_text link="node 42">previous node on plotting</rich_text>
@@ -4420,7 +4420,7 @@ plt.show()</codebox>
 plt.style.use('ggplot')
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 2D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545397906.08" ts_lastsave="1545497117.42" unique_id="62">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 2D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545397906.08" ts_lastsave="1545670848.89" unique_id="62">
 			<rich_text>
 
 Meshgrids
@@ -4550,6 +4550,46 @@ Rescaling image intensity values. The image array can be treated like an array a
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+More on image processing (enhancing dynamic range)
+
+This turns the 2D array into a 1D array suitable for histograms
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This plots the histogram for the image intensity values
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This switches the grid lines off
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This makes second set of axes that shares the x-axis. This enables us to plot the CDF on the same plot as the histogram. This will cause the left and right y axes to have different sets of values.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This plots the CDF. Note that we just need to add the cumulative parameter. Note that the lecture assigns plt.hist object to cdf.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+This is how to produce an equalised image that has a linear CDF. Most of the work is done by np.interp(x, xp, fp). This function maps the array x according to the function fp evaluated on the values xp.
+
+
+
+
+
+
 
 </rich_text>
 			<codebox char_offset="45" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import numpy as np
@@ -4649,8 +4689,61 @@ plt.imshow(rescaled_image)
 
 plt.show()
 </codebox>
+			<codebox char_offset="2399" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">pixels = image.flatten()</codebox>
+			<codebox char_offset="2459" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.subplot(2,1,2)
+plt.xlim((0,255))
+plt.title('Normalized histogram')
+plt.hist(pixels,bins=64, range=(0,256), normed=True, color='red',alpha=0.4)
+</codebox>
+			<codebox char_offset="2496" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.grid('off')</codebox>
+			<codebox char_offset="2697" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Use plt.twinx() to overlay the CDF in the bottom subplot
+plt.twinx()</codebox>
+			<codebox char_offset="2831" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Display a cumulative histogram of the pixels
+cdf = plt.hist(pixels, bins=64, range=(0,256),
+               normed=True, cumulative=True,
+               color='blue', alpha=0.4)
+</codebox>
+			<codebox char_offset="3039" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Load the image into an array: image
+image = plt.imread('640px-Unequalized_Hawkes_Bay_NZ.jpg')
+
+# Flatten the image into 1 dimension: pixels
+pixels = image.flatten()
+
+# Generate a cumulative histogram
+cdf, bins, patches = plt.hist(pixels, bins=256, range=(0,256), normed=True, cumulative=True)
+new_pixels = np.interp(pixels, bins[:-1], cdf*255)
+
+# Reshape new_pixels as a 2-D array: new_image
+new_image = new_pixels.reshape(image.shape)
+
+# Display the new image with 'gray' color map
+plt.subplot(2,1,1)
+plt.title('Equalized image')
+plt.axis('off')
+plt.imshow(new_image,cmap='gray')
+
+# Generate a histogram of the new pixels
+plt.subplot(2,1,2)
+pdf = plt.hist(new_pixels, bins=64, range=(0,256), normed=False,
+               color='red', alpha=0.4)
+plt.grid('off')
+
+# Use plt.twinx() to overlay the CDF in the bottom subplot
+plt.twinx()
+plt.xlim((0,256))
+plt.grid('off')
+
+# Add title
+plt.title('PDF &amp; CDF (equalized image)')
+
+# Generate a cumulative histogram of the new pixels
+cdf = plt.hist(new_pixels, bins=64, range=(0,256),
+               cumulative=True, normed=True,
+               color='blue', alpha=0.4)
+plt.show()
+</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Seaborn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545497371.62" ts_lastsave="1545542170.02" unique_id="63">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Seaborn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545497371.62" ts_lastsave="1545664317.65" unique_id="63">
 			<rich_text>
 Plotting a simple linear regression line
 
@@ -4705,7 +4798,86 @@ Note that x has to be a categorical variable, and y the continuous variable. If 
 			<rich_text>
 
 
+Swarm plots
 
+These can be generated like strip plots, and can have a horizontal orientation as well if orient='h' is specified. Just remember to swap the x and y arrays.
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Violin plots
+
+This generates a basic violin plot categorised by cyl.
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This removes inner annotation of the violin plots and uses a different color scheme
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Visualising multivariate data
+
+Joint plot - souped up scatter plot
+
+By default, the below shows: correlation coefficient + p value, and histograms for both axes
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Can use kernel density, or hex, or other plot options
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+kind takes other options
+
+• </rich_text>
+			<rich_text family="monospace">kind='scatter'</rich_text>
+			<rich_text> uses a scatter plot of the data points
+• </rich_text>
+			<rich_text family="monospace">kind='reg'</rich_text>
+			<rich_text> uses a regression plot (default order 1)
+• </rich_text>
+			<rich_text family="monospace">kind='resid'</rich_text>
+			<rich_text> uses a residual plot
+• </rich_text>
+			<rich_text family="monospace">kind='kde'</rich_text>
+			<rich_text> uses a kernel density estimate of the joint distribution
+• </rich_text>
+			<rich_text family="monospace">kind='hex'</rich_text>
+			<rich_text> uses a hexbin plot of the joint distribution
+
+
+
+Pair Plot 
+Pair wise plots - takes pairs of variables and plots a series of scatter plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The non-categorical columns are automatically identified and plotted. Just need to pass the data frame as an argument.
+
+Pair plot also takes the kind parameter.
+kind: ‘reg’ for regression; ‘scatter’ for scatter plots (default)
+hue: to group by categorical variable by color
+
+
+Heat map
+
+For covariance matrix between two variables. This is sometimes used to visualise covariance matrices.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+It appears that the type of cov_matrix here is pandas DataFrame. 
 
 
 </rich_text>
@@ -4734,6 +4906,105 @@ sns.stripplot(x='cyl', y='hp', data=auto)
 # Make the strip plot again using jitter and a smaller point size
 plt.subplot(2,1,2)
 sns.stripplot(x='cyl', y='hp', data=auto, jitter=True, size=3)</codebox>
+			<codebox char_offset="1309" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a swarm plot of 'hp' grouped horizontally by 'cyl'  
+plt.subplot(2,1,1)
+sns.swarmplot(x='cyl',y='hp',data=auto)
+
+# Generate a swarm plot of 'hp' grouped vertically by 'cyl' with a hue of 'origin'
+plt.subplot(2,1,2)
+sns.swarmplot(y='cyl',x='hp',data=auto,hue='origin',orient='h')
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="1382" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a violin plot of 'hp' grouped horizontally by 'cyl'
+plt.subplot(2,1,1)
+sns.violinplot(x='cyl', y='hp', data=auto)
+</codebox>
+			<codebox char_offset="1470" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">sns.violinplot(x='cyl', y='hp', data=auto,inner=None, color='lightgray')
+</codebox>
+			<codebox char_offset="1635" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a joint plot of 'hp' and 'mpg'
+sns.jointplot('hp','mpg',data=auto)
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="1693" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a joint plot of 'hp' and 'mpg' using a hexbin plot
+sns.jointplot('hp','mpg',data=auto,kind='hex')
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="2090" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot the pairwise joint distributions from the DataFrame 
+sns.pairplot(auto)
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="2482" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Visualize the covariance matrix using a heatmap
+sns.heatmap(cov_matrix)
+
+# Display the heatmap
+plt.show()
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting Time Series" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545664972.78" ts_lastsave="1545666857.57" unique_id="64">
+			<rich_text>
+We can specify the legend
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+So can the orientation of the x axis tick marks
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This demonstrates slicing and plotting an inset within another plot.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Here is the x axis relabelling example from the lectures
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<codebox char_offset="28" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add a legend in the top left corner of the plot
+plt.legend(loc='upper left')
+</codebox>
+			<codebox char_offset="80" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify the orientation of the xticks
+plt.xticks(rotation=60)
+</codebox>
+			<codebox char_offset="153" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Slice aapl from Nov. 2007 to Apr. 2008 inclusive: view
+view = aapl['2007-11':'2008-04']
+
+# Plot the entire series 
+plt.plot(aapl)
+plt.xticks(rotation=45)
+plt.title('AAPL: 2001-2011')
+
+# Specify the axes
+plt.axes([0.25,0.5,0.35,0.35])
+
+# Plot the sliced series in red using the current axes
+plt.plot(view,color='red')
+plt.xticks(rotation=45)
+plt.title('2007/11-2008/04')
+plt.show()</codebox>
+			<codebox char_offset="214" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">dates = jan.index[::96] # Pick every 4th day
+
+labels = dates.strftime('%b %d')
+
+# ...
+# And then we can specify the labels
+plt.xticks(dates, labels, rotation=60)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">
