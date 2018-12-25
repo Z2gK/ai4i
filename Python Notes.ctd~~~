@@ -5049,7 +5049,7 @@ labels = dates.strftime('%b %d')
 # And then we can specify the labels
 plt.xticks(dates, labels, rotation=60)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Bokeh Plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545708455.59" ts_lastsave="1545709302.54" unique_id="65">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bokeh Plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545708455.59" ts_lastsave="1545754445.05" unique_id="65">
 			<rich_text>
 Bokeh does not require a server to run. No javascript is required
 
@@ -5058,6 +5058,12 @@ Basic scatter plots
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+figure() has other parameters
+plot_width: for the width of the plot
+tools: what tools to equip the plot with. Lecture example is 'pan,box_zoom'
+
+circle() accepts arrays. Here the list of x and y coordinates of the centres of the circles are provided. Size can be provided as an array too. One parameter can be a single integer, while the others can be arrays.
 
 There is such a thing as an x glyph. The marks will be ‘x’ instead of circles.
 
@@ -5069,9 +5075,86 @@ For p.circle(), we can have other parameters, e.g.
 color: for the color of the marks. This can take CSS color names, RGB values or hexadecimal strings
 size: for the sizes of the marks
 alpha: for transparency, specified as a value between 0 and 1
+fill_color: the color of the fill
+
+Other glyph markers are available
+
+• asterisk() 
+• circle()
+• circle_cross()
+• circle_x()
+• cross()
+• diamond()
+• diamond_cross()
+• inverted_triangle()
+• square()
+• square_cross()
+• square_x()
+• triangle()
+• x()
+
+Plotting Lines
+
+If we are using datetime objects, we need to specify this in the figure() method.
+
+The line() method takes the x and y values.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Patches
+
+These are basically filled polygons.  We provide arrays with its x and y coordinates.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
-Q: In plotting scatter diagrams, the axes don't get restricted. How do we do that? E.g. in some cases, it doesn't make sense for percentage to be negative (population literacy)
+Data from numpy arrays
+
+The circle() method can take numpy arrays as inputs.
+
+
+
+It  can take columns from pandas dataframes directly
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Another way is to convert pandas data frames to ColumnDataSource objects 
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Adding customisations to glyphs
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+By specifying tools='box_select', we are enabling the selection tool, which will change the colors of data points when they are selected. Additional options can be specified in circle() method.
+
+There is also the hover tool.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+And the color mapping tool, to color each category with a different color
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+</rich_text>
+			<rich_text weight="heavy">Q: In plotting scatter diagrams, the axes don't get restricted. How do we do that? E.g. in some cases, it doesn't make sense for percentage to be negative (population literacy)</rich_text>
+			<rich_text>
 
 </rich_text>
 			<codebox char_offset="89" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import figure from bokeh.plotting
@@ -5092,13 +5175,88 @@ output_file('fert_lit.html')
 # Display the plot
 show(p)
 </codebox>
-			<codebox char_offset="172" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add an x glyph to the figure p
+			<codebox char_offset="533" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add an x glyph to the figure p
 p.x(fertility_africa,female_literacy_africa)</codebox>
+			<codebox char_offset="1174" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a figure with x_axis_type=&quot;datetime&quot;: p
+p = figure(x_axis_type = 'datetime', x_axis_label='Date', y_axis_label='US Dollars')
+
+# Plot date along the x axis and price along the y axis
+p.line(date, price)
+</codebox>
+			<codebox char_offset="1273" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a list of az_lons, co_lons, nm_lons and ut_lons: x
+x = [az_lons, co_lons, nm_lons, ut_lons]
+
+# Create a list of az_lats, co_lats, nm_lats and ut_lats: y
+y = [az_lats, co_lats, nm_lats, ut_lats]
+
+# Add patches to figure p with line_color=white for x and y
+p.patches(x, y, line_color='white')
+</codebox>
+			<codebox char_offset="1355" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import numpy as np
+import numpy as np
+
+# Create array using np.linspace: x
+x = np.linspace(0,5,100)
+
+# Create array using np.cos: y
+y = np.cos(x)
+
+# Add circles at x and y
+p.circle(x,y)
+</codebox>
+			<codebox char_offset="1412" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot mpg vs hp by color
+p.circle(df['hp'],df['mpg'],color=df['color'],size=10)
+</codebox>
+			<codebox char_offset="1490" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the ColumnDataSource class from bokeh.plotting
+from bokeh.plotting import ColumnDataSource
+
+# Create a ColumnDataSource from df: source
+source = ColumnDataSource(df)
+
+# Add circle glyphs to the figure p
+p.circle(x='Year',y='Time',source=source,color='color',size=8)
+</codebox>
+			<codebox char_offset="1526" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a figure with the &quot;box_select&quot; tool: p
+p = figure(x_axis_label=&quot;Year&quot;,y_axis_label=&quot;Time&quot;,tools=&quot;box_select&quot;)
+
+# Add circle glyphs to the figure p with the selected and non-selected properties
+p.circle(x=&quot;Year&quot;,y=&quot;Time&quot;,source=source,selection_color='red',nonselection_alpha=0.1)
+</codebox>
+			<codebox char_offset="1755" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># import the HoverTool
+from bokeh.models import HoverTool
+
+# Add circle glyphs to figure p
+p.circle(x, y, size=10,
+         fill_color='grey', alpha=0.1, line_color=None,
+         hover_fill_color='firebrick', hover_alpha=0.5,
+         hover_line_color='white')
+
+# Create a HoverTool: hover
+hover = HoverTool(tooltips=None,mode='vline')
+
+# Add the hover tool to the figure p
+p.add_tools(hover)
+</codebox>
+			<codebox char_offset="1833" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#Import CategoricalColorMapper from bokeh.models
+from bokeh.models import CategoricalColorMapper
+
+# Convert df to a ColumnDataSource: source
+source = ColumnDataSource(df)
+
+# Make a CategoricalColorMapper object: color_mapper
+color_mapper = CategoricalColorMapper(factors=['Europe', 'Asia', 'US'],
+                                      palette=['red', 'green', 'blue'])
+
+# Add a circle glyph to the figure p
+p.circle('weight', 'mpg', source=source,
+            color=dict(field='origin',transform=color_mapper),
+            legend='origin')
+</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545754679.34" unique_id="56">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545672265.87" unique_id="57">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545754946.45" unique_id="57">
 			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
 
 </rich_text>
@@ -5188,6 +5346,12 @@ Note that the Pearson correlation coefficient is simply the covariance divided b
 			<rich_text>
 
 
+This sets a 2% margin on the x and y axes
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
 Previous node on plotting can be found </rich_text>
 			<rich_text link="node 42">here</rich_text>
 			<rich_text>.
@@ -5270,6 +5434,9 @@ petal_cov = covariance_matrix[0,1]
 
 # Compute Pearson correlation coefficient for I. versicolor: r
 r = pearson_r(versicolor_petal_length,versicolor_petal_width)
+</codebox>
+			<codebox char_offset="1280" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the margins and label axes
+plt.margins(0.02)
 </codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Probability Distributions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545366287.72" ts_lastsave="1545672291.66" unique_id="58">
@@ -5362,6 +5529,11 @@ samples_std10 = np.random.normal(20, 10, size=100000)
 _ = plt.legend(('std = 1', 'std = 3', 'std = 10'))
 plt.ylim(-0.01, 0.42)</codebox>
 			<codebox char_offset="1097" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">t1 = np.random.exponential(tau1, size=size)</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression, Confidence intervals and hypothesis testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545754679.34" ts_lastsave="1545754683.23" unique_id="66">
+			<rich_text>
+
+</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
