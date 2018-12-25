@@ -4223,7 +4223,7 @@ for result in results:
     print('{}:{}'.format(result.state, result.pop_change))</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545664972.78" unique_id="60">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545708455.58" unique_id="60">
 		<rich_text>
 Here's a </rich_text>
 		<rich_text link="node 42">previous node on plotting</rich_text>
@@ -5048,6 +5048,74 @@ labels = dates.strftime('%b %d')
 # ...
 # And then we can specify the labels
 plt.xticks(dates, labels, rotation=60)</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bokeh Plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545708455.59" ts_lastsave="1545709676.97" unique_id="65">
+			<rich_text>
+Bokeh does not require a server to run. No javascript is required
+
+Basic scatter plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+figure() has other parameters
+plot_width: for the width of the plot
+tools: what tools to equip the plot with. Lecture example is 'pan,box_zoom'
+
+circle() accepts arrays. Here the list of x and y coordinates of the centres of the circles are provided. Size can be provided as an array too. One parameter can be a single integer, while the others can be arrays.
+
+There is such a thing as an x glyph. The marks will be ‘x’ instead of circles.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+For p.circle(), we can have other parameters, e.g.
+color: for the color of the marks. This can take CSS color names, RGB values or hexadecimal strings
+size: for the sizes of the marks
+alpha: for transparency, specified as a value between 0 and 1
+
+Other glyph markers are available
+
+• asterisk() 
+• circle()
+• circle_cross()
+• circle_x()
+• cross()
+• diamond()
+• diamond_cross()
+• inverted_triangle()
+• square()
+• square_cross()
+• square_x()
+• triangle()
+• x()
+
+
+Q: In plotting scatter diagrams, the axes don't get restricted. How do we do that? E.g. in some cases, it doesn't make sense for percentage to be negative (population literacy)
+
+</rich_text>
+			<codebox char_offset="89" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import figure from bokeh.plotting
+from bokeh.plotting import figure
+
+# Import output_file and show from bokeh.io
+from bokeh.io import output_file, show
+
+# Create the figure: p
+p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)')
+
+# Add a circle glyph to the figure p
+p.circle(fertility, female_literacy)
+
+# Call the output_file() function and specify the name of the file
+output_file('fert_lit.html')
+
+# Display the plot
+show(p)
+</codebox>
+			<codebox char_offset="533" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add an x glyph to the figure p
+p.x(fertility_africa,female_literacy_africa)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">

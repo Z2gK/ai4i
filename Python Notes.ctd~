@@ -4223,7 +4223,7 @@ for result in results:
     print('{}:{}'.format(result.state, result.pop_change))</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545664972.78" unique_id="60">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545708455.58" unique_id="60">
 		<rich_text>
 Here's a </rich_text>
 		<rich_text link="node 42">previous node on plotting</rich_text>
@@ -4420,10 +4420,12 @@ plt.show()</codebox>
 plt.style.use('ggplot')
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 2D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545397906.08" ts_lastsave="1545671289.69" unique_id="62">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Plotting 2D data" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545397906.08" ts_lastsave="1545672170.27" unique_id="62">
 			<rich_text>
 
-Meshgrids
+</rich_text>
+			<rich_text scale="h1">Meshgrids</rich_text>
+			<rich_text>
 
 These are rather like heatmaps
 
@@ -4483,7 +4485,9 @@ To include the correct X and Y axes labels (instead of integers), we simply incl
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Contour plots
+</rich_text>
+			<rich_text scale="h1">Contour plots</rich_text>
+			<rich_text>
 
 Instead of pcolor, we can use contour plots to show equi-valued points. The usage is similar.
 
@@ -4510,7 +4514,9 @@ We can improve the spacing as well using this
 			<rich_text>
 
 
-2D Histogram
+</rich_text>
+			<rich_text scale="h1">2D Histogram</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -4518,7 +4524,9 @@ We can improve the spacing as well using this
 
 In the example here, hp and mpg are on the horizontal and vertical axes respectively. There are 20 bins on the horizontal and 20 on the vertical. the range parameter specifies the range of values we are showing - [40, 235] on the horizontal and [8,48] on the vertical.
 
-Hexbin plots
+</rich_text>
+			<rich_text scale="h1">Hexbin plots</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -4526,7 +4534,9 @@ Hexbin plots
 
 Here, gridsize is the equivalent of bins. extent is the equivalent of range, except that it is provided in one tuple instead of two separate ones.
 
-Images
+</rich_text>
+			<rich_text scale="h1">Images</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -4585,7 +4595,9 @@ This plots the CDF. Note that we just need to add the cumulative parameter. Note
 
 This is how to produce an equalised image that has a linear CDF. Most of the work is done by np.interp(x, xp, fp). This function maps the array x according to the function fp evaluated on the values xp.
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 This extracts the RGB values from a color image
 
@@ -4752,9 +4764,11 @@ image = plt.imread('hs-2004-32-b-small_web.jpg')
 # Extract 2-D arrays of the RGB channels: red, blue, green
 red, green, blue = image[:,:,0], image[:,:,1], image[:,:,2]</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Seaborn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545497371.62" ts_lastsave="1545664317.65" unique_id="63">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction to Seaborn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545497371.62" ts_lastsave="1545672226.62" unique_id="63">
 			<rich_text>
-Plotting a simple linear regression line
+</rich_text>
+			<rich_text scale="h1">Plotting a simple linear regression line</rich_text>
+			<rich_text>
 
 Note that the 95% confidence range shading is included in the plot
 
@@ -4777,7 +4791,9 @@ Alternatively, this puts the different regression lines into distinct plots.
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Residual plots
+</rich_text>
+			<rich_text scale="h1">Residual plots</rich_text>
+			<rich_text>
 
 This  is a residual plot, with similar arguments as lmplot
 
@@ -4786,7 +4802,9 @@ This  is a residual plot, with similar arguments as lmplot
 			<rich_text>
 
 
-Higher order regression
+</rich_text>
+			<rich_text scale="h1">Higher order regression</rich_text>
+			<rich_text>
 
 regplot() is lower level compared to lmplot(). We can specify the order of the fitted line. Presumably this has to do with the polynomial order being used.
 
@@ -4795,7 +4813,9 @@ regplot() is lower level compared to lmplot(). We can specify the order of the f
 			<rich_text>
 
 
-Strip Plots
+</rich_text>
+			<rich_text scale="h1">Strip Plots</rich_text>
+			<rich_text>
 
 Strip plots are like bee swarm plots, except that the default option plots the points in a vertical line, making it impossible to see multiple plots when they are plotted on top of each other
 The workaround is to use the parameter jitter=True, which jitters the plotted points so that they don't overlap. The parameter size is for the size of the points.
@@ -4807,7 +4827,9 @@ Note that x has to be a categorical variable, and y the continuous variable. If 
 			<rich_text>
 
 
-Swarm plots
+</rich_text>
+			<rich_text scale="h1">Swarm plots</rich_text>
+			<rich_text>
 
 These can be generated like strip plots, and can have a horizontal orientation as well if orient='h' is specified. Just remember to swap the x and y arrays.
 </rich_text>
@@ -4815,7 +4837,9 @@ These can be generated like strip plots, and can have a horizontal orientation a
 			<rich_text>
 
 
-Violin plots
+</rich_text>
+			<rich_text scale="h1">Violin plots</rich_text>
+			<rich_text>
 
 This generates a basic violin plot categorised by cyl.
 </rich_text>
@@ -4828,9 +4852,15 @@ This removes inner annotation of the violin plots and uses a different color sch
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Visualising multivariate data
+</rich_text>
+			<rich_text scale="h1">Visualising multivariate data</rich_text>
+			<rich_text>
 
-Joint plot - souped up scatter plot
+</rich_text>
+			<rich_text scale="h2">Joint plot</rich_text>
+			<rich_text>
+
+Souped up scatter plot
 
 By default, the below shows: correlation coefficient + p value, and histograms for both axes
 
@@ -4864,7 +4894,9 @@ kind takes other options
 
 
 
-Pair Plot 
+</rich_text>
+			<rich_text scale="h2">Pair Plot </rich_text>
+			<rich_text>
 Pair wise plots - takes pairs of variables and plots a series of scatter plots
 
 </rich_text>
@@ -4878,7 +4910,9 @@ kind: ‘reg’ for regression; ‘scatter’ for scatter plots (default)
 hue: to group by categorical variable by color
 
 
-Heat map
+</rich_text>
+			<rich_text scale="h2">Heat map</rich_text>
+			<rich_text>
 
 For covariance matrix between two variables. This is sometimes used to visualise covariance matrices.
 
@@ -4932,25 +4966,25 @@ sns.violinplot(x='cyl', y='hp', data=auto)
 </codebox>
 			<codebox char_offset="1470" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">sns.violinplot(x='cyl', y='hp', data=auto,inner=None, color='lightgray')
 </codebox>
-			<codebox char_offset="1635" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a joint plot of 'hp' and 'mpg'
+			<codebox char_offset="1634" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a joint plot of 'hp' and 'mpg'
 sns.jointplot('hp','mpg',data=auto)
 
 # Display the plot
 plt.show()
 </codebox>
-			<codebox char_offset="1693" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a joint plot of 'hp' and 'mpg' using a hexbin plot
+			<codebox char_offset="1692" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate a joint plot of 'hp' and 'mpg' using a hexbin plot
 sns.jointplot('hp','mpg',data=auto,kind='hex')
 
 # Display the plot
 plt.show()
 </codebox>
-			<codebox char_offset="2090" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot the pairwise joint distributions from the DataFrame 
+			<codebox char_offset="2089" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Plot the pairwise joint distributions from the DataFrame 
 sns.pairplot(auto)
 
 # Display the plot
 plt.show()
 </codebox>
-			<codebox char_offset="2482" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Visualize the covariance matrix using a heatmap
+			<codebox char_offset="2481" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Visualize the covariance matrix using a heatmap
 sns.heatmap(cov_matrix)
 
 # Display the heatmap
@@ -5015,13 +5049,67 @@ labels = dates.strftime('%b %d')
 # And then we can specify the labels
 plt.xticks(dates, labels, rotation=60)</codebox>
 		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bokeh Plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545708455.59" ts_lastsave="1545709596.12" unique_id="65">
+			<rich_text>
+Bokeh does not require a server to run. No javascript is required
+
+Basic scatter plots
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+figure() has other parameters
+plot_width: for the width of the plot
+tools: what tools to equip the plot with. Lecture example is 'pan,box_zoom'
+
+circle() accepts arrays. Here the list of x and y coordinates of the centres of the circles are provided. Size can be provided as an array too. One parameter can be a single integer, while the others can be arrays.
+
+There is such a thing as an x glyph. The marks will be ‘x’ instead of circles.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+For p.circle(), we can have other parameters, e.g.
+color: for the color of the marks. This can take CSS color names, RGB values or hexadecimal strings
+size: for the sizes of the marks
+alpha: for transparency, specified as a value between 0 and 1
+
+
+Q: In plotting scatter diagrams, the axes don't get restricted. How do we do that? E.g. in some cases, it doesn't make sense for percentage to be negative (population literacy)
+
+</rich_text>
+			<codebox char_offset="89" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import figure from bokeh.plotting
+from bokeh.plotting import figure
+
+# Import output_file and show from bokeh.io
+from bokeh.io import output_file, show
+
+# Create the figure: p
+p = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)')
+
+# Add a circle glyph to the figure p
+p.circle(fertility, female_literacy)
+
+# Call the output_file() function and specify the name of the file
+output_file('fert_lit.html')
+
+# Display the plot
+show(p)
+</codebox>
+			<codebox char_offset="533" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add an x glyph to the figure p
+p.x(fertility_africa,female_literacy_africa)</codebox>
+		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545391424.12" unique_id="56">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545369608.74" unique_id="57">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545672265.87" unique_id="57">
 			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
 
-Histograms
+</rich_text>
+			<rich_text scale="h1">Histograms</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -5034,7 +5122,9 @@ histtype: ‘step’ to see transparent stepped bars instead of the default opaq
 
 There is a ‘square root rule’ for histograms - choose the number of bins to be square root of the number of data points
 
-Bee Swarm Plots
+</rich_text>
+			<rich_text scale="h1">Bee Swarm Plots</rich_text>
+			<rich_text>
 
 Bee Swarm plots add more information to histograms without adding more complexity. These can be done in seaborn.
 
@@ -5042,7 +5132,9 @@ Bee Swarm plots add more information to histograms without adding more complexit
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Empirical Cumulative Distribution Function (ECDF)
+</rich_text>
+			<rich_text scale="h1">Empirical Cumulative Distribution Function (ECDF)</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -5063,7 +5155,9 @@ Note that the percentile array need to be first converted to numpy array
 			<rich_text>
 
 
-Box plots
+</rich_text>
+			<rich_text scale="h1">Box plots</rich_text>
+			<rich_text>
 
 We use box plots when the number of samples get too much to be represented in swarm plots
 
@@ -5071,21 +5165,27 @@ We use box plots when the number of samples get too much to be represented in sw
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Scatter plots
+</rich_text>
+			<rich_text scale="h1">Scatter plots</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
 
-Calculating covariance
+</rich_text>
+			<rich_text scale="h1">Calculating covariance</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
 
-Pearson correlation coefficient
+</rich_text>
+			<rich_text scale="h1">Pearson correlation coefficient</rich_text>
+			<rich_text>
 
 Note that the Pearson correlation coefficient is simply the covariance divided by the respective standard deviations of x and y.
 
@@ -5178,9 +5278,11 @@ petal_cov = covariance_matrix[0,1]
 r = pearson_r(versicolor_petal_length,versicolor_petal_width)
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Probability Distributions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545366287.72" ts_lastsave="1545371079.92" unique_id="58">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Probability Distributions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545366287.72" ts_lastsave="1545672291.66" unique_id="58">
 			<rich_text>
-
+</rich_text>
+			<rich_text scale="h1">Generating random numbers</rich_text>
+			<rich_text>
 
 Seeding and generating random numbers with np.random.random()
 
@@ -5202,14 +5304,18 @@ Probability mass function vs Probability Distributions?
 
 Plotting PMF in matplotlib requires a bit of trickery. We will use the histogram method to plot instead
 
-Poisson process
+</rich_text>
+			<rich_text scale="h1">Poisson process</rich_text>
+			<rich_text>
 
 Timing of one is independent of timing of the previous
 e.g. births in a hospital, hits on a website in a given hour, meteor strikes, moleculer collisionss in a gas, aviations accidents, buses in Poissonville
 
 Poisson is the limit to Binomial for low probability of success and high number of trials, i.e. for rare events
 
-The Normal Distribution
+</rich_text>
+			<rich_text scale="h1">The Normal Distribution</rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -5219,7 +5325,9 @@ Things that you think are normally distributed are actually not
 4 standard deviation data points are very very rare - when data contains such points, be very careful
 
 
-Exponential distribution
+</rich_text>
+			<rich_text scale="h1">Exponential distribution</rich_text>
+			<rich_text>
 
 The probability of interval (time) between Poisson processes
 
@@ -5240,7 +5348,7 @@ The probability of interval (time) between Poisson processes
 
 
 </rich_text>
-			<codebox char_offset="136" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Seed the random number generator
+			<codebox char_offset="161" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Seed the random number generator
 np.random.seed(42)
 
 # Initialize random numbers: random_numbers
@@ -5249,9 +5357,9 @@ random_numbers = np.empty(100000)
 # Generate random numbers by looping over range(100000)
 for i in range(100000):
     random_numbers[i] = np.random.random()</codebox>
-			<codebox char_offset="284" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">n_defaults = np.random.binomial(n=100,p=0.05,size=10000)
+			<codebox char_offset="309" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">n_defaults = np.random.binomial(n=100,p=0.05,size=10000)
 </codebox>
-			<codebox char_offset="813" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Draw 100000 samples from Normal distribution with stds of interest: samples_std1, samples_std3, samples_std10
+			<codebox char_offset="838" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Draw 100000 samples from Normal distribution with stds of interest: samples_std1, samples_std3, samples_std10
 samples_std1 = np.random.normal(20, 1, size=100000)
 samples_std3 = np.random.normal(20, 3, size=100000)
 samples_std10 = np.random.normal(20, 10, size=100000)
@@ -5259,7 +5367,7 @@ samples_std10 = np.random.normal(20, 10, size=100000)
 # Make a legend, set limits and show plot
 _ = plt.legend(('std = 1', 'std = 3', 'std = 10'))
 plt.ylim(-0.01, 0.42)</codebox>
-			<codebox char_offset="1072" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">t1 = np.random.exponential(tau1, size=size)</codebox>
+			<codebox char_offset="1097" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">t1 = np.random.exponential(tau1, size=size)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
