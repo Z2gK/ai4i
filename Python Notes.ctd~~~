@@ -5116,7 +5116,9 @@ Data from numpy arrays
 
 The circle() method can take numpy arrays as inputs.
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 It  can take columns from pandas dataframes directly
 
@@ -5530,10 +5532,79 @@ _ = plt.legend(('std = 1', 'std = 3', 'std = 10'))
 plt.ylim(-0.01, 0.42)</codebox>
 			<codebox char_offset="1097" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">t1 = np.random.exponential(tau1, size=size)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression, Confidence intervals and hypothesis testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545754679.34" ts_lastsave="1545754683.23" unique_id="66">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression, Confidence intervals and hypothesis testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545754679.34" ts_lastsave="1545801962.18" unique_id="66">
 			<rich_text>
+Regression
+
+To calculate linear regression coefficients, we use polyfit()
+
+Note that here, illiteracy and fertility are the x and y data respectively.
+a is the slope, b is the intercept
+deg is for the degree of the polynomial we are fitting. For linear regressions, this is 1.
 
 </rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This, empty_like(), initialises and empty array just like the one provided
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Bootstrapping
+
+Definition
+
+A </rich_text>
+			<rich_text weight="heavy">bootstrap sample</rich_text>
+			<rich_text> is an array of length n that was drawn from the original data with replacement.
+
+</rich_text>
+			<rich_text weight="heavy">Q: Should n have the same length as the original data set?</rich_text>
+			<rich_text>
+
+A </rich_text>
+			<rich_text weight="heavy">bootstrap replicate</rich_text>
+			<rich_text> is single value of a statistic computed from a bootstrap sample. For example, this could be the mean or standard deviation generated many times
+
+We can use np.random.choice() on a numpy array to help 
+
+The confidence interval of the statistic can be generate using np.percentile(). For example, if bs_means is the data set, the 95% confidence interval is given by np.percentile(bs_means, [2.5, 97.5]).
+
+For pair-wise data
+
+In the case for pair-wise data, e.g. election data such as vote share (%) for Obama vs total votes cast grouped by county. 
+
+The arange function is useful for generating a list of values from 0, to ...
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can generate slopes and intercepts and calculate 95% confidence intervals from this bootstrap data, for both the slope and intercept. 
+
+
+Hypothesis testing
+
+We can simulate a hypothesis my sample mixing.
+
+In the lecture example, there we have a list of voting patterns for PA and OH, i.e. the Obama vote share for 
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="279" frame_height="70" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform a linear regression using np.polyfit(): a, b
+a, b = np.polyfit(illiteracy,fertility,deg=1)
+</codebox>
+			<codebox char_offset="358" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify slopes to consider: a_vals
+a_vals = np.linspace(0,0.1,200)
+
+# Initialize sum of square of residuals: rss
+rss = np.empty_like(a_vals)</codebox>
+			<codebox char_offset="1196" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">inds = np.arange(len(x))</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
