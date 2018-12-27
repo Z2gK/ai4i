@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -5532,7 +5532,7 @@ _ = plt.legend(('std = 1', 'std = 3', 'std = 10'))
 plt.ylim(-0.01, 0.42)</codebox>
 			<codebox char_offset="1097" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">t1 = np.random.exponential(tau1, size=size)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression, Confidence intervals and hypothesis testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545754679.34" ts_lastsave="1545802103.69" unique_id="66">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression, Confidence intervals and hypothesis testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545754679.34" ts_lastsave="1545899294.19" unique_id="66">
 			<rich_text>
 Regression
 
@@ -5593,8 +5593,29 @@ In the lecture example, there we have a list of voting patterns for PA and OH, i
 
 A way to start is to mix up the vote share data in the 67 PA and 80+ OH counties, permute them, and assign 67 randomly to PA and the rest to OH. Then repeat the calculations.
 
+Useful functions for this - 
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+In the lectures, the way to visually answer this is to plot the ecdf for the sets generated from the mixed samples, and overlay this with the ecdfs from the actual samples, and see if they overlap.
+
+The p value is ....
+
+</rich_text>
+			<rich_text weight="heavy">One sample bootstrap hypothesis test can be quite confusing! Why are we shifting results to some particular mean value??</rich_text>
+			<rich_text>
+
+A/B Testing
+
+Testing of website design
+
+Statistical significance is not the same as practical significance
 
 
+
+Example of hypothesis testing on the null hypothesis that illiteracy rates DOES NOT correlate with fertility in the country
 
 
 
@@ -5609,6 +5630,29 @@ a_vals = np.linspace(0,0.1,200)
 # Initialize sum of square of residuals: rss
 rss = np.empty_like(a_vals)</codebox>
 			<codebox char_offset="1196" frame_height="40" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">inds = np.arange(len(x))</codebox>
+			<codebox char_offset="1929" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Concatenate the data sets: data
+data = np.concatenate((data1,data2))
+
+# Permute the concatenated array: permuted_data
+permuted_data = np.random.permutation(data)
+</codebox>
+			<codebox char_offset="2509" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Compute observed correlation: r_obs
+r_obs = pearson_r(illiteracy,fertility)
+
+# Initialize permutation replicates: perm_replicates
+perm_replicates = np.empty(10000)
+
+# Draw replicates
+for i in range(10000):
+    # Permute illiteracy measurments: illiteracy_permuted
+    illiteracy_permuted = np.random.permutation(illiteracy)
+
+    # Compute Pearson correlation
+    perm_replicates[i] = pearson_r(illiteracy_permuted,fertility)
+
+# Compute p-value: p
+p = np.sum(perm_replicates &gt; r_obs) / len(perm_replicates)
+print('p-val =', p)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
