@@ -3265,7 +3265,7 @@ combined = pd.merge(revenue,managers,on=[&quot;branch_id&quot;,&quot;city&quot;,
 # how can be &quot;left&quot;, &quot;right&quot;, &quot;inner&quot; or &quot;outer&quot;</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL basics" prog_lang="custom-colors" readonly="False" tags="SQL" ts_creation="1545034371.37" ts_lastsave="1545065566.13" unique_id="51">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="SQL basics" prog_lang="custom-colors" readonly="False" tags="SQL" ts_creation="1545034371.37" ts_lastsave="1546010978.01" unique_id="51">
 		<rich_text>
 Basic SELECTing of columns from table, or multiple columns, or all columns
 
@@ -3415,7 +3415,9 @@ Performing basic INNER JOIN
 		<rich_text>
 
 
-
+Further content on SQL (more specifically, PostgreSQL) can be found at </rich_text>
+		<rich_text link="node 67">this node</rich_text>
+		<rich_text>.
 
 
 </rich_text>
@@ -5256,7 +5258,7 @@ p.circle('weight', 'mpg', source=source,
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1545754679.34" unique_id="56">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1546008831.71" unique_id="56">
 		<rich_text></rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545754946.45" unique_id="57">
 			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
@@ -5532,7 +5534,7 @@ _ = plt.legend(('std = 1', 'std = 3', 'std = 10'))
 plt.ylim(-0.01, 0.42)</codebox>
 			<codebox char_offset="1097" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">t1 = np.random.exponential(tau1, size=size)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression, Confidence intervals and hypothesis testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545754679.34" ts_lastsave="1545904893.11" unique_id="66">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression, Confidence intervals and hypothesis testing" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545754679.34" ts_lastsave="1546008810.94" unique_id="66">
 			<rich_text>
 Regression
 
@@ -5684,6 +5686,108 @@ p = np.sum(bs_replicates &gt;= np.mean(control) - np.mean(treated)) \
             / len(bs_replicates)
 print('p-value =', p)</codebox>
 		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="PostgreSQL" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546008831.72" ts_lastsave="1546018141.25" unique_id="67">
+		<rich_text>
+A SQL statement can have multiple INNER JOINs
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+There can also be multiple join conditions
+
+We can use the USING shorthand for ON conditions. The USING (code) line below is the same as
+ON c.code = l.code
+
+We can use this shorthand only when the join column names in both tables are the same, i.e. code in this case.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Using CASE WHEN syntax to create customised categories from numerical data.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+The above example creats a new column called geosize_group that shows the string ‘large’ when the surface_area of the country is &gt; 2million, and ‘medium’ in the next category, and ‘small’ otherwise.
+
+The INTO statement turns the results of the query into another table for later use
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+LEFT JOIN
+
+All records on the left table are kept. If keys match on left and right, then values on right table are included in the table.
+
+For rows on the left table with no matching keys on the right, they are preserved. Their “right table values” are given null values.
+
+The syntax is similar to that for INNER JOIN above. Just replace INNER with LEFTs
+
+RIGHT JOINs are quite the same as LEFT JOINs
+
+
+FULL JOINs
+
+This brings together a LEFT JOIN and RIGHT JOIN
+
+
+There is CROSS JOIN as well...but it sounds obscure and not so useful. Basically it pairs keys on the left with every possible combination of keys on the right
+
+
+These join one set of SELECT statements with another. Note that the types of the fields returned by the two SELECT statements must match. Also, the same number of fields has to be returned by the SELECT statement.
+
+In terms of set theory
+UNION: A UNION B
+UNION  ALL:  A UNION B with duplicates
+INTERSECT: - A INTERSECT B
+EXCEPT: (A UNION B) - B
+
+
+
+
+
+
+
+
+
+
+The previous node on SQL syntax can be found at </rich_text>
+		<rich_text link="node 51">this node</rich_text>
+		<rich_text>.</rich_text>
+		<codebox char_offset="48" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT c.code, name, region, e.year, fertility_rate, unemployment_rate
+FROM countries AS c
+INNER JOIN populations AS p
+ON c.code = p.country_code
+INNER JOIN economies AS e
+ON c.code = e.code AND e.year = p.year;</codebox>
+		<codebox char_offset="320" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT c.name AS country, c.continent, l.name AS language, l.official
+FROM countries AS c
+INNER JOIN languages AS l
+USING (code);</codebox>
+		<codebox char_offset="400" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name, continent, code, surface_area,
+        -- first case
+    CASE WHEN surface_area &gt; 2000000 THEN 'large'
+        -- second case
+        WHEN surface_area &gt; 350000 THEN 'medium'
+        -- else clause + end
+        ELSE 'small' END
+        AS geosize_group
+FROM countries;</codebox>
+		<codebox char_offset="687" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="sql" width_in_pixels="True">SELECT name, continent, code, surface_area,
+    CASE WHEN surface_area &gt; 2000000
+            THEN 'large'
+       WHEN surface_area &gt; 350000
+            THEN 'medium'
+       ELSE 'small' END
+       AS geosize_group
+INTO countries_plus
+FROM countries;</codebox>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
