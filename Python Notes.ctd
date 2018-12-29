@@ -4225,7 +4225,7 @@ for result in results:
     print('{}:{}'.format(result.state, result.pop_change))</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1545708455.58" unique_id="60">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="More Data Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545391424.12" ts_lastsave="1546086530.4" unique_id="60">
 		<rich_text>
 Here's a </rich_text>
 		<rich_text link="node 42">previous node on plotting</rich_text>
@@ -4429,7 +4429,9 @@ plt.style.use('ggplot')
 			<rich_text scale="h1">Meshgrids</rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 These are rather like heatmaps
 
@@ -4492,7 +4494,9 @@ To include the correct X and Y axes labels (instead of integers), we simply incl
 </rich_text>
 			<rich_text scale="h1">Contour plots</rich_text>
 			<rich_text>
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Instead of pcolor, we can use contour plots to show equi-valued points. The usage is similar.
 
@@ -4523,7 +4527,9 @@ We can improve the spacing as well using this
 			<rich_text scale="h1">2D Histogram</rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -4535,7 +4541,9 @@ In the example here, hp and mpg are on the horizontal and vertical axes respecti
 			<rich_text scale="h1">Hexbin plots</rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -4830,7 +4838,9 @@ regplot() is lower level compared to lmplot(). We can specify the order of the f
 			<rich_text scale="h1">Strip Plots</rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Strip plots are like bee swarm plots, except that the default option plots the points in a vertical line, making it impossible to see multiple plots when they are plotted on top of each other
 The workaround is to use the parameter jitter=True, which jitters the plotted points so that they don't overlap. The parameter size is for the size of the points.
@@ -4846,7 +4856,9 @@ Note that x has to be a categorical variable, and y the continuous variable. If 
 			<rich_text scale="h1">Swarm plots</rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 These can be generated like strip plots, and can have a horizontal orientation as well if orient='h' is specified. Just remember to swap the x and y arrays.
 </rich_text>
@@ -4857,7 +4869,9 @@ These can be generated like strip plots, and can have a horizontal orientation a
 </rich_text>
 			<rich_text scale="h1">Violin plots</rich_text>
 			<rich_text>
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 This generates a basic violin plot categorised by cyl.
 </rich_text>
@@ -4878,7 +4892,9 @@ This removes inner annotation of the violin plots and uses a different color sch
 			<rich_text scale="h2">Joint plot</rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Souped up scatter plot
 
@@ -4890,7 +4906,9 @@ By default, the below shows: correlation coefficient + p value, and histograms f
 
 Can use kernel density, or hex, or other plot options
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -4920,7 +4938,9 @@ kind takes other options
 			<rich_text scale="h2">Pair Plot </rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Pair wise plots - takes pairs of variables and plots a series of scatter plots
 
@@ -5080,7 +5100,7 @@ labels = dates.strftime('%b %d')
 # And then we can specify the labels
 plt.xticks(dates, labels, rotation=60)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Bokeh Plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545708455.59" ts_lastsave="1545754445.05" unique_id="65">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bokeh Plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545708455.59" ts_lastsave="1546086347.83" unique_id="65">
 			<rich_text>
 Bokeh does not require a server to run. No javascript is required
 
@@ -5183,6 +5203,82 @@ And the color mapping tool, to color each category with a different color
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Multiple plots in rows and columns
+
+This puts the two plots in a row. We need to first import row from the bokeh.layouts module
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+To put both figures in columns we use column
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can also mix column with row
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+An easier way to do this is to use gridplot
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+toolbar_location: This can be set to None, as in the lecture, if toolbars are not required
+In the example above, some of p1, p2, etc. can be set to None if no plot is desired for that space
+
+We can create tabs, but first we need to make panels
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+And then use it in Tabs
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Linking plots
+
+Ranges can be linked simply by assigning the x_range or y_range property of the figure object to each other. The consequence of linking is that when we pan the plot in one subplot, the linked plots will pan correspondingly.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The box select and lasso tools are automatically linked
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Setting legend location and color
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Hover tools can be configured as well
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+or using the add_tools method
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 </rich_text>
@@ -5285,6 +5381,338 @@ p.circle('weight', 'mpg', source=source,
             color=dict(field='origin',transform=color_mapper),
             legend='origin')
 </codebox>
+			<codebox char_offset="1965" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import row from bokeh.layouts
+from bokeh.layouts import row
+
+# Create the first figure: p1
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female_literacy (% population)')
+
+# Add a circle glyph to p1
+p1.circle(&quot;fertility&quot;, &quot;female_literacy&quot;, source=source)
+
+# Create the second figure: p2
+p2 = figure(x_axis_label='population', y_axis_label='female_literacy (% population)')
+
+# Add a circle glyph to p2
+p2.circle(&quot;population&quot;,&quot;female_literacy&quot;,source=source)
+
+# Put p1 and p2 into a horizontal row: layout
+layout = row(p1,p2)
+
+# Specify the name of the output_file and show the result
+output_file('fert_row.html')
+show(layout)</codebox>
+			<codebox char_offset="2014" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import column from the bokeh.layouts module
+from bokeh.layouts import column
+
+#...
+
+# Put plots p1 and p2 in a column: layout
+layout = column(p1,p2)
+
+# ...</codebox>
+			<codebox char_offset="2050" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import column and row from bokeh.layouts
+from bokeh.layouts import column, row
+
+# Make a column layout that will be used as the second row: row2
+row2 = column([mpg_hp,mpg_weight], sizing_mode='scale_width')
+
+# Make a row layout that includes the above column layout: layout
+layout = row([avg_mpg, row2], sizing_mode='scale_width')
+
+# Specify the name of the output_file and show the result
+output_file('layout_custom.html')
+show(layout)</codebox>
+			<codebox char_offset="2098" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import gridplot from bokeh.layouts
+from bokeh.layouts import gridplot
+
+# Create a list containing plots p1 and p2: row1
+row1=[p1,p2]
+
+# Create a list containing plots p3 and p4: row2
+row2=[p3,p4]
+
+# Create a gridplot using row1 and row2: layout
+layout = gridplot([row1,row2])
+
+# Specify the name of the output_file and show the result
+output_file('grid.html')
+show(layout)</codebox>
+			<codebox char_offset="2346" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Panel from bokeh.models.widgets
+from bokeh.models.widgets import Panel
+
+# Create tab1 from plot p1: tab1
+tab1 = Panel(child=p1, title='Latin America')
+
+# Create tab2 from plot p2: tab2
+tab2 = Panel(child=p2, title='Africa')
+
+# Create tab3 from plot p3: tab3
+tab3 = Panel(child=p3, title='Asia')
+
+# Create tab4 from plot p4: tab4
+tab4 = Panel(child=p4, title='Europe')
+</codebox>
+			<codebox char_offset="2374" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Tabs from bokeh.models.widgets
+from bokeh.models.widgets import Tabs
+
+# Create a Tabs layout: layout
+layout = Tabs(tabs=[tab1, tab2,tab3,tab4])
+
+# Specify the name of the output_file and show the result
+output_file('tabs.html')
+show(layout)</codebox>
+			<codebox char_offset="2617" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">p3.x_range = p2.x_range = p1.x_range
+p3.y_range = p2.y_range = p1.y_range</codebox>
+			<codebox char_offset="2620" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create ColumnDataSource: source
+source = ColumnDataSource(data)
+
+# Create the first figure: p1
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)',
+            tools='box_select,lasso_select')
+
+# Add a circle glyph to p1
+p1.circle(x='fertility',y='female literacy', source=source)
+
+# Create the second figure: p2
+p2 = figure(x_axis_label='fertility (children per woman)', y_axis_label='population (millions)',
+            source=source)
+
+# Add a circle glyph to p2
+p2.circle('fertility','population',source=source)
+
+# Create row layout of figures p1 and p2: layout
+layout = row([p1,p2])
+
+# Specify the name of the output_file and show the result
+output_file('linked_brush.html')
+show(layout)</codebox>
+			<codebox char_offset="2680" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create the first figure: p1
+p1 = figure(x_axis_label='fertility (children per woman)', y_axis_label='female literacy (% population)',
+            tools = 'box_select,lasso_select')
+</codebox>
+			<codebox char_offset="2717" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Assign the legend to the bottom left: p.legend.location
+p.legend.location= 'bottom_left'
+
+# Fill the legend background with the color 'lightgray': p.legend.background_fill_color
+p.legend.background_fill_color='lightgray'
+
+# Specify the name of the output_file and show the result
+output_file('fert_lit_groups.html')
+show(p)
+</codebox>
+			<codebox char_offset="2760" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from bokeh.models import HoverTool
+hover = HoverTool(tooltips=[
+('species name','@species'),
+('petal length','@petal_length'),
+('sepal length','@sepal_length')])
+plot = figure(tools=[hover, 'pan','wheel_zoom'])</codebox>
+			<codebox char_offset="2794" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add the HoverTool object to figure p
+p.add_tools(hover)</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bokeh App Development" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546086530.41" ts_lastsave="1546090071.09" unique_id="68">
+			<rich_text>
+Basic bokeh serve
+
+
+
+In the background, the bokeh serve script.py command will be called.
+
+Creating a slider
+
+
+
+
+To add additional sliders, just define another one and pass it to widgetbox, e.g. widgetbox(slider1, slider2)
+
+We can let the value of the slider control the plot. A callback function needs to be defined so that we know what actions need to be taken on every change.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Creating a dropdown
+
+This example creates a dropdown that changes the data plotted on the y axis
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This example creates two dropdowns. Dropdown 1 has options A and B. Dropdown 2's options would change depending on whether A or B is selected in Dropdown 1.
+
+
+
+
+Buttons
+
+Click button
+
+Data source had already been defined.
+
+
+
+Other types of buttons
+
+
+
+From 2017, bokeh applications can be hosted on </rich_text>
+			<rich_text link="webs https://anaconda.org">https://anaconda.org</rich_text>
+			<rich_text> so there is no need to run your own bokeh server
+
+</rich_text>
+			<codebox char_offset="20" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform necessary imports
+from bokeh.io import curdoc
+from bokeh.plotting import figure
+
+# Create a new plot: plot
+plot = figure()
+
+# Add a line to the plot
+plot.line([1,2,3,4,5],[2,5,4,6,7])
+
+# Add the plot to the current document
+curdoc().add_root(plot)</codebox>
+			<codebox char_offset="112" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform the necessary imports
+from bokeh.io import curdoc
+from bokeh.layouts import widgetbox
+from bokeh.models import Slider
+
+# Create a slider: slider
+slider = Slider(title='my slider', start=0, end=10, step=0.1, value=2)
+
+# Create a widgetbox layout: layout
+layout = widgetbox(slider)
+
+# Add the layout to the current document
+curdoc().add_root(layout)</codebox>
+			<codebox char_offset="384" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create ColumnDataSource: source
+source = ColumnDataSource(data={'x':x,'y':y})
+
+# Add a line to the plot
+plot.line('x', 'y', source=source)
+
+# Create a column layout: layout
+layout = column(widgetbox(slider), plot)
+
+# Add the layout to the current document
+curdoc().add_root(layout)
+
+# Define a callback function: callback
+def callback(attr, old, new):
+
+    # Read the current value of the slider: scale
+    scale = slider.value
+
+    # Compute the updated y using np.sin(scale/x): new_y
+    new_y = np.sin(scale/x)
+
+    # Update source with the new data values
+    source.data = {'x': x, 'y': new_y}
+
+# Attach the callback to the 'value' property of slider
+slider.on_change('value',callback)
+
+# Create layout and add to current document
+layout = column(widgetbox(slider), plot)
+curdoc().add_root(layout)</codebox>
+			<codebox char_offset="485" frame_height="370" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform necessary imports
+from bokeh.models import ColumnDataSource, Select
+
+# Create ColumnDataSource: source
+source = ColumnDataSource(data={
+    'x' : fertility,
+    'y' : female_literacy
+})
+
+# Create a new plot: plot
+plot = figure()
+
+# Add circles to the plot
+plot.circle('x', 'y', source=source)
+
+# Define a callback function: update_plot
+def update_plot(attr, old, new):
+    # If the new Selection is 'female_literacy', update 'y' to female_literacy
+    if new == 'female_literacy': 
+        source.data = {
+            'x' : fertility,
+            'y' : female_literacy
+        }
+    # Else, update 'y' to population
+    else:
+        source.data = {
+            'x' : fertility,
+            'y' : population
+        }
+
+# Create a dropdown Select widget: select    
+select = Select(title=&quot;distribution&quot;, options=['female_literacy', 'population'], value='female_literacy')
+
+# Attach the update_plot callback to the 'value' property of select
+select.on_change('value', update_plot)
+
+# Create layout and add to current document
+layout = row(select, plot)
+curdoc().add_root(layout)</codebox>
+			<codebox char_offset="646" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create two dropdown Select widgets: select1, select2
+select1 = Select(title='First', options=['A', 'B'], value='A')
+select2 = Select(title='Second', options=['1', '2', '3'], value='1')
+
+# Define a callback function: callback
+def callback(attr, old, new):
+    # If select1 is 'A' 
+    if select1.value == 'A':
+        # Set select2 options to ['1', '2', '3']
+        select2.options = ['1', '2', '3']
+
+        # Set select2 value to '1'
+        select2.value = '1'
+    else:
+        # Set select2 options to ['100', '200', '300']
+        select2.options = ['100', '200', '300']
+
+        # Set select2 value to '100'
+        select2.value = '100'
+
+# Attach the callback to the 'value' property of select1
+select1.on_change('value', callback)
+
+# Create layout and add to current document
+layout = widgetbox(select1, select2)
+curdoc().add_root(layout)</codebox>
+			<codebox char_offset="712" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a Button with label 'Update Data'
+button = Button(label=&quot;Update Data&quot;)
+
+# Define an update callback with no arguments: update
+def update():
+
+    # Compute new y values: y
+    y = np.sin(x) + np.random.random(N)
+
+    # Update the ColumnDataSource data dictionary
+    source.data = {'x':x,'y':y}
+
+# Add the update callback to the button
+button.on_click(update)
+
+# Create layout and add to current document
+layout = column(widgetbox(button), plot)
+curdoc().add_root(layout)</codebox>
+			<codebox char_offset="739" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import CheckboxGroup, RadioGroup, Toggle from bokeh.models
+from bokeh.models import CheckboxGroup, RadioGroup, Toggle
+
+# Add a Toggle: toggle
+toggle = Toggle(button_type='success',label='Toggle button')
+
+# Add a CheckboxGroup: checkbox
+checkbox = CheckboxGroup(labels=['Option 1','Option 2','Option 3'])
+
+# Add a RadioGroup: radio
+radio = RadioGroup(labels=['Option 1','Option 2','Option 3'])
+
+# Add widgetbox(toggle, checkbox, radio) to the current document
+curdoc().add_root(widgetbox(toggle,checkbox,radio))</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Statistical Thinking" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315637.85" ts_lastsave="1546008831.71" unique_id="56">
