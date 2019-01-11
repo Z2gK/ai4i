@@ -6804,7 +6804,7 @@ y_pred = knn.predict(X)
 new_prediction = knn.predict(X_new)
 print(&quot;Prediction: {}&quot;.format(new_prediction))</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546757159.95" ts_lastsave="1547186119.64" unique_id="75">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546757159.95" ts_lastsave="1547189080.17" unique_id="75">
 			<rich_text scale="h1">Ordinary Linear Regression</rich_text>
 			<rich_text>
 
@@ -6889,6 +6889,15 @@ This is how we can continue to plot the ROC curve for logreg.
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+This is how we compute the AUC scores.
+
+5-fold validation is used, and we call the cross_val_score function on the original set of data X and y. 
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
 
 
 
@@ -7066,6 +7075,26 @@ plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.title('ROC Curve')
 plt.show()</codebox>
+			<codebox char_offset="1566" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from sklearn.metrics import roc_auc_score
+from sklearn.model_selection import cross_val_score
+
+# Compute predicted probabilities: y_pred_prob
+y_pred_prob = logreg.predict_proba(X_test)[:,1]
+
+# Compute and print AUC score
+print(&quot;AUC: {}&quot;.format(roc_auc_score(y_test, y_pred_prob)))
+
+# Compute cross-validated AUC scores: cv_auc
+cv_auc = cross_val_score(logreg,X,y,cv=5,scoring='roc_auc')
+
+# Print list of AUC scores
+print(&quot;AUC scores computed using 5-fold cross-validation: {}&quot;.format(cv_auc))
+
+# Output
+#  AUC: 0.8254806777079764
+#     AUC scores computed using 5-fold cross-validation: [ 0.80148148  0.8062963   0.81481481  0.86245283  0.8554717 ]
+</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Quantifying correctness of predictions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546357835.61" ts_lastsave="1547186217.01" unique_id="72">
 			<rich_text>

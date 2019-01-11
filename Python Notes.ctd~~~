@@ -6804,7 +6804,7 @@ y_pred = knn.predict(X)
 new_prediction = knn.predict(X_new)
 print(&quot;Prediction: {}&quot;.format(new_prediction))</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546757159.95" ts_lastsave="1547185034.37" unique_id="75">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546757159.95" ts_lastsave="1547186106.76" unique_id="75">
 			<rich_text scale="h1">Ordinary Linear Regression</rich_text>
 			<rich_text>
 
@@ -6884,7 +6884,11 @@ We can similarly have confusion matrices for this.
 			<rich_text>
 
 
+This is how we can continue to plot the ROC curve for logreg.
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -7046,6 +7050,22 @@ y_pred = logreg.predict(X_test)
 print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 </codebox>
+			<codebox char_offset="1416" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from sklearn.metrics import roc_curve
+
+# Compute predicted probabilities: y_pred_prob
+y_pred_prob = logreg.predict_proba(X_test)[:,1]
+
+# Generate ROC curve values: fpr, tpr, thresholds
+fpr, tpr, thresholds = roc_curve(y_test, y_pred_prob)
+
+# Plot ROC curve
+plt.plot([0, 1], [0, 1], 'k--')
+plt.plot(fpr, tpr)
+plt.xlabel('False Positive Rate')
+plt.ylabel('True Positive Rate')
+plt.title('ROC Curve')
+plt.show()</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Quantifying correctness of predictions" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546357835.61" ts_lastsave="1547185756.25" unique_id="72">
 			<rich_text>
