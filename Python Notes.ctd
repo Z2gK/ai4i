@@ -114,6 +114,8 @@ time = np.arange(0, 1, 1/num_samples)
 		<rich_text>
 </rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting with matplotlib" prog_lang="custom-colors" readonly="False" tags="matplotlib" ts_creation="1542453435.11" ts_lastsave="1543920059.23" unique_id="4">
+			<rich_text>
+</rich_text>
 			<rich_text scale="h1">Line and scatter plots</rich_text>
 			<rich_text>
 
@@ -154,7 +156,7 @@ More plotting </rich_text>
 			<rich_text>
 
 </rich_text>
-			<codebox char_offset="24" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
+			<codebox char_offset="25" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
 
 # Make a line plot: year on the x-axis, pop on the y-axis
 plt.plot(year,pop)
@@ -166,7 +168,7 @@ plt.clf()
 # Change the line plot below to a scatter plot
 plt.scatter(gdp_cap, life_exp)
 </codebox>
-			<codebox char_offset="120" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot as plt
+			<codebox char_offset="121" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -175,7 +177,7 @@ import pandas as pd
 pd.DataFrame.hist(data)
 plt.show()
 </codebox>
-			<codebox char_offset="282" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+			<codebox char_offset="283" frame_height="415" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 
 # Plot the histogram
 # rot is for rotation of the x axis labels
@@ -194,7 +196,7 @@ g1800s.plot(kind=&quot;scatter&quot;, x=&quot;1800&quot;, y=&quot;1899&quot;)
 # Create a histogram of life_expectancy
 gapminder.life_expectancy.plot(kind=&quot;hist&quot;)
 </codebox>
-			<codebox char_offset="302" frame_height="490" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add first subplot
+			<codebox char_offset="303" frame_height="490" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Add first subplot
 plt.subplot(2, 1, 1) 
 
 # Create a histogram of life_expectancy
@@ -219,7 +221,7 @@ plt.tight_layout()
 plt.show()
 
 </codebox>
-			<codebox char_offset="349" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify axis limits
+			<codebox char_offset="350" frame_height="85" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify axis limits
 plt.xlim(20, 55)
 plt.ylim(20, 55)
 </codebox>
@@ -5926,7 +5928,7 @@ curdoc().title = 'Gapminder'</codebox>
 		<rich_text>
 </rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Basic plotting" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1545315653.63" ts_lastsave="1545754946.45" unique_id="57">
-			<rich_text>John Tukey: Exploratory Data Analysis .... is the foundation stone
+			<rich_text>ohn Tukey: Exploratory Data Analysis .... is the foundation stone
 
 </rich_text>
 			<rich_text scale="h1">Histograms</rich_text>
@@ -6025,14 +6027,14 @@ Previous node on plotting can be found </rich_text>
 			<rich_text link="node 42">here</rich_text>
 			<rich_text>.
 </rich_text>
-			<codebox char_offset="80" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
+			<codebox char_offset="79" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set()
 _ = plt.hist(df_swing['dem_share'])
 _ = plt.xlabel('percent of vote for Obama')
 _ = plt.ylabel('number of counties')
 plt.show() </codebox>
-			<codebox char_offset="613" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
+			<codebox char_offset="612" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create bee swarm plot with Seaborn's default settings
 _ = sns.swarmplot(x='species',y='petal length (cm)',data=df)
 
 # Label the axes
@@ -6041,7 +6043,7 @@ _ = plt.ylabel('petal length (cm)')
 
 # Show the plot
 plt.show()</codebox>
-			<codebox char_offset="667" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def ecdf(data):
+			<codebox char_offset="666" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def ecdf(data):
     &quot;&quot;&quot;Compute ECDF for a one-dimensional array of measurements.&quot;&quot;&quot;
     # Number of data points: n
     n = len(data)
@@ -6069,31 +6071,31 @@ plt.margins(0.02) # Keeps data off plot edges
 # Display the plot
 plt.show()
 </codebox>
-			<codebox char_offset="824" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
-			<codebox char_offset="914" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify array of percentiles: percentiles
+			<codebox char_offset="823" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">plt.legend(('setosa', 'versicolor', 'virginica'), loc='lower right')</codebox>
+			<codebox char_offset="913" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Specify array of percentiles: percentiles
 percentile = [2.5,25,50,75,97.5]
 
 # Compute percentiles: ptiles_vers
 ptiles_vers = np.percentile(versicolor_petal_length,np.array(percentile))
 </codebox>
-			<codebox char_offset="1020" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create box plot with Seaborn's default settings
+			<codebox char_offset="1019" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create box plot with Seaborn's default settings
 _ =sns.boxplot(x='species',y='petal length (cm)', data=df)
 
 # Label the axes
 _ = plt.xlabel('species')
 _ = plt.ylabel('petal length (cm)')
 </codebox>
-			<codebox char_offset="1038" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make a scatter plot
+			<codebox char_offset="1037" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Make a scatter plot
 _ = plt.plot(versicolor_petal_length,versicolor_petal_width,marker='.',linestyle='none')
 </codebox>
-			<codebox char_offset="1066" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">covariance_matrix = np.cov(versicolor_petal_length,versicolor_petal_width)
+			<codebox char_offset="1065" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">covariance_matrix = np.cov(versicolor_petal_length,versicolor_petal_width)
 
 # Extract covariance of length and width of petals: petal_cov
 petal_cov = covariance_matrix[0,1]
 
 # Note that covariance_matrix[1,0] is the same as the above value by symmetry
 </codebox>
-			<codebox char_offset="1233" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def pearson_r(x, y):
+			<codebox char_offset="1232" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def pearson_r(x, y):
     &quot;&quot;&quot;Compute Pearson correlation coefficient between two arrays.&quot;&quot;&quot;
     # Compute correlation matrix: corr_mat
     corr_mat = np.corrcoef(x,y)
@@ -6104,7 +6106,7 @@ petal_cov = covariance_matrix[0,1]
 # Compute Pearson correlation coefficient for I. versicolor: r
 r = pearson_r(versicolor_petal_length,versicolor_petal_width)
 </codebox>
-			<codebox char_offset="1280" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the margins and label axes
+			<codebox char_offset="1279" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the margins and label axes
 plt.margins(0.02)
 </codebox>
 		</node>
@@ -6721,7 +6723,7 @@ WHERE name IN
 ORDER BY city_perc DESC
 LIMIT 10;</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Supervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546098184.75" ts_lastsave="1547227702.66" unique_id="69">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Supervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546098184.75" ts_lastsave="1547283216.2" unique_id="69">
 		<rich_text>
 Machine learning
 
@@ -7297,7 +7299,9 @@ Likewise for DecisionTree
 
 For kNN
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Testing different ways to regularise
 
@@ -7308,7 +7312,9 @@ Testing different ways to regularise
 
 ElasticNet
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -7424,13 +7430,68 @@ print(&quot;Tuned ElasticNet R squared: {}&quot;.format(r2))
 print(&quot;Tuned ElasticNet MSE: {}&quot;.format(mse))
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Miscellaneous" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546361631.07" ts_lastsave="1546361639.89" unique_id="73">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Miscellaneous" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546361631.07" ts_lastsave="1547282760.99" unique_id="73">
 			<rich_text>
 We can load images like this
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+
+Creating dummy variables
+
+scikit-learn cannot deal with categorical variables. For such cases, we have to convert them in to numeric data types. The pandas get_dummies() function can help us do this.
+
+The Region column in the original data frame df is removed and replaced by a series of columns with 1 or 0.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Actually we don't need that many columns. We can automatically remove one using the drop_first parameter.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Building a pipeline
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Scaling
+
+Models perform better when various features are on the same scale as each other. A way is to do this through standardisation, i.e. subtract by the mean and divide by the standard deviation
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+There are other ways, such as scaling it to be between 0 and 1, or between -1 and +1.
+
+Here we pipeline and then compute the score
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Pipeline for classification
+
+
+
+Another example
+
+
+
+
 
 </rich_text>
 			<codebox char_offset="31" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
@@ -7451,6 +7512,141 @@ print(digits.data.shape)
 # Display digit 1010
 plt.imshow(digits.images[1010], cmap=plt.cm.gray_r, interpolation='nearest')
 plt.show()</codebox>
+			<codebox char_offset="345" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create dummy variables: df_region
+df_region = pd.get_dummies(df)</codebox>
+			<codebox char_offset="455" frame_height="55" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create dummy variables with drop_first=True: df_region
+df_region = pd.get_dummies(df,drop_first=True)</codebox>
+			<codebox char_offset="479" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the Imputer module
+from sklearn.preprocessing import Imputer
+from sklearn.svm import SVC
+
+# Setup the Imputation transformer: imp
+imp = Imputer(missing_values='NaN', strategy='most_frequent', axis=0)
+
+# Instantiate the SVC classifier: clf
+clf = SVC()
+
+# Setup the pipeline with the required steps: steps
+steps = [('imputation', imp),
+        ('SVM', clf)]</codebox>
+			<codebox char_offset="483" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from sklearn.preprocessing import Imputer
+from sklearn.pipeline import Pipeline
+from sklearn.svm import SVC
+
+# Setup the pipeline steps: steps
+steps = [('imputation', Imputer(missing_values='NaN', strategy='most_frequent', axis=0)),
+        ('SVM', SVC())]
+
+# Create the pipeline: pipeline
+pipeline = Pipeline(steps)
+
+# Create training and test sets
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.3,random_state=42)
+
+# Fit the pipeline to the train set
+pipeline.fit(X_train,y_train)
+
+# Predict the labels of the test set
+y_pred = pipeline.predict(X_test)
+
+# Compute metrics
+print(classification_report(y_test, y_pred))</codebox>
+			<codebox char_offset="686" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import scale
+from sklearn.preprocessing import scale
+
+# Scale the features: X_scaled
+X_scaled = scale(X)
+
+# Print the mean and standard deviation of the unscaled features
+print(&quot;Mean of Unscaled Features: {}&quot;.format(np.mean(X))) 
+print(&quot;Standard Deviation of Unscaled Features: {}&quot;.format(np.std(X)))
+
+# Print the mean and standard deviation of the scaled features
+print(&quot;Mean of Scaled Features: {}&quot;.format(np.mean(X_scaled))) 
+print(&quot;Standard Deviation of Scaled Features: {}&quot;.format(np.std(X_scaled)))</codebox>
+			<codebox char_offset="821" frame_height="400" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the necessary modules
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+
+# Setup the pipeline steps: steps
+steps = [('scaler', StandardScaler()),
+        ('knn', KNeighborsClassifier())]
+        
+# Create the pipeline: pipeline
+pipeline = Pipeline(steps)
+
+# Create train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=0.3, random_state=42)
+
+# Fit the pipeline to the training set: knn_scaled
+knn_scaled = pipeline.fit(X_train,y_train)
+
+# Instantiate and fit a k-NN classifier to the unscaled data
+knn_unscaled = KNeighborsClassifier().fit(X_train, y_train)
+
+# Compute and print metrics
+print('Accuracy with Scaling: {}'.format(knn_scaled.score(X_test,y_test)))
+print('Accuracy without Scaling: {}'.format(knn_unscaled.score(X_test,y_test)))
+</codebox>
+			<codebox char_offset="853" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Setup the pipeline
+steps = [('scaler', StandardScaler()),
+         ('SVM', SVC())]
+
+pipeline = Pipeline(steps)
+
+# Specify the hyperparameter space
+parameters = {'SVM__C':[1, 10, 100],
+              'SVM__gamma':[0.1, 0.01]}
+
+# Create train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2, random_state=21)
+
+# Instantiate the GridSearchCV object: cv
+cv = GridSearchCV(pipeline,parameters)
+
+# Fit to the training set
+cv.fit(X_train,y_train)
+
+# Predict the labels of the test set: y_pred
+y_pred = cv.predict(X_test)
+
+# Compute and print metrics
+print(&quot;Accuracy: {}&quot;.format(cv.score(X_test, y_test)))
+print(classification_report(y_test, y_pred))
+print(&quot;Tuned Model Parameters: {}&quot;.format(cv.best_params_))</codebox>
+			<codebox char_offset="873" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Setup the pipeline steps: steps
+steps = [('imputation', Imputer(missing_values='NaN', strategy='mean', axis=0)),
+         ('scaler', StandardScaler()),
+         ('elasticnet',ElasticNet())]
+
+# Create the pipeline: pipeline 
+pipeline = Pipeline(steps)
+
+# Specify the hyperparameter space
+# this needs to follow the this notation: 'step_name__parameter_name'
+parameters = {'elasticnet__l1_ratio':np.linspace(0,1,30)}
+
+# Create train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.4, random_state=42)
+
+# Create the GridSearchCV object: gm_cv
+gm_cv = GridSearchCV(pipeline,parameters)
+
+# Fit to the training set
+gm_cv.fit(X_train,y_train)
+
+# Compute and print the metrics
+r2 = gm_cv.score(X_test, y_test)
+print(&quot;Tuned ElasticNet Alpha: {}&quot;.format(gm_cv.best_params_))
+print(&quot;Tuned ElasticNet R squared: {}&quot;.format(r2))
+</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Unsupervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283216.21" ts_lastsave="1547283227.82" unique_id="77">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="k-means clustering" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283227.83" ts_lastsave="1547283227.83" unique_id="78">
+			<rich_text></rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1546364564.24" unique_id="70">
