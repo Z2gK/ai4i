@@ -6723,7 +6723,7 @@ WHERE name IN
 ORDER BY city_perc DESC
 LIMIT 10;</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Supervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546098184.75" ts_lastsave="1547227702.66" unique_id="69">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Supervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546098184.75" ts_lastsave="1547283216.2" unique_id="69">
 		<rich_text>
 Machine learning
 
@@ -7430,7 +7430,7 @@ print(&quot;Tuned ElasticNet R squared: {}&quot;.format(r2))
 print(&quot;Tuned ElasticNet MSE: {}&quot;.format(mse))
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Miscellaneous" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546361631.07" ts_lastsave="1547282531.16" unique_id="73">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Miscellaneous" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546361631.07" ts_lastsave="1547282760.99" unique_id="73">
 			<rich_text>
 We can load images like this
 
@@ -7485,9 +7485,15 @@ Here we pipeline and then compute the score
 
 Pipeline for classification
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
+Another example
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -7613,6 +7619,93 @@ y_pred = cv.predict(X_test)
 print(&quot;Accuracy: {}&quot;.format(cv.score(X_test, y_test)))
 print(classification_report(y_test, y_pred))
 print(&quot;Tuned Model Parameters: {}&quot;.format(cv.best_params_))</codebox>
+			<codebox char_offset="873" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Setup the pipeline steps: steps
+steps = [('imputation', Imputer(missing_values='NaN', strategy='mean', axis=0)),
+         ('scaler', StandardScaler()),
+         ('elasticnet',ElasticNet())]
+
+# Create the pipeline: pipeline 
+pipeline = Pipeline(steps)
+
+# Specify the hyperparameter space
+# this needs to follow the this notation: 'step_name__parameter_name'
+parameters = {'elasticnet__l1_ratio':np.linspace(0,1,30)}
+
+# Create train and test sets
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.4, random_state=42)
+
+# Create the GridSearchCV object: gm_cv
+gm_cv = GridSearchCV(pipeline,parameters)
+
+# Fit to the training set
+gm_cv.fit(X_train,y_train)
+
+# Compute and print the metrics
+r2 = gm_cv.score(X_test, y_test)
+print(&quot;Tuned ElasticNet Alpha: {}&quot;.format(gm_cv.best_params_))
+print(&quot;Tuned ElasticNet R squared: {}&quot;.format(r2))
+</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Unsupervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283216.21" ts_lastsave="1547283227.82" unique_id="77">
+		<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="k-means clustering" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283227.83" ts_lastsave="1547397403.81" unique_id="78">
+			<rich_text>
+
+Unsupervised clustering using KMeans
+
+This example tries to cluster using 3 clusters on the numpy array points. Each row in this array has two numbers, i.e. this is a set of points in 2D.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Plotting the new points and obtaining the centroids.
+
+
+
+
+How do we evaluate the quality of the clustering?
+
+Use a property called inertia. This is calculated automatically when the .fit() method is called and can be accessed later as .inertia attribute
+
+</rich_text>
+			<codebox char_offset="191" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import KMeans
+from sklearn.cluster import KMeans
+
+# Create a KMeans instance with 3 clusters: model
+model = KMeans(n_clusters = 3)
+
+# Fit model to points
+model.fit(points)
+
+# Determine the cluster labels of new_points: labels
+labels = model.predict(new_points)
+
+# Print cluster labels of new_points
+print(labels)
+</codebox>
+			<codebox char_offset="248" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pyplot
+import matplotlib.pyplot as plt
+
+# Assign the columns of new_points: xs and ys
+xs = new_points[:,0]
+ys = new_points[:,1]
+
+# Make a scatter plot of xs and ys, using labels to define the colors
+plt.scatter(xs,ys,c=labels,alpha=0.5)
+
+# Assign the cluster centers: centroids
+centroids = model.cluster_centers_
+
+# Assign the columns of centroids: centroids_x, centroids_y
+centroids_x = centroids[:,0]
+centroids_y = centroids[:,1]
+
+# Make a scatter plot of centroids_x and centroids_y
+plt.scatter(centroids_x,centroids_y,marker='D',s=50,alpha=0.5)
+plt.show()
+</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1546364564.24" unique_id="70">
