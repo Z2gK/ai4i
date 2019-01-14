@@ -7649,10 +7649,12 @@ print(&quot;Tuned ElasticNet R squared: {}&quot;.format(r2))
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Unsupervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283216.21" ts_lastsave="1547283227.82" unique_id="77">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="k-means clustering" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283227.83" ts_lastsave="1547396020.03" unique_id="78">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="k-means clustering" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283227.83" ts_lastsave="1547482105.39" unique_id="78">
 			<rich_text>
 
-Unsupervised clustering using KMeans
+</rich_text>
+			<rich_text scale="h1">Unsupervised clustering using KMeans</rich_text>
+			<rich_text>
 
 This example tries to cluster using 3 clusters on the numpy array points. Each row in this array has two numbers, i.e. this is a set of points in 2D.
 
@@ -7661,6 +7663,55 @@ This example tries to cluster using 3 clusters on the numpy array points. Each r
 			<rich_text>
 
 Plotting the new points and obtaining the centroids.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h1">Inertia</rich_text>
+			<rich_text>
+
+How do we evaluate the quality of the clustering?
+
+Use a property called inertia. This is calculated automatically when the .fit() method is called and can be accessed later as .inertia attribute
+
+This is how we can plot a graph. The best point is the “elbow” point.
+
+
+
+StandardScaler - use fit()/transform()
+KMeans - use fit()/predict()
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The above fits and then predicts the labels of the samples. The actual varieties are stored in the array varieties. pd.crosstab creates the below table
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h1">Standardisation</rich_text>
+			<rich_text>
+
+Standardisation improves clustering. This method transforms all attributes to mean 0 variance 1.
+
+StandardScaler scales all features to zero mean and unit variance
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Followed by this
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
 
 
 
@@ -7702,6 +7753,74 @@ centroids_y = centroids[:,1]
 plt.scatter(centroids_x,centroids_y,marker='D',s=50,alpha=0.5)
 plt.show()
 </codebox>
+			<codebox char_offset="528" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">ks = range(1, 6)
+inertias = []
+
+for k in ks:
+    # Create a KMeans instance with k clusters: model
+    model=KMeans(n_clusters=k)
+    
+    # Fit model to samples
+    model.fit(samples)
+    
+    # Append the inertia to the list of inertias
+    inertias.append(model.inertia_)
+    
+# Plot ks vs inertias
+plt.plot(ks, inertias, '-o')
+plt.xlabel('number of clusters, k')
+plt.ylabel('inertia')
+plt.xticks(ks)
+plt.show()</codebox>
+			<codebox char_offset="600" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a KMeans model with 3 clusters: model
+model = KMeans(n_clusters=3)
+
+# Use fit_predict to fit model and obtain cluster labels: labels
+labels = model.fit_predict(samples)
+
+# Create a DataFrame with labels and varieties as columns: df
+df = pd.DataFrame({'labels': labels, 'varieties': varieties})
+
+# Create crosstab: ct
+ct = pd.crosstab(df['labels'],df['varieties'])
+
+# Display ct
+print(ct)</codebox>
+			<codebox char_offset="756" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#    varieties  Canadian wheat  Kama wheat  Rosa wheat
+#    labels                                           
+#    0                       2          60          10
+#    1                       0           1          60
+#    2                      68           9           0</codebox>
+			<codebox char_offset="941" frame_height="265" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform the necessary imports
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+# Create scaler: scaler
+scaler = StandardScaler()
+
+# Create KMeans instance: kmeans
+kmeans = KMeans(n_clusters=4)
+
+# Create pipeline: pipeline
+pipeline = make_pipeline(scaler,kmeans)</codebox>
+			<codebox char_offset="962" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Fit the pipeline to samples
+pipeline.fit(samples)
+
+# Calculate the cluster labels: labels
+labels = pipeline.predict(samples)
+
+# Create a DataFrame with labels and species as columns: df
+df = pd.DataFrame({'labels':labels, 'species':species})
+
+# Create crosstab: ct
+ct = pd.crosstab(df['labels'],df['species'])
+
+# Display ct
+print(ct)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1546364564.24" unique_id="70">

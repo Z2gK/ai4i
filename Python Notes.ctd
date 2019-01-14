@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74,78"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -7647,12 +7647,14 @@ print(&quot;Tuned ElasticNet R squared: {}&quot;.format(r2))
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Unsupervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283216.21" ts_lastsave="1547283227.82" unique_id="77">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Unsupervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283216.21" ts_lastsave="1547483680.72" unique_id="77">
 		<rich_text></rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="k-means clustering" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283227.83" ts_lastsave="1547397794.6" unique_id="78">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="k-means clustering" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283227.83" ts_lastsave="1547483619.89" unique_id="78">
 			<rich_text>
 
-Unsupervised clustering using KMeans
+</rich_text>
+			<rich_text scale="h1">Unsupervised clustering using KMeans</rich_text>
+			<rich_text>
 
 This example tries to cluster using 3 clusters on the numpy array points. Each row in this array has two numbers, i.e. this is a set of points in 2D.
 
@@ -7662,17 +7664,134 @@ This example tries to cluster using 3 clusters on the numpy array points. Each r
 
 Plotting the new points and obtaining the centroids.
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
-
+</rich_text>
+			<rich_text scale="h1">Inertia</rich_text>
+			<rich_text>
 
 How do we evaluate the quality of the clustering?
 
 Use a property called inertia. This is calculated automatically when the .fit() method is called and can be accessed later as .inertia attribute
 
+This is how we can plot a graph. The best point is the “elbow” point.
+
+
+
 StandardScaler - use fit()/transform()
 KMeans - use fit()/predict()
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The above fits and then predicts the labels of the samples. The actual varieties are stored in the array varieties. pd.crosstab creates the below table
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h1">Standardisation</rich_text>
+			<rich_text>
+
 Standardisation improves clustering. This method transforms all attributes to mean 0 variance 1.
+
+StandardScaler scales all features to zero mean and unit variance
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Followed by this
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Normalizer is the other way to scale. It is supposed to scale each sample independently of each other (whatever that means)
+
+movements is a 60x963 numpy array that represents the stock prices over 963 trading days (2010-2015) for 60 companies. The aim is to find clusters of companies that are similar to each other
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: How does Normalizer work? How is it possible to scale each row independent of the other and still preserve the clusters?</rich_text>
+			<rich_text>
+
+Now we see what companies are in the same clusters
+
+
+
+Result:
+
+</rich_text>
+			<rich_text family="monospace">                             companies  labels
+21                               Honda       0
+48                              Toyota       0
+7                                Canon       0
+34                          Mitsubishi       0
+45                                Sony       0
+16                   General Electrics       1
+23                                 IBM       1
+58                               Xerox       1
+20                          Home Depot       1
+35                            Navistar       1
+32                                  3M       1
+13                   DuPont de Nemours       1
+47                            Symantec       1
+8                          Caterpillar       1
+50  Taiwan Semiconductor Manufacturing       1
+51                   Texas instruments       1
+54                            Walgreen       1
+31                           McDonalds       1
+30                          MasterCard       2
+3                     American express       2
+9                    Colgate-Palmolive       3
+41                       Philip Morris       3
+40                      Procter Gamble       3
+38                               Pepsi       3
+56                            Wal-Mart       3
+28                           Coca Cola       3
+25                   Johnson &amp; Johnson       3
+27                      Kimberly-Clark       3
+0                                Apple       4
+22                                  HP       4
+14                                Dell       4
+11                               Cisco       4
+24                               Intel       4
+33                           Microsoft       4
+59                               Yahoo       5
+19                     GlaxoSmithKline       6
+57                               Exxon       6
+53                       Valero Energy       6
+52                            Unilever       6
+49                               Total       6
+6             British American Tobacco       6
+46                      Sanofi-Aventis       6
+12                             Chevron       6
+44                        Schlumberger       6
+10                      ConocoPhillips       6
+42                   Royal Dutch Shell       6
+39                              Pfizer       6
+37                            Novartis       6
+43                                 SAP       6
+15                                Ford       7
+26                      JPMorgan Chase       7
+5                      Bank of America       7
+18                       Goldman Sachs       7
+55                         Wells Fargo       7
+1                                  AIG       7
+17                     Google/Alphabet       8
+2                               Amazon       8
+4                               Boeing       9
+36                    Northrop Grumman       9
+29                     Lookheed Martin       9
 </rich_text>
 			<codebox char_offset="191" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import KMeans
 from sklearn.cluster import KMeans
@@ -7710,6 +7829,120 @@ centroids_y = centroids[:,1]
 plt.scatter(centroids_x,centroids_y,marker='D',s=50,alpha=0.5)
 plt.show()
 </codebox>
+			<codebox char_offset="528" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">ks = range(1, 6)
+inertias = []
+
+for k in ks:
+    # Create a KMeans instance with k clusters: model
+    model=KMeans(n_clusters=k)
+    
+    # Fit model to samples
+    model.fit(samples)
+    
+    # Append the inertia to the list of inertias
+    inertias.append(model.inertia_)
+    
+# Plot ks vs inertias
+plt.plot(ks, inertias, '-o')
+plt.xlabel('number of clusters, k')
+plt.ylabel('inertia')
+plt.xticks(ks)
+plt.show()</codebox>
+			<codebox char_offset="600" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create a KMeans model with 3 clusters: model
+model = KMeans(n_clusters=3)
+
+# Use fit_predict to fit model and obtain cluster labels: labels
+labels = model.fit_predict(samples)
+
+# Create a DataFrame with labels and varieties as columns: df
+df = pd.DataFrame({'labels': labels, 'varieties': varieties})
+
+# Create crosstab: ct
+ct = pd.crosstab(df['labels'],df['varieties'])
+
+# Display ct
+print(ct)</codebox>
+			<codebox char_offset="756" frame_height="115" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">#    varieties  Canadian wheat  Kama wheat  Rosa wheat
+#    labels                                           
+#    0                       2          60          10
+#    1                       0           1          60
+#    2                      68           9           0</codebox>
+			<codebox char_offset="941" frame_height="265" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform the necessary imports
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+
+# Create scaler: scaler
+scaler = StandardScaler()
+
+# Create KMeans instance: kmeans
+kmeans = KMeans(n_clusters=4)
+
+# Create pipeline: pipeline
+pipeline = make_pipeline(scaler,kmeans)</codebox>
+			<codebox char_offset="962" frame_height="340" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Fit the pipeline to samples
+pipeline.fit(samples)
+
+# Calculate the cluster labels: labels
+labels = pipeline.predict(samples)
+
+# Create a DataFrame with labels and species as columns: df
+df = pd.DataFrame({'labels':labels, 'species':species})
+
+# Create crosstab: ct
+ct = pd.crosstab(df['labels'],df['species'])
+
+# Display ct
+print(ct)</codebox>
+			<codebox char_offset="1283" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Normalizer
+from sklearn.preprocessing import Normalizer
+
+# Create a normalizer: normalizer
+normalizer = Normalizer()
+
+# Create a KMeans model with 10 clusters: kmeans
+kmeans = KMeans(n_clusters=10)
+
+# Make a pipeline chaining normalizer and kmeans: pipeline
+pipeline = make_pipeline(normalizer,kmeans)
+
+# Fit pipeline to the daily price movements
+pipeline.fit(movements)
+</codebox>
+			<codebox char_offset="1463" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Predict the cluster labels: labels
+labels = pipeline.predict(movements)
+
+# Create a DataFrame aligning labels and companies: df
+df = pd.DataFrame({'labels': labels, 'companies': companies})
+
+# Display df sorted by cluster label
+print(df.sort_values('labels'))
+</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Visualisation" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547483680.73" ts_lastsave="1547484512.41" unique_id="79">
+			<rich_text>
+Dendrograms
+
+
+
+t-SNE
+
+
+
+
+
+</rich_text>
+			<rich_text weight="heavy">Q: What is t-SNE??? This is a problem of not enough theory here, only hands-on coding!</rich_text>
+			<rich_text>
+
+
+</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1546364564.24" unique_id="70">
