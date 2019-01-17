@@ -7958,7 +7958,9 @@ scikit-learn hierachical clustering does not fit into pipeline framework, so we 
 
 We can do flat hierarchical clustering and define a level at which we stop. The example below takes mergings - result of the linkage() function and obtains the labels for the clusters formed at maximum height of 6.
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 </rich_text>
@@ -7967,11 +7969,15 @@ We can do flat hierarchical clustering and define a level at which we stop. The 
 
 This uses t-SNE to transform and fit the grain data. And then it plots a scatter plot with the actual categories of the grains in coded in color. I don't understand this method at all!
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 This is t-SNE applied on stock data. The plot is annotated with the names of the companies
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 The aim seems to be for extracting quick results from high dimensional data...
 
@@ -8148,7 +8154,9 @@ We need TruncatedSVD to help us perform PCA with sparse matrices in  csr_matrix 
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -8307,15 +8315,149 @@ df = pd.DataFrame({'label': labels, 'article': titles})
 print(df.sort_values('label'))
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Non-negative matrix factorization" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547654834.15" ts_lastsave="1547655088.92" unique_id="81">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Non-negative matrix factorization" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547654834.15" ts_lastsave="1547701246.9" unique_id="81">
 			<rich_text>
 NMF
 
 This is another means of dimension reduction, which can only be applied to non-negative feature values.
 It is more explanable compared to PCA. The original sample can be reconstructed or approximated by a linear combination of vectors, with the coefficients representing the reduced dimensions of the transformed data set
 
+This fits the NMF model to a tfidf array.
 
 </rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+articles is a 60x13125 array of tfidf values
+
+The result nmf_features is a 60x6 array.
+
+NOw we assign the titles of the articles to the rows and produce a data frame. Then we print some rows.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Then we create the components data frame and check one of its rows
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The most significant words are those with the highest values in the component
+
+
+Images
+
+Now we try this on images. This is a collection of seven segment display images
+
+We first try to display an image.
+samples is a 100x104 array of 1 and 0s. We extract the first row and reshape it into a 13x8 array. This is the bitmap of the first sample. Finally, we display the bitmap. It shows a seven segment figure image of the number ‘7’
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Now we fit the model and show the components.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+</rich_text>
+			<codebox char_offset="372" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import NMF
+from sklearn.decomposition import NMF
+
+# Create an NMF instance: model
+model = NMF(n_components=6)
+
+# Fit the model to articles
+model.fit(articles)
+
+# Transform the articles: nmf_features
+nmf_features = model.transform(articles)
+
+# Print the NMF features
+print(nmf_features)</codebox>
+			<codebox char_offset="568" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Create a pandas DataFrame: df
+df = pd.DataFrame(nmf_features,index=titles)
+
+# Print the row for 'Anne Hathaway'
+print(df.loc['Anne Hathaway'])
+
+# Print the row for 'Denzel Washington'
+print(df.loc['Denzel Washington'])
+</codebox>
+			<codebox char_offset="640" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Create a DataFrame: components_df
+# In [5]: words[:10]
+# Out[5]: 
+#['aaron', 'abandon', 'abandoned', 'abandoning',.'abandonment', 'abbas', 'abbey','abbreviated', 'abbreviation', 'abc']
+components_df = pd.DataFrame(model.components_,columns=words)
+
+# Print the shape of the DataFrame
+# (6, 13125)
+print(components_df.shape)
+
+# Select row 3: component
+component = components_df.iloc[3]
+
+# Print result of nlargest
+# film       0.627877
+# award      0.253131
+# starred    0.245284
+# role       0.211451
+# actress    0.186398
+print(component.nlargest())</codebox>
+			<codebox char_offset="1074" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pyplot
+from matplotlib import pyplot as plt
+
+# Select the 0th row: digit
+digit = samples[0,:]
+
+# Print digit
+print(digit)
+
+# Reshape digit to a 13x8 array: bitmap
+bitmap = digit.reshape(13,8)
+
+# Print bitmap
+print(bitmap)
+
+# Use plt.imshow to display bitmap
+plt.imshow(bitmap, cmap='gray', interpolation='nearest')
+plt.colorbar()
+plt.show()
+</codebox>
+			<codebox char_offset="1124" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import NMF
+from sklearn.decomposition import NMF
+
+# Create an NMF model: model
+model = NMF(n_components=7)
+
+# Apply fit_transform to samples: features
+features = model.fit_transform(samples)
+
+# Call show_as_image on each component
+for component in model.components_:
+    show_as_image(component)
+
+# Assign the 0th row of features: digit_features
+digit_features = features[0]
+
+# Print digit_features
+# [  4.76823559e-01   0.00000000e+00   0.00000000e+00   5.90605054e-01
+#   4.81559442e-01   0.00000000e+00   7.37562716e-16]
+print(digit_features)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1546364564.24" unique_id="70">
