@@ -8315,9 +8315,11 @@ df = pd.DataFrame({'label': labels, 'article': titles})
 print(df.sort_values('label'))
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Non-negative matrix factorization" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547654834.15" ts_lastsave="1547700896.2" unique_id="81">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Non-negative matrix factorization" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547654834.15" ts_lastsave="1547724602.44" unique_id="81">
 			<rich_text>
-NMF
+</rich_text>
+			<rich_text scale="h1">NMF</rich_text>
+			<rich_text>
 
 This is another means of dimension reduction, which can only be applied to non-negative feature values.
 It is more explanable compared to PCA. The original sample can be reconstructed or approximated by a linear combination of vectors, with the coefficients representing the reduced dimensions of the transformed data set
@@ -8348,7 +8350,9 @@ Then we create the components data frame and check one of its rows
 The most significant words are those with the highest values in the component
 
 
-Images
+</rich_text>
+			<rich_text scale="h1">Images</rich_text>
+			<rich_text>
 
 Now we try this on images. This is a collection of seven segment display images
 
@@ -8359,6 +8363,45 @@ samples is a 100x104 array of 1 and 0s. We extract the first row and reshape it 
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Now we fit the model and show the components.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Doing the same thing using PCA, and displaying the images
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h1">Cosine similarity</rich_text>
+			<rich_text>
+
+We calculate the cosine similarity (i.e. dot product)
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h1">Recommendations</rich_text>
+			<rich_text>
+
+Another example:  recommending musical artists
+
+artists is a 111x500 sparse matrix of tfidf values. These are put into a pipeline.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Then we use cosine similarity to produce recommendations
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -8433,6 +8476,105 @@ print(bitmap)
 plt.imshow(bitmap, cmap='gray', interpolation='nearest')
 plt.colorbar()
 plt.show()
+</codebox>
+			<codebox char_offset="1124" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import NMF
+from sklearn.decomposition import NMF
+
+# Create an NMF model: model
+model = NMF(n_components=7)
+
+# Apply fit_transform to samples: features
+features = model.fit_transform(samples)
+
+# Call show_as_image on each component
+for component in model.components_:
+    show_as_image(component)
+
+# Assign the 0th row of features: digit_features
+digit_features = features[0]
+
+# Print digit_features
+# [  4.76823559e-01   0.00000000e+00   0.00000000e+00   5.90605054e-01
+#   4.81559442e-01   0.00000000e+00   7.37562716e-16]
+print(digit_features)</codebox>
+			<codebox char_offset="1186" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import PCA
+from sklearn.decomposition import PCA
+
+# Create a PCA instance: model
+model = PCA(n_components=7)
+
+# Apply fit_transform to samples: features
+features = model.fit_transform(samples)
+
+# Call show_as_image on each component
+for component in model.components_:
+    show_as_image(component)
+    </codebox>
+			<codebox char_offset="1263" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform the necessary imports
+import pandas as pd
+from sklearn.preprocessing import normalize
+
+# Normalize the NMF features: norm_features
+norm_features = normalize(nmf_features)
+
+# Create a DataFrame: df
+df = pd.DataFrame(norm_features,index=titles)
+
+# Select the row corresponding to 'Cristiano Ronaldo': article
+article = df.loc['Cristiano Ronaldo']
+
+# Compute the dot products: similarities
+similarities = df.dot(article)
+
+# Display those with the largest cosine similarity
+print(similarities.nlargest())
+
+
+#     Cristiano Ronaldo                1.000000
+#    Franck Ribéry                    0.999972
+#    Radamel Falcao                   0.999942
+#    Zlatan Ibrahimović               0.999942
+#    France national football team    0.999923
+</codebox>
+			<codebox char_offset="1415" frame_height="385" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Perform the necessary imports
+from sklearn.decomposition import NMF
+from sklearn.preprocessing import Normalizer, MaxAbsScaler
+from sklearn.pipeline import make_pipeline
+
+# Create a MaxAbsScaler: scaler
+scaler = MaxAbsScaler()
+
+# Create an NMF model: nmf
+nmf = NMF(n_components=20)
+
+# Create a Normalizer: normalizer
+normalizer = Normalizer()
+
+# Create a pipeline: pipeline
+pipeline = make_pipeline(scaler,nmf,normalizer)
+
+# Apply fit_transform to artists: norm_features
+norm_features = pipeline.fit_transform(artists)</codebox>
+			<codebox char_offset="1476" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+import pandas as pd
+
+# Create a DataFrame: df
+df = pd.DataFrame(norm_features,index=artist_names)
+
+# Select row of 'Bruce Springsteen': artist
+artist = df.loc['Bruce Springsteen']
+
+# Compute cosine similarities: similarities
+similarities = df.dot(artist)
+
+# Display those with highest cosine similarity
+print(similarities.nlargest())
+
+#     Bruce Springsteen    1.000000
+#    Neil Young           0.957054
+#    Van Morrison         0.874705
+#    Leonard Cohen        0.864583
+#    Bob Dylan            0.862430
 </codebox>
 		</node>
 	</node>
