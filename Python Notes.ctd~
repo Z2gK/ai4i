@@ -7647,7 +7647,7 @@ print(&quot;Tuned ElasticNet R squared: {}&quot;.format(r2))
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Unsupervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283216.21" ts_lastsave="1547654834.14" unique_id="77">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Unsupervised learning in scikit-learn" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283216.21" ts_lastsave="1547787251.14" unique_id="77">
 		<rich_text>
 </rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="k-means clustering" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547283227.83" ts_lastsave="1547483619.89" unique_id="78">
@@ -8324,7 +8324,7 @@ df = pd.DataFrame({'label': labels, 'article': titles})
 print(df.sort_values('label'))
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Non-negative matrix factorization" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547654834.15" ts_lastsave="1547724668.35" unique_id="81">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Non-negative matrix factorization" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547654834.15" ts_lastsave="1547724937.9" unique_id="81">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">NMF</rich_text>
@@ -8406,7 +8406,7 @@ artists is a 111x500 sparse matrix of tfidf values. These are put into a pipelin
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-Then we use cosine similarity to produce recommendations by listing the top 5 most similar
+Then we use cosine similarity to produce recommendations by listing the top 5 most similar.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -8564,7 +8564,7 @@ pipeline = make_pipeline(scaler,nmf,normalizer)
 
 # Apply fit_transform to artists: norm_features
 norm_features = pipeline.fit_transform(artists)</codebox>
-			<codebox char_offset="1510" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
+			<codebox char_offset="1511" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pandas
 import pandas as pd
 
 # Create a DataFrame: df
@@ -8586,6 +8586,35 @@ print(similarities.nlargest())
 #    Bob Dylan            0.862430
 </codebox>
 		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="ML Application" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547787251.17" ts_lastsave="1547790779.22" unique_id="82">
+		<rich_text>
+
+
+The log loss expression can be used to compute the performance of a classification model
+
+
+
+This is computed after a classification of N samples into M categories.
+
+y</rich_text>
+		<rich_text scale="sub">ij</rich_text>
+		<rich_text> is a binary indicator of whether label j is the correct classification for instance i - 1 for correct, 0 for incorrect. Therefore only one term out of the M terms for each instance will be nonzero
+
+p</rich_text>
+		<rich_text scale="sub">ij</rich_text>
+		<rich_text> is the model probability for assigning label j to instance i.
+
+
+
+
+
+
+
+
+
+</rich_text>
+		<encoded_png char_offset="93">iVBORw0KGgoAAAANSUhEUgAAALgAAABACAIAAAAmkCrkAAAAA3NCSVQICAjb4U/gAAAN5UlEQVR4nO2caVBTVxvHT2QZ9kUYRATKDNoGHGsh7GptoEAUsQripFZQ7GiHpZbNastWqeDIFAKMFGiFYYTKXimgopbFAi0OQmkhGEBKgEgCJEoIEMh23w933kxeQHqTYHgj9/fBuTn3nP99LvnnnOece64YCIIACsq/sWm9A0BRDlCjoCACNQoKIlCjoCACNQoKIlCjoCACNQoKIlCjoCACNQoKIpTSKAsLC2lpaY6OjvX19QCA6enpqKiozz77rKOjQ1qpzs7OoKAgf39/ycILFy4cOXKktLR0zSJWflTXOwBZ0NDQcHFx4XA4t2/fJhAIBgYG+/fvt7e3t7CwkFYKh8M5OTlVVVUJBAJVVVUAQHt7O4/HO3bsGJFIfA2xKytK2aMAACgUSkRERF9f38jICACATqfL4BIAAI/H09DQMDExmZychD8ymcypqan33ntvjSNWctbBKFNTU+np6XKK8Pl8AwMDb2/v6upqAADcGchAX1+fjY2Nqanp+Pg4AODBgwcuLi40Gg2LxcoZ4RuGQo3S0NAQHR0dHh5eWVkpjw6fz1dTUwMAHD16tLa2lsVi6enpySbV09Oze/furVu3MhgMBoNhaGg4MDBga2srs/PeVBRqFA8Pj7S0tCWZowz09fXZ2toCAHbu3GliYkIikXbv3i2b1OzsrI6OjpmZGZ1Ob2tr27Nnz59//omOO8tRyhzlr7/+2rVrF3zs5+fX2tq6Y8cOeQTNzMx+/fVXe3t7AABqlBVRPqMUFRWVlZVVVVXBHwkEgqur66ZNUt/IyMjIpUuX2tranj17ZmZm5ubmZmJikpubS6FQWltbFxYW1jpw5Qaj+B1u5eXlGRkZv//+u4KviyIP65OyIXfnqVOnhoaGIAiytrbW1taG/otQKBQIBEKhUCQSiUQiLpdLp9NFIpG4YXp6+vvvvy8p9ejRo9jYWACAlpaWtbU1HAMsBSMSieCDycnJ2dlZcUMsFltcXLwGt63M/L8bJSQkJDw8HACwefPmjIyMVWoKBILnz593dXVVVVVRKJTS0tIlRtm3b5+trW1XVxefzw8NDRVnOSsyPT09PDx89+7d+vp6CoXS3d290RMXSOGUlZU5Ozsjr5+RkYHD4XA4XElJCcImDQ0N+/fvh7siSRgMBh6Px+Fwvr6+HA4HiRSbzY6MjLx48SLygN9IlCCZDQsLs7GxAQBkZmYODAwgaeLu7p6amlpeXr6kfMuWLfHx8QCA8fHxlJQUJFJ6enrffffdzMzMxMSElIG/USg0mX38+HFRUdHo6OiLFy8sLS0tLCyuXbuGpOHY2NiJEye4XK6VlVVxcbGGhgaSVn/88Yerq+vy8qtXr8KTpoSEhMOHDyORmpyc5HA41tbWSCqvTmlpaVlZGQRB8Jqy0rDeXRpS6urq4AHo22+/lVOKy+UGBATgcLg9e/YMDw+vRXTSUVFRceDAAcVfVx6UYOiB8fHxOXDgAACgurr64cOH8khpaGikpKSoq6svLCzExsby+fw1ihEpyvh8QGmMAgC4dOmSubk5ACA5OZlOp8sjtX379qioKABAf39/VlbW2sSHGAwGo+Aryo8yWVtbWzslJeXMmTOzs7OxsbE//PCDPD/NY8eOtbe3Nzc3l5SUODs77927V6rmo6Ojubm5dDo9LS1t8+bNAIBvvvnm008/RbLbQdIoIpHo5s2bIyMjampqPB7v888/NzIyAgBMT0+npqbChdu2bRscHDQyMkpISFgiVVZW1t7e7ujoqKmp2d/fPzQ0FBERsXPnTqnuBRHrPfZJzc2bN+Fk5fvvv5dTis1mHzx4EIfDeXh4TE1NSdU2KSmJy+Xi8fj79+9DEDQwMODg4IBwyl1TUyPOUa5du5aUlAQfNzY2+vv7LywsQBAUFhaWkpICQdDw8LCrq2tfX19LS8sSncnJyeTk5Lq6OhcXl46ODgiCqqqqjh8/LtWNIESZhh6YkydPwnOZgoKCJ0+eyCOlp6d35cqVTZs2TU9PJyQkQIgngBwOx8vLa3BwkMPhODg4AADa29vfeecdHR0dAACfzxcIBOLKfD5/SRoE/+kBAEwms6KiwtPTEy7H4/E0Gu3evXsAACqVqq+vDwAwMTHh8XhjY2PL+7zp6enAwMC///7byckJDoPH41GpVFh8fn5esvLyMKRCxq77+vXrr1pXcHd3x+Px8DEcvVT863ePwWAuX75MJBJnZmbkH+zt7OzOnj2bl5enpqYmEolUVFSQtNLV1XV2ds7Kynr33Xfhcefx48c4HA4+SyKR3NzcxN8riURycXGRXCYWGwVeEtTU1BSf0tLS6u/vBwAcPHiwo6ODw+E0NDSYmpo6OjouDwN+Zt7Z2fnRRx/BJRQKxcLCAv6zhIaGpqenw+GtGIZUyGgUeFn9X5HzF/8qtLS0tmzZEhUVJf5u5MHKygqLxV69ehWhS8S0tbXBEzGBQNDd3R0QEACXf/nll5LVlnwEEk8wzMzMAABzc3Pi8vn5+a1btwIAFhcXiURifn6+sbFxUVGRoaHhijEwmUwqlWpnZweH0dLScurUKfhUYWHh6mFIhfINPSKRKD4+3sPDg0AgyK/W09OTl5eXkZGhpaUlbVsMBgOPNffv319cXLSzsxMKhYWFhTExMXCFiYmJgoKCVX5UFhYWnp6eDx48gD/+9ttv+vr68Bogi8VisVi+vr4EAkFbW/tVCl1dXQAAXV1dAEBlZaW5ufknn3zCYDAyMzNzc3MRhoEEZZr1wJBIJAMDg9OnT8svRaPREhIS0tLSjI2NZWgeHR1dUFDQ3d1NoVB27Nihp6fX3t6Ox+Pr6urgCk1NTcHBwbdu3eLxeOrq6nBhaWlpcXHx3NxcaGhoSkpKUlJSTk5ORESElpYWBEH5+fkGBgYAAAcHhytXrsBN1NXVCQRCTEzMcjd3dXVhsdjc3FwVFZVt27bl5eWpqKh0d3fb29s3NTWtEobUvI4M+fVRUlJy/vx5gUAgv9TLly+PHz8OTxZkgM/niydKgYGB169fF0eYl5cnrkalUk+cOCFDbN7e3mQymc/n83i8p0+fBgQE3Lp1a3lNf3///Pz85eUxMTFPnjyRMwxJFDf0FBYWfvzxx46OjpKDZXZ2tqen54cffhgWFiYeql9Fc3Pz3bt3kScTbDb7VacWFxdjYmKCg4MRptsCgWBJeKmpqRcvXgQAPHv2jEKh+Pn5weV37tzx8vJqbW2FP5LJ5NX3M6xIf3+/qakpvMdbTU0Ni8USCAT4xRRJWCyWOEGRhM1mDw0N6evrj46OyhOGJIozyunTp/39/a2trZubm8UzprCwMD8/v6+++io7O3uVkRgA0Nvbm52dnZ6ejjCZ4HA4ly9fXvEUBEGJiYl79+5FnuUUFhb29vZKlgwODsI7VG7cuHHy5Ek4AwUAmJubNzU1iTevkMlkGTZ+29jYjI2Nia84Ozt77949JycnyTq9vb0hISGqqqrZ2dkMBkPylIqKiqWlZUdHh6WlpTxh/A/ydEfSEhcX19vbi8PhcnJyxIWRkZFcLnf1hjQazd/f/59//kF4IRaLFRwcfPv27RXPkkgkeC0LIb/88svhw4eFQqFkYX19fVxcXHJysuS9LCcoKIhGoyG/lpinT5+Gh4fHxsYmJSWdPXu2urpaBhH5wxCjUKNERkZCEBQSEuLt7c3n8yEIEgqF58+fX70Vm80mEomdnZ1ILsHhcCoqKnx8fNzc3FZcJy0vL//iiy8QZjk9PT1xcXE4HE6cgiBEJBLl5+ezWCwikShVw7VlDcNQ3KyHRqPBj/QCAgIuXLjw6NEjDw+PoaGh1d+04PF40dHROjo6vb29ZDIZg8FIRg/+u+mVzWbT6XQGgzE8PLy4uAgAIBAI8NxVkpaWFhKJFBQU9NNPP2EwGFhNJBKJpSAI4vF4ExMTdDqdRqOJu/RDhw5JdbMLCwuNjY3j4+OJiYlSNVxb1jAMxW1cqqmp0dXVxePxQqHQ19f3rbfeysnJKS8vt7CwWHF7EUxycnJtbS2QWM0UHywHXpGE/83KynJxcZE8S6VSz5w5Ay9sL3Hbq6Tgg127duXn58twy28UcvZIyElMTHzx4gV8/OOPP+JwOCqV+vXXX8/NzSksBhSZUdysh8lkitehjxw5oqqqWllZOT8/L8OSKIriUZBR6HS6qamp+KOxsfEHH3xQVVVlZWWlmABQ5ERBRmlpaYF30osJCAjg8XhSPdXjcrn/WkcgEEi+u7UKS57Cy6n2xvPajcJgMM6dO5eVlZWXlyf5vh0Oh8Niscjfqnr48OHqGSWXy83KygoMDET4smpISAiLxVortTeedXj3+LUSHx+/b98+Ly+v/0M1pUY5thnU1tZGRUUxmcw1Uevo6MjJycnMzFwTtQ2CEmwzmJycNDMzYzKZ8P7CO3fuvHz5UrICBoNxdnbevn07EjUej0ej0Tw8PFJTU+VX2zgogVFMTExmZmY0NTXheZOPj488aurq6kePHv3555/h/7NJTrWNgxIYBQBQV1d36NChxsZGd3f35X0AAMDJyentt99GLkgmk+F12zVR2wgoh1GMjIyGh4fh3eqv6gOEQuGNGzcGBgZmZmaEQiG8m/VVkMnkc+fOrZXaRuBNm/UgYX5+nkgk1tTUrHcgyoRy9ChrBZPJbG1tNTQ0XOUxJMqKbCyjPH/+vL6+3tzcXM4t6RuQjTj0oMiAciy4oaw7qFFQEIEaBQURqFFQEIEaBQURqFFQEIEaBQURqFFQEPEfgyumGhh2XZ0AAAAASUVORK5CYII=</encoded_png>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1546364564.24" unique_id="70">
 		<rich_text>
