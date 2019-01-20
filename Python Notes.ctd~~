@@ -9201,14 +9201,53 @@ model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accurac
 model.fit(X,y,validation_split=0.3)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1547823351.3" unique_id="83">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1547823522.86" unique_id="83">
 		<rich_text>
 
 
-Nodes and edges both can have metadata associated with them
-
 
 </rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1547823779.48" unique_id="84">
+			<rich_text>
+Nodes and edges both can have metadata associated with them
+
+This is how we do various basic tasks
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<codebox char_offset="101" frame_height="625" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
+import networkx as nx
+
+# Create the graph object
+G = nx.Graph()
+
+# Add nodes using a list of their labels
+G.add_nodes_from([1, 2, 3])
+
+# display nodes
+G.nodes()
+# [1, 2, 3]
+
+# add edges
+G.add_edge(1, 2)
+
+# print out the edges
+G.edges()
+#[(1, 2)]
+
+# add metadata to node 1
+G.node[1]['label'] = 'blue'
+
+# print out the nodes and their metadata
+G.nodes(data=True)
+# [(1, {'label': 'blue'}), (2, {}), (3, {})]
+
+# plot and show the graph
+nx.draw(G)
+
+import matplotlib.pyplot as plt
+plt.show()</codebox>
+		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>

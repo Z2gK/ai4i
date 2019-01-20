@@ -8838,7 +8838,7 @@ score = score_submission(pred_path='predictions.csv')
 # Print score
 print('Your model, trained with numeric data only, yields logloss score: {}'.format(score))</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1546364564.24" unique_id="70">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1547823344.67" unique_id="70">
 		<rich_text>
 </rich_text>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Neural Networks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546364564.25" ts_lastsave="1546864844.11" unique_id="74">
@@ -9199,6 +9199,19 @@ model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accurac
 
 # Fit the model
 model.fit(X,y,validation_split=0.3)</codebox>
+		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1547823522.86" unique_id="83">
+		<rich_text>
+
+
+
+</rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1547823524.72" unique_id="84">
+			<rich_text>
+Nodes and edges both can have metadata associated with them
+
+</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
