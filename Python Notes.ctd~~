@@ -8587,7 +8587,7 @@ print(similarities.nlargest())
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="ML Application" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547787251.17" ts_lastsave="1547823076.8" unique_id="82">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="ML Application" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547787251.17" ts_lastsave="1548087879.59" unique_id="82">
 		<rich_text>
 
 
@@ -8673,9 +8673,11 @@ and next...
 		<rich_text scale="h1">SImple NLP</rich_text>
 		<rich_text>
 
-The example goes through the bag-of-words approach through tokenization
+The example goes through the bag-of-words approach through tokenization. This example goes through the Position_Extra column of the data frame and tokenises the entries. The bag of words is the vec_alphanumeric.get_feature_names() list. CountVectorizer expects each row to be a single string, which it already is.
 
-
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
 
 
@@ -8841,6 +8843,27 @@ score = score_submission(pred_path='predictions.csv')
 
 # Print score
 print('Your model, trained with numeric data only, yields logloss score: {}'.format(score))</codebox>
+		<codebox char_offset="1745" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Create the token pattern: TOKENS_ALPHANUMERIC
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)'
+
+# Fill missing values in df.Position_Extra
+df.Position_Extra.fillna('',inplace=True)
+
+# Instantiate the CountVectorizer: vec_alphanumeric
+vec_alphanumeric = CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC)
+
+# Fit to the data
+vec_alphanumeric.fit(df.Position_Extra)
+
+# Print the number of tokens and first 15 tokens
+msg = &quot;There are {} tokens in Position_Extra if we split on non-alpha numeric&quot;
+print(msg.format(len(vec_alphanumeric.get_feature_names())))
+print(vec_alphanumeric.get_feature_names()[:15])
+
+</codebox>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1547823344.67" unique_id="70">
 		<rich_text>
@@ -9211,7 +9234,7 @@ model.fit(X,y,validation_split=0.3)</codebox>
 
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1548046367.3" unique_id="84">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1548046573.04" unique_id="84">
 			<rich_text>
 Nodes and edges both can have metadata associated with them
 
@@ -9224,13 +9247,24 @@ This is how we do various basic tasks
 
 Here's how we perform queries on nodes and edges of the graph. The parameter data=True is necessary so that the metadata will be included in the enumeration
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
-
-We can set the weight of certain edges
+We can set the weight of certain edges. The example here sets the ‘weight’ metadata of any edge that has 293 as one of the nodes it links to.
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+This checks the number of nodes that have self-loops
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
 
 
 
@@ -9278,7 +9312,7 @@ noi = [n for n, d in T.nodes(data=True) if d['occupation'] == 'scientist']
 # Use a list comprehension to get the edges of interest: eoi
 eoi = [(u, v) for u, v, d in T.edges(data=True) if d['date'] &lt; date(2010,1,1)]
 </codebox>
-			<codebox char_offset="306" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the weight of the edge
+			<codebox char_offset="409" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the weight of the edge
 T.edge[1][10]['weight'] = 2
 
 # Iterate over all the edges (with metadata)
@@ -9289,6 +9323,26 @@ for u, v, d in T.edges(data=True):
     
         # Set the weight to 1.1
         T.edge[u][v]['weight'] = 1.1</codebox>
+			<codebox char_offset="466" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define find_selfloop_nodes()
+def find_selfloop_nodes(G):
+    &quot;&quot;&quot;
+    Finds all nodes that have self-loops in the graph G.
+    &quot;&quot;&quot;
+    nodes_in_selfloops = []
+    
+    # Iterate over all the edges of G
+    for u, v in G.edges():
+    
+    # Check if node u and node v are the same
+        if u == v:
+        
+            # Append node u to nodes_in_selfloops
+            nodes_in_selfloops.append(u)
+            
+    return nodes_in_selfloops
+
+# Check whether number of self loops equals the number of nodes in self loops
+assert T.number_of_selfloops() == len(find_selfloop_nodes(T))</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548045265.88" unique_id="85">
 			<rich_text>
