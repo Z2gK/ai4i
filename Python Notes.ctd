@@ -9211,7 +9211,7 @@ model.fit(X,y,validation_split=0.3)</codebox>
 
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1548002593.69" unique_id="84">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1548046573.04" unique_id="84">
 			<rich_text>
 Nodes and edges both can have metadata associated with them
 
@@ -9221,7 +9221,34 @@ This is how we do various basic tasks
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
-    </rich_text>
+
+Here's how we perform queries on nodes and edges of the graph. The parameter data=True is necessary so that the metadata will be included in the enumeration
+
+
+
+We can set the weight of certain edges. The example here sets the ‘weight’ metadata of any edge that has 293 as one of the nodes it links to.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+This checks the number of nodes that have self-loops
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+
+
+
+
+
+
+
+
+</rich_text>
 			<codebox char_offset="101" frame_height="625" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">
 import networkx as nx
 
@@ -9254,9 +9281,48 @@ nx.draw(G)
 
 import matplotlib.pyplot as plt
 plt.show()</codebox>
+			<codebox char_offset="263" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Use a list comprehension to get the nodes of interest: noi
+noi = [n for n, d in T.nodes(data=True) if d['occupation'] == 'scientist']
+
+# Use a list comprehension to get the edges of interest: eoi
+eoi = [(u, v) for u, v, d in T.edges(data=True) if d['date'] &lt; date(2010,1,1)]
+</codebox>
+			<codebox char_offset="409" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Set the weight of the edge
+T.edge[1][10]['weight'] = 2
+
+# Iterate over all the edges (with metadata)
+for u, v, d in T.edges(data=True):
+
+    # Check if node 293 is involved
+    if 293 in [u,v]:
+    
+        # Set the weight to 1.1
+        T.edge[u][v]['weight'] = 1.1</codebox>
+			<codebox char_offset="466" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define find_selfloop_nodes()
+def find_selfloop_nodes(G):
+    &quot;&quot;&quot;
+    Finds all nodes that have self-loops in the graph G.
+    &quot;&quot;&quot;
+    nodes_in_selfloops = []
+    
+    # Iterate over all the edges of G
+    for u, v in G.edges():
+    
+    # Check if node u and node v are the same
+        if u == v:
+        
+            # Append node u to nodes_in_selfloops
+            nodes_in_selfloops.append(u)
+            
+    return nodes_in_selfloops
+
+# Check whether number of self loops equals the number of nodes in self loops
+assert T.number_of_selfloops() == len(find_selfloop_nodes(T))</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548004366.48" unique_id="85">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548045265.88" unique_id="85">
 			<rich_text>
+
+
 
 Betweenness centrality
 
