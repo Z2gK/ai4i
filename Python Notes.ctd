@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74,78"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74,78,85"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -9482,7 +9482,7 @@ c.draw()
 plt.show()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548151177.22" unique_id="85">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548152018.54" unique_id="85">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Degree centrality</rich_text>
@@ -9520,6 +9520,14 @@ The example presented in the lecture is a simplified variant of Dijkstra's algor
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">Q: Why are so many nodes added to queue?</rich_text>
+			<rich_text> </rich_text>
+			<rich_text weight="heavy">We are modifying the queue list INSIDE the for loop, which actually iterates over the queue list?</rich_text>
+			<rich_text> </rich_text>
+			<rich_text weight="heavy">Looks buggy</rich_text>
 			<rich_text>
 
 
