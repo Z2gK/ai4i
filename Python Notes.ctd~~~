@@ -8587,7 +8587,7 @@ print(similarities.nlargest())
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="ML Application" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547787251.17" ts_lastsave="1548087476.99" unique_id="82">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="ML Application" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547787251.17" ts_lastsave="1548088629.54" unique_id="82">
 		<rich_text>
 
 
@@ -8673,15 +8673,23 @@ and next...
 		<rich_text scale="h1">SImple NLP</rich_text>
 		<rich_text>
 
-The example goes through the bag-of-words approach through tokenization. This example goes through the Position_Extra column of the data frame and tokenises the entries. The bag of words is the vec_alphanumeric.get_feature_names() list
+The example goes through the bag-of-words approach through tokenization. This example goes through the Position_Extra column of the data frame and tokenises the entries. The bag of words is the vec_alphanumeric.get_feature_names() list. CountVectorizer expects each row to be a single string, which it already is.
 
 </rich_text>
 		<rich_text justification="left"></rich_text>
 		<rich_text>
 
+We define a function that converts rows into strings joined by spaces. Only non-numeric columns are selected
 
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
+Finally we get the tokens. TOKENS_BASIC matches all strings separated by spaces, so we may also get special characters such as - / ( in the tokens. TOKENS_ALPHANUMERIC matches all alphanumeric strings.
 
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
 
 
@@ -8843,7 +8851,7 @@ score = score_submission(pred_path='predictions.csv')
 
 # Print score
 print('Your model, trained with numeric data only, yields logloss score: {}'.format(score))</codebox>
-		<codebox char_offset="1667" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import CountVectorizer
+		<codebox char_offset="1745" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import CountVectorizer
 from sklearn.feature_extraction.text import CountVectorizer
 
 # Create the token pattern: TOKENS_ALPHANUMERIC
@@ -8864,6 +8872,48 @@ print(msg.format(len(vec_alphanumeric.get_feature_names())))
 print(vec_alphanumeric.get_feature_names()[:15])
 
 </codebox>
+		<codebox char_offset="1858" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define combine_text_columns()
+def combine_text_columns(data_frame, to_drop=NUMERIC_COLUMNS + LABELS):
+    &quot;&quot;&quot; converts all text in each row of data_frame to single vector &quot;&quot;&quot;
+    
+    # Drop non-text columns that are in the df
+    to_drop = set(to_drop) &amp; set(data_frame.columns.tolist())
+    text_data = data_frame.drop(to_drop, axis=1)
+    
+    # Replace nans with blanks
+    text_data.fillna(&quot;&quot;,inplace=True)
+    
+    # Join all text items in a row that have a space in between
+    return text_data.apply(lambda x: &quot; &quot;.join(x), axis=1)</codebox>
+		<codebox char_offset="2064" frame_height="460" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Create the basic token pattern
+TOKENS_BASIC = '\\S+(?=\\s+)'
+
+# Create the alphanumeric token pattern
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)'
+
+# Instantiate basic CountVectorizer: vec_basic
+vec_basic = CountVectorizer(token_pattern=TOKENS_BASIC)
+
+# Instantiate alphanumeric CountVectorizer: vec_alphanumeric
+vec_alphanumeric = CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC)
+
+# Create the text vector
+text_vector = combine_text_columns(df)
+
+# Fit and transform vec_basic
+vec_basic.fit_transform(text_vector)
+
+# Print number of tokens of vec_basic
+print(&quot;There are {} tokens in the dataset&quot;.format(len(vec_basic.get_feature_names())))
+print(vec_basic.get_feature_names())
+# Fit and transform vec_alphanumeric
+vec_alphanumeric.fit_transform(text_vector)
+
+# Print number of tokens of vec_alphanumeric
+print(&quot;There are {} alpha-numeric tokens in the dataset&quot;.format(len(vec_alphanumeric.get_feature_names())))</codebox>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1547823344.67" unique_id="70">
 		<rich_text>
@@ -9234,7 +9284,7 @@ model.fit(X,y,validation_split=0.3)</codebox>
 
 
 </rich_text>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1548046573.04" unique_id="84">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Introduction" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823518.18" ts_lastsave="1548133005.08" unique_id="84">
 			<rich_text>
 Nodes and edges both can have metadata associated with them
 
@@ -9263,6 +9313,40 @@ This checks the number of nodes that have self-loops
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+</rich_text>
+			<rich_text scale="h1">Visualising graphs</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h2">Matrix Plots</rich_text>
+			<rich_text>
+
+In this example, T is a digraph. It is first converted to a matrix, then back to a digraph. The graph T contains nodes and edges with metadata. Each node has category and occupation. Each edge has date
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Undirected graphs have symmetric matrix representations. Directed graphs have assymetric matrices.
+
+</rich_text>
+			<rich_text scale="h2">Arc plots</rich_text>
+			<rich_text>
+
+For a2, the nodes are ordered and colored by their the node metadata ‘category’.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<rich_text scale="h2">Circos plots</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -9343,10 +9427,84 @@ def find_selfloop_nodes(G):
 
 # Check whether number of self loops equals the number of nodes in self loops
 assert T.number_of_selfloops() == len(find_selfloop_nodes(T))</codebox>
+			<codebox char_offset="706" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import nxviz
+import nxviz as nv
+
+# Create the MatrixPlot object: m
+m = nv.MatrixPlot(T)
+
+# Draw m to the screen
+m.draw()
+
+# Display the plot
+plt.show()
+
+# Convert T to a matrix format: A
+A = nx.to_numpy_matrix(T)
+
+# Convert A back to the NetworkX form as a directed graph: T_conv
+T_conv = nx.from_numpy_matrix(A, create_using=nx.DiGraph())
+
+# Check that the `category` metadata field is lost from each node
+for n, d in T_conv.nodes(data=True):
+    assert 'category' not in d.keys()</codebox>
+			<codebox char_offset="902" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from nxviz import ArcPlot
+
+# Create the un-customized ArcPlot object: a
+a = ArcPlot(T)
+
+# Draw a to the screen
+a.draw()
+
+# Display the plot
+plt.show()
+
+# Create the customized ArcPlot object: a2
+a2 = ArcPlot(T,node_order='category',node_color='category')
+
+# Draw a2 to the screen
+a2.draw()
+
+# Display the plot
+plt.show()
+</codebox>
+			<codebox char_offset="920" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+import matplotlib.pyplot as plt
+from nxviz import CircosPlot
+
+# Create the CircosPlot object: c
+c = CircosPlot(T)
+
+# Draw c to the screen
+c.draw()
+
+# Display the plot
+plt.show()
+</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548045265.88" unique_id="85">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548134231.69" unique_id="85">
+			<rich_text>
+Degree centrality
+
+THe .neighbors(n) method returns a list of nodes that are neighbors to node n. This function returns a set of nodes that have m neighbors.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+The degree of node n can be obtained from
+
+</rich_text>
+			<rich_text family="monospace">G.neighbors(n)</rich_text>
+			<rich_text>
+
+The degree centrality of a node is defined as the degree of the node divided by all the number of neighbours it could possibly have, d(n)/N. In a graph with no self loops, N is the total number of nodes in the entire graph minus 1. In a graph with self loops, N is the total number of nodes in the entire graph.
+
+</rich_text>
+			<rich_text weight="heavy">Q: what about graphs with multiple edges? A node can have any number of neighbors. What about directed graphs? A node can have in and out degrees.</rich_text>
+			<rich_text>
+
+The method nx.degree_centrality(T) returns a dictionary where the keys are nodes and the values are the degree centralities.
 
 
 Betweenness centrality
@@ -9354,6 +9512,28 @@ Betweenness centrality
 Nodes with high betweenness centrality do not necessarily have high degree centrality. High betweenness centrality captures the idea of “bottleneck nodes”. They may have few neighbours, but they are the crucial links between two or more sets of highly connected nodes.
 
 Think: transport networks, bridges between liberals and conservatives, computer networks, etc.</rich_text>
+			<codebox char_offset="160" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define nodes_with_m_nbrs()
+def nodes_with_m_nbrs(G,m):
+    &quot;&quot;&quot;
+    Returns all nodes in graph G that have m neighbors.
+    &quot;&quot;&quot;
+    nodes = set()
+    
+    # Iterate over all nodes in G
+    for n in G.nodes():
+    
+        # Check if the number of neighbors of n matches m
+        if len(G.neighbors(n)) == m:
+        
+            # Add the node n to the set
+            nodes.add(n)
+            
+    # Return the nodes with m neighbors
+    return nodes
+
+# Compute and print all nodes in T that have 6 neighbors
+six_nbrs = nodes_with_m_nbrs(T,6)
+print(six_nbrs)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
