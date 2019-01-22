@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74,78,85"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74,78,85,86"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -8587,7 +8587,7 @@ print(similarities.nlargest())
 </codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="ML Application" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547787251.17" ts_lastsave="1548088629.54" unique_id="82">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="ML Application" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547787251.17" ts_lastsave="1548167103.15" unique_id="82">
 		<rich_text>
 
 
@@ -8692,22 +8692,73 @@ Finally we get the tokens. TOKENS_BASIC matches all strings separated by spaces,
 		<rich_text>
 
 
+Using pipelines
+
+We can construct a simple pipeline. Note that the numeric column does not contain any missing values
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Now we add an imputer into the pipeline. By default, it fills missing values with the mean of the column
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+This one just uses text data for classification
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+What if we want to combine text and numeric data? Preprocessing needs to be done separately, and then the data has to be combined into one dataframe.
 
 
+First we use the FunctionTransformer to subset the data
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Then we put it into FeatureUnion
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
 
+Pipelines build the infrastructure of processing and model fitting. We can easily change the model by editting code in the final few steps. We can also add more columns easily.
+
+</rich_text>
+		<rich_text weight="heavy">Q: This is where theory really goes a long way. Nothing much is covered about how text and numeric data is dealt with by logistic regression under the hood. We wish for more theory...</rich_text>
+		<rich_text>
 
 
+Now we try another example 
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Build the pipeline...
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+We can try different models just by changing the ‘clf’ step.  Here we use the RandomForestClassifier instead.
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
 
+We can also easily change parameters of the model. Here we change the n_estimators of the random forest classifier model.
 
-
-
-
-
-
-
-
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
 
 
 
@@ -8914,6 +8965,237 @@ vec_alphanumeric.fit_transform(text_vector)
 
 # Print number of tokens of vec_alphanumeric
 print(&quot;There are {} alpha-numeric tokens in the dataset&quot;.format(len(vec_alphanumeric.get_feature_names())))</codebox>
+		<codebox char_offset="2187" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Pipeline
+from sklearn.pipeline import Pipeline
+
+# Import other necessary modules
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.multiclass import OneVsRestClassifier
+
+# Split and select numeric data only, no nans 
+X_train, X_test, y_train, y_test = train_test_split(sample_df[['numeric']],
+                                                    pd.get_dummies(sample_df['label']), 
+                                                    random_state=22)
+
+# Instantiate Pipeline object: pl
+pl = Pipeline([
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])
+
+# Fit the pipeline to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print(&quot;\nAccuracy on sample data - numeric, no nans: &quot;, accuracy)</codebox>
+		<codebox char_offset="2296" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the Imputer object
+from sklearn.preprocessing import Imputer
+
+# Create training and test sets using only numeric data
+X_train, X_test, y_train, y_test = train_test_split(sample_df[['numeric', 'with_missing']],
+                                                    pd.get_dummies(sample_df['label']), 
+                                                    random_state=456)
+
+# Insantiate Pipeline object: pl
+pl = Pipeline([
+        ('imp', Imputer()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])
+
+# Fit the pipeline to the training data
+pl.fit(X_train,y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test,y_test)
+print(&quot;\nAccuracy on sample data - all numeric, incl nans: &quot;, accuracy)</codebox>
+		<codebox char_offset="2348" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Split out only the text data
+X_train, X_test, y_train, y_test = train_test_split(sample_df['text'],
+                                                    pd.get_dummies(sample_df['label']), 
+                                                    random_state=456)
+
+# Instantiate Pipeline object: pl
+pl = Pipeline([
+        ('vec', CountVectorizer()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])
+
+# Fit to the training data
+pl.fit(X_train,y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test,y_test)
+print(&quot;\nAccuracy on sample data - just text data: &quot;, accuracy)
+</codebox>
+		<codebox char_offset="2560" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import FunctionTransformer
+from sklearn.preprocessing import FunctionTransformer
+
+# Obtain the text data: get_text_data
+get_text_data = FunctionTransformer(lambda x: x['text'], validate=False)
+
+# Obtain the numeric data: get_numeric_data
+get_numeric_data = FunctionTransformer(lambda x: x[['numeric', 'with_missing']], validate=False)
+
+# Fit and transform the text data: just_text_data
+just_text_data = get_text_data.fit_transform(sample_df)
+
+# Fit and transform the numeric data: just_numeric_data
+just_numeric_data = get_numeric_data.fit_transform(sample_df)
+
+# Print head to check results
+print('Text Data')
+print(just_text_data.head())
+print('\nNumeric Data')
+print(just_numeric_data.head())</codebox>
+		<codebox char_offset="2597" frame_height="520" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import FeatureUnion
+from sklearn.pipeline import FeatureUnion
+
+# Split using ALL data in sample_df
+X_train, X_test, y_train, y_test = train_test_split(sample_df[['numeric', 'with_missing', 'text']],
+                                                    pd.get_dummies(sample_df['label']), 
+                                                    random_state=22)
+
+# Create a FeatureUnion with nested pipeline: process_and_join_features
+process_and_join_features = FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer())
+                ]))
+             ]
+        )
+
+# Instantiate nested pipeline: pl
+pl = Pipeline([
+        ('union', process_and_join_features),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])
+
+
+# Fit pl to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print(&quot;\nAccuracy on sample data - all data: &quot;, accuracy)
+</codebox>
+		<codebox char_offset="2994" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import FunctionTransformer
+from sklearn.preprocessing import FunctionTransformer
+
+# Get the dummy encoding of the labels
+dummy_labels = pd.get_dummies(df[LABELS])
+
+# Get the columns that are features in the original df
+NON_LABELS = [c for c in df.columns if c not in LABELS]
+
+# Split into training and test sets
+X_train, X_test, y_train, y_test = multilabel_train_test_split(df[NON_LABELS],
+                                                               dummy_labels,
+                                                               0.2, 
+                                                               seed=123)
+
+# Preprocess the text data: get_text_data
+get_text_data = FunctionTransformer(combine_text_columns,validate=False)
+
+# Preprocess the numeric data: get_numeric_data
+get_numeric_data = FunctionTransformer(lambda x: x[NUMERIC_COLUMNS], validate=False)</codebox>
+		<codebox char_offset="3020" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Complete the pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer())
+                ]))
+             ]
+        )),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])
+
+# Fit to the training data
+pl.fit(X_train,y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print(&quot;\nAccuracy on budget dataset: &quot;, accuracy)</codebox>
+		<codebox char_offset="3134" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import random forest classifer
+from sklearn.ensemble import RandomForestClassifier
+
+# Edit model step in pipeline
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer())
+                ]))
+             ]
+        )),
+        ('clf', RandomForestClassifier())
+    ])
+
+# Fit to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print(&quot;\nAccuracy on budget dataset: &quot;, accuracy)</codebox>
+		<codebox char_offset="3261" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+# Add model step to pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer())
+                ]))
+             ]
+        )),
+        ('clf', RandomForestClassifier(n_estimators=15))
+    ])
+
+# Fit to the training data
+pl.fit(X_train, y_train)
+
+# Compute and print accuracy
+accuracy = pl.score(X_test, y_test)
+print(&quot;\nAccuracy on budget dataset: &quot;, accuracy)</codebox>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548168799.42" unique_id="86">
+			<rich_text>
+Tricks fall into the categories of text processing, statistical methods, computational efficiency
+
+In the competition, the winning team tokenised on punctuations as well. They also considered bigrams in addition to unigrams. Computational trick - hashing
+
+They used logistic regression, not any fancy models.
+
+</rich_text>
+			<rich_text weight="heavy">Will completed datacamp courses still be available after our one year premium access ends?</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">If I have completed all the courses, can I start to process the claim?</rich_text>
+		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1547823344.67" unique_id="70">
 		<rich_text>
@@ -9278,7 +9560,7 @@ model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accurac
 model.fit(X,y,validation_split=0.3)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548004016.55" unique_id="83">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548167825.91" unique_id="83">
 		<rich_text>
 
 
@@ -9621,6 +9903,9 @@ plt.show()</codebox>
 
             # Place the appropriate return statement
             return False</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548167825.92" unique_id="87">
+			<rich_text></rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
