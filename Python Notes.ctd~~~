@@ -9482,9 +9482,11 @@ c.draw()
 plt.show()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548134231.69" unique_id="85">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548134740.87" unique_id="85">
 			<rich_text>
-Degree centrality
+</rich_text>
+			<rich_text scale="h1">Degree centrality</rich_text>
+			<rich_text>
 
 THe .neighbors(n) method returns a list of nodes that are neighbors to node n. This function returns a set of nodes that have m neighbors.
 
@@ -9506,12 +9508,33 @@ The degree centrality of a node is defined as the degree of the node divided by 
 
 The method nx.degree_centrality(T) returns a dictionary where the keys are nodes and the values are the degree centralities.
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
-Betweenness centrality
+</rich_text>
+			<rich_text scale="h1">Shortest paths</rich_text>
+			<rich_text>
+
+The example presented in the lecture is a simplified variant of Dijkstra's algorithm, with unweighted edges.
+
+
+
+
+
+</rich_text>
+			<rich_text scale="h1">Betweenness centrality</rich_text>
+			<rich_text>
 
 Nodes with high betweenness centrality do not necessarily have high degree centrality. High betweenness centrality captures the idea of “bottleneck nodes”. They may have few neighbours, but they are the crucial links between two or more sets of highly connected nodes.
 
-Think: transport networks, bridges between liberals and conservatives, computer networks, etc.</rich_text>
+Think: transport networks, bridges between liberals and conservatives, computer networks, etc.
+
+
+
+
+
+</rich_text>
 			<codebox char_offset="160" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define nodes_with_m_nbrs()
 def nodes_with_m_nbrs(G,m):
     &quot;&quot;&quot;
@@ -9534,6 +9557,26 @@ def nodes_with_m_nbrs(G,m):
 # Compute and print all nodes in T that have 6 neighbors
 six_nbrs = nodes_with_m_nbrs(T,6)
 print(six_nbrs)</codebox>
+			<codebox char_offset="809" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import matplotlib.pyplot
+import matplotlib.pyplot as plt
+
+# Compute the degree centrality of the Twitter network: deg_cent
+deg_cent = nx.degree_centrality(T)
+
+# Plot a histogram of the degree centrality distribution of the graph.
+plt.figure()
+plt.hist(list(deg_cent.values()))
+plt.show()
+
+# Plot a histogram of the degree distribution of the graph
+plt.figure()
+plt.hist(degrees)
+plt.show()
+
+# Plot a scatter plot of the centrality distribution and the degree distribution
+plt.figure()
+plt.scatter(degrees,list(deg_cent.values()))
+plt.show()</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">

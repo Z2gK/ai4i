@@ -9482,7 +9482,7 @@ c.draw()
 plt.show()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548134740.87" unique_id="85">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548151177.22" unique_id="85">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Degree centrality</rich_text>
@@ -9516,9 +9516,11 @@ The method nx.degree_centrality(T) returns a dictionary where the keys are nodes
 			<rich_text scale="h1">Shortest paths</rich_text>
 			<rich_text>
 
-The example presented in the lecture is a simplified variant of Dijkstra's algorithm, with unweighted edges.
+The example presented in the lecture is a simplified variant of Dijkstra's algorithm, with unweighted edges. We build a function to return True if the path exists between two nodes - node1 and node2.
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -9577,6 +9579,40 @@ plt.show()
 plt.figure()
 plt.scatter(degrees,list(deg_cent.values()))
 plt.show()</codebox>
+			<codebox char_offset="1029" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def path_exists(G,node1,node2):
+    &quot;&quot;&quot;
+    This function checks whether a path exists between two nodes (node1, node2) in graph G.
+    &quot;&quot;&quot;
+    visited_nodes = set()
+    
+    # Initialize the queue of cells to visit with the first node: queue
+    queue = [node1]
+    
+    # Iterate over the nodes in the queue
+    for node in queue:
+    
+        # Get neighbors of the node
+        neighbors = G.neighbors(node) 
+        
+        # Check to see if the destination node is in the set of neighbors
+        if node2 in neighbors:
+            print('Path exists between nodes {0} and {1}'.format(node1, node2))
+            return True
+            break
+
+        else:
+            # Add current node to visited nodes
+            visited_nodes.add(node)
+            
+            # Add neighbors of current node that have not yet been visited
+            queue.extend([n for n in neighbors if n not in visited_nodes])
+
+        # Check to see if the final element of the queue has been reached
+        if node == queue[-1]:
+            print('Path does not exist between nodes {0} and {1}'.format(node1, node2))
+
+            # Place the appropriate return statement
+            return False</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
