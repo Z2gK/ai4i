@@ -9764,7 +9764,7 @@ c.draw()
 plt.show()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548152018.54" unique_id="85">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548211666.16" unique_id="85">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Degree centrality</rich_text>
@@ -9821,6 +9821,12 @@ The example presented in the lecture is a simplified variant of Dijkstra's algor
 Nodes with high betweenness centrality do not necessarily have high degree centrality. High betweenness centrality captures the idea of “bottleneck nodes”. They may have few neighbours, but they are the crucial links between two or more sets of highly connected nodes.
 
 Think: transport networks, bridges between liberals and conservatives, computer networks, etc.
+
+There is the betweenness_centrality() method to do this. In the example here, it is calculated for the graph T. The return data type is a dictionary, with the node number as the key and the betweenness centrality as the value.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -9903,6 +9909,17 @@ plt.show()</codebox>
 
             # Place the appropriate return statement
             return False</codebox>
+			<codebox char_offset="1804" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Compute the betweenness centrality of T: bet_cen
+bet_cen = nx.betweenness_centrality(T)
+
+# Compute the degree centrality of T: deg_cen
+deg_cen = nx.degree_centrality(T)
+
+# Create a scatter plot of betweenness centrality and degree centrality
+plt.scatter(list(bet_cen.values()),list(deg_cen.values()))
+
+# Display the plot
+plt.show()</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548167825.92" unique_id="87">
 			<rich_text></rich_text>

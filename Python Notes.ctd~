@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <cherrytree>
-	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74,78,85"/>
+	<bookmarks list="2,18,21,31,33,36,35,16,43,5,46,47,48,50,51,66,71,74,78,85,86"/>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Intro to Python for Data Science" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1542451468.54" ts_lastsave="1542454833.41" unique_id="1">
 		<rich_text>
 
@@ -9181,7 +9181,7 @@ pl.fit(X_train, y_train)
 # Compute and print accuracy
 accuracy = pl.score(X_test, y_test)
 print(&quot;\nAccuracy on budget dataset: &quot;, accuracy)</codebox>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548167646.54" unique_id="86">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548168799.42" unique_id="86">
 			<rich_text>
 Tricks fall into the categories of text processing, statistical methods, computational efficiency
 
@@ -9191,6 +9191,10 @@ They used logistic regression, not any fancy models.
 
 </rich_text>
 			<rich_text weight="heavy">Will completed datacamp courses still be available after our one year premium access ends?</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text weight="heavy">If I have completed all the courses, can I start to process the claim?</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1547823344.67" unique_id="70">

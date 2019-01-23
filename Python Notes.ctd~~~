@@ -9181,11 +9181,13 @@ pl.fit(X_train, y_train)
 # Compute and print accuracy
 accuracy = pl.score(X_test, y_test)
 print(&quot;\nAccuracy on budget dataset: &quot;, accuracy)</codebox>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548167228.11" unique_id="86">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548167646.54" unique_id="86">
 			<rich_text>
 Tricks fall into the categories of text processing, statistical methods, computational efficiency
 
-In the competition, the winning team tokenised on punctuations as well. They also considered bigrams in addition to unigrams.
+In the competition, the winning team tokenised on punctuations as well. They also considered bigrams in addition to unigrams. Computational trick - hashing
+
+They used logistic regression, not any fancy models.
 
 </rich_text>
 			<rich_text weight="heavy">Will completed datacamp courses still be available after our one year premium access ends?</rich_text>
