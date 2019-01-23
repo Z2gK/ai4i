@@ -9992,7 +9992,7 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548228886.02" unique_id="87">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548230178.46" unique_id="87">
 			<rich_text>
 
 </rich_text>
@@ -10018,14 +10018,24 @@ This returns the number of nodes that are in a triangle relation with a particul
 
 This function returns the number of maximal cliques of a certain size in the graph.
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 Subgraphs
 
+We can create subgraphs using the .subgraph() method of a graph object.
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
+We can extract nodes with a certain property and create a subgraph out of them.
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -10087,6 +10097,56 @@ def maximal_cliques(G,size):
 
 # Check that there are 33 maximal cliques of size 3 in the graph T
 assert len(maximal_cliques(T,3)) == 33</codebox>
+			<codebox char_offset="612" frame_height="580" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">nodes_of_interest = [29, 38, 42]
+
+# Define get_nodes_and_nbrs()
+def get_nodes_and_nbrs(G, nodes_of_interest):
+    &quot;&quot;&quot;
+    Returns a subgraph of the graph `G` with only the `nodes_of_interest` and their neighbors.
+    &quot;&quot;&quot;
+    nodes_to_draw = []
+    
+    # Iterate over the nodes of interest
+    for n in nodes_of_interest:
+    
+        # Append the nodes of interest to nodes_to_draw
+        nodes_to_draw.append(n)
+        
+        # Iterate over all the neighbors of node n
+        for nbr in G.neighbors(n):
+        
+            # Append the neighbors of n to nodes_to_draw
+            nodes_to_draw.append(nbr)
+            
+    return G.subgraph(nodes_to_draw)
+
+# Extract the subgraph with the nodes of interest: T_draw
+T_draw = get_nodes_and_nbrs(T,nodes_of_interest)
+
+# Draw the subgraph to the screen
+nx.draw(T_draw)
+plt.show()</codebox>
+			<codebox char_offset="696" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the nodes of interest: nodes
+nodes = [n for n, d in T.nodes(data=True) if d['occupation'] == 'celebrity']
+
+# Create the set of nodes: nodeset
+nodeset = set(nodes)
+
+# Iterate over nodes
+for n in nodes:
+
+    # Compute the neighbors of n: nbrs
+    nbrs = T.neighbors(n)
+    
+    # Compute the union of nodeset and nbrs: nodeset
+    nodeset = nodeset.union(nbrs)
+
+# Compute the subgraph using nodeset: T_sub
+T_sub = T.subgraph(nodeset)
+
+# Draw T_sub to the screen
+nx.draw(T_sub)
+plt.show()</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">

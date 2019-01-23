@@ -9560,7 +9560,7 @@ model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accurac
 model.fit(X,y,validation_split=0.3)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548167825.91" unique_id="83">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548236782.12" unique_id="83">
 		<rich_text>
 
 
@@ -9992,7 +9992,7 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548229947.03" unique_id="87">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548236231.12" unique_id="87">
 			<rich_text>
 
 </rich_text>
@@ -10030,6 +10030,13 @@ We can create subgraphs using the .subgraph() method of a graph object.
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+We can extract nodes with a certain property and create a subgraph out of them.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
 
 
 
@@ -10121,6 +10128,75 @@ T_draw = get_nodes_and_nbrs(T,nodes_of_interest)
 
 # Draw the subgraph to the screen
 nx.draw(T_draw)
+plt.show()</codebox>
+			<codebox char_offset="696" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the nodes of interest: nodes
+nodes = [n for n, d in T.nodes(data=True) if d['occupation'] == 'celebrity']
+
+# Create the set of nodes: nodeset
+nodeset = set(nodes)
+
+# Iterate over nodes
+for n in nodes:
+
+    # Compute the neighbors of n: nbrs
+    nbrs = T.neighbors(n)
+    
+    # Compute the union of nodeset and nbrs: nodeset
+    nodeset = nodeset.union(nbrs)
+
+# Compute the subgraph using nodeset: T_sub
+T_sub = T.subgraph(nodeset)
+
+# Draw T_sub to the screen
+nx.draw(T_sub)
+plt.show()</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548236823.05" unique_id="88">
+			<rich_text>
+MatrixPlot
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+ArcPlot
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+</rich_text>
+			<codebox char_offset="13" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from nxviz import MatrixPlot
+import matplotlib.pyplot as plt
+
+# Calculate the largest connected component subgraph: largest_ccs
+largest_ccs = sorted(nx.connected_component_subgraphs(G), key=lambda x: len(x))[-1]
+
+# Create the customized MatrixPlot object: h
+h = MatrixPlot(graph=largest_ccs,node_grouping='grouping')
+
+# Draw the MatrixPlot to the screen
+h.draw()
+plt.show()</codebox>
+			<codebox char_offset="26" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from nxviz.plots import ArcPlot
+import matplotlib.pyplot as plt
+
+# Iterate over all the nodes in G, including the metadata
+for n, d in G.nodes(data=True):
+
+    # Calculate the degree of each node: G.node[n]['degree']
+    G.node[n]['degree'] = nx.degree(G,n)
+    
+# Create the ArcPlot object: a
+a = ArcPlot(graph=G,node_order='degree')
+
+# Draw the ArcPlot to the screen
+a.draw()
 plt.show()</codebox>
 		</node>
 	</node>
