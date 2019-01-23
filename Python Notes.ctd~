@@ -9764,7 +9764,7 @@ c.draw()
 plt.show()
 </codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548152018.54" unique_id="85">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Important nodes" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548004016.56" ts_lastsave="1548225044.19" unique_id="85">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Degree centrality</rich_text>
@@ -9794,6 +9794,15 @@ The method nx.degree_centrality(T) returns a dictionary where the keys are nodes
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+
+This finds the node(s) with maximum degree centrality
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
 </rich_text>
 			<rich_text scale="h1">Shortest paths</rich_text>
 			<rich_text>
@@ -9822,8 +9831,17 @@ Nodes with high betweenness centrality do not necessarily have high degree centr
 
 Think: transport networks, bridges between liberals and conservatives, computer networks, etc.
 
+There is the betweenness_centrality() method to do this. In the example here, it is calculated for the graph T. The return data type is a dictionary, with the node number as the key and the betweenness centrality as the value.
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
+Finding the node with the maximum betweenness centrality
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 </rich_text>
@@ -9869,7 +9887,38 @@ plt.show()
 plt.figure()
 plt.scatter(degrees,list(deg_cent.values()))
 plt.show()</codebox>
-			<codebox char_offset="1029" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def path_exists(G,node1,node2):
+			<codebox char_offset="868" frame_height="550" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define find_nodes_with_highest_deg_cent()
+def find_nodes_with_highest_deg_cent(G):
+
+    # Compute the degree centrality of G: deg_cent
+    # This is a dict object
+    deg_cent = nx.degree_centrality(G)
+    
+    # Compute the maximum degree centrality: max_dc
+    max_dc = max(list(deg_cent.values()))
+    
+    nodes = set()
+    
+    # Iterate over the degree centrality dictionary
+    # deg_cent.items() is a list of tuples
+    for k, v in deg_cent.items():
+    
+        # Check if the current value has the maximum degree centrality
+        if v == max_dc:
+        
+            # Add the current node to the set of nodes
+            nodes.add(k)
+            
+    return nodes
+    
+# Find the node(s) that has the highest degree centrality in T: top_dc
+top_dc = find_nodes_with_highest_deg_cent(T)
+print(top_dc)
+
+# Write the assertion statement
+for node in top_dc:
+    assert nx.degree_centrality(T)[node] == max(nx.degree_centrality(T).values())</codebox>
+			<codebox char_offset="1090" frame_height="505" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def path_exists(G,node1,node2):
     &quot;&quot;&quot;
     This function checks whether a path exists between two nodes (node1, node2) in graph G.
     &quot;&quot;&quot;
@@ -9903,9 +9952,84 @@ plt.show()</codebox>
 
             # Place the appropriate return statement
             return False</codebox>
+			<codebox char_offset="1865" frame_height="160" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Compute the betweenness centrality of T: bet_cen
+bet_cen = nx.betweenness_centrality(T)
+
+# Compute the degree centrality of T: deg_cen
+deg_cen = nx.degree_centrality(T)
+
+# Create a scatter plot of betweenness centrality and degree centrality
+plt.scatter(list(bet_cen.values()),list(deg_cen.values()))
+
+# Display the plot
+plt.show()</codebox>
+			<codebox char_offset="1926" frame_height="445" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Define find_node_with_highest_bet_cent()
+def find_node_with_highest_bet_cent(G):
+
+    # Compute betweenness centrality: bet_cent
+    bet_cent = nx.betweenness_centrality(G)
+    
+    # Compute maximum betweenness centrality: max_bc
+    max_bc = max(list(bet_cent.values()))
+    
+    nodes = set()
+    
+    # Iterate over the betweenness centrality dictionary
+    for k, v in bet_cent.items():
+    
+        # Check if the current value has the maximum betweenness centrality
+        if v == max_bc:
+        
+            # Add the current node to the set of nodes
+            nodes.add(k)
+            
+    return nodes
+
+# Use that function to find the node(s) that has the highest betweenness centrality in the network: top_bc
+top_bc = find_node_with_highest_bet_cent(T)
+
+# Write an assertion statement that checks that the node(s) is/are correctly identified.
+for node in top_bc:
+    assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548167825.92" unique_id="87">
-			<rich_text></rich_text>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548225606.28" unique_id="87">
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h1">Cliques</rich_text>
+			<rich_text>
+
+Cliques in a graph are subgraphs that are complete graphs. 
+
+This example checks if a node n in graph G is part of a triangle clique.
+
+The combinations function from itertools is of the form combinations(iterable, n). It returns an iterable with two entries n1 and n2, showing all possible combinations of members of the iterable.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<codebox char_offset="343" frame_height="400" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from itertools import combinations
+
+# Define is_in_triangle() 
+def is_in_triangle(G, n):
+    &quot;&quot;&quot;
+    Checks whether a node `n` in graph `G` is in a triangle relationship or not. 
+    
+    Returns a boolean.
+    &quot;&quot;&quot;
+    in_triangle = False
+    
+    # Iterate over all possible triangle relationship combinations
+    for n1, n2 in combinations(G.neighbors(n),2):
+    
+        # Check if an edge exists between n1 and n2
+        if G.has_edge(n1,n2):
+            in_triangle = True
+            break
+    return in_triangle</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
