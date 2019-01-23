@@ -9181,7 +9181,7 @@ pl.fit(X_train, y_train)
 # Compute and print accuracy
 accuracy = pl.score(X_test, y_test)
 print(&quot;\nAccuracy on budget dataset: &quot;, accuracy)</codebox>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548168799.42" unique_id="86">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548254826.66" unique_id="86">
 			<rich_text>
 Tricks fall into the categories of text processing, statistical methods, computational efficiency
 
@@ -9189,12 +9189,179 @@ In the competition, the winning team tokenised on punctuations as well. They als
 
 They used logistic regression, not any fancy models.
 
+Good tokenising trick
+
+
+
+Adding the remaining steps and adding to the pipeline
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+Interaction terms for statistics
+
+This adds an interaction term
+
+
+
+Hashing
+
+Hashing enforces a fixed length which can speed up calculations especially on large datasets.
+
+
+
+
+Now we add the Hashing Vectorizer
+
+
+
+Thiss jupyter notebook contains the more detailed code for this competition submission
+
+https://github.com/datacamp/course-resources-ml-with-experts-budgets/blob/master/notebooks/1.0-full-model.ipynb
+
+The full data set is at DrivenData
+</rich_text>
+			<rich_text link="webs http://www.drivendata.org">www.drivendata.org</rich_text>
+			<rich_text>
+
+
+
 </rich_text>
 			<rich_text weight="heavy">Will completed datacamp courses still be available after our one year premium access ends?</rich_text>
 			<rich_text>
 
 </rich_text>
 			<rich_text weight="heavy">If I have completed all the courses, can I start to process the claim?</rich_text>
+			<codebox char_offset="334" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Create the text vector
+text_vector = combine_text_columns(X_train)
+
+# Create the token pattern: TOKENS_ALPHANUMERIC
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)'
+
+# Instantiate the CountVectorizer: text_features
+text_features = CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC)
+
+# Fit text_features to the text vector
+text_features.fit(text_vector)
+
+# Print the first 10 tokens
+print(text_features.get_feature_names()[:10])</codebox>
+			<codebox char_offset="392" frame_height="475" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pipeline
+from sklearn.pipeline import Pipeline
+
+# Import classifiers
+from sklearn.linear_model import LogisticRegression
+from sklearn.multiclass import OneVsRestClassifier
+
+# Import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Import other preprocessing modules
+from sklearn.preprocessing import Imputer
+from sklearn.feature_selection import chi2, SelectKBest
+
+# Select 300 best features
+chi_k = 300
+
+# Import functional utilities
+from sklearn.preprocessing import FunctionTransformer, MaxAbsScaler
+from sklearn.pipeline import FeatureUnion
+
+# Perform preprocessing
+get_text_data = FunctionTransformer(combine_text_columns, validate=False)
+get_numeric_data = FunctionTransformer(lambda x: x[NUMERIC_COLUMNS], validate=False)
+
+# Create the token pattern: TOKENS_ALPHANUMERIC
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)'
+
+# Instantiate pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC,
+                                                   ngram_range=(1,2))),
+                    ('dim_red', SelectKBest(chi2, chi_k))
+                ]))
+             ]
+        )),
+        ('scale', MaxAbsScaler()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])</codebox>
+			<codebox char_offset="462" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">    
+# Instantiate pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC,
+                                                   ngram_range=(1, 2))),  
+                    ('dim_red', SelectKBest(chi2, chi_k))
+                ]))
+             ]
+        )),
+        ('int', SparseInteractions(degree=2)),
+        ('scale', MaxAbsScaler()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])</codebox>
+			<codebox char_offset="569" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import HashingVectorizer
+from sklearn.feature_extraction.text import HashingVectorizer
+
+# Get text data: text_data
+text_data = combine_text_columns(X_train)
+
+# Create the token pattern: TOKENS_ALPHANUMERIC
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)' 
+
+# Instantiate the HashingVectorizer: hashing_vec
+hashing_vec = HashingVectorizer(token_pattern=TOKENS_ALPHANUMERIC)
+
+# Fit and transform the Hashing Vectorizer
+hashed_text = hashing_vec.fit_transform(text_data)
+
+# Create DataFrame and print the head
+hashed_df = pd.DataFrame(hashed_text.data)
+print(hashed_df.head())</codebox>
+			<codebox char_offset="608" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the hashing vectorizer
+from sklearn.feature_extraction.text import HashingVectorizer
+
+# Instantiate the winning model pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', HashingVectorizer(token_pattern=TOKENS_ALPHANUMERIC,
+                                                     non_negative=True, norm=None, binary=False,
+                                                     ngram_range=(1,2))),
+                    ('dim_red', SelectKBest(chi2, chi_k))
+                ]))
+             ]
+        )),
+        ('int', SparseInteractions(degree=2)),
+        ('scale', MaxAbsScaler()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1547823344.67" unique_id="70">
@@ -9992,7 +10159,7 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548236231.12" unique_id="87">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548256375.52" unique_id="87">
 			<rich_text>
 
 </rich_text>
@@ -10021,6 +10188,14 @@ This function returns the number of maximal cliques of a certain size in the gra
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+
+Here's how we find open triangles
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
 
 
 Subgraphs
@@ -10100,7 +10275,40 @@ def maximal_cliques(G,size):
 
 # Check that there are 33 maximal cliques of size 3 in the graph T
 assert len(maximal_cliques(T,3)) == 33</codebox>
-			<codebox char_offset="612" frame_height="580" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">nodes_of_interest = [29, 38, 42]
+			<codebox char_offset="563" frame_height="595" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from itertools import combinations
+
+# Define node_in_open_triangle()
+def node_in_open_triangle(G, n):
+    &quot;&quot;&quot;
+    Checks whether pairs of neighbors of node `n` in graph `G` are in an 'open triangle' relationship with node `n`.
+    &quot;&quot;&quot;
+    in_open_triangle = False
+    
+    # Iterate over all possible triangle relationship combinations
+    for n1, n2 in combinations(G.neighbors(n),2):
+    
+        # Check if n1 and n2 do NOT have an edge between them
+        if not (n1,n2) in G.edges() and not (n2,n1) in G.edges():
+            in_open_triangle = True
+#            print(n1,n2)
+#            print((n,n1) in G.edges() or (n1,n) in G.edges())
+#            print((n,n2) in G.edges() or (n2,n) in G.edges())
+            break
+    return in_open_triangle
+
+# Compute the number of open triangles in T
+num_open_triangles = 0
+
+# Iterate over all the nodes in T
+for n in T.nodes():
+    # Check if the current node is in an open triangle
+    if node_in_open_triangle(T,n):
+        # Increment num_open_triangles
+#        print(n)
+        num_open_triangles += 1
+        
+print(num_open_triangles)</codebox>
+			<codebox char_offset="652" frame_height="580" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">nodes_of_interest = [29, 38, 42]
 
 # Define get_nodes_and_nbrs()
 def get_nodes_and_nbrs(G, nodes_of_interest):
@@ -10129,7 +10337,7 @@ T_draw = get_nodes_and_nbrs(T,nodes_of_interest)
 # Draw the subgraph to the screen
 nx.draw(T_draw)
 plt.show()</codebox>
-			<codebox char_offset="696" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the nodes of interest: nodes
+			<codebox char_offset="736" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Extract the nodes of interest: nodes
 nodes = [n for n, d in T.nodes(data=True) if d['occupation'] == 'celebrity']
 
 # Create the set of nodes: nodeset

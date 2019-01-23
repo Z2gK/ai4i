@@ -9181,7 +9181,7 @@ pl.fit(X_train, y_train)
 # Compute and print accuracy
 accuracy = pl.score(X_test, y_test)
 print(&quot;\nAccuracy on budget dataset: &quot;, accuracy)</codebox>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548168799.42" unique_id="86">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Tricks" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167103.17" ts_lastsave="1548254786.75" unique_id="86">
 			<rich_text>
 Tricks fall into the categories of text processing, statistical methods, computational efficiency
 
@@ -9189,12 +9189,176 @@ In the competition, the winning team tokenised on punctuations as well. They als
 
 They used logistic regression, not any fancy models.
 
+Good tokenising trick
+
+
+
+Adding the remaining steps and adding to the pipeline
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+
+Interaction terms for statistics
+
+This adds an interaction term
+
+
+
+Hashing
+
+Hashing enforces a fixed length which can speed up calculations especially on large datasets.
+
+
+
+
+Now we add the Hashing Vectorizer
+
+
+
+Thiss jupyter notebook contains the more detailed code for this competition submission
+
+https://github.com/datacamp/course-resources-ml-with-experts-budgets/blob/master/notebooks/1.0-full-model.ipynb
+
+The full data set is at DrivenData
+
+
+
 </rich_text>
 			<rich_text weight="heavy">Will completed datacamp courses still be available after our one year premium access ends?</rich_text>
 			<rich_text>
 
 </rich_text>
 			<rich_text weight="heavy">If I have completed all the courses, can I start to process the claim?</rich_text>
+			<codebox char_offset="334" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Create the text vector
+text_vector = combine_text_columns(X_train)
+
+# Create the token pattern: TOKENS_ALPHANUMERIC
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)'
+
+# Instantiate the CountVectorizer: text_features
+text_features = CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC)
+
+# Fit text_features to the text vector
+text_features.fit(text_vector)
+
+# Print the first 10 tokens
+print(text_features.get_feature_names()[:10])</codebox>
+			<codebox char_offset="392" frame_height="475" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import pipeline
+from sklearn.pipeline import Pipeline
+
+# Import classifiers
+from sklearn.linear_model import LogisticRegression
+from sklearn.multiclass import OneVsRestClassifier
+
+# Import CountVectorizer
+from sklearn.feature_extraction.text import CountVectorizer
+
+# Import other preprocessing modules
+from sklearn.preprocessing import Imputer
+from sklearn.feature_selection import chi2, SelectKBest
+
+# Select 300 best features
+chi_k = 300
+
+# Import functional utilities
+from sklearn.preprocessing import FunctionTransformer, MaxAbsScaler
+from sklearn.pipeline import FeatureUnion
+
+# Perform preprocessing
+get_text_data = FunctionTransformer(combine_text_columns, validate=False)
+get_numeric_data = FunctionTransformer(lambda x: x[NUMERIC_COLUMNS], validate=False)
+
+# Create the token pattern: TOKENS_ALPHANUMERIC
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)'
+
+# Instantiate pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC,
+                                                   ngram_range=(1,2))),
+                    ('dim_red', SelectKBest(chi2, chi_k))
+                ]))
+             ]
+        )),
+        ('scale', MaxAbsScaler()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])</codebox>
+			<codebox char_offset="462" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">    
+# Instantiate pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', CountVectorizer(token_pattern=TOKENS_ALPHANUMERIC,
+                                                   ngram_range=(1, 2))),  
+                    ('dim_red', SelectKBest(chi2, chi_k))
+                ]))
+             ]
+        )),
+        ('int', SparseInteractions(degree=2)),
+        ('scale', MaxAbsScaler()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])</codebox>
+			<codebox char_offset="569" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import HashingVectorizer
+from sklearn.feature_extraction.text import HashingVectorizer
+
+# Get text data: text_data
+text_data = combine_text_columns(X_train)
+
+# Create the token pattern: TOKENS_ALPHANUMERIC
+TOKENS_ALPHANUMERIC = '[A-Za-z0-9]+(?=\\s+)' 
+
+# Instantiate the HashingVectorizer: hashing_vec
+hashing_vec = HashingVectorizer(token_pattern=TOKENS_ALPHANUMERIC)
+
+# Fit and transform the Hashing Vectorizer
+hashed_text = hashing_vec.fit_transform(text_data)
+
+# Create DataFrame and print the head
+hashed_df = pd.DataFrame(hashed_text.data)
+print(hashed_df.head())</codebox>
+			<codebox char_offset="608" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the hashing vectorizer
+from sklearn.feature_extraction.text import HashingVectorizer
+
+# Instantiate the winning model pipeline: pl
+pl = Pipeline([
+        ('union', FeatureUnion(
+            transformer_list = [
+                ('numeric_features', Pipeline([
+                    ('selector', get_numeric_data),
+                    ('imputer', Imputer())
+                ])),
+                ('text_features', Pipeline([
+                    ('selector', get_text_data),
+                    ('vectorizer', HashingVectorizer(token_pattern=TOKENS_ALPHANUMERIC,
+                                                     non_negative=True, norm=None, binary=False,
+                                                     ngram_range=(1,2))),
+                    ('dim_red', SelectKBest(chi2, chi_k))
+                ]))
+             ]
+        )),
+        ('int', SparseInteractions(degree=2)),
+        ('scale', MaxAbsScaler()),
+        ('clf', OneVsRestClassifier(LogisticRegression()))
+    ])</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Deep Learning in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546099758.7" ts_lastsave="1547823344.67" unique_id="70">
@@ -9560,7 +9724,7 @@ model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accurac
 model.fit(X,y,validation_split=0.3)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548167825.91" unique_id="83">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548236782.12" unique_id="83">
 		<rich_text>
 
 
@@ -9992,7 +10156,7 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548230178.46" unique_id="87">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548236231.12" unique_id="87">
 			<rich_text>
 
 </rich_text>
@@ -10036,6 +10200,9 @@ We can extract nodes with a certain property and create a subgraph out of them.
 </rich_text>
 			<rich_text justification="left"></rich_text>
 			<rich_text>
+
+
+
 
 
 
@@ -10146,6 +10313,67 @@ T_sub = T.subgraph(nodeset)
 
 # Draw T_sub to the screen
 nx.draw(T_sub)
+plt.show()</codebox>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548236920.46" unique_id="88">
+			<rich_text>
+</rich_text>
+			<rich_text scale="h1">Visualisation examples</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text scale="h2">MatrixPlot</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<rich_text scale="h2">ArcPlot</rich_text>
+			<rich_text>
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+</rich_text>
+			<rich_text scale="h2">CircosPlot</rich_text>
+			<rich_text>
+
+
+
+</rich_text>
+			<codebox char_offset="37" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from nxviz import MatrixPlot
+import matplotlib.pyplot as plt
+
+# Calculate the largest connected component subgraph: largest_ccs
+largest_ccs = sorted(nx.connected_component_subgraphs(G), key=lambda x: len(x))[-1]
+
+# Create the customized MatrixPlot object: h
+h = MatrixPlot(graph=largest_ccs,node_grouping='grouping')
+
+# Draw the MatrixPlot to the screen
+h.draw()
+plt.show()</codebox>
+			<codebox char_offset="50" frame_height="250" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from nxviz.plots import ArcPlot
+import matplotlib.pyplot as plt
+
+# Iterate over all the nodes in G, including the metadata
+for n, d in G.nodes(data=True):
+
+    # Calculate the degree of each node: G.node[n]['degree']
+    G.node[n]['degree'] = nx.degree(G,n)
+    
+# Create the ArcPlot object: a
+a = ArcPlot(graph=G,node_order='degree')
+
+# Draw the ArcPlot to the screen
+a.draw()
 plt.show()</codebox>
 		</node>
 	</node>
