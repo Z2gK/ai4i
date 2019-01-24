@@ -10167,7 +10167,7 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548297464.86" unique_id="87">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548298993.97" unique_id="87">
 			<rich_text>
 
 </rich_text>
@@ -10206,7 +10206,9 @@ Here's how we find open triangles
 
 
 
-Subgraphs
+</rich_text>
+			<rich_text scale="h1">Subgraphs</rich_text>
+			<rich_text>
 
 We can create subgraphs using the .subgraph() method of a graph object.
 

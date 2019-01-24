@@ -10381,7 +10381,7 @@ prolific_collaborators = [n for n, dc in deg_cent.items() if dc == max_dc]
 # Print the most prolific collaborator(s)
 print(prolific_collaborators)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548298665.98" unique_id="88">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548298690.05" unique_id="88">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Visualisation examples</rich_text>
@@ -10435,6 +10435,7 @@ Visualising the neighbors of a clique
 			<rich_text>
 
 THis makes recommendation for users who should work together, based on open triangles.
+Note: to test if there is an edge between n1 and n2 in graph G, we use G.has_edge(n1,n2) -&gt; modify previous code
 
 </rich_text>
 			<rich_text justification="left"></rich_text>
@@ -10534,7 +10535,7 @@ a = ArcPlot(G_lmc,node_order='degree centrality')
 # Draw the ArcPlot to the screen
 a.draw()
 plt.show()</codebox>
-			<codebox char_offset="401" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+			<codebox char_offset="514" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
 from itertools import combinations
 from collections import defaultdict
 

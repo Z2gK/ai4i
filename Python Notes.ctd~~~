@@ -10381,7 +10381,7 @@ prolific_collaborators = [n for n, dc in deg_cent.items() if dc == max_dc]
 # Print the most prolific collaborator(s)
 print(prolific_collaborators)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548297329.44" unique_id="88">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548298471.72" unique_id="88">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Visualisation examples</rich_text>
@@ -10428,7 +10428,11 @@ Plotting the largest maximal clique
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Visualising the neighbors of a clique
 
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -10501,6 +10505,31 @@ c = CircosPlot(G_lc)
 
 # Draw the CircosPlot to the screen
 c.draw()
+plt.show()</codebox>
+			<codebox char_offset="310" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from nxviz import ArcPlot
+import matplotlib.pyplot as plt
+ 
+# Identify the largest maximal clique: largest_max_clique
+largest_max_clique = set(sorted(nx.find_cliques(G), key=lambda x: len(x))[-1])
+
+# Create a subgraph from the largest_max_clique: G_lmc
+G_lmc = G.subgraph(largest_max_clique)
+
+# Go out 1 degree of separation
+for node in G_lmc.nodes():
+    G_lmc.add_nodes_from(G.neighbors(node))
+    G_lmc.add_edges_from(zip([node]*len(G.neighbors(node)), G.neighbors(node)))
+
+# Record each node's degree centrality score
+for n in G_lmc.nodes():
+    G_lmc.node[n]['degree centrality'] = nx.degree_centrality(G_lmc)[n]
+        
+# Create the ArcPlot object: a
+a = ArcPlot(G_lmc,node_order='degree centrality')
+
+# Draw the ArcPlot to the screen
+a.draw()
 plt.show()</codebox>
 		</node>
 	</node>
