@@ -9191,7 +9191,9 @@ They used logistic regression, not any fancy models.
 
 Good tokenising trick
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Adding the remaining steps and adding to the pipeline
 
@@ -9205,18 +9207,24 @@ Interaction terms for statistics
 
 This adds an interaction term
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Hashing
 
 Hashing enforces a fixed length which can speed up calculations especially on large datasets.
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 Now we add the Hashing Vectorizer
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 Thiss jupyter notebook contains the more detailed code for this competition submission
 
@@ -10159,7 +10167,7 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548256375.52" unique_id="87">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548297464.86" unique_id="87">
 			<rich_text>
 
 </rich_text>
@@ -10212,8 +10220,11 @@ We can extract nodes with a certain property and create a subgraph out of them.
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+Who has the highest degree centrality, i.e. most number of collaborators.
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 
@@ -10358,8 +10369,19 @@ T_sub = T.subgraph(nodeset)
 # Draw T_sub to the screen
 nx.draw(T_sub)
 plt.show()</codebox>
+			<codebox char_offset="814" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Compute the degree centralities of G: deg_cent
+deg_cent = nx.degree_centrality(G)
+
+# Compute the maximum degree centrality: max_dc
+max_dc = max(deg_cent.values())
+
+# Find the user(s) that have collaborated the most: prolific_collaborators
+prolific_collaborators = [n for n, dc in deg_cent.items() if dc == max_dc]
+
+# Print the most prolific collaborator(s)
+print(prolific_collaborators)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548236920.46" unique_id="88">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548298690.05" unique_id="88">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Visualisation examples</rich_text>
@@ -10387,6 +10409,37 @@ plt.show()</codebox>
 			<rich_text scale="h2">CircosPlot</rich_text>
 			<rich_text>
 
+This calculates the degree, stores them in the metadata, and orders the nodes by their degrees in the Circos plot.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Calcuating the number of maximal cliques
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Plotting the largest maximal clique
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Visualising the neighbors of a clique
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+THis makes recommendation for users who should work together, based on open triangles.
+Note: to test if there is an edge between n1 and n2 in graph G, we use G.has_edge(n1,n2) -&gt; modify previous code
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 </rich_text>
@@ -10419,6 +10472,92 @@ a = ArcPlot(graph=G,node_order='degree')
 # Draw the ArcPlot to the screen
 a.draw()
 plt.show()</codebox>
+			<codebox char_offset="182" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from nxviz import CircosPlot
+import matplotlib.pyplot as plt 
+ 
+# Iterate over all the nodes, including the metadata
+for n, d in G.nodes(data=True):
+
+    # Calculate the degree of each node: G.node[n]['degree']
+    G.node[n]['degree'] = nx.degree(G,n)
+
+# Create the CircosPlot object: c
+c = CircosPlot(G, node_order='degree',node_grouping='grouping', node_color='grouping')
+
+# Draw the CircosPlot object to the screen
+c.draw()
+plt.show()</codebox>
+			<codebox char_offset="227" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Calculate the maximal cliques in G: cliques
+cliques = nx.find_cliques(G)
+
+# Count and print the number of maximal cliques in G
+print(len(list(cliques)))</codebox>
+			<codebox char_offset="268" frame_height="265" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+import networkx as nx
+from nxviz import CircosPlot
+import matplotlib.pyplot as plt
+
+# Find the author(s) that are part of the largest maximal clique: largest_clique
+largest_clique = sorted(nx.find_cliques(G), key=lambda x:len(x))[-1]
+
+# Create the subgraph of the largest_clique: G_lc
+G_lc = G.subgraph(largest_clique)
+
+# Create the CircosPlot object: c
+c = CircosPlot(G_lc)
+
+# Draw the CircosPlot to the screen
+c.draw()
+plt.show()</codebox>
+			<codebox char_offset="310" frame_height="355" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from nxviz import ArcPlot
+import matplotlib.pyplot as plt
+ 
+# Identify the largest maximal clique: largest_max_clique
+largest_max_clique = set(sorted(nx.find_cliques(G), key=lambda x: len(x))[-1])
+
+# Create a subgraph from the largest_max_clique: G_lmc
+G_lmc = G.subgraph(largest_max_clique)
+
+# Go out 1 degree of separation
+for node in G_lmc.nodes():
+    G_lmc.add_nodes_from(G.neighbors(node))
+    G_lmc.add_edges_from(zip([node]*len(G.neighbors(node)), G.neighbors(node)))
+
+# Record each node's degree centrality score
+for n in G_lmc.nodes():
+    G_lmc.node[n]['degree centrality'] = nx.degree_centrality(G_lmc)[n]
+        
+# Create the ArcPlot object: a
+a = ArcPlot(G_lmc,node_order='degree centrality')
+
+# Draw the ArcPlot to the screen
+a.draw()
+plt.show()</codebox>
+			<codebox char_offset="514" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from itertools import combinations
+from collections import defaultdict
+
+# Initialize the defaultdict: recommended
+recommended = defaultdict(int)
+
+# Iterate over all the nodes in G
+for n, d in G.nodes(data=True):
+
+    # Iterate over all possible triangle relationship combinations
+    for n1, n2 in combinations(G.neighbors(n), 2):
+    
+        # Check whether n1 and n2 do not have an edge
+        if not G.has_edge(n1, n2):
+        
+            # Increment recommended
+            recommended[(n1, n2)] += 1
+
+# Identify the top 10 pairs of users
+all_counts = sorted(recommended.values())
+top10_pairs = [pair for pair, count in recommended.items() if count &gt; all_counts[-10]]
+print(top10_pairs)</codebox>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
