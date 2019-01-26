@@ -10562,7 +10562,7 @@ top10_pairs = [pair for pair, count in recommended.items() if count &gt; all_cou
 print(top10_pairs)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Notes from Workshop #2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548465437.51" ts_lastsave="1548468664.47" unique_id="89">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Workshop #2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548465437.51" ts_lastsave="1548473884.84" unique_id="89">
 		<rich_text>
 If images are input to a neural net as a 1D vector, they are not so effective. Better to apply convolution first
 
@@ -10613,7 +10613,32 @@ keras - 10 lines for number recognition
 
 DLib C++ library
 
-jupyter = evernote/onenote of data science world</rich_text>
+jupyter = evernote/onenote of data science world
+
+Competitive advantage is in the data sets.
+
+using python on top of spark
+pyspark, revolscalespark
+
+
+
+ONNX model - standard
+pretrained models - available on github
+
+
+Microsoft created a chatbot called XiaoIce. Luis is built on this and released on azure. It is sort of a chatbot maker
+
+The big 3 in ML
+MS, google, amazon
+
+MS has most user friendly interface for non-technically incline audience
+google/amazon - more software developer oriented
+
+in LUIS, there are prebuilt intents for common user actions, e.g. cancel, confirm, start over etc.
+
+What are entities? and how will adding those additional intents help?
+
+recyclebotsg</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>

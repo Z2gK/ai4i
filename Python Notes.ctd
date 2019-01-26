@@ -10562,7 +10562,7 @@ top10_pairs = [pair for pair, count in recommended.items() if count &gt; all_cou
 print(top10_pairs)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Workshop #2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548465437.51" ts_lastsave="1548469724.77" unique_id="89">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Workshop #2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548465437.51" ts_lastsave="1548474329.33" unique_id="89">
 		<rich_text>
 If images are input to a neural net as a 1D vector, they are not so effective. Better to apply convolution first
 
@@ -10625,7 +10625,111 @@ pyspark, revolscalespark
 ONNX model - standard
 pretrained models - available on github
 
+
+Microsoft created a chatbot called XiaoIce. Luis is built on this and released on azure. It is sort of a chatbot maker
+
+The big 3 in ML
+MS, google, amazon
+
+MS has most user friendly interface for non-technically incline audience
+google/amazon - more software developer oriented
+
+in LUIS, there are prebuilt intents for common user actions, e.g. cancel, confirm, start over etc.
+
 </rich_text>
+		<rich_text weight="heavy">What are entities? and how will adding those additional intents help?
+</rich_text>
+		<rich_text>
+LUIS exposes an link where the question can be provided as a parameter to the url. This can be integrated into any frontend. A json object is returned
+
+
+
+
+recyclebotsg
+
+QnA maker spinoff from XiaoIce
+
+Provide any URL on the web and the bot will separate the questions from the answers.
+Connects user to a premade LUIS bot
+
+
+
+
+
+</rich_text>
+		<codebox char_offset="2224" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True">{
+  &quot;query&quot;: &quot;i have submitted my job application on 29 Nov&quot;,
+  &quot;topScoringIntent&quot;: {
+    &quot;intent&quot;: &quot;ApplyForJob&quot;,
+    &quot;score&quot;: 0.291910768
+  },
+  &quot;intents&quot;: [
+    {
+      &quot;intent&quot;: &quot;ApplyForJob&quot;,
+      &quot;score&quot;: 0.291910768
+    },
+    {
+      &quot;intent&quot;: &quot;GetJobInformation&quot;,
+      &quot;score&quot;: 0.206149369
+    },
+    {
+      &quot;intent&quot;: &quot;Utilities.Stop&quot;,
+      &quot;score&quot;: 0.0263269115
+    },
+    {
+      &quot;intent&quot;: &quot;Utilities.StartOver&quot;,
+      &quot;score&quot;: 0.0145611428
+    },
+    {
+      &quot;intent&quot;: &quot;Utilities.Cancel&quot;,
+      &quot;score&quot;: 0.010699288
+    },
+    {
+      &quot;intent&quot;: &quot;None&quot;,
+      &quot;score&quot;: 0.008071172
+    },
+    {
+      &quot;intent&quot;: &quot;Utilities.GoBack&quot;,
+      &quot;score&quot;: 0.006475916
+    },
+    {
+      &quot;intent&quot;: &quot;Utilities.Confirm&quot;,
+      &quot;score&quot;: 0.00646961946
+    }
+  ],
+  &quot;entities&quot;: [
+    {
+      &quot;entity&quot;: &quot;29 nov&quot;,
+      &quot;type&quot;: &quot;builtin.datetimeV2.date&quot;,
+      &quot;startIndex&quot;: 39,
+      &quot;endIndex&quot;: 44,
+      &quot;resolution&quot;: {
+        &quot;values&quot;: [
+          {
+            &quot;timex&quot;: &quot;XXXX-11-29&quot;,
+            &quot;type&quot;: &quot;date&quot;,
+            &quot;value&quot;: &quot;2018-11-29&quot;
+          },
+          {
+            &quot;timex&quot;: &quot;XXXX-11-29&quot;,
+            &quot;type&quot;: &quot;date&quot;,
+            &quot;value&quot;: &quot;2019-11-29&quot;
+          }
+        ]
+      }
+    },
+    {
+      &quot;entity&quot;: &quot;29&quot;,
+      &quot;type&quot;: &quot;builtin.number&quot;,
+      &quot;startIndex&quot;: 39,
+      &quot;endIndex&quot;: 40,
+      &quot;resolution&quot;: {
+        &quot;subtype&quot;: &quot;integer&quot;,
+        &quot;value&quot;: &quot;29&quot;
+      }
+    }
+  ]
+}</codebox>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
