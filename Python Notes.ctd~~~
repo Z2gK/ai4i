@@ -9735,7 +9735,7 @@ model.compile(optimizer='adam',loss='categorical_crossentropy',metrics=['accurac
 model.fit(X,y,validation_split=0.3)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548236782.12" unique_id="83">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Network Analysis in Python" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1547823344.68" ts_lastsave="1548465437.5" unique_id="83">
 		<rich_text>
 
 
@@ -10167,7 +10167,7 @@ top_bc = find_node_with_highest_bet_cent(T)
 for node in top_bc:
     assert nx.betweenness_centrality(T)[node] == max(nx.betweenness_centrality(T).values())</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548297464.86" unique_id="87">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Structures" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548167825.92" ts_lastsave="1548298993.97" unique_id="87">
 			<rich_text>
 
 </rich_text>
@@ -10206,7 +10206,9 @@ Here's how we find open triangles
 
 
 
-Subgraphs
+</rich_text>
+			<rich_text scale="h1">Subgraphs</rich_text>
+			<rich_text>
 
 We can create subgraphs using the .subgraph() method of a graph object.
 
@@ -10381,7 +10383,7 @@ prolific_collaborators = [n for n, dc in deg_cent.items() if dc == max_dc]
 # Print the most prolific collaborator(s)
 print(prolific_collaborators)</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548298471.72" unique_id="88">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Bringing it together" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548236782.14" ts_lastsave="1548298690.05" unique_id="88">
 			<rich_text>
 </rich_text>
 			<rich_text scale="h1">Visualisation examples</rich_text>
@@ -10434,8 +10436,12 @@ Visualising the neighbors of a clique
 			<rich_text justification="left"></rich_text>
 			<rich_text>
 
+THis makes recommendation for users who should work together, based on open triangles.
+Note: to test if there is an edge between n1 and n2 in graph G, we use G.has_edge(n1,n2) -&gt; modify previous code
 
-
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
 
 
 </rich_text>
@@ -10531,7 +10537,83 @@ a = ArcPlot(G_lmc,node_order='degree centrality')
 # Draw the ArcPlot to the screen
 a.draw()
 plt.show()</codebox>
+			<codebox char_offset="514" frame_height="310" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+from itertools import combinations
+from collections import defaultdict
+
+# Initialize the defaultdict: recommended
+recommended = defaultdict(int)
+
+# Iterate over all the nodes in G
+for n, d in G.nodes(data=True):
+
+    # Iterate over all possible triangle relationship combinations
+    for n1, n2 in combinations(G.neighbors(n), 2):
+    
+        # Check whether n1 and n2 do not have an edge
+        if not G.has_edge(n1, n2):
+        
+            # Increment recommended
+            recommended[(n1, n2)] += 1
+
+# Identify the top 10 pairs of users
+all_counts = sorted(recommended.values())
+top10_pairs = [pair for pair, count in recommended.items() if count &gt; all_counts[-10]]
+print(top10_pairs)</codebox>
 		</node>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Notes from Workshop #2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548465437.51" ts_lastsave="1548468664.47" unique_id="89">
+		<rich_text>
+If images are input to a neural net as a 1D vector, they are not so effective. Better to apply convolution first
+
+</rich_text>
+		<rich_text underline="single" weight="heavy">Transfer learning</rich_text>
+		<rich_text>
+
+Use an already trained network to help classify the new feature
+
+</rich_text>
+		<rich_text underline="single" weight="heavy">Traditional machine learning</rich_text>
+		<rich_text>
+
+Need domain knowledge to identify important features. A unique 128 length vector is produced for each face
+
+</rich_text>
+		<rich_text underline="single" weight="heavy">Generative Adversarial Networks</rich_text>
+		<rich_text>
+
+Generate samples of actual data by playing off two neural network. Application: create additional samples automatically for training - this can create many more training samples.
+FFT, wavelet transform etc
+
+
+</rich_text>
+		<rich_text underline="single" weight="heavy">NLP</rich_text>
+		<rich_text>
+
+Convert words into numbers and therefore sentences into vectors. After this, all numerical classification methods apply.
+Off the shelf tool fasttext.cc just need labelled text
+
+Application: Spam engines, document classification, sentiment analysis/social feed, helpdesk classification/routing, ...
+
+Not much knowledge is needed. Just need labelled text
+
+NUS high students created an application to automatically generate test questions by automatically crawling websites. They just started a company...
+
+</rich_text>
+		<rich_text underline="single" weight="heavy">Tools</rich_text>
+		<rich_text>
+
+Underneath Python/R machine learning packages, they could be running C, C++ even fortran
+
+pytorch is more and more popular - learn this if you want to join facebook
+keras - high level framework over tensorflow
+theano - not so actively developed anymore
+
+keras - 10 lines for number recognition
+
+DLib C++ library
+
+jupyter = evernote/onenote of data science world</rich_text>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
