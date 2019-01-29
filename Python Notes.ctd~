@@ -10862,7 +10862,7 @@ for column in data.columns:
     data[column].plot(ax=ax, label=column)
 ax.legend()
 plt.show()</codebox>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Time Series as Input to Model" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548740104.84" ts_lastsave="1548740964.23" unique_id="91">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Time Series as Input to Model" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548740104.84" ts_lastsave="1548764548.65" unique_id="91">
 			<rich_text>
 The raw data is usually too noisy. Better to use summary statistics so that it looks more like traditional classification problem
 
@@ -10898,10 +10898,143 @@ Then we calculate the spectral bandwidths and centroids and use these for classi
 
 
 
+Importing heart beat data
 
 </rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Plotting the average of the normal and abnormal heart data to smooth out noise, separately.
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+Fitting the model using LinearSVC
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+
+For audio data, we can apply a few transformations
+
+Rectification, i.e. take the absolute value so that there is no negative data. This gives the “energy”
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+The use the rectified data to compute the rolling mean of 50 points
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We use this the summary statistics to form our predictions
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+We can go further by calculating the tempo of the sound
+
+</rich_text>
+			<rich_text justification="left"></rich_text>
+			<rich_text>
+
+Then we add these to the summary statistics
+
+
+
+
+
+
+
+
+
+
+</rich_text>
+			<codebox char_offset="1229" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True">fig, axs = plt.subplots(3, 2, figsize=(15, 7), sharex=True, sharey=True)
+
+# Calculate the time array
+time = np.arange(0,len(normal[3])) / sfreq
+
+# Stack the normal/abnormal audio so you can loop and plot
+stacked_audio = np.hstack([normal, abnormal]).T
+
+# Loop through each audio file / ax object and plot
+# .T.ravel() transposes the array, then unravels it into a 1-D vector for looping
+for iaudio, ax in zip(stacked_audio, axs.T.ravel()):
+    ax.plot(time, iaudio)
+show_plot_and_make_titles()</codebox>
+			<codebox char_offset="1325" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True"># Average across the time dimension of each DataFrame
+mean_normal = np.mean(normal, axis=1)
+mean_abnormal = np.mean(abnormal, axis=1)
+
+# Plot each average over time
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(10, 3), sharey=True)
+ax1.plot(time, normal)
+ax1.set(title=&quot;Normal Data&quot;)
+ax2.plot(time, abnormal)
+ax2.set(title=&quot;Abnormal Data&quot;)
+plt.show()</codebox>
+			<codebox char_offset="1364" frame_height="190" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True">from sklearn.svm import LinearSVC
+
+# Initialize and fit the model
+model = LinearSVC()
+model.fit(X_train,y_train)
+
+# Generate predictions and score them manually
+predictions = model.predict(X_test)
+print(sum(predictions == y_test.squeeze()) / len(y_test))</codebox>
+			<codebox char_offset="1524" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True"># Rectify the audio signal
+audio_rectified = audio.apply(np.abs)
+
+# Plot the result
+audio_rectified.plot(figsize=(10, 5))
+plt.show()</codebox>
+			<codebox char_offset="1596" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True"># Smooth by applying a rolling mean
+audio_rectified_smooth = audio_rectified.rolling(50).mean()
+
+# Plot the result
+audio_rectified_smooth.plot(figsize=(10, 5))
+plt.show()</codebox>
+			<codebox char_offset="1659" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True"># Calculate stats
+means = np.mean(audio_rectified_smooth, axis=0)
+stds = np.std(audio_rectified_smooth, axis=0)
+maxs = np.max(audio_rectified_smooth, axis=0)
+
+# Create the X and y arrays
+X = np.column_stack([means, stds,maxs])
+y = labels.reshape([-1, 1])
+
+# Fit the model and score on testing data
+from sklearn.model_selection import cross_val_score
+percent_score = cross_val_score(model, X,y, cv=5)
+print(np.mean(percent_score))</codebox>
+			<codebox char_offset="1719" frame_height="265" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True"># Calculate the tempo of the sounds
+tempos = []
+for col, i_audio in audio.items():
+    tempos.append(lr.beat.tempo(i_audio.values, sr=sfreq, hop_length=2**6, aggregate=None))
+
+# Convert the list to an array so you can manipulate it more easily
+tempos = np.array(tempos)
+
+# Calculate statistics of each tempo
+tempos_mean = tempos.mean(axis=-1)
+tempos_std = tempos.std(axis=-1)
+tempos_max = tempos.max(axis=-1)</codebox>
+			<codebox char_offset="1767" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True"># Create the X and y arrays
+X = np.column_stack([means, stds, maxs, tempos_mean, tempos_std, tempos_max])
+y = labels.reshape([-1, 1])
+
+# Fit the model and score on testing data
+percent_score = cross_val_score(model, X, y, cv=5)
+print(np.mean(percent_score))</codebox>
 		</node>
-		<node custom_icon_id="0" foreground="" is_bold="False" name="Predicting Time Series" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548741011.51" ts_lastsave="1548745720.78" unique_id="92">
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Predicting Time Series" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548741011.51" ts_lastsave="1548746035.77" unique_id="92">
 			<rich_text>
 Regression
 
@@ -10914,7 +11047,9 @@ Two time series may be correlated for some time
 
 scoring
 Correlation coefficient r
-Correlation determination R^2 = 1 - error(model)/variance(test data)</rich_text>
+Correlation determination R^2 = 1 - error(model)/variance(test data)
+
+</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
