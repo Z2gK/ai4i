@@ -6807,6 +6807,8 @@ new_prediction = knn.predict(X_new)
 print(&quot;Prediction: {}&quot;.format(new_prediction))</codebox>
 		</node>
 		<node custom_icon_id="0" foreground="" is_bold="False" name="Regression" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1546757159.95" ts_lastsave="1547229134.53" unique_id="75">
+			<rich_text>
+</rich_text>
 			<rich_text scale="h1">Ordinary Linear Regression</rich_text>
 			<rich_text>
 
@@ -6908,7 +6910,7 @@ A Hold-out Set is a set of data that is not used in training at all
 
 
 </rich_text>
-			<codebox char_offset="101" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import numpy and pandas
+			<codebox char_offset="102" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import numpy and pandas
 import numpy as np
 import pandas as pd
 
@@ -6931,7 +6933,7 @@ X = X.reshape(-1,1)
 print(&quot;Dimensions of y after reshaping: {}&quot;.format(y.shape))
 print(&quot;Dimensions of X after reshaping: {}&quot;.format(X.shape))
 </codebox>
-			<codebox char_offset="191" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import LinearRegression
+			<codebox char_offset="192" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import LinearRegression
 from sklearn.linear_model import LinearRegression
 
 # Create the regressor: reg
@@ -6952,7 +6954,7 @@ print(reg.score(X_fertility, y))
 # Plot regression line
 plt.plot(prediction_space, y_pred, color='black', linewidth=3)
 plt.show()</codebox>
-			<codebox char_offset="269" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+			<codebox char_offset="270" frame_height="430" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
@@ -6973,7 +6975,7 @@ y_pred = reg_all.predict(X_test)
 print(&quot;R^2: {}&quot;.format(reg_all.score(X_test, y_test)))
 rmse = np.sqrt(mean_squared_error(y_test,y_pred))
 print(&quot;Root Mean Squared Error: {}&quot;.format(rmse))</codebox>
-			<codebox char_offset="906" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Lasso
+			<codebox char_offset="907" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import Lasso
 from sklearn.linear_model import Lasso
 
 # Instantiate a lasso regressor: lasso
@@ -6991,13 +6993,13 @@ plt.plot(range(len(df_columns)), lasso_coef)
 plt.xticks(range(len(df_columns)), df_columns.values, rotation=60)
 plt.margins(0.02)
 plt.show()</codebox>
-			<codebox char_offset="928" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from sklearn.linear_model import Ridge
+			<codebox char_offset="929" frame_height="145" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from sklearn.linear_model import Ridge
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.3, random_state=42)
 ridge = Ridge(alpha=0.1, normalize=True)
 ridge.fit(X_train, y_train)
 ridge_pred = ridge.predict(X_test)
 ridge.score(X_test, y_test)</codebox>
-			<codebox char_offset="969" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+			<codebox char_offset="970" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
 from sklearn.linear_model import Ridge
 from sklearn.model_selection import cross_val_score
 
@@ -7027,7 +7029,7 @@ for alpha in alpha_space:
 # Display the plot
 display_plot(ridge_scores, ridge_scores_std)
 </codebox>
-			<codebox char_offset="1018" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def display_plot(cv_scores, cv_scores_std):
+			<codebox char_offset="1019" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">def display_plot(cv_scores, cv_scores_std):
     fig = plt.figure()
     ax = fig.add_subplot(1,1,1)
     ax.plot(alpha_space, cv_scores)
@@ -7041,7 +7043,7 @@ display_plot(ridge_scores, ridge_scores_std)
     ax.set_xlim([alpha_space[0], alpha_space[-1]])
     ax.set_xscale('log')
     plt.show()</codebox>
-			<codebox char_offset="1349" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the necessary modules
+			<codebox char_offset="1350" frame_height="295" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import the necessary modules
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, classification_report
 
@@ -7061,7 +7063,7 @@ y_pred = logreg.predict(X_test)
 print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 </codebox>
-			<codebox char_offset="1416" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+			<codebox char_offset="1417" frame_height="220" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
 from sklearn.metrics import roc_curve
 
 # Compute predicted probabilities: y_pred_prob
@@ -7077,7 +7079,7 @@ plt.xlabel('False Positive Rate')
 plt.ylabel('True Positive Rate')
 plt.title('ROC Curve')
 plt.show()</codebox>
-			<codebox char_offset="1566" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
+			<codebox char_offset="1567" frame_height="280" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Import necessary modules
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import cross_val_score
 
@@ -10562,7 +10564,7 @@ top10_pairs = [pair for pair, count in recommended.items() if count &gt; all_cou
 print(top10_pairs)</codebox>
 		</node>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Workshop #2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548465437.51" ts_lastsave="1548474159.1" unique_id="89">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Workshop #2" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548465437.51" ts_lastsave="1548737702.87" unique_id="89">
 		<rich_text>
 If images are input to a neural net as a 1D vector, they are not so effective. Better to apply convolution first
 
@@ -10642,10 +10644,23 @@ in LUIS, there are prebuilt intents for common user actions, e.g. cancel, confir
 		<rich_text>
 LUIS exposes an link where the question can be provided as a parameter to the url. This can be integrated into any frontend. A json object is returned
 
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+recyclebotsg
+
+QnA maker spinoff from XiaoIce
+
+Provide any URL on the web and the bot will separate the questions from the answers.
+Connects user to a premade LUIS bot
 
 
 
-recyclebotsg</rich_text>
+
+
+</rich_text>
 		<codebox char_offset="2224" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="js" width_in_pixels="True">{
   &quot;query&quot;: &quot;i have submitted my job application on 29 Nov&quot;,
   &quot;topScoringIntent&quot;: {
@@ -10719,6 +10734,173 @@ recyclebotsg</rich_text>
     }
   ]
 }</codebox>
+	</node>
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Time Series" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548737702.88" ts_lastsave="1548740104.82" unique_id="90">
+		<rich_text>
+Fitting a simple LinearSVC model to the iris data set
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+Then we predict using some test data
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+Linear regression using housing data
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+Generating predictions
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+
+Loading audio file (wav) and generating time series data
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+The data set was from a kaggle competition
+</rich_text>
+		<rich_text link="webs https://www.kaggle.com/kinguistics/heartbeat-sounds">https://www.kaggle.com/kinguistics/heartbeat-sounds</rich_text>
+		<rich_text>
+
+
+
+Loading market value data
+
+</rich_text>
+		<rich_text justification="left"></rich_text>
+		<rich_text>
+
+This dataset was from a kaggle competition
+</rich_text>
+		<rich_text link="webs https://www.kaggle.com/dgawlik/nyse">https://www.kaggle.com/dgawlik/nyse</rich_text>
+		<rich_text>
+
+
+
+
+
+
+
+
+</rich_text>
+		<codebox char_offset="56" frame_height="130" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from sklearn.svm import LinearSVC
+
+# Construct data for the model
+X = data[[&quot;petal length (cm)&quot;,&quot;petal width (cm)&quot;]]
+y = data[['target']]
+
+# Fit the model
+model = LinearSVC()
+model.fit(X, y)</codebox>
+		<codebox char_offset="98" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Create input array
+X_predict = targets[['petal length (cm)', 'petal width (cm)']]
+
+# Predict with the model
+predictions = model.predict(X_predict)
+print(predictions)
+
+# Visualize predictions and actual values
+plt.scatter(X_predict['petal length (cm)'], X_predict['petal width (cm)'],
+            c=predictions, cmap=plt.cm.coolwarm)
+plt.title(&quot;Predicted class values&quot;)
+plt.show()</codebox>
+		<codebox char_offset="140" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">from sklearn import linear_model
+
+# Prepare input and output DataFrames
+X = boston[[&quot;AGE&quot;]]
+y = boston[[&quot;RM&quot;]]
+
+# Fit the model
+model = linear_model.LinearRegression()
+model.fit(X,y)</codebox>
+		<codebox char_offset="167" frame_height="100" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Generate predictions with the model using those inputs
+predictions = model.predict(new_inputs.reshape(-1,1))
+
+# Visualize the inputs and predicted values
+plt.scatter(new_inputs, predictions, color='r', s=3)
+plt.xlabel('inputs')
+plt.ylabel('predictions')
+plt.show()</codebox>
+		<codebox char_offset="229" frame_height="235" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True">import librosa as lr
+from glob import glob
+
+# List all the wav files in the folder
+audio_files = glob(data_dir + '/*.wav')
+
+# Read in the first audio file, create the time array
+audio, sfreq = lr.load(audio_files[0])
+time = np.arange(0, len(audio)) / sfreq
+
+# Plot audio over time
+fig, ax = plt.subplots()
+ax.plot(time, audio)
+ax.set(xlabel='Time (s)', ylabel='Sound Amplitude')
+plt.show()</codebox>
+		<codebox char_offset="357" frame_height="175" frame_width="700" highlight_brackets="True" show_line_numbers="False" syntax_highlighting="python3" width_in_pixels="True"># Read in the data
+data = pd.read_csv('prices.csv', index_col=0)
+
+# Convert the index of the DataFrame to datetime
+data.index = pd.to_datetime(data.index)
+print(data.head())
+
+# Loop through each column, plot its values over time
+fig, ax = plt.subplots()
+for column in data.columns:
+    data[column].plot(ax=ax, label=column)
+ax.legend()
+plt.show()</codebox>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Time Series as Input to Model" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548740104.84" ts_lastsave="1548740964.23" unique_id="91">
+			<rich_text>
+The raw data is usually too noisy. Better to use summary statistics so that it looks more like traditional classification problem
+
+Easy start: summary statistics.
+
+For each time series, calculate min, max, average, standard deviation
+
+In this way, a 2D array is turned into a 1D array
+
+
+
+Improving features for classification
+
+Calculate envelope - calculate rolling window to get smoothed data, then take absolute value (change of audio energy over time). Then calculate min, max, std, avg and use this for model. LinearSVC is used.
+
+librosa is a great library for auditory and timeseries feature engineering
+
+Can construct a tempogram which estimates the tempo of sound over time, then calculate summary statistics of tempo as for the envelope.
+
+rolling method of dataframe object
+
+
+
+The spectrogram - special case of time series features
+
+Fourier transform! It describes the fast and slow oscillations at  a moment in time. We do a short time FFT.
+
+Choose window and size and shape, then at a time point, compute the FFT for that window, then slide the window over by one.
+
+Square STFT to get spectrogram.
+
+Then we calculate the spectral bandwidths and centroids and use these for classification
+
+
+
+
+</rich_text>
+		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
 		<rich_text>
