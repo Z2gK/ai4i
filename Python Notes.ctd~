@@ -10735,7 +10735,7 @@ Connects user to a premade LUIS bot
   ]
 }</codebox>
 	</node>
-	<node custom_icon_id="0" foreground="" is_bold="False" name="Time Series" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548737702.88" ts_lastsave="1548740104.82" unique_id="90">
+	<node custom_icon_id="0" foreground="" is_bold="False" name="Time Series" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548737702.88" ts_lastsave="1548741011.5" unique_id="90">
 		<rich_text>
 Fitting a simple LinearSVC model to the iris data set
 
@@ -10900,6 +10900,21 @@ Then we calculate the spectral bandwidths and centroids and use these for classi
 
 
 </rich_text>
+		</node>
+		<node custom_icon_id="0" foreground="" is_bold="False" name="Predicting Time Series" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1548741011.51" ts_lastsave="1548745720.78" unique_id="92">
+			<rich_text>
+Regression
+
+Regression predict continuous output whereas classification predicts categorical variables
+
+Regression creates a model of the data
+Correlation is only a statistic that describes the data and has less information about the data
+
+Two time series may be correlated for some time
+
+scoring
+Correlation coefficient r
+Correlation determination R^2 = 1 - error(model)/variance(test data)</rich_text>
 		</node>
 	</node>
 	<node custom_icon_id="0" foreground="" is_bold="False" name="Datacamp Usage TIPS" prog_lang="custom-colors" readonly="False" tags="" ts_creation="1543917644.25" ts_lastsave="1544680508.96" unique_id="40">
